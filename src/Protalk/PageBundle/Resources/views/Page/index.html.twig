@@ -1,0 +1,14 @@
+{% extends "::base.html.twig" %}
+
+{% block title page.pagetitle %}
+{% block body %}
+  <div style="float: left; width: 500px;">
+
+  <h1>{{ page.title }}</h1>
+  {{ page.content }}
+  </div>
+
+  <div style="float:left; width:200px;">
+    {% render "ProtalkMediaBundle:Tag:list" %}
+  </div>
+{% endblock %}

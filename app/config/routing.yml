@@ -1,0 +1,14 @@
+ProtalkMediaBundle:
+    resource: "@ProtalkMediaBundle/Controller/"
+    type:     annotation
+    prefix:   /media
+
+ProtalkPageBundle:
+    resource: "@ProtalkPageBundle/Controller/"
+    type:     annotation
+    prefix:   /page
+
+# Internal routing configuration to handle ESI
+#_internal:
+#   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#   prefix:   /_internal
