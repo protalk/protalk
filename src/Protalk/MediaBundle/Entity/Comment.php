@@ -1,0 +1,196 @@
+<?php
+
+namespace Protalk\MediaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Protalk\MediaBundle\Entity\Comment
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Protalk\MediaBundle\Entity\CommentRepository")
+ */
+class Comment
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var integer $media_id
+     *
+     * @ORM\Column(name="media_id", type="integer")
+     */
+    private $media_id;
+
+    /**
+     * @var string $author
+     *
+     * @ORM\Column(name="author", type="string", length=100)
+     */
+    private $author;
+
+    /**
+     * @var string $email
+     *
+     * @ORM\Column(name="email", type="string", length=200)
+     */
+    private $email;
+
+    /**
+     * @var string $website
+     *
+     * @ORM\Column(name="website", type="string", length=200)
+     */
+    private $website;
+
+    /**
+     * @var datetime $datetime
+     *
+     * @ORM\Column(name="datetime", type="datetime")
+     */
+    private $datetime;
+
+    /**
+     * @var text $content
+     *
+     * @ORM\Column(name="content", type="text")
+     */
+    private $content;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set media_id
+     *
+     * @param integer $mediaId
+     */
+    public function setMediaId($mediaId)
+    {
+        $this->media_id = $mediaId;
+    }
+
+    /**
+     * Get media_id
+     *
+     * @return integer 
+     */
+    public function getMediaId()
+    {
+        return $this->media_id;
+    }
+
+    /**
+     * Set author
+     *
+     * @param string $author
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+    }
+
+    /**
+     * Get author
+     *
+     * @return string 
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set website
+     *
+     * @param string $website
+     */
+    public function setWebsite($website)
+    {
+        $this->website = $website;
+    }
+
+    /**
+     * Get website
+     *
+     * @return string 
+     */
+    public function getWebsite()
+    {
+        return $this->website;
+    }
+
+    /**
+     * Set datetime
+     *
+     * @param datetime $datetime
+     */
+    public function setDatetime($datetime)
+    {
+        $this->datetime = $datetime;
+    }
+
+    /**
+     * Get datetime
+     *
+     * @return datetime 
+     */
+    public function getDatetime()
+    {
+        return $this->datetime;
+    }
+
+    /**
+     * Set content
+     *
+     * @param text $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * Get content
+     *
+     * @return text 
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+}
