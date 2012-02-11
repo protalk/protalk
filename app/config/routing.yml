@@ -1,12 +1,20 @@
 ProtalkMediaBundle:
     resource: "@ProtalkMediaBundle/Controller/"
     type:     annotation
-    prefix:   /media
+    prefix:   /
+
+_home:
+    pattern:  /
+    defaults: { _controller: ProtalkMediaBundle:Home:index }
 
 ProtalkPageBundle:
     resource: "@ProtalkPageBundle/Controller/"
     type:     annotation
     prefix:   /page
+
+page_show:
+    pattern:  /page/{url}
+    defaults: { _controller: ProtalkPageBundle:Page:index }
 
 # Internal routing configuration to handle ESI
 #_internal:

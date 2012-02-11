@@ -3,11 +3,80 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>ProTalk - {% block title %}Welcome{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <script src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
+        <script src="{{ asset('js/home.js') }}"></script>
+
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.4.1/build/cssreset/cssreset-min.css"/>
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.4.1/build/cssbase/cssbase-min.css"/>
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.4.1/build/cssfonts/cssfonts-min.css"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
+        {% block stylesheets %}{% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body class="yui3-skin-sam">
+
+        <div id="headerContainer" class="contentContainer">
+            <header>
+                <div id="logoContainer">
+                    <img id="logo" src="{{ asset('images/logo.png') }}" alt="ProTalk Logo" />
+                </div>
+                <nav>
+                    <div id="firstNavLink" class="navigation"><a href="{{ path('_home') }}" >HOME</a></div>
+                    <div class="navigation"><a href="#">EXPLORE</a></div>
+                    <div class="navigation"><a href="{{ path('page_show', { 'url': 'contribute' }) }}">CONTRIBUTE</a></div>
+                    <div class="navigation"><a href="{{ path('page_show', { 'url': 'about' }) }}">ABOUT</a></div>
+                    <div class="navigation"><a href="{{ path('page_show', { 'url': 'contact' }) }}">CONTACT</a></div>
+                </nav>
+            </header>
+        </div>
+
+        <div id="blueStrip">
+            <div id="bluestripContent" class="contentContainer">
+                <p>We are an online audio & video community resource</p>
+                <p id="textLight">that aims to provide a central point of access to content with a PHP focus</p>
+
+                <div id="searchForm">
+                    <form method='post' action='#'>
+                        <input id="searchCriteria" class="search" name="search" type="text" placeholder="What can we find for you?"/>
+                        <input id="searchButton" class="search" type="image" alt="Search" src="{{ asset('images/searchButton.png') }}" />
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="contentContainer">
+            {% block body %}{% endblock %}
+
+            <div id="rightColumn">
+                {% block rightcolumn %}{% endblock %}
+            </div>
+        </div>
+
+        <div id="footerStrip">
+            <div class="contentContainer">
+                <footer>
+                    <div id="followUs">
+                        <p>FOLLOW US</p>
+                        <nav>
+                            <a href="#"><img src="{{ asset('images/facebookIcon.png') }}" alt="Facebook Icon"/></a>
+                            <a href="http://twitter.com/pro_talk"><img src="{{ asset('images/twitterIcon.png') }}" alt="Twitter Icon"/></a>
+                            <a href="#"><img src="{{ asset('images/mailIcon.png') }}" alt="Mail Icon"/></a>
+                        </nav>
+                    </div>
+
+                    <div id="copyright">
+                        <p>Copyright &copy; 2012 ProTalk. All video/audio<br />
+                            content and descriptions are owned by their creators</p>
+                        <a href="{{ path('page_show', { 'url': 'terms' }) }}">Terms of Service</a>
+                        <a href="{{ path('page_show', { 'url': 'privacy' }) }}">Privacy Policy</a>
+                    </div>
+                </footer>
+            </div>
+        </div>
+
         {% block javascripts %}{% endblock %}
     </body>
 </html>
