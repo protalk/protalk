@@ -1,0 +1,17 @@
+{% if fullStars > 0 %}
+  {% for i in range(1, fullStars) %}
+    <img src="{{ asset('images/star_full.png') }}" alt="Star image"/>
+  {% endfor %}
+{% endif %}
+
+{% if partialStar > 0 %}
+  <img src="{{ asset('images/star_partial.png') }}" alt="Star image"/>
+{% endif %}
+
+{% if emptyStars > 0 %}
+  {% for i in range(1, emptyStars) %}
+    <img src="{{ asset('images/star_empty.png') }}" alt="Star image"/>
+  {% endfor %}
+{% endif %}
+
+({{ rating }})

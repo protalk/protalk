@@ -6,24 +6,24 @@
 <div id="latestTalks">
     <section>
         <h1>LATEST TALKS</h1>
-        <?php for ($i = 1; $i < 7; $i++): ?>
+        {% for i in range(1, 7) %}
         <article class="latestMedia">
             <div class="latestMediaThumbNail">
                 <img src="{{ asset('images/mediaThumbNail.png') }}" alt="Media ThumbNail Image"/>
             </div>
             <div class="latestMediaText">
                 <header>
-                    <h2>Featured Talk #<?php echo $i; ?></h2>
+                    <h2>Featured Talk #{{ i }}</h2>
                     <p><time datetime="2012-04-10" >Apr 10, 2012 by </time><span class="speaker">Ann Other</span></p>
                 </header>
                 <p>Topping lemon drops pie I love bear claw tiramisu. Powder chupa chups...</p>
                 <footer>
-                    <span class="metadata">Rating: <?php setRating(); ?></span>
+                    <span class="metadata">Rating: {% render "ProtalkMediaBundle:Rating:index" %}</span>
                 </footer>
             </div>
 
         </article>
-        <?php endfor; ?>
+        {% endfor %}
         <div>
             <img src="{{ asset('images/moreRecentItemsButton.png') }}" alt="More Recent Items"/>
         </div>
@@ -41,46 +41,46 @@
         </ul>
         <div>
             <div id="viewed">
-                <?php for ($i = 1; $i < 7; $i++): ?>
+                {% for i in range(1, 7) %}
                 <article class="tabMedia">
                     <div class="tabMediaThumbNail">
                         <img src="{{ asset('images/tabMediaThumbNail.png') }}" alt="Media ThumbNail Image"/>
                     </div>
                     <div class="tabMediaText">
                         <header>
-                            <h2>Last Viewed Talk #<?php echo $i; ?></h2>
+                            <h2>Last Viewed Talk #{{ i }}</h2>
                             <p><time datetime="2012-04-10">Nov 7, 2011 by </time><span class="speaker">Joe Bloggs</span></p>
                         </header>
 
                         <footer>
-                            <img src="{{ asset('images/binoculars.png') }}" alt="Binoculars Image"/><span class="metadata"> <?php echo rand(0,2000); ?> views</span>
+                            <img src="{{ asset('images/binoculars.png') }}" alt="Binoculars Image"/><span class="metadata"> 100 views</span>
                         </footer>
                     </div>
                 </article>
-                <?php endfor; ?>
+                {% endfor %}
                 <div>
                     <img src="{{ asset('images/topVisitedButton.png') }}" alt="Top Visited Items"/>
                 </div>
             </div>
 
             <div id="rated">
-                <?php for ($i = 1; $i < 7; $i++): ?>
+                {% for i in range(1, 7) %}
                 <article class="tabMedia">
                     <div class="tabMediaThumbNail">
                         <img src="{{ asset('images/tabMediaThumbNail.png') }}" alt="Media ThumbNail Image"/>
                     </div>
                     <div class="tabMediaText">
                         <header>
-                            <h2>Top Rated Talk #<?php echo $i; ?></h2>
+                            <h2>Top Rated Talk #{{ i }}</h2>
                             <p><time datetime="2012-04-10" >Mar 21, 2010 by </time><span class="speaker">Ivor Headache</span></p>
                         </header>
 
                         <footer>
-                            <span class="metadata"><?php setRating(); ?></span>
+                            <span class="metadata">{% render "ProtalkMediaBundle:Rating:index" %}</span>
                         </footer>
                     </div>
                 </article>
-                <?php endfor; ?>
+                {% endfor %}
                 <div>
                     <img src="{{ asset('images/topRatedButton.png') }}" alt="Top Rated Items"/>
                 </div>
