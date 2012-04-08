@@ -8,7 +8,7 @@
         <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
         <script src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
-        <script src="{{ asset('js/home.js') }}"></script>
+        {% block javascripts %}{% endblock %}
 
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.4.1/build/cssreset/cssreset-min.css"/>
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.4.1/build/cssbase/cssbase-min.css"/>
@@ -76,7 +76,5 @@
                 </footer>
             </div>
         </div>
-
-        {% block javascripts %}{% endblock %}
     </body>
 </html>
