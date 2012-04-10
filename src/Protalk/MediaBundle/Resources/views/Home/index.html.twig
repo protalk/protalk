@@ -1,5 +1,11 @@
 {% extends "::base.html.twig" %}
 
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('js/home.js') }}"></script>
+{% endblock %}
+
 {% block title "Home" %}
 
 {% block body %}
