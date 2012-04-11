@@ -11,12 +11,12 @@ YUI().use( "tabview", 'node-focusmanager', function(Y) {
         Y.log("ondomready function", "info");
 
         var tabview = new Y.TabView({
-            srcNode: '#tab_control'
+            srcNode: '#tabControl'
         });
 
         tabview.render();
 
-        var tabControl = Y.one("#tab_control"),
+        var tabControl = Y.one("#tabControl"),
             tabList = tabControl.one("ul"),
             selectedTabAnchor = tabControl.one(".yui3-tab-selected>a"),
             bGeckoIEWin = ((Y.UA.gecko || Y.UA.ie) && navigator.userAgent.indexOf("Windows") > -1),
