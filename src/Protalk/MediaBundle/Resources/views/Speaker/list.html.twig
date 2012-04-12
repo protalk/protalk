@@ -1,0 +1,3 @@
+{% for speaker in speakers %}
+  <a class="speaker" href="{{ url('speaker_show', { 'name': speaker.name , 'id' : speaker.id }) }}"><img src="{{ asset(['images/photos/', speaker.photo]|join) }}" alt="Author Image"/></a>
+{% endfor %}
