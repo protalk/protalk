@@ -33,18 +33,16 @@
             </header>
         </div>
 
-        <div id="blueStrip">
-            <div id="bluestripContent" class="contentContainer">
-                <p>We are an online audio & video community resource</p>
-                <p id="textLight">that aims to provide a central point of access to content with a PHP focus</p>
+        <div class="blueStrip">
+          <div id="bluestripContent" class="contentContainer">
+              <p>We are an online audio & video community resource</p>
+              <p id="textLight">that aims to provide a central point of access to content with a PHP focus</p>
 
-                <div id="searchForm">
-                    <form method='post' action='#'>
-                        <input id="searchCriteria" class="search" name="search" type="text" placeholder="What can we find for you?"/>
-                        <input id="searchButton" class="search" type="image" alt="Search" src="{{ asset('images/searchButton.png') }}" />
-                    </form>
-                </div>
-            </div>
+                  <form method='post' action='#'>
+                      <input id="searchCriteria" class="search" name="search" type="text" placeholder="What can we find for you?"/>
+                      <input id="searchButton" class="search" type="image" alt="Search" src="{{ asset('images/searchButton.png') }}" />
+                  </form>
+          </div>
         </div>
 
         <div class="contentContainer">
@@ -56,26 +54,28 @@
         </div>
 
         <div id="footerStrip">
-            <div class="contentContainer">
-                <footer>
-                    <div id="followUs">
-                        <p>FOLLOW US</p>
-                        <nav>
-                            <a href="#"><img src="{{ asset('images/facebookIcon.png') }}" alt="Facebook Icon"/></a>
-                            <a href="http://twitter.com/pro_talk"><img src="{{ asset('images/twitterIcon.png') }}" alt="Twitter Icon"/></a>
-                            <a href="#"><img src="{{ asset('images/mailIcon.png') }}" alt="Mail Icon"/></a>
-                        </nav>
-                    </div>
+          <div class="contentContainer">
+              <footer>
+                  <div id="followUs">
+                  <p>FOLLOW US</p>
+                  <nav>
+                      <a href="#"><img src="{{ asset('images/facebookIcon.png') }}" alt="Facebook Icon"/></a>
+                      <a href="http://twitter/pro_talk"><img src="{{ asset('images/twitterIcon.png') }}" alt="Twitter Icon"/></a>
+                      <a href="#"><img src="{{ asset('images/mailIcon.png') }}" alt="Mail Icon"/></a>
+                  </nav>
+                  </div>
 
-                    <div id="copyright">
-                        <p>Copyright &copy; 2012 ProTalk. All video/audio<br />
-                            content and descriptions are owned by their creators</p>
-                        <a href="{{ path('page_show', { 'url': 'terms' }) }}">Terms of Service</a>
-                        <a href="{{ path('page_show', { 'url': 'privacy' }) }}">Privacy Policy</a>
-                    </div>
-                </footer>
-            </div>
-        </div>
+                  <div id="copyright">
+                      <p>Copyright &copy; 2012 ProTalk. All video/audio<br />
+                      content and descriptions are owned by their creators</p>
+                      <a href="{{ path('page_show', { 'url': 'terms' }) }}">Terms of Service</a>
+                      <a href="{{ path('page_show', { 'url': 'privacy' }) }}">Privacy Policy</a>
+                  </div>
+              </footer>
+          </div>
+      </div>
+
+        
         {% block javascripts %}{% endblock %}
     </body>
 </html>
