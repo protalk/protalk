@@ -7,6 +7,12 @@ _home:
     pattern:  /
     defaults: { _controller: ProtalkMediaBundle:Home:index }
 
+speaker_show:
+  pattern: /speaker/{name}/{id}
+  defaults: {_controller: ProtalkMediaBundle:Speaker:show }
+  requirements:
+    id:  \d+
+
 ProtalkPageBundle:
     resource: "@ProtalkPageBundle/Controller/"
     type:     annotation
