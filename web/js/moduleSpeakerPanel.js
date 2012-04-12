@@ -1,6 +1,6 @@
 /*
-*		@class Y.AMS.PanelForm (ams-panel-form)
-*		@extends Y.AMS.PanelBase (ams-panel-base)
+*		@class ProTalk.SpeakerPanel
+*		@extends Y.Base
 *		@version 0.0.1
 *
 */

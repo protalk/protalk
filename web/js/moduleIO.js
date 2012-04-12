@@ -1,7 +1,7 @@
 /*
-*		@class AMS.IO
-*		@extends Base
-*		@version 1.0.0
+*		@class ProTalk.IO
+*		@extends Y.Base
+*		@version 0.0.1
 *
 */
 
@@ -197,7 +197,7 @@ YUI.add("protalk-io", function(Y) {
 
     }
   });
-}, "@VERSION@", {
+}, "0.0.1", {
   requires: [
   "io", "base-build", "widget", "node", "json-parse"
   ]
