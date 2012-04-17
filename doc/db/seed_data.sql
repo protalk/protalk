@@ -12,7 +12,7 @@ SET foreign_key_checks = 0;
 
 /* Delete all Page records then re-load sample data */
 
-TRUNCATE `Page`;
+TRUNCATE TABLE `Page`;
 
 INSERT INTO `Page` (url,pagetitle,title,content) VALUES ('contact','Contact Us','Contact','Some dummy text for contact page');
 INSERT INTO `Page` (url,pagetitle,title,content) VALUES ('contribute','How to Contribute','Contribute','Some dummy text for contribute page');
