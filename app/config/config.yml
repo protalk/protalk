@@ -57,3 +57,6 @@ swiftmailer:
 jms_security_extra:
     secure_controllers:  true
     secure_all_services: false
+
+parameters:
+    home_lists_max:  6

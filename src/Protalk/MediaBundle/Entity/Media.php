@@ -29,6 +29,12 @@ class Media
     private $mediatype_id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Speaker", inversedBy="medias")
+     * @ORM\JoinColumn(name="speaker_id", referencedColumnName="id")
+     */
+    protected $speaker;
+
+    /**
      * @var date $date
      *
      * @ORM\Column(name="date", type="date")
@@ -48,6 +54,13 @@ class Media
      * @ORM\Column(name="length", type="string", length=10)
      */
     private $length;
+
+    /**
+     * @var string $title
+     *
+     * @ORM\Column(name="title", type="string", length=200)
+     */
+    private $title;
 
     /**
      * @var float $rating
@@ -95,7 +108,7 @@ class Media
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -115,7 +128,7 @@ class Media
     /**
      * Get mediatype_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getMediatypeId()
     {
@@ -135,7 +148,7 @@ class Media
     /**
      * Get date
      *
-     * @return date 
+     * @return date
      */
     public function getDate()
     {
@@ -155,7 +168,7 @@ class Media
     /**
      * Get description
      *
-     * @return text 
+     * @return text
      */
     public function getDescription()
     {
@@ -175,7 +188,7 @@ class Media
     /**
      * Get length
      *
-     * @return string 
+     * @return string
      */
     public function getLength()
     {
@@ -195,7 +208,7 @@ class Media
     /**
      * Get rating
      *
-     * @return float 
+     * @return float
      */
     public function getRating()
     {
@@ -215,7 +228,7 @@ class Media
     /**
      * Get visits
      *
-     * @return integer 
+     * @return integer
      */
     public function getVisits()
     {
@@ -235,7 +248,7 @@ class Media
     /**
      * Get content
      *
-     * @return text 
+     * @return text
      */
     public function getContent()
     {
@@ -255,7 +268,7 @@ class Media
     /**
      * Get slides
      *
-     * @return string 
+     * @return string
      */
     public function getSlides()
     {
@@ -275,7 +288,7 @@ class Media
     /**
      * Get joindin
      *
-     * @return integer 
+     * @return integer
      */
     public function getJoindin()
     {
@@ -295,10 +308,67 @@ class Media
     /**
      * Get language
      *
-     * @return string 
+     * @return string
      */
     public function getLanguage()
     {
         return $this->language;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set speaker
+     *
+     * @param Protalk\MediaBundle\Entity\Speaker $speaker
+     */
+    public function setSpeaker(\Protalk\MediaBundle\Entity\Speaker $speaker)
+    {
+        $this->speaker = $speaker;
+    }
+
+    /**
+     * Get speaker
+     *
+     * @return Protalk\MediaBundle\Entity\Speaker
+     */
+    public function getSpeaker()
+    {
+        return $this->speaker;
+    }
+
+    /**
+     * Get shorter version of media title
+     *
+     * @param  Maximum allowed length of media title
+     * @return string
+     */
+
+    public function getTruncatedTitle($length = 25)
+    {
+        if (strlen($this->title) > $length )
+        {
+           return substr($this->title, 0, $length) . '...';
+        }
+
+        return $this->title;
     }
 }
