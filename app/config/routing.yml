@@ -1,3 +1,8 @@
+ProtalkAdminBundle:
+    resource: "@ProtalkAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 ProtalkMediaBundle:
     resource: "@ProtalkMediaBundle/Controller/"
     type:     annotation
@@ -8,10 +13,10 @@ _home:
     defaults: { _controller: ProtalkMediaBundle:Home:index }
 
 speaker_show:
-  pattern: /speaker/{name}/{id}
-  defaults: {_controller: ProtalkMediaBundle:Speaker:show }
-  requirements:
-    id:  \d+
+    pattern: /speaker/{name}/{id}
+    defaults: {_controller: ProtalkMediaBundle:Speaker:show }
+    requirements:
+        id:  \d+
 
 ProtalkPageBundle:
     resource: "@ProtalkPageBundle/Controller/"
@@ -21,6 +26,38 @@ ProtalkPageBundle:
 page_show:
     pattern:  /page/{url}
     defaults: { _controller: ProtalkPageBundle:Page:index }
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+ 
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+ 
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+ 
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+ 
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /change-password
+ 
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+ 
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
+ 
+sonata_user:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
+    prefix: /admin
 
 # Internal routing configuration to handle ESI
 #_internal:

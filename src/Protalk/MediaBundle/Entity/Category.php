@@ -24,7 +24,7 @@ class Category
     /**
      * @var integer $parent_id
      *
-     * @ORM\Column(name="parent_id", type="integer")
+     * @ORM\Column(name="parent_id", type="integer", nullable=true)
      */
     private $parent_id;
 
