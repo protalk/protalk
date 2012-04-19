@@ -13,9 +13,6 @@ class RatingController extends Controller
      */
     public function indexAction($rating)
     {
-        //generate a random whole or decimal number between 0 and 5
-        //retain original value for display purposes
-        //$rating = rand(0,50) / 10;
 
         //initialise partialStar variable to false
         $partialStar = 0;

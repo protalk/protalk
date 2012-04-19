@@ -48,13 +48,10 @@ class Speaker
      */
     private $biography;
 
-
-
-   /**
-    * Constructor function
-    *
-    */
-
+    /**
+     * Constructor function
+     *
+     */
     public function __construct()
     {
         $this->medias = new ArrayCollection();
@@ -143,7 +140,7 @@ class Speaker
     /**
      * Get medias
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getMedias()
     {

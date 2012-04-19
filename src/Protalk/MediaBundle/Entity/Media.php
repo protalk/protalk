@@ -361,7 +361,6 @@ class Media
      * @param  Maximum allowed length of media title
      * @return string
      */
-
     public function getTruncatedTitle($length = 25)
     {
         if (strlen($this->title) > $length )

@@ -12,8 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class MediaRepository extends EntityRepository
 {
-
-
+    /**
+     * Query database for a fixed number of media records ordered by
+     * a specific field
+     *
+     * @param string $orderField
+     * @param integer $max
+     * @return Doctrine Collection
+     */
     public function getMediaOrderedBy($orderField, $max)
     {
         return $this->getEntityManager()
@@ -23,7 +29,4 @@ class MediaRepository extends EntityRepository
             ->setMaxResults($max)
             ->getResult();
     }
-
-
-
 }
