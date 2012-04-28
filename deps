@@ -93,10 +93,6 @@
     git=http://github.com/sonata-project/SonataDoctrineORMAdminBundle.git
     target=/bundles/Sonata/DoctrineORMAdminBundle
     version=origin/2.0
-
-[EntityAudit]
-    git=git://github.com/simplethings/EntityAudit.git
-    target=/bundles/SimpleThings/EntityAudit
     
 [SonataEasyExtendsBundle]
     git=git://github.com/sonata-project/SonataEasyExtendsBundle.git
