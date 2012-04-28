@@ -13,7 +13,7 @@ class CategoryController extends Controller
      */
     public function listAction()
     {
-        $categorys = $this->getDoctrine()->getRepository("ProtalkMediaBundle:Category")->findAll();
-        return array('categorys' => $categorys);
+        $categories = $this->getDoctrine()->getRepository("ProtalkMediaBundle:Category")->findAll();
+        return array('categories' => $categories);
     }
 }
