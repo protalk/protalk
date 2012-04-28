@@ -153,3 +153,6 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Application\Sonata\UserBundle\Entity\User             
+
+parameters:
+    home_lists_max:  6
