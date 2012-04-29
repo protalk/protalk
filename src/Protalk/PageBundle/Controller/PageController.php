@@ -20,6 +20,12 @@ class PageController extends Controller
         if (!is_object($page))
         throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
 
+        if ($url == 'contribute') {
+
+            return $this->render('ProtalkPageBundle:Page:content.html.twig', array('page' => $page));
+        }
+
         return array('page' => $page);
     }
+    
 }
