@@ -17,7 +17,7 @@
 <div id="leftColumn">
     <section>
         <h1>{{ page.title }}</h1>
-        {% include 'ProtalkPageBundle:Page:content.html.twig' with {'page': page} %}
+        {% render 'ProtalkPageBundle:Page:content' with {'page': page} %}
     </section>
 </div>
 {% endblock %}

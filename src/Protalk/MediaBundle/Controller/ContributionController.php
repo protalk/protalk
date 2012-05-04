@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class ContributionController extends Controller
 {
 
-     public function newAction(Request $request)
+    public function newAction(Request $request)
     {
         $contribution = new Contribution();
         $form = $this->createForm(new ContributeMedia(), $contribution);
@@ -37,4 +37,5 @@ class ContributionController extends Controller
 
         return $this->render('ProtalkMediaBundle:Contribution:new.html.twig', array('form' => $form->createView()));
     }
+
 }

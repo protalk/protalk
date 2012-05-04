@@ -86,6 +86,11 @@ class Category
         return $this->name;
     }
 
+    /**
+     * Get object as string (name)
+     *
+     * @return string
+     */
     public function __toString()
     {
         return $this->name;

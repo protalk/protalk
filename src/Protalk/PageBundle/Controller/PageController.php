@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class PageController extends Controller
 {
+
     /**
      * @Route("/{url}")
      * @Template()
@@ -18,7 +19,7 @@ class PageController extends Controller
         $page = $this->getDoctrine()->getRepository('ProtalkPageBundle:Page')->findOneByUrl($url);
 
         if (!is_object($page))
-        throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
 
         if ($url == 'contribute') {
 
@@ -27,5 +28,15 @@ class PageController extends Controller
 
         return array('page' => $page);
     }
-    
+
+    /*
+     * Displays page content text from database
+     *
+     * @return template
+     */
+    public function contentAction($page)
+    {
+        return $this->render('ProtalkPageBundle:Page:content.html.twig', array('page' => $page));
+    }
+
 }
