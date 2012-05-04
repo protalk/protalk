@@ -3,6 +3,7 @@
 namespace Protalk\MediaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Protalk\MediaBundle\Entity\Speaker
@@ -20,6 +21,11 @@ class Speaker
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Media", mappedBy="speaker")
+     */
+    protected $medias;
 
     /**
      * @var string $name
@@ -42,11 +48,19 @@ class Speaker
      */
     private $biography;
 
+    /**
+     * Constructor function
+     *
+     */
+    public function __construct()
+    {
+        $this->medias = new ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -66,7 +80,7 @@ class Speaker
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -86,7 +100,7 @@ class Speaker
     /**
      * Get photo
      *
-     * @return string 
+     * @return string
      */
     public function getPhoto()
     {
@@ -106,10 +120,30 @@ class Speaker
     /**
      * Get biography
      *
-     * @return text 
+     * @return text
      */
     public function getBiography()
     {
         return $this->biography;
+    }
+
+    /**
+     * Add medias
+     *
+     * @param Protalk\MediaBundle\Entity\Media $medias
+     */
+    public function addMedia(\Protalk\MediaBundle\Entity\Media $medias)
+    {
+        $this->medias[] = $medias;
+    }
+
+    /**
+     * Get medias
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getMedias()
+    {
+        return $this->medias;
     }
 }

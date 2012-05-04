@@ -12,4 +12,21 @@ use Doctrine\ORM\EntityRepository;
  */
 class MediaRepository extends EntityRepository
 {
+    /**
+     * Query database for a fixed number of media records ordered by
+     * a specific field
+     *
+     * @param string $orderField
+     * @param integer $max
+     * @return Doctrine Collection
+     */
+    public function getMediaOrderedBy($orderField, $max)
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT m, s FROM ProtalkMediaBundle:Media m
+                           JOIN m.speaker s
+                           ORDER BY m.'.$orderField.' DESC')
+            ->setMaxResults($max)
+            ->getResult();
+    }
 }
