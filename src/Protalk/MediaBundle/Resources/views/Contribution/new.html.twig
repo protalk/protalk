@@ -17,7 +17,7 @@
 <div id="leftColumn">
     <section>
         <h1>Contribution</h1>
-        {% render "ProtalkPageBundle:Page:index" with { 'url' : 'contribute' } %}
+        {% render "ProtalkPageBundle:Page:content" with { 'url' : 'contribute' } %}
 
         {% if app.session.hasFlash('contribution-notice') %}
         <div class="contribution-notice">

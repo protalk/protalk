@@ -17,7 +17,7 @@
 <div id="leftColumn">
     <section>
         <h1>{{ page.title }}</h1>
-        {% render 'ProtalkPageBundle:Page:content' with {'page': page} %}
+        <p>{{ page.content }}</p>
     </section>
 </div>
 {% endblock %}

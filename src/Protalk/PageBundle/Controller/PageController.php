@@ -15,18 +15,8 @@ class PageController extends Controller
      */
     public function indexAction($url)
     {
-        // get the page by url
-        $page = $this->getDoctrine()->getRepository('ProtalkPageBundle:Page')->findOneByUrl($url);
-
-        if (!is_object($page))
-            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
-
-        if ($url == 'contribute') {
-
-            return $this->render('ProtalkPageBundle:Page:content.html.twig', array('page' => $page));
-        }
-
-        return array('page' => $page);
+        $this->getPage($url);
+        return array('page' => $this->page);
     }
 
     /*
@@ -34,9 +24,23 @@ class PageController extends Controller
      *
      * @return template
      */
-    public function contentAction($page)
+    public function contentAction($url)
     {
-        return $this->render('ProtalkPageBundle:Page:content.html.twig', array('page' => $page));
+        $this->getPage($url);
+        return $this->render('ProtalkPageBundle:Page:content.html.twig', array('page' => $this->page));
     }
 
+    /*
+     * Retrieves page content text from database
+     *
+     * @return boolean
+     */
+    public function getPage($url)
+    {
+        $this->page = $this->getDoctrine()->getRepository('ProtalkPageBundle:Page')->findOneByUrl($url);
+        if (!is_object($this->page)) {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
+        return true;
+    }
 }
