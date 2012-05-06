@@ -23,6 +23,13 @@ class ContributeMedia extends AbstractType
                                                      'property' => 'name',
                                                      'empty_value' => 'Choose a category'
                                                     ));
+        $builder->add('recaptcha', 'ewz_recaptcha', array(
+        'attr' => array(
+            'options' => array(
+                'theme' => 'clean'
+            )
+        )
+    ));
     }
 
 

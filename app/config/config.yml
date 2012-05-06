@@ -64,19 +64,19 @@ sonata_block:
     blocks:
         sonata.admin.block.admin_list:
             contexts:   [admin]
-    
+
         #sonata.admin_doctrine_orm.block.audit:
         #    contexts:   [admin]
-   
+
         sonata.block.service.text:
         sonata.block.service.action:
         sonata.block.service.rss:
-   
+
         # Some specific block from the SonataMediaBundle
         #sonata.media.block.media:
         #sonata.media.block.gallery:
-        #sonata.media.block.feature_media:    
-    
+        #sonata.media.block.feature_media:
+
 sonata_admin:
     title:      ProTalk
     templates:
@@ -96,19 +96,19 @@ sonata_admin:
         groups:
             protalk_common:
                 label: Common
-                items: ~ 
+                items: ~
 
 services:
    protalk.common.admin.category:
       class: Protalk\AdminBundle\Admin\CategoryAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_common, label: Category }
-      arguments: [null, Protalk\MediaBundle\Entity\Category, ProtalkAdminBundle:CategoryAdmin]  
+      arguments: [null, Protalk\MediaBundle\Entity\Category, ProtalkAdminBundle:CategoryAdmin]
    protalk.common.admin.tag:
       class: Protalk\AdminBundle\Admin\TagAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_common, label: Tag }
-      arguments: [null, Protalk\MediaBundle\Entity\Tag, ProtalkAdminBundle:TagAdmin]                   
+      arguments: [null, Protalk\MediaBundle\Entity\Tag, ProtalkAdminBundle:TagAdmin]
 
 sonata_doctrine_orm_admin:
     # default value is null, so doctrine uses the value defined in the configuration
@@ -147,9 +147,15 @@ sonata_doctrine_orm_admin:
                 smallint:   SonataAdminBundle:CRUD:base_show_field.html.twig
                 bigint:     SonataAdminBundle:CRUD:base_show_field.html.twig
                 integer:    SonataAdminBundle:CRUD:base_show_field.html.twig
-                decimal:    SonataAdminBundle:CRUD:base_show_field.html.twig            
-                
+                decimal:    SonataAdminBundle:CRUD:base_show_field.html.twig
+
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: Application\Sonata\UserBundle\Entity\User             
+    user_class: Application\Sonata\UserBundle\Entity\User
+
+ewz_recaptcha:
+    public_key:   6LcAINESAAAAAC1V_QhiarIfD-ikLaLqnmAayo_0
+    private_key:  6LcAINESAAAAAEvnZPMdtyBQ9YwPb3HyS5V90ie2
+    secure:       false
+    locale_key:   session.default_locale

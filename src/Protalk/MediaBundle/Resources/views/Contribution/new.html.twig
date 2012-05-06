@@ -95,6 +95,15 @@
                 {{ form_widget(form.description, { 'attr': {'class': 'form_field'} }) }}
             </div>
 
+            {% form_theme form 'EWZRecaptchaBundle:Form:ewz_recaptcha_widget.html.twig' %}
+            {{ form_errors(form.recaptcha) }}
+            {{ form_widget(form.recaptcha, { 'attr': {
+                'options' : {
+                    'theme' : 'clean',
+                },
+            } }) }}
+
+
             {{ form_rest(form) }}
 
             <div>
