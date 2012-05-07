@@ -1,0 +1,136 @@
+{% extends "::base.html.twig" %}
+
+{% block title "Contribution" %}
+
+{% block javascriptsHead %}
+{{ parent() }}
+
+<script>
+      var protalk = {
+        baseurl : {{ url('_home')|json_encode|raw }}
+      }
+</script>
+<script src="{{ asset('js/page.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+<div id="leftColumn">
+    <section>
+        <h1>Contribution</h1>
+        {% render "ProtalkPageBundle:Page:content" with { 'url' : 'contribute' } %}
+
+        {% if app.session.hasFlash('contribution-notice') %}
+        <div class="contribution-notice">
+            {{ app.session.flash('contribution-notice') }}
+        </div>
+        {% endif %}
+        <form action="{{ path('contribute_new') }}" method="post" {{ form_enctype(form) }} id="contribution">
+
+            {{ form_errors(form) }}
+
+            <div>
+                {{ form_errors(form.name, { 'attr': {'class': 'form_error'} }) }}
+                {{ form_label(form.name, 'Your name*', { 'attr': {'class': 'form_label'} }) }}
+                {{ form_widget(form.name, { 'attr': {'class': 'form_field'} }) }}
+            </div>
+
+            <div>
+                {{ form_errors(form.email, { 'attr': {'class': 'form_error'} }) }}
+                {{ form_label(form.email, 'Your email address*', { 'attr': {'class': 'form_label'} }) }}
+                {{ form_widget(form.email, { 'attr': {'class': 'form_field'} }) }}
+            </div>
+
+
+            <div>
+                {{ form_errors(form.hostUrl, { 'attr': {'class': 'form_error'} }) }}
+                {{ form_label(form.hostUrl, 'Host URL*', { 'attr': {'class': 'form_label'} }) }}
+                {{ form_widget(form.hostUrl, { 'attr': {'class': 'form_field'} }) }}
+            </div>
+
+            <div>
+                {{ form_errors(form.hostName, { 'attr': {'class': 'form_error'} }) }}
+                {{ form_label(form.hostName, 'Host name*', { 'attr': {'class': 'form_label'} }) }}
+                {{ form_widget(form.hostName, { 'attr': {'class': 'form_field'} }) }}
+            </div>
+
+            <div>
+                {{ form_errors(form.title, { 'attr': {'class': 'form_error'} }) }}
+                {{ form_label(form.title, 'Talk title*', { 'attr': {'class': 'form_label'} }) }}
+                {{ form_widget(form.title, { 'attr': {'class': 'form_field'} }) }}
+            </div>
+
+            <div>
+                {{ form_errors(form.speaker) }}
+                {{ form_label(form.speaker, 'Speaker name*', { 'attr': {'class': 'form_label'} }) }}
+                {{ form_widget(form.speaker, { 'attr': {'class': 'form_field'} }) }}
+            </div>
+
+            <div>
+                {{ form_errors(form.mediaUrl) }}
+                {{ form_label(form.mediaUrl, 'Media URL*', { 'attr': {'class': 'form_label'} }) }}
+                {{ form_widget(form.mediaUrl, { 'attr': {'class': 'form_field'} }) }}
+            </div>
+
+            <div>
+                {{ form_errors(form.slidesUrl) }}
+                {{ form_label(form.slidesUrl, 'Slides URL', { 'attr': {'class': 'form_label'} }) }}
+                {{ form_widget(form.slidesUrl, { 'attr': {'class': 'form_field'} }) }}
+            </div>
+
+            <div>
+                {{ form_errors(form.category) }}
+                {{ form_label(form.category, 'Category*', { 'attr': {'class': 'form_label'} }) }}
+                {{ form_widget(form.category, { 'attr': {'class': 'form_field'} }) }}
+            </div>
+
+            <div>
+                {{ form_errors(form.tags) }}
+                {{ form_label(form.tags, 'Tags (5 max)', { 'attr': {'class': 'form_label'} }) }}
+                {{ form_widget(form.tags, { 'attr': {'class': 'form_field'} }) }}
+            </div>
+
+            <div>
+                {{ form_errors(form.description) }}
+                {{ form_label(form.description, 'Brief description*', { 'attr': {'class': 'form_label'} }) }}
+                {{ form_widget(form.description, { 'attr': {'class': 'form_field'} }) }}
+            </div>
+
+            {{ form_rest(form) }}
+
+            <div>
+                 <a id="contribute_submit_button" class="button" href="#" onclick="document.getElementById('contribution').submit();" ><span>SUBMIT</span></a>
+            </div>
+        </form>
+    </section>
+</div>
+{% endblock %}
+
+{% block rightcolumn %}
+<div id="rightColumn" >
+    <div id="sidebar">
+        <section>
+            <div id="categories">
+                <h1>CATEGORIES</h1>
+                {% render "ProtalkMediaBundle:Category:list" %}
+            </div>
+        </section>
+        <section>
+            <div id="tags">
+                <h1>TAGS</h1>
+                {% render "ProtalkMediaBundle:Tag:list" %}
+            </div>
+        </section>
+        <section>
+            <div id="speakers">
+                <h1>SPEAKERS</h1>
+                {% render "ProtalkMediaBundle:Speaker:list" %}
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+

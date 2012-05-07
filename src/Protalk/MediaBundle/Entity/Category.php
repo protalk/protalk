@@ -39,7 +39,7 @@ class Category
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -59,7 +59,7 @@ class Category
     /**
      * Get parent_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getParentId()
     {
@@ -79,10 +79,21 @@ class Category
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Get object as string (name)
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
+
     }
 }
