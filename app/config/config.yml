@@ -98,7 +98,7 @@ services:
       class: Protalk\AdminBundle\Admin\CategoryAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_common, label: Category }
-      arguments: [null, Protalk\MediaBundle\Entity\Category, ProtalkAdminBundle:CategoryAdmin]  
+      arguments: [null, Protalk\MediaBundle\Entity\Category, ProtalkAdminBundle:CategoryAdmin]
    protalk.common.admin.tag:
       class: Protalk\AdminBundle\Admin\TagAdmin
       tags:
@@ -167,8 +167,8 @@ sonata_doctrine_orm_admin:
                 smallint:   SonataAdminBundle:CRUD:base_show_field.html.twig
                 bigint:     SonataAdminBundle:CRUD:base_show_field.html.twig
                 integer:    SonataAdminBundle:CRUD:base_show_field.html.twig
-                decimal:    SonataAdminBundle:CRUD:base_show_field.html.twig            
-                
+                decimal:    SonataAdminBundle:CRUD:base_show_field.html.twig
+
 fos_user:
     db_driver: orm
     firewall_name: main
@@ -176,3 +176,9 @@ fos_user:
 
 parameters:
     home_lists_max:  6
+
+ewz_recaptcha:
+    public_key:   6LcAINESAAAAAC1V_QhiarIfD-ikLaLqnmAayo_0
+    private_key:  6LcAINESAAAAAEvnZPMdtyBQ9YwPb3HyS5V90ie2
+    secure:       false
+    locale_key:   session.default_locale
