@@ -6,20 +6,19 @@
 {{ parent() }}
 
 <script>
-      var protalk = {
+    var protalk = {
         baseurl : {{ url('_home')|json_encode|raw }}
-      }
+    }
 </script>
 <script src="{{ asset('js/page.js') }}"></script>
 {% endblock %}
 
-
 {% block body %}
 <div id="leftColumn">
-  <section>
-    <h1>{{ page.title }}</h1>
-    <p>{{ page.content }}</p>
-  </section>
+    <section>
+        <h1>{{ page.title }}</h1>
+        <p>{{ page.content }}</p>
+    </section>
 </div>
 {% endblock %}
 
@@ -27,26 +26,26 @@
 
 {% block rightcolumn %}
 <div id="rightColumn" >
-  <div id="sidebar">
-      <section>
-          <div id="categories">
-              <h1>CATEGORIES</h1>
-              {% render "ProtalkMediaBundle:Category:list" %}
-          </div>
-      </section>
-      <section>
-          <div id="tags">
-              <h1>TAGS</h1>
-              {% render "ProtalkMediaBundle:Tag:list" %}
-          </div>
-      </section>
-      <section>
-          <div id="speakers">
-              <h1>AUTHORS</h1>
-              {% render "ProtalkMediaBundle:Speaker:list" %}
-          </div>
-      </section>
-  </div>
+    <div id="sidebar">
+        <section>
+            <div id="categories">
+                <h1>CATEGORIES</h1>
+                {% render "ProtalkMediaBundle:Category:list" %}
+            </div>
+        </section>
+        <section>
+            <div id="tags">
+                <h1>TAGS</h1>
+                {% render "ProtalkMediaBundle:Tag:list" %}
+            </div>
+        </section>
+        <section>
+            <div id="speakers">
+                <h1>SPEAKERS</h1>
+                {% render "ProtalkMediaBundle:Speaker:list" %}
+            </div>
+        </section>
+    </div>
 </div>
 {% endblock %}
 
