@@ -22,6 +22,7 @@ class PageController extends Controller
     /*
      * Displays page content text from database
      *
+     * @param string $url
      * @return template
      */
     public function contentAction($url)
@@ -33,9 +34,10 @@ class PageController extends Controller
     /*
      * Retrieves page content text from database
      *
+     * @param string $url
      * @return boolean
      */
-    public function getPage($url)
+    protected function getPage($url)
     {
         $this->page = $this->getDoctrine()->getRepository('ProtalkPageBundle:Page')->findOneByUrl($url);
         if (!is_object($this->page)) {
