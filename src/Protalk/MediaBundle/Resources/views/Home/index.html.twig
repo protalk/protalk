@@ -20,7 +20,7 @@
                 </div>
                 <div class="mediaTextLarge">
                     <header>
-                        <h2 title="{{media.title}}">{{ media.getTruncatedTitle(34) }}</h2>
+                        <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'id': media.id }) }}">{{ media.getTruncatedTitle(34) }}</a></h2>
                         <p><time datetime="{{ media.date|date("Y/m/d") }}" >{{ media.date|date("d M Y") }} by </time><span class="name">{{ media.speaker.name }}</span></p>
                     </header>
                     <p>{{ media.description }}</p>
