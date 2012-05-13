@@ -20,6 +20,7 @@ $loader->registerNamespaces(array(
     'Knp\Menu'         => __DIR__.'/../vendor/knp/menu/src',
     'SimpleThings'     => __DIR__.'/../vendor/bundles',
     'FOS'              => __DIR__.'/../vendor/bundles',
+    'EWZ'              => __DIR__.'/../vendor/bundles',
     'Application'      => __DIR__,
 ));
 $loader->registerPrefixes(array(

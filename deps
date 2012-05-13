@@ -88,7 +88,7 @@
 [Exporter]
     git=http://github.com/sonata-project/exporter.git
     target=/exporter
-    
+
 [SonataDoctrineORMAdminBundle]
     git=http://github.com/sonata-project/SonataDoctrineORMAdminBundle.git
     target=/bundles/Sonata/DoctrineORMAdminBundle
@@ -96,13 +96,17 @@
     
 [SonataEasyExtendsBundle]
     git=git://github.com/sonata-project/SonataEasyExtendsBundle.git
-    target=/bundles/Sonata/EasyExtendsBundle       
+    target=/bundles/Sonata/EasyExtendsBundle
 
 [FOSUserBundle]
     git=git://github.com/FriendsOfSymfony/FOSUserBundle.git
     target=bundles/FOS/UserBundle
- 
+
 [SonataUserBundle]
     git=git://github.com/sonata-project/SonataUserBundle.git
     target=/bundles/Sonata/UserBundle
-         
+
+[EWZRecaptchaBundle]
+    git=http://github.com/excelwebzone/EWZRecaptchaBundle.git
+    target=/bundles/EWZ/Bundle/RecaptchaBundle
+    version=origin/2.0

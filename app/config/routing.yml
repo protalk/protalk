@@ -18,6 +18,10 @@ speaker_show:
     requirements:
         id:  \d+
 
+contribute_new:
+    pattern: /contribute/new
+    defaults: {_controller: ProtalkMediaBundle:Contribution:new }
+
 ProtalkPageBundle:
     resource: "@ProtalkPageBundle/Controller/"
     type:     annotation

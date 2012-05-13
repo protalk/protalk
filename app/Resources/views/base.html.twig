@@ -26,7 +26,7 @@
                 <nav>
                     <div id="firstNavLink" class="navigation"><a href="{{ path('_home') }}" >HOME</a></div>
                     <div class="navigation"><a href="#">EXPLORE</a></div>
-                    <div class="navigation"><a href="{{ path('page_show', { 'url': 'contribute' }) }}">CONTRIBUTE</a></div>
+                    <div class="navigation"><a href="{{ path('contribute_new') }}">CONTRIBUTE</a></div>
                     <div class="navigation"><a href="{{ path('page_show', { 'url': 'about' }) }}">ABOUT</a></div>
                     <div class="navigation"><a href="{{ path('page_show', { 'url': 'contact' }) }}">CONTACT</a></div>
                 </nav>
@@ -76,6 +76,6 @@
       </div>
 
 
-        {% block javascripts %}{% endblock %}
+    {% block javascripts %}{% endblock %}
     </body>
 </html>
