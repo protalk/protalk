@@ -23,8 +23,7 @@ class MediaRepository extends EntityRepository
     public function getMediaOrderedBy($orderField, $max)
     {
         return $this->getEntityManager()
-            ->createQuery('SELECT m, s FROM ProtalkMediaBundle:Media m
-                           JOIN m.speaker s
+            ->createQuery('SELECT m FROM ProtalkMediaBundle:Media m
                            ORDER BY m.'.$orderField.' DESC')
             ->setMaxResults($max)
             ->getResult();

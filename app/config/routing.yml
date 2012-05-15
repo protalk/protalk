@@ -18,6 +18,10 @@ speaker_show:
     requirements:
         id:  \d+
 
+get_speakers:
+  pattern:  /media/{id}/speakers
+  defaults: {_controller: ProtalkMediaBundle:Media:speakers}
+
 contribute_new:
     pattern: /contribute/new
     defaults: {_controller: ProtalkMediaBundle:Contribution:new }
@@ -32,7 +36,7 @@ page_show:
     defaults: { _controller: ProtalkPageBundle:Page:index }
 
 media_show:
-    pattern:  /media/{id}
+    pattern:  /media/{slug}
     defaults: { _controller: ProtalkMediaBundle:Media:index }
 
 fos_user_security:

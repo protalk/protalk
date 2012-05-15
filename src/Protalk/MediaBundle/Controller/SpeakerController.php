@@ -23,7 +23,7 @@ class SpeakerController extends Controller {
     $request = $this->getRequest();
     if ($request->isXmlHttpRequest())
     {
-      $speaker = $this->getDoctrine()
+      $speaker[] = $this->getDoctrine()
           ->getRepository('ProtalkMediaBundle:Speaker')
           ->find($id);
 
@@ -31,12 +31,11 @@ class SpeakerController extends Controller {
           throw $this->createNotFoundException($name.' not found with id '.$id);
       }
 
-      return $this->render('ProtalkMediaBundle:Speaker:show.html.twig', array('speaker' => $speaker));
+      return $this->render('ProtalkMediaBundle:Speaker:show.html.twig', array('speakers' => $speaker));
 
     }
 
     throw new \Exception('Naughty naughty! This should be an ajax request.');
 
   }
-
 }

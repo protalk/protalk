@@ -1,3 +1,4 @@
+{% for speaker in speakers %}
 <div class="speakerBio">
   <header>
     <img id="speakerThumbNail" src="{{ asset(['images/photos/', speaker.photo]|join) }}" alt="Author Image"/>
@@ -5,7 +6,5 @@
 
   </header>
   <p>{{ speaker.biography}}</p>
-  <footer>
-    <p><span class="metadata">Average Rating: {% render "ProtalkMediaBundle:Rating:index" %}</span></p>
-  </footer>
 </div>
+{% endfor %}

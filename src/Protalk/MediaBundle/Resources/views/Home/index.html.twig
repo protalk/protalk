@@ -3,7 +3,14 @@
 {% block javascriptsHead %}
     {{ parent() }}
 
+    <script>
+    var protalk = {
+        baseurl : {{ url('_home')|json_encode|raw }}
+    }
+    </script>
+
     <script src="{{ asset('js/home.js') }}"></script>
+    <script src="{{ asset('js/page.js') }}"></script>
 {% endblock %}
 
 {% block title "Home" %}
@@ -20,8 +27,8 @@
                 </div>
                 <div class="mediaTextLarge">
                     <header>
-                        <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'id': media.id }) }}">{{ media.getTruncatedTitle(34) }}</a></h2>
-                        <p><time datetime="{{ media.date|date("Y/m/d") }}" >{{ media.date|date("d M Y") }} by </time><span class="name">{{ media.speaker.name }}</span></p>
+                        <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.getTruncatedTitle(34) }}</a></h2>
+                        <p><time datetime="{{ media.date|date("Y/m/d") }}" >{{ media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.getTruncatedSpeaker(20) }}</a></span></p>
                     </header>
                     <p>{{ media.description }}</p>
                     <footer>
@@ -55,7 +62,7 @@
                     <div class="tabMediaText">
                         <header>
                             <h2 title="{{media.title}}">{{ media.getTruncatedTitle(25) }}</h2>
-                            <p><time datetime="{{ media.date|date("Y/m/d") }}" >{{ media.date|date("d M Y") }} by </time><span class="name">Joe Bloggs</span></p>
+                            <p><time datetime="{{ media.date|date("Y/m/d") }}" >{{ media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.getTruncatedSpeaker() }}</a></span></p>
                         </header>
 
                         <footer>
@@ -78,7 +85,7 @@
                     <div class="tabMediaText">
                         <header>
                             <h2 title="{{media.title}}">{{ media.getTruncatedTitle(25) }}</h2>
-                            <p><time datetime="{{ media.date|date("Y/m/d") }}" >{{ media.date|date("d M Y") }} by </time><span class="name">Joe Bloggs</span></p>
+                            <p><time datetime="{{ media.date|date("Y/m/d") }}" >{{ media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.getTruncatedSpeaker() }}</a></span></p>
                         </header>
 
                         <footer>
