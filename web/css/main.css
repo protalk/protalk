@@ -701,3 +701,99 @@ hr {
     padding-left: 43px;
     padding-right: 43px;
 }
+
+input[type="text"], input[type="password"], input[type="url"], input[type="email"], textarea {
+    width: 350px;
+}
+
+form {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: normal;
+}
+
+.form_field {
+    -moz-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    color: #808080;
+    display: inline-block;
+    font-size: 13px;
+    height: 18px;
+    line-height: 18px;
+    padding: 4px;
+    margin: 0px 0px 10px 0px;
+    vertical-align: baseline;
+    left: 5px;
+    position:relative;
+}
+
+.form_label {
+    color: #404040;
+    float: left;
+    font-size: 13px;
+    line-height: 18px;
+    padding-top: 6px;
+    text-align: right;
+    width: 130px;
+    border: 0 none;
+    font-style: normal;
+    margin: 0;
+}
+
+form li, .contribution-notice {
+    background-color: #C43C35;
+    background-image: -moz-linear-gradient(center top , #EE5F5B, #C43C35);
+    background-repeat: repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    border-radius: 4px 4px 4px 4px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset;
+    margin-bottom: 10px;
+    padding: 7px 15px;
+    font-family: inherit;
+    font-size: 100%;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    text-decoration: none;
+    color:white;
+}
+
+.contribution-notice {
+    background-color: #C2E078;
+    background-image: -moz-linear-gradient(center top , #C2E078, #C2E078);
+    text-shadow:none;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    font-size: 15px;
+}
+
+form ul {
+    list-style-type: none;
+    text-align:left;
+    width: 93%;
+    margin:0;
+}
+
+#contribution_category {
+    height: 28px;
+    width:360px;
+}
+
+#contribution_description {
+    height: 100px;
+}
+
+#contribute_submit_button {
+    margin-top:15px;
+    margin-left:260px;
+
+}
+
+#recaptcha_area {
+
+    padding-left: 53px;
+}

@@ -12,7 +12,7 @@ class CategoryAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('name');
+        $formMapper->add('name')->add('parent_id', null, array('required' => false));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -22,7 +22,7 @@ class CategoryAdmin extends Admin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('name');
+        $listMapper->addIdentifier('name')->add('parent_id');
     }
 
     public function validate(ErrorElement $errorElement, $object)

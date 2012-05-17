@@ -24,7 +24,8 @@ class Category
     /**
      * @var integer $parent_id
      *
-     * @ORM\Column(name="parent_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
      */
     private $parent_id;
 
@@ -34,12 +35,18 @@ class Category
      * @ORM\Column(name="name", type="string", length=50)
      */
     private $name;
-
+    
+    /**
+     * @var array $children
+     * 
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="parent_id")
+     */
+    private $children;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -59,7 +66,7 @@ class Category
     /**
      * Get parent_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getParentId()
     {
@@ -79,9 +86,19 @@ class Category
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Get object as string (name)
+     *
+     * @return string
+     */
+    public function __toString()
     {
         return $this->name;
     }
