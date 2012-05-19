@@ -36,24 +36,21 @@ class Media implements SluggableInterface
      * @var ArrayCollection $speakers
      *
      * @ORM\ManyToMany(targetEntity="Speaker", inversedBy="medias")
-     * @ORM\JoinTable(name="Media_speaker",
-     *     joinColumns={@ORM\JoinColumn(name="media_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="speaker_id", referencedColumnName="id")}
-     * )
+     * @ORM\JoinTable(name="media_speaker")
      */
     private $speakers;
 
     /**
      * @var date $date
      *
-     * @ORM\Column(name="date", type="date")
+     * @ORM\Column(name="date", type="date", nullable=true)
      */
     private $date;
 
     /**
      * @var text $description
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
@@ -93,16 +90,16 @@ class Media implements SluggableInterface
     private $content;
 
     /**
-     * @var string $slides
+     * @var text $slides
      *
-     * @ORM\Column(name="slides", type="string", length=255)
+     * @ORM\Column(name="slides", type="text", nullable=true)
      */
     private $slides;
 
     /**
      * @var integer $joindin
      *
-     * @ORM\Column(name="joindin", type="integer")
+     * @ORM\Column(name="joindin", type="integer", nullable=true)
      */
     private $joindin;
 
@@ -114,9 +111,32 @@ class Media implements SluggableInterface
     private $language;
 
     /**
+     * @var string $slug
+     *
      * @ORM\Column(type="string")
      */
     protected $slug;
+
+    /**
+     * @var boolean $isPublished
+     *
+     * @ORM\Column(name="isPublished", type="boolean")
+     */
+    private $isPublished;
+
+    /**
+     * @var string $hostName
+     *
+     * @ORM\Column(name="hostName", type="string")
+     */
+    private $hostName;
+
+    /**
+     * @var string $hostUrl
+     *
+     * @ORM\Column(name="hostUrl", type="string")
+     */
+    private $hostUrl;
 
     /*
      * Constructor
@@ -284,7 +304,7 @@ class Media implements SluggableInterface
     /**
      * Set slides
      *
-     * @param string $slides
+     * @param text $slides
      */
     public function setSlides($slides)
     {
@@ -294,7 +314,7 @@ class Media implements SluggableInterface
     /**
      * Get slides
      *
-     * @return string
+     * @return text
      */
     public function getSlides()
     {
@@ -479,5 +499,65 @@ class Media implements SluggableInterface
         $slug = $slugger->getSlug($this->getSlugFields());
 
         return $this->setSlug($slug);
+    }
+
+    /**
+     * Set isPublished
+     *
+     * @param boolean $isPublished
+     */
+    public function setIsPublished($isPublished)
+    {
+        $this->isPublished = $isPublished;
+    }
+
+    /**
+     * Get isPublished
+     *
+     * @return boolean
+     */
+    public function getIsPublished()
+    {
+        return $this->isPublished;
+    }
+
+    /**
+     * Set hostName
+     *
+     * @param string $hostName
+     */
+    public function setHostName($hostName)
+    {
+        $this->hostName = $hostName;
+    }
+
+    /**
+     * Get hostName
+     *
+     * @return string
+     */
+    public function getHostName()
+    {
+        return $this->hostName;
+    }
+
+    /**
+     * Set hostUrl
+     *
+     * @param string $hostUrl
+     */
+    public function setHostUrl($hostUrl)
+    {
+        $this->hostUrl = $hostUrl;
+    }
+
+    /**
+     * Get hostUrl
+     *
+     * @return string
+     */
+    public function getHostUrl()
+    {
+        return $this->hostUrl;
     }
 }
