@@ -12,21 +12,23 @@ class MediaAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('name');
+        $formMapper->add('title')->add('mediatype_id')->add('speakers')->add('date')
+                ->add('description')->add('length')->add('rating')->add('visits')
+                ->add('content')->add('slides')->add('joindin')->add('language');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('name');
+        $datagridMapper->add('title');
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('name');
+        $listMapper->addIdentifier('title');
     }
 
     public function validate(ErrorElement $errorElement, $object)
     {
-        $errorElement->with('name')->assertMaxLength(array('limit' => 50))->end();
+        $errorElement->with('title')->assertMaxLength(array('limit' => 255))->end();
     }
 }

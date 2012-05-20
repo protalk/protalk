@@ -81,14 +81,15 @@ var Admin = {
      * @param subject
      */
     add_collapsed_toggle: function(subject) {
+        jQuery('fieldset.sonata-ba-fielset-collapsed div.sonata-ba-collapsed-fields').hide();
         jQuery('fieldset legend a.sonata-ba-collapsed', subject).live('click', function(event) {
             event.preventDefault();
 
             var fieldset = jQuery(this).closest('fieldset');
 
-            jQuery('div.sonata-ba-collapsed-fields', fieldset).toggle();
+            jQuery('div.sonata-ba-collapsed-fields', fieldset).slideToggle();
             fieldset.toggleClass('sonata-ba-collapsed-fields-close');
-        }).click();
+        });
     },
 
     stopEvent: function(event) {
@@ -156,12 +157,16 @@ var Admin = {
             var proto = container.attr('data-prototype');
             proto = proto.replace(/\$\$name\$\$/g, container.children().length);
             jQuery(proto).insertBefore(jQuery(this).parent());
+            
+            jQuery(this).trigger('sonata-collection-item-added');
         });
 
         jQuery(subject).on('click', '.sonata-collection-delete', function(event) {
             Admin.stopEvent(event);
 
             jQuery(this).closest('.sonata-collection-row').remove();
+            
+            jQuery(this).trigger('sonata-collection-item-deleted');
         });
     }
 }

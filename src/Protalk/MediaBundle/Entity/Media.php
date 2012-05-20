@@ -2,15 +2,19 @@
 
 namespace Protalk\MediaBundle\Entity;
 
+use SamJ\DoctrineSluggableBundle\SluggableInterface;
+use SamJ\DoctrineSluggableBundle\Slugger;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Protalk\MediaBundle\Entity\Media
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Protalk\MediaBundle\Entity\MediaRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
-class Media
+class Media implements SluggableInterface
 {
     /**
      * @var integer $id
@@ -29,22 +33,24 @@ class Media
     private $mediatype_id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Speaker", inversedBy="medias")
-     * @ORM\JoinColumn(name="speaker_id", referencedColumnName="id")
+     * @var ArrayCollection $speakers
+     *
+     * @ORM\ManyToMany(targetEntity="Speaker", inversedBy="medias")
+     * @ORM\JoinTable(name="media_speaker")
      */
-    protected $speaker;
+    private $speakers;
 
     /**
      * @var date $date
      *
-     * @ORM\Column(name="date", type="date")
+     * @ORM\Column(name="date", type="date", nullable=true)
      */
     private $date;
 
     /**
      * @var text $description
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
@@ -84,16 +90,16 @@ class Media
     private $content;
 
     /**
-     * @var string $slides
+     * @var text $slides
      *
-     * @ORM\Column(name="slides", type="string", length=255)
+     * @ORM\Column(name="slides", type="text", nullable=true)
      */
     private $slides;
 
     /**
      * @var integer $joindin
      *
-     * @ORM\Column(name="joindin", type="integer")
+     * @ORM\Column(name="joindin", type="integer", nullable=true)
      */
     private $joindin;
 
@@ -104,6 +110,46 @@ class Media
      */
     private $language;
 
+    /**
+     * @var string $slug
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $slug;
+
+    /**
+     * @var boolean $isPublished
+     *
+     * @ORM\Column(name="isPublished", type="boolean")
+     */
+    private $isPublished;
+
+    /**
+     * @var string $hostName
+     *
+     * @ORM\Column(name="hostName", type="string")
+     */
+    private $hostName;
+
+    /**
+     * @var string $hostUrl
+     *
+     * @ORM\Column(name="hostUrl", type="string")
+     */
+    private $hostUrl;
+
+    /*
+     * Constructor
+     *
+     * Initialize all collection fields to empty ArrayCollections
+     * in order to support the relationship before object persisted
+     * to database (when it would otherwise be null)
+     *
+     */
+    public function __construct()
+    {
+        $this->speakers = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -258,7 +304,7 @@ class Media
     /**
      * Set slides
      *
-     * @param string $slides
+     * @param text $slides
      */
     public function setSlides($slides)
     {
@@ -268,7 +314,7 @@ class Media
     /**
      * Get slides
      *
-     * @return string
+     * @return text
      */
     public function getSlides()
     {
@@ -336,26 +382,6 @@ class Media
     }
 
     /**
-     * Set speaker
-     *
-     * @param Protalk\MediaBundle\Entity\Speaker $speaker
-     */
-    public function setSpeaker(\Protalk\MediaBundle\Entity\Speaker $speaker)
-    {
-        $this->speaker = $speaker;
-    }
-
-    /**
-     * Get speaker
-     *
-     * @return Protalk\MediaBundle\Entity\Speaker
-     */
-    public function getSpeaker()
-    {
-        return $this->speaker;
-    }
-
-    /**
      * Get shorter version of media title
      *
      * @param  Maximum allowed length of media title
@@ -369,5 +395,169 @@ class Media
         }
 
         return $this->title;
+    }
+
+    /*
+     * Get slug
+     *
+     * @return string
+     */
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /*
+     * Set slug
+     *
+     * @param string $slug
+     */
+
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /*
+     * Get slug fields
+     *
+     * @return string
+     */
+
+    public function getSlugFields() {
+        return $this->getTitle();
+    }
+
+
+    /**
+     * Add speakers
+     *
+     * @param Protalk\MediaBundle\Entity\Speaker $speakers
+     */
+    public function addSpeaker(\Protalk\MediaBundle\Entity\Speaker $speakers)
+    {
+        $this->speakers[] = $speakers;
+    }
+
+    /**
+     * Get speakers
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getSpeakers()
+    {
+        return $this->speakers;
+    }
+
+    /**
+     * Add speakers
+     *
+     * @param Protalk\MediaBundle\Entity\Media_Speaker $speakers
+     */
+    public function addMedia_Speaker(\Protalk\MediaBundle\Entity\Media_Speaker $speakers)
+    {
+        $this->speakers[] = $speakers;
+    }
+
+    /**
+     * Get one speaker's truncated name
+     *
+     * @param  integer Maximum allowed length of speaker name
+     * @return string
+     */
+    public function getTruncatedSpeaker($length = 10)
+    {
+        $speaker = $this->getOneSpeaker();
+
+        if (strlen($speaker) > $length )
+        {
+           return substr($speaker, 0, $length) . '...';
+        }
+
+        return $speaker;
+    }
+
+    /**
+     * Get one speaker's name
+     *
+     * @return string
+     */
+    public function getOneSpeaker()
+    {
+        return ($this->speakers->count() > 1) ? $this->speakers[0].' et al' : $this->speakers[0] ;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateSlug()
+    {
+
+        $slugger = new Slugger();
+
+        $slug = $slugger->getSlug($this->getSlugFields());
+
+        return $this->setSlug($slug);
+    }
+
+    /**
+     * Set isPublished
+     *
+     * @param boolean $isPublished
+     */
+    public function setIsPublished($isPublished)
+    {
+        $this->isPublished = $isPublished;
+    }
+
+    /**
+     * Get isPublished
+     *
+     * @return boolean
+     */
+    public function getIsPublished()
+    {
+        return $this->isPublished;
+    }
+
+    /**
+     * Set hostName
+     *
+     * @param string $hostName
+     */
+    public function setHostName($hostName)
+    {
+        $this->hostName = $hostName;
+    }
+
+    /**
+     * Get hostName
+     *
+     * @return string
+     */
+    public function getHostName()
+    {
+        return $this->hostName;
+    }
+
+    /**
+     * Set hostUrl
+     *
+     * @param string $hostUrl
+     */
+    public function setHostUrl($hostUrl)
+    {
+        $this->hostUrl = $hostUrl;
+    }
+
+    /**
+     * Get hostUrl
+     *
+     * @return string
+     */
+    public function getHostUrl()
+    {
+        return $this->hostUrl;
     }
 }

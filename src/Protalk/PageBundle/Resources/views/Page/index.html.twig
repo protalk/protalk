@@ -13,6 +13,10 @@
 <script src="{{ asset('js/page.js') }}"></script>
 {% endblock %}
 
+{% block bluestrip %}
+    {% include '::bluestripThin.html.twig' %}
+{% endblock %}
+
 {% block body %}
 <div id="leftColumn">
     <section>
@@ -25,28 +29,7 @@
 {# TODO: Work out max no. of Category, Tag and Speaker that can be displayed.  If retrieved rcords exceed this, display 'more' link (??) #}
 
 {% block rightcolumn %}
-<div id="rightColumn" >
-    <div id="sidebar">
-        <section>
-            <div id="categories">
-                <h1>CATEGORIES</h1>
-                {% render "ProtalkMediaBundle:Category:list" %}
-            </div>
-        </section>
-        <section>
-            <div id="tags">
-                <h1>TAGS</h1>
-                {% render "ProtalkMediaBundle:Tag:list" %}
-            </div>
-        </section>
-        <section>
-            <div id="speakers">
-                <h1>SPEAKERS</h1>
-                {% render "ProtalkMediaBundle:Speaker:list" %}
-            </div>
-        </section>
-    </div>
-</div>
+    {% include '::sidebar.html.twig' %}
 {% endblock %}
 
 

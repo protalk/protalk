@@ -32,14 +32,14 @@ YUI({
 
 
 
-  var speakerContainer  = Y.one('#speakers');
+  var bodyContainer  = Y.one('#bodyContainer');
 
 
 
     // clicks on any speaker image within the container element will cause
     // a modal panel to open displaying the speaker's biosketch
 
-    speakerContainer.delegate('click', function(e) {
+    bodyContainer.delegate('click', function(e) {
 
       e.preventDefault();
       Y.log(e.currentTarget.getAttribute('href'));
