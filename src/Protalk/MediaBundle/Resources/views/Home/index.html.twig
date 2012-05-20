@@ -30,7 +30,7 @@
                         <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.getTruncatedTitle(34) }}</a></h2>
                         <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.getTruncatedSpeaker(20) }}</a></span></p>
                     </header>
-                    <p>{{ media.description }}</p>
+                    <p>{{ media.getTruncatedDescription() }}</p>
                     <footer>
                         <span class="metadata">Rating: {% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span>
                     </footer>
@@ -62,7 +62,7 @@
                     <div class="tabMediaText">
                         <header>
                             <h2 title="{{media.title}}">{{ media.getTruncatedTitle(25) }}</h2>
-                            <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.getTruncatedSpeaker() }}</a></span></p>
+                            <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.date is empty ? media.getTruncatedSpeaker(20) : media.getTruncatedSpeaker() }}</a></span></p>
                         </header>
 
                         <footer>
@@ -85,7 +85,7 @@
                     <div class="tabMediaText">
                         <header>
                             <h2 title="{{media.title}}">{{ media.getTruncatedTitle(25) }}</h2>
-                            <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.getTruncatedSpeaker() }}</a></span></p>
+                            <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.date is empty ? media.getTruncatedSpeaker(20) : media.getTruncatedSpeaker() }}</a></span></p>
                         </header>
 
                         <footer>

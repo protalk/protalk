@@ -33,6 +33,12 @@ class Media implements SluggableInterface
     private $mediatype_id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Mediatype", inversedBy="medias")
+     * @ORM\JoinColumn(name="mediatype_id", referencedColumnName="id")
+     */
+    protected $mediatype;
+
+    /**
      * @var ArrayCollection $speakers
      *
      * @ORM\ManyToMany(targetEntity="Speaker", inversedBy="medias")
@@ -219,6 +225,25 @@ class Media implements SluggableInterface
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Get truncated description
+     *
+     * @param  integer Maximum allowed length of description
+     * @return string
+     */
+    public function getTruncatedDescription($length = 200)
+    {
+
+        $description = $this->getDescription();
+
+        if (strlen($description) > $length )
+        {
+           return substr($description, 0, $length) . '...';
+        }
+
+        return $description;
     }
 
     /**
@@ -466,7 +491,7 @@ class Media implements SluggableInterface
      * @param  integer Maximum allowed length of speaker name
      * @return string
      */
-    public function getTruncatedSpeaker($length = 10)
+    public function getTruncatedSpeaker($length = 12)
     {
         $speaker = $this->getOneSpeaker();
 
@@ -559,5 +584,25 @@ class Media implements SluggableInterface
     public function getHostUrl()
     {
         return $this->hostUrl;
+    }
+
+    /**
+     * Set mediatype
+     *
+     * @param Protalk\MediaBundle\Entity\Mediatype $mediatype
+     */
+    public function setMediatype(\Protalk\MediaBundle\Entity\Mediatype $mediatype)
+    {
+        $this->mediatype = $mediatype;
+    }
+
+    /**
+     * Get mediatype
+     *
+     * @return Protalk\MediaBundle\Entity\Mediatype
+     */
+    public function getMediatype()
+    {
+        return $this->mediatype;
     }
 }
