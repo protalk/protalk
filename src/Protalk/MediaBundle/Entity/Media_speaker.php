@@ -35,11 +35,10 @@ class Media_speaker
      */
     private $speaker_id;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -59,7 +58,7 @@ class Media_speaker
     /**
      * Get media_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getMediaId()
     {
@@ -79,7 +78,7 @@ class Media_speaker
     /**
      * Get speaker_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getSpeakerId()
     {

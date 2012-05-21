@@ -21,6 +21,7 @@ $loader->registerNamespaces(array(
     'SimpleThings'     => __DIR__.'/../vendor/bundles',
     'FOS'              => __DIR__.'/../vendor/bundles',
     'EWZ'              => __DIR__.'/../vendor/bundles',
+    'SamJ'             => __DIR__.'/../vendor/DoctrineSluggableBundle/src',
     'Application'      => __DIR__,
 ));
 $loader->registerPrefixes(array(

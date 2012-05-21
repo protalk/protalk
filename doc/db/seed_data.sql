@@ -35,6 +35,15 @@ INSERT INTO `Speaker` (`name`, photo, biography ) VALUES ('Ernie','ernie.png','B
 INSERT INTO `Speaker` (`name`, photo, biography ) VALUES ('Fozzie','fozzie.png','Really friendly muppet.  Kids love him and he is so nice.');
 INSERT INTO `Speaker` (`name`, photo, biography ) VALUES ('Gonzo','gonzo.png','Mischevious but loveable.  Is moody at times but generally good natured, if a little naughty.');
 
+/* Delete all Media-speaker records then re-load sample data */
+
+TRUNCATE TABLE `Media_speaker`;
+
+INSERT INTO `Media_speaker` (media_id, speaker_id ) VALUES ('1', '1');
+INSERT INTO `Media_speaker` (media_id, speaker_id ) VALUES ('1', '2');
+INSERT INTO `Media_speaker` (media_id, speaker_id ) VALUES ('2', '2');
+INSERT INTO `Media_speaker` (media_id, speaker_id ) VALUES ('3', '3');
+
 
 /* Delete all Category records then re-load sample data */
 
@@ -46,11 +55,11 @@ INSERT INTO `Category` (`name`) VALUES ('Tootie Frootie'),('Candi Bonbons'),('To
 
 TRUNCATE TABLE `Media`;
 
-INSERT INTO `Media` (speaker_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title ) VALUES ('1', '2011-04-19','A fascinating talk about how ProTalk was created to help people learn PHP and programming in general', '2hrs 42mins', '5', '450', 'Content Goes Here','Slides goes here','joindin goes here','en', 'ProTalking All Over The World');
+INSERT INTO `Media` (`date`, description, `length`, rating, visits, content, slides, joindin, `language`, title ) VALUES ('2011-04-19','A fascinating talk about how ProTalk was created to help people learn PHP and programming in general', '2hrs 42mins', '5', '450', 'Content Goes Here','Slides goes here','joindin goes here','en', 'ProTalking All Over The World');
 
-INSERT INTO `Media` (speaker_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title ) VALUES ('2', '2012-03-14','How to get started with Symfony2', '1hr 30mins', '4', '32', 'Content Goes Here','Slides goes here','joindin goes here','en', 'Getting Started With Symfony2');
+INSERT INTO `Media` (`date`, description, `length`, rating, visits, content, slides, joindin, `language`, title ) VALUES ('2012-03-14','How to get started with Symfony2', '1hr 30mins', '4', '32', 'Content Goes Here','Slides goes here','joindin goes here','en', 'Getting Started With Symfony2');
 
-INSERT INTO `Media` (speaker_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title ) VALUES ('3', '2012-01-11','Testing whether the very long talk title fits in the main Latest Talks lists', '65mins', '3.5', '6', 'Content Goes Here','Slides goes here','joindin goes here','en', 'Another Great PHP Talk With A Very Long Title That We Need To Make Fit');
+INSERT INTO `Media` (`date`, description, `length`, rating, visits, content, slides, joindin, `language`, title ) VALUES ('2012-01-11','Testing whether the very long talk title fits in the main Latest Talks lists', '65mins', '3.5', '6', 'Content Goes Here','Slides goes here','joindin goes here','en', 'Another Great PHP Talk With A Very Long Title That We Need To Make Fit');
 
 
 /* Reenable foreign key constrain checks in MySQL */

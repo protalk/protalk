@@ -102,4 +102,28 @@ class Category
     {
         return $this->name;
     }
+    public function __construct()
+    {
+        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add children
+     *
+     * @param Protalk\MediaBundle\Entity\Category $children
+     */
+    public function addCategory(\Protalk\MediaBundle\Entity\Category $children)
+    {
+        $this->children[] = $children;
+    }
+
+    /**
+     * Get children
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
 }
