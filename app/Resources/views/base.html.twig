@@ -33,17 +33,9 @@
             </header>
         </div>
 
-        <div class="blueStrip">
-          <div id="bluestripContent" class="contentContainer">
-              <p>We are an online audio & video community resource</p>
-              <p id="textLight">that aims to provide a central point of access to content with a PHP focus</p>
-
-                  <form method='post' action='#'>
-                      <input id="searchCriteria" class="search" name="search" type="text" placeholder="What can we find for you?"/>
-                      <input id="searchButton" class="search" type="image" alt="Search" src="{{ asset('images/searchButton.png') }}" />
-                  </form>
-          </div>
-        </div>
+        {% block bluestrip %}
+            {% include '::bluestrip.html.twig' %}
+        {% endblock %}
 
         <div id="bodyContainer" class="contentContainer">
             {% block body %}{% endblock %}

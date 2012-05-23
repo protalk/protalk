@@ -25,11 +25,7 @@ class Speaker
     /**
      * @var ArrayCollection $medias
      *
-     * @ORM\ManyToMany(targetEntity="Media")
-     * @ORM\JoinTable(name="Media_speaker",
-     *      joinColumns={@ORM\JoinColumn(name="speaker_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="media_id", referencedColumnName="id")}
-     * )
+     * @ORM\ManyToMany(targetEntity="Media", mappedBy="speakers")
      */
     private $medias;
 

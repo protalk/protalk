@@ -64,11 +64,11 @@ sonata_block:
     blocks:
         sonata.admin.block.admin_list:
             contexts:   [admin]
-   
+
         sonata.block.service.text:
         sonata.block.service.action:
         sonata.block.service.rss:
-    
+
 sonata_admin:
     title:      ProTalk
     templates:
@@ -88,10 +88,10 @@ sonata_admin:
         groups:
             protalk_common:
                 label: Common
-                items: ~ 
+                items: ~
             protalk_media:
                 label: Media
-                items: ~     
+                items: ~
 
 services:
    protalk.common.admin.category:
@@ -103,17 +103,17 @@ services:
       class: Protalk\AdminBundle\Admin\TagAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_common, label: Tag }
-      arguments: [null, Protalk\MediaBundle\Entity\Tag, ProtalkAdminBundle:TagAdmin] 
+      arguments: [null, Protalk\MediaBundle\Entity\Tag, ProtalkAdminBundle:TagAdmin]
    protalk.common.admin.mediatype:
       class: Protalk\AdminBundle\Admin\MediatypeAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_common, label: Mediatype }
-      arguments: [null, Protalk\MediaBundle\Entity\Mediatype, ProtalkAdminBundle:MediatypeAdmin]   
+      arguments: [null, Protalk\MediaBundle\Entity\Mediatype, ProtalkAdminBundle:MediatypeAdmin]
    protalk.media.admin.media:
       class: Protalk\AdminBundle\Admin\MediaAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_media, label: Media }
-      arguments: [null, Protalk\MediaBundle\Entity\Media, ProtalkAdminBundle:MediaAdmin]   
+      arguments: [null, Protalk\MediaBundle\Entity\Media, ProtalkAdminBundle:MediaAdmin]
    protalk.media.admin.speaker:
       class: Protalk\AdminBundle\Admin\SpeakerAdmin
       tags:
@@ -123,12 +123,12 @@ services:
       class: Protalk\AdminBundle\Admin\CommentAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_media, label: Comment }
-      arguments: [null, Protalk\MediaBundle\Entity\Comment, ProtalkAdminBundle:CommentAdmin] 
+      arguments: [null, Protalk\MediaBundle\Entity\Comment, ProtalkAdminBundle:CommentAdmin]
    protalk.media.admin.rating:
       class: Protalk\AdminBundle\Admin\RatingAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_media, label: Rating }
-      arguments: [null, Protalk\MediaBundle\Entity\Rating, ProtalkAdminBundle:RatingAdmin]                              
+      arguments: [null, Protalk\MediaBundle\Entity\Rating, ProtalkAdminBundle:RatingAdmin]
 
 sonata_doctrine_orm_admin:
     # default value is null, so doctrine uses the value defined in the configuration
@@ -172,7 +172,7 @@ sonata_doctrine_orm_admin:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: Application\Sonata\UserBundle\Entity\User             
+    user_class: Application\Sonata\UserBundle\Entity\User
 
 parameters:
     home_lists_max:  6

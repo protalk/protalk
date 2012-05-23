@@ -1,7 +1,9 @@
 {% for speaker in speakers %}
 <div class="speakerBio">
   <header>
-    <img id="speakerThumbNail" src="{{ asset(['images/photos/', speaker.photo]|join) }}" alt="Author Image"/>
+    {% if speaker.photo %}
+        <img id="speakerThumbNail" src="{{ asset(['images/photos/', speaker.photo]|join) }}" alt="Author Image"/>
+    {% endif %}
     <span id="speakerName">{{ speaker.name }}</span>
 
   </header>

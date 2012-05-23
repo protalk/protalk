@@ -244,10 +244,7 @@ time, .metadata {
 
 #speakerThumbNail {
     vertical-align:middle;
-}
-
-#speakerName {
-    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .speakerBio p {
@@ -624,6 +621,15 @@ a.tagButton:active span {
 #title {
     margin-bottom: 0px;
     padding-bottom: 5px;
+    width:440px;
+}
+
+.wrap {
+  white-space:normal;
+}
+
+.nowrap {
+   white-space:nowrap;
 }
 
 .metadata {
