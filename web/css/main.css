@@ -703,9 +703,24 @@ hr {
     font-weight:bold;
 }
 
-#shareIcons {
-    padding-left: 43px;
-    padding-right: 43px;
+div.social_sharing .linkedinBtn, .fb-like, .twitter, .mail, .pinterest{
+    font-size: 1px;
+    display: inline-block;
+
+}
+.fb_reset {
+    display: inline;
+}
+.social_sharing {
+    clear:both;
+}
+
+.twitter {
+    width:90px;
+}
+
+.mail {
+    padding-right: 7px;
 }
 
 input[type="text"], input[type="password"], input[type="url"], input[type="email"], textarea {
@@ -802,4 +817,8 @@ form ul {
 #recaptcha_area {
 
     padding-left: 53px;
+}
+
+#rating {
+    float:right;
 }
