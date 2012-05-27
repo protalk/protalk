@@ -12,7 +12,9 @@
     <script src="{{ asset('js/page.js') }}"></script>
 {% endblock %}
 
-{% block title "Media" %}
+{% block title %}
+    {{ media.title }}
+{% endblock %}
 
 {% block bluestrip %}
     {% include '::bluestripThin.html.twig' %}

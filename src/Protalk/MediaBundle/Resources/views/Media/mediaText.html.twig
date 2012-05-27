@@ -30,11 +30,16 @@
     <hr />
 
     <section id="comments">
-
-        {#  PUT COMMENTS TEMPLATE HERE #}
+        <h1>COMMENTS</h1>
+        {% for comment in media.comments %}
+            <article class="comment">
+                    <p><time datetime="{{ comment.datetime|date("Y/m/d")}}" >{{ comment.datetime|date("d M Y") }} by </time><span class="name">{{ comment.author }}</span></p>
+                    <p class="commentText">{{ comment.content }}</p>
+            </article>
+        {% endfor %}
 
         <div>
-            <a class="button" href="#"><span>COMMENT</span></a>
+            <a id="button_add_comment" class="button" href="#"><span>COMMENT</span></a>
         </div>
     </section>
 

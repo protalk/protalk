@@ -18,9 +18,7 @@ class MediaController extends Controller
 
         $media = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->findOneBySlug($slug);
 
-        $speakers = $media->getSpeakers();
-
-        if (is_object($media)) return array('media' => $media, 'speakers' => $speakers);
+        if (is_object($media)) return array('media' => $media);
         else throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
     }
 

@@ -47,6 +47,11 @@ class Media implements SluggableInterface
     private $speakers;
 
     /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="media")
+     */
+    protected $comments;
+
+    /**
      * @var date $date
      *
      * @ORM\Column(name="date", type="date", nullable=true)
@@ -155,6 +160,7 @@ class Media implements SluggableInterface
     public function __construct()
     {
         $this->speakers = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -604,5 +610,25 @@ class Media implements SluggableInterface
     public function getMediatype()
     {
         return $this->mediatype;
+    }
+
+    /**
+     * Add comments
+     *
+     * @param Protalk\MediaBundle\Entity\Comment $comments
+     */
+    public function addComment(\Protalk\MediaBundle\Entity\Comment $comments)
+    {
+        $this->comments[] = $comments;
+    }
+
+    /**
+     * Get comments
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

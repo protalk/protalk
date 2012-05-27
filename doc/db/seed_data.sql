@@ -77,6 +77,13 @@ TRUNCATE TABLE `Mediatype`;
 INSERT INTO `Mediatype` (`name`, `type`) VALUES ('video', 'video');
 INSERT INTO `Mediatype` (`name`, `type`) VALUES ('podcast', 'podcast');
 
+/* Delete all Comment records then re-load sample data */
+
+TRUNCATE TABLE `Comment`;
+
+INSERT INTO `Comment` (media_id, author, email, website, content, datetime ) VALUES ('1', 'Kim Rowan', 'kim.rowan@cancer.org.uk', 'http://protalk.me', 'Awesome site! Great talk too', '2012-05-19 09:01:36' );
+INSERT INTO `Comment` (media_id, author, email, website, content, datetime) VALUES ('1', 'Michelle Sanver', 'michelle@sanver.com', 'http://www.jippey.com', 'I learned a lot from this amazing talk.  Great topic.', '2012-06-02 13:25:52' );
+
 
 /* Reenable foreign key constrain checks in MySQL */
 

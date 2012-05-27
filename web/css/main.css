@@ -161,7 +161,7 @@ h2, h2 a, #speakerName {
     padding-bottom: 7px;
 }
 
-.speaker{
+.speaker, .name {
     color:#C2E078;
 }
 
@@ -819,8 +819,22 @@ form ul {
     padding-left: 53px;
 }
 
-#infoBar {text-align: center; }
+#infoBar {
+    text-align: center;
+}
 
-#duration { color:#999999; }
-.social_sharing { float:left; padding-bottom: 3px; }
-#rating { float: right; }
+#duration {
+    color:#999999;
+}
+.social_sharing {
+    float:left;
+    padding-bottom: 3px;
+}
+
+#rating {
+    float: right;
+}
+
+#button_add_comment {
+    margin-bottom: 10px;
+}
