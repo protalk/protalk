@@ -14,13 +14,14 @@ class CommentController extends Controller
 
     public function newAction(Request $request)
     {
-        $comment = new Comment();
-        $form = $this->createForm(new CommentMedia(), $comment);
-
         $request = $this->getRequest();
-
-      //  var_dump($request->get('media_id'));die;
         $media = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->findOneById($request->get('media_id'));
+
+        $comment = new Comment();
+        $comment->setMedia($media);
+        $comment->setMediaId($media->getId());
+
+        $form = $this->createForm(new CommentMedia(), $comment);
 
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);
@@ -32,11 +33,10 @@ class CommentController extends Controller
                 $em->persist($comment);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('media_show', array('slug' => $media->get('slug'))));
+                return $this->redirect($this->generateUrl('media_show', array('slug' => $media->getSlug())));
             }
         }
 
         return $this->render('ProtalkMediaBundle:Comment:new.html.twig', array('form' => $form->createView(), 'media' => $media));
     }
-
 }
