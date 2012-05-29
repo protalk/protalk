@@ -30,6 +30,26 @@ ProtalkPageBundle:
 page_show:
     pattern:  /page/{url}
     defaults: { _controller: ProtalkPageBundle:Page:index }
+    
+explore:
+    pattern:  /explore
+    defaults: { _controller: ProtalkMediaBundle:Explore:index }   
+
+search_results:
+    pattern:  /result/{search}/{sort}/{page}
+    defaults: { _controller: ProtalkMediaBundle:Explore:result }
+    
+tag_search:
+    pattern:  /tag/{id}
+    defaults: { _controller: ProtalkMediaBundle:Explore:tag }
+    
+category_search:
+    pattern:  /category/{id}
+    defaults: { _controller: ProtalkMediaBundle:Explore:category } 
+    
+speaker_search:
+    pattern:  /search/speaker/{id}
+    defaults: { _controller: ProtalkMediaBundle:Explore:speaker }                
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

@@ -17,10 +17,11 @@ class MediaRepository extends EntityRepository
      * a specific field
      *
      * @param string $orderField
-     * @param integer $max
+     * @param int $page
+     * @param int $max
      * @return Doctrine Collection
      */
-    public function getMediaOrderedBy($orderField, $max)
+    public function getMediaOrderedBy($orderField, $page, $max)
     {
         return $this->getEntityManager()
             ->createQuery('SELECT m, s FROM ProtalkMediaBundle:Media m

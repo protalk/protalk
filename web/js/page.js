@@ -1,5 +1,5 @@
 /*
- *		YUI sandbox to run on main Mouse page
+ *		YUI sandbox to run on main page
  *
  *		@version 1.0.0
  */
@@ -13,11 +13,11 @@ YUI({
       modules: {
 
         'protalk-io': {
-          fullpath: "/js/moduleIO.js",
+          fullpath: "/protalk/web/js/moduleIO.js",
           requires: ["base-build", "io-base", "io-form", "widget", "json-parse"]
         },
         'protalk-speaker-panel': {
-          fullpath: "/js/moduleSpeakerPanel.js",
+          fullpath: "/protalk/web/js/moduleSpeakerPanel.js",
           requires: [ "base-build", "panel", "protalk-io", "dd-plugin"]
         }
       }

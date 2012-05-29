@@ -16,15 +16,14 @@ class HomeController extends Controller
      */
     public function indexAction()
     {
-
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
 
         $numRows = $this->container->getParameter('home_lists_max');
 
-        $latestMedia = $repository->getMediaOrderedBy('date', $numRows);
-        $topViewedMedia = $repository->getMediaOrderedBy('visits', $numRows);
-        $topRatedMedia = $repository->getMediaOrderedBy('rating', $numRows);
+        $latestMedia = $repository->getMediaOrderedBy('date', 1, $numRows);
+        $topViewedMedia = $repository->getMediaOrderedBy('visits', 1, $numRows);
+        $topRatedMedia = $repository->getMediaOrderedBy('rating', 1, $numRows);
 
         return array('latestMedia' => $latestMedia , 'topViewedMedia' => $topViewedMedia, 'topRatedMedia' => $topRatedMedia);
     }

@@ -1,5 +1,5 @@
 <ul class="categoryList">
   {% for category in categories %}
-  <li><a class="category" href="#"><span>{{ category.name }}</span></a></li>
+  <li><a class="category" href="{{ path('category_search', { 'id' : category.id }) }}"><span>{{ category.name }}</span></a></li>
   {% endfor %}
 </ul>

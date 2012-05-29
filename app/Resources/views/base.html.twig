@@ -25,7 +25,7 @@
                 </div>
                 <nav>
                     <div id="firstNavLink" class="navigation"><a href="{{ path('_home') }}" >HOME</a></div>
-                    <div class="navigation"><a href="#">EXPLORE</a></div>
+                    <div class="navigation"><a href="{{ path('explore') }}">EXPLORE</a></div>
                     <div class="navigation"><a href="{{ path('contribute_new') }}">CONTRIBUTE</a></div>
                     <div class="navigation"><a href="{{ path('page_show', { 'url': 'about' }) }}">ABOUT</a></div>
                     <div class="navigation"><a href="{{ path('page_show', { 'url': 'contact' }) }}">CONTACT</a></div>
@@ -46,7 +46,11 @@
         </div>
 
         <div class="contentContainer">
-            {% block body %}{% endblock %}
+            <div id="leftColumn">
+                <section>
+                    {% block body %}{% endblock %}
+                </section>    
+            </div>    
 
             <div id="rightColumn">
                 {% block rightcolumn %}{% endblock %}
@@ -60,7 +64,7 @@
                   <p>FOLLOW US</p>
                   <nav>
                       <a href="#"><img src="{{ asset('images/facebookIcon.png') }}" alt="Facebook Icon"/></a>
-                      <a href="http://twitter/pro_talk"><img src="{{ asset('images/twitterIcon.png') }}" alt="Twitter Icon"/></a>
+                      <a href="http://twitter.com/pro_talk"><img src="{{ asset('images/twitterIcon.png') }}" alt="Twitter Icon"/></a>
                       <a href="#"><img src="{{ asset('images/mailIcon.png') }}" alt="Mail Icon"/></a>
                   </nav>
                   </div>

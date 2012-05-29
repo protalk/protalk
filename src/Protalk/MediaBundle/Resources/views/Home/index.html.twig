@@ -9,32 +9,28 @@
 {% block title "Home" %}
 
 {% block body %}
-<div id="leftColumn">
-    <section>
-        <h1>LATEST TALKS</h1>
-            {% for media in latestMedia %}
+<h1>LATEST TALKS</h1>
+{% for media in latestMedia %}
 
-            <article class="mediaLarge">
-                <div class="mediaThumbNailLarge">
-                    <img src="{{ asset('images/mediaThumbNail.png') }}" alt="Media ThumbNail Image"/>
-                </div>
-                <div class="mediaTextLarge">
-                    <header>
-                        <h2 title="{{media.title}}">{{ media.getTruncatedTitle(34) }}</h2>
-                        <p><time datetime="{{ media.date|date("Y/m/d") }}" >{{ media.date|date("d M Y") }} by </time><span class="name">{{ media.speaker.name }}</span></p>
-                    </header>
-                    <p>{{ media.description }}</p>
-                    <footer>
-                        <span class="metadata">Rating: {% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span>
-                    </footer>
-                </div>
+<article class="mediaLarge">
+    <div class="mediaThumbNailLarge">
+        <img src="{{ asset('images/mediaThumbNail.png') }}" alt="Media ThumbNail Image"/>
+    </div>
+    <div class="mediaTextLarge">
+        <header>
+            <h2 title="{{media.title}}">{{ media.getTruncatedTitle(34) }}</h2>
+            <p><time datetime="{{ media.date|date("Y/m/d") }}" >{{ media.date|date("d M Y") }} by </time><span class="name">{{ media.speaker.name }}</span></p>
+        </header>
+        <p>{{ media.description }}</p>
+        <footer>
+            <span class="metadata">Rating: {% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span>
+        </footer>
+    </div>
 
-            </article>
-            {% endfor %}
-            <div>
-                <a class="button" href="#"><span>MORE RECENT ITEMS</span></a>
-            </div>
-    </section>
+</article>
+{% endfor %}
+<div>
+    <a class="button" href="{{ path('search_results', { 'search' : -1, 'sort' : 'date', 'page' : 1 }) }}"><span>MORE RECENT ITEMS</span></a>
 </div>
 {% endblock %}
 
@@ -65,7 +61,7 @@
                 </article>
                 {% endfor %}
                 <div>
-                    <a class="button" href="#"><span>TOP VISITED ITEMS</span></a>
+                    <a class="button" href="{{ path('search_results', { 'search' : -1, 'sort' : 'visits', 'page' : 1 }) }}"><span>TOP VISITED ITEMS</span></a>
                 </div>
             </div>
 
@@ -88,7 +84,7 @@
                 </article>
                 {% endfor %}
                 <div>
-                    <a class="button" href="#"><span>TOP RATED ITEMS</span></a>
+                    <a class="button" href="{{ path('search_results', { 'search' : -1, 'sort' : 'rating', 'page' : 1 }) }}"><span>TOP RATED ITEMS</span></a>
                 </div>
             </div>
 
