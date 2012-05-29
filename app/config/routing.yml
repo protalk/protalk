@@ -40,7 +40,7 @@ explore:
     defaults: { _controller: ProtalkMediaBundle:Explore:index }   
 
 search_results:
-    pattern:  /result/{search}/{sort}/{page}
+    pattern:  /result
     defaults: { _controller: ProtalkMediaBundle:Explore:result }
     
 tag_search:

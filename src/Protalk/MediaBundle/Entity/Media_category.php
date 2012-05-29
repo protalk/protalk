@@ -27,6 +27,12 @@ class Media_category
      * @ORM\Column(name="media_id", type="integer")
      */
     private $media_id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Media", inversedBy="categories")
+     * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
+     */
+    protected $media;
 
     /**
      * @var integer $category_id
@@ -34,6 +40,12 @@ class Media_category
      * @ORM\Column(name="category_id", type="integer")
      */
     private $category_id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="medias")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     */
+    protected $category;
 
 
     /**

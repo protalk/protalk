@@ -8,6 +8,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class MediaController extends Controller
 {
+    /**
+     * @Route("/home")
+     * @Template()
+     */
     public function indexAction($slug)
     {
         $media = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->findOneBySlug($slug);

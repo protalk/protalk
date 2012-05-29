@@ -28,6 +28,10 @@ class Tag
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Media_tag", mappedBy="tag")
+     */
+    protected $medias;
 
     /**
      * Get id

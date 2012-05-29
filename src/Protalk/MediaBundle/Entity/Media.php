@@ -50,6 +50,16 @@ class Media implements SluggableInterface
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="media")
      */
     protected $comments;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Media_category", mappedBy="media")
+     */
+    protected $categories;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Media_tag", mappedBy="media")
+     */
+    protected $tags;
 
     /**
      * @var date $date

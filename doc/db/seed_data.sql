@@ -70,6 +70,18 @@ INSERT INTO `Media` (mediatype_id,`date`, description, `length`, rating, visits,
 
 INSERT INTO `Media` (mediatype_id,`date`, description, `length`, rating, visits, content, `language`, title, slug ) VALUES (2,'2012-04-26','Episode 11 of the DevHell postcase series. "This time out we are blessed by the presence of Joël Perras, PHP developer extraordinaire and Fictive Kin brosef of Ed. We explore Joël’s rags-to-riches story: a young academic schlepping coffee and 44oz soft drinks at a gas station, where he’s discovered by a grizzled dev team manager in need of Java skills. From there it’s been a whirlwind of web sites, programming languages, and more ops than you can shake a stick at."', '1hr 31mins', '3.5', '6', 'http://devhell.s3.amazonaws.com/ep11-64mono.mp3','en', 'From Gas Station Attendant to Java Developer', 'from-gas-station-attendant-to-java-developer');
 
+/* Delete all Media_category records then re-load sample data */
+
+TRUNCATE TABLE `Media_category`;
+
+INSERT INTO Media_category (media_id, category_id) VALUES (1, 1);
+
+/* Delete all Media_tag records then re-load sample data */
+
+TRUNCATE TABLE `Media_tag`;
+
+INSERT INTO Media_tag (media_id, tag_id) VALUES (1, 2);
+
 /* Delete all Mediatype records then re-load sample data */
 
 TRUNCATE TABLE `Mediatype`;

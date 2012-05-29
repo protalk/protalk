@@ -37,14 +37,84 @@ class MediaRepository extends EntityRepository
      * @param string $slug
      * @return Doctrine Record
      */
-    public function findOneBySlug($slug) {
-
+    public function findOneBySlug($slug) 
+    {
         return $this->getEntityManager()
-        ->createQuery('
-            SELECT m, mt FROM ProtalkMediaBundle:Media m
-            JOIN m.mediatype mt
-            WHERE m.slug = :slug'
-        )->setParameter('slug', $slug)
-        ->getSingleResult();
+                                    ->createQuery('
+                                        SELECT m, mt FROM ProtalkMediaBundle:Media m
+                                        JOIN m.mediatype mt
+                                        WHERE m.slug = :slug'
+                                        )
+                                    ->setParameter('slug', $slug)
+                                    ->getSingleResult();
+    }
+    
+    /**
+     * Find media items by category
+     * 
+     * @param int $categoryId
+     * @param string $orderField
+     * @param int $page
+     * @param int $max
+     * 
+     * @return Doctrine Collection
+     */
+    public function findByCategory($categoryId, $orderField, $page, $max)
+    {
+        return $this->getEntityManager()
+                ->createQuery('SELECT m 
+                               FROM ProtalkMediaBundle:Media m
+                               JOIN m.categories mc
+                               WHERE mc.category_id = :catId
+                               ORDER BY m.'.$orderField.' DESC')
+                ->setParameter('catId', $categoryId)               
+                ->setMaxResults($max)
+                ->getResult();
+    }
+    
+    /**
+     * Find media items by tag
+     *
+     * @param int $tagId
+     * @param string $orderField
+     * @param int $page
+     * @param int $max
+     *
+     * @return Doctrine Collection
+     */
+    public function findByTag($tagId, $orderField, $page, $max)
+    {
+        return $this->getEntityManager()
+        ->createQuery('SELECT m
+                FROM ProtalkMediaBundle:Media m
+                JOIN m.tags mt
+                WHERE mt.tag_id = :tagId
+                ORDER BY m.'.$orderField.' DESC')
+                ->setParameter('tagId', $tagId)
+                ->setMaxResults($max)
+                ->getResult();
+    }
+    
+    /**
+     * Find media items by speaker
+     *
+     * @param int $speakerId
+     * @param string $orderField
+     * @param int $page
+     * @param int $max
+     *
+     * @return Doctrine Collection
+     */
+    public function findBySpeaker($speakerId, $orderField, $page, $max)
+    {
+        return $this->getEntityManager()
+        ->createQuery('SELECT m
+                FROM ProtalkMediaBundle:Media m
+                JOIN m.speakers s
+                WHERE s.id = :speakerId
+                ORDER BY m.'.$orderField.' DESC')
+                ->setParameter('speakerId', $speakerId)
+                ->setMaxResults($max)
+                ->getResult();
     }
 }

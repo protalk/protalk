@@ -27,6 +27,12 @@ class Media_tag
      * @ORM\Column(name="media_id", type="integer")
      */
     private $media_id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Media", inversedBy="tags")
+     * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
+     */
+    protected $media;
 
     /**
      * @var integer $tag_id
@@ -35,6 +41,11 @@ class Media_tag
      */
     private $tag_id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Tag", inversedBy="medias")
+     * @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
+     */
+    protected $tag;
 
     /**
      * Get id

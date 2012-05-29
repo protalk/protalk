@@ -42,6 +42,11 @@ class Category
      * @ORM\OneToMany(targetEntity="Category", mappedBy="parent_id")
      */
     private $children;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Media_category", mappedBy="category")
+     */
+    protected $medias;
 
     /**
      * Get id

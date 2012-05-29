@@ -3,7 +3,7 @@
 {% block title "Search results" %}
 
 {% block body %}
-<h1 id="resultHeading">SHOWING <span class="numberHiLite">120</span> RESULTS</h1>
+<h1 id="resultHeading">SHOWING <span class="numberHiLite">{{ total }}</span> RESULTS</h1>
 {% for media in results %}
 
 <article class="mediaLarge">
@@ -12,10 +12,10 @@
     </div>
     <div class="mediaTextLarge">
         <header>
-            <h2 title="{{media.title}}">{{ media.getTruncatedTitle(34) }}</h2>
-            <p><time datetime="{{ media.date|date("Y/m/d") }}" >{{ media.date|date("d M Y") }} by </time><span class="name">{{ media.speaker.name }}</span></p>
+            <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.getTruncatedTitle(34) }}</a></h2>
+            <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.getTruncatedSpeaker(20) }}</a></span></p>
         </header>
-        <p>{{ media.description }}</p>
+        <p>{{ media.getTruncatedDescription() }}</p>
         <footer>
             <span class="metadata">Rating: {% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span>
         </footer>
@@ -37,24 +37,5 @@
 {% endblock %}
 
 {% block rightcolumn %}
-<div id="sidebar">
-    <section>
-        <div id="categories">
-            <h1>CATEGORIES</h1>
-            {% render "ProtalkMediaBundle:Category:list" %}
-        </div>
-    </section>
-    <section>
-        <div id="tags">
-            <h1>TAGS</h1>
-            {% render "ProtalkMediaBundle:Tag:list" %}
-        </div>
-    </section>
-    <section>
-        <div id="speakers">
-            <h1>SPEAKERS</h1>
-            {% render "ProtalkMediaBundle:Speaker:list" %}
-        </div>
-    </section>
-</div>
+    {% include '::sidebar.html.twig' %}
 {% endblock %}

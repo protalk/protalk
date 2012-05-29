@@ -21,7 +21,7 @@ class ExploreController extends Controller
      * @Route("/result/{search}/{sort}/{page}")
      * @Template()
      */
-    public function resultAction($search, $sort, $page)
+    public function resultAction($search = -1, $sort = 'date', $page = 1)
     {
         $pageSize = $this->container->getParameter('search_results_page');
         
@@ -32,33 +32,51 @@ class ExploreController extends Controller
             $results = $repository->getMediaOrderedBy($sort, $page, $pageSize);
         }
         
-        return array('results' => $results);
+        return array('results' => $results, 'total' => count($results));
     }
     
     /**
-     * @Route("/tag/{id}")
-     * @Template("ProtalkMediaBundle:Explore:result")
+     * @Route("/tag/{id}/{sort}/{page}")
+     * @Template("ProtalkMediaBundle:Explore:result.html.twig")
      */
-    public function tagAction($id)
+    public function tagAction($id, $sort = 'date', $page = 1)
     {
-        return array("results" => $results);
+        $pageSize = $this->container->getParameter('search_results_page');
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        $repository = $em->getRepository('ProtalkMediaBundle:Media');
+        $results = $repository->findByTag($id, $sort, $page, $pageSize);
+        
+        return array("results" => $results, 'total' => count($results));
     }
     
     /**
-     * @Route("/category/{id}")
-     * @Template("ProtalkMediaBundle:Explore:result")
+     * @Route("/category/{id}/{sort}/{page}")
+     * @Template("ProtalkMediaBundle:Explore:result.html.twig")
      */
-    public function categoryAction($id)
+    public function categoryAction($id, $sort = 'date', $page = 1)
     {
-        return array("results" => $results);
+        $pageSize = $this->container->getParameter('search_results_page');
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        $repository = $em->getRepository('ProtalkMediaBundle:Media');
+        $results = $repository->findByCategory($id, $sort, $page, $pageSize);
+        
+        return array("results" => $results, 'total' => count($results));
     }
     
     /**
-     * @Route("/search/speaker/{id}")
-     * @Template("ProtalkMediaBundle:Explore:result")
+     * @Route("/search/speaker/{id}/{sort}/{page}")
+     * @Template("ProtalkMediaBundle:Explore:result.html.twig")
      */
-    public function speakerAction($id)
+    public function speakerAction($id, $sort = 'date', $page = 1)
     {
-        return array("results" => $results);
+        $pageSize = $this->container->getParameter('search_results_page');
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        $repository = $em->getRepository('ProtalkMediaBundle:Media');
+        $results = $repository->findBySpeaker($id, $sort, $page, $pageSize);
+        
+        return array("results" => $results, 'total' => count($results));
     }
 }
