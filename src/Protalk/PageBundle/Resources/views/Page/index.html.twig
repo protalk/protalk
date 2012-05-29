@@ -25,30 +25,7 @@
 {# TODO: Work out max no. of Category, Tag and Speaker that can be displayed.  If retrieved rcords exceed this, display 'more' link (??) #}
 
 {% block rightcolumn %}
-<<<<<<< HEAD
-<div id="sidebar">
-    <section>
-        <div id="categories">
-            <h1>CATEGORIES</h1>
-            {% render "ProtalkMediaBundle:Category:list" %}
-        </div>
-    </section>
-    <section>
-        <div id="tags">
-            <h1>TAGS</h1>
-            {% render "ProtalkMediaBundle:Tag:list" %}
-        </div>
-    </section>
-    <section>
-        <div id="speakers">
-            <h1>SPEAKERS</h1>
-            {% render "ProtalkMediaBundle:Speaker:list" %}
-        </div>
-    </section>
-</div>
-=======
     {% include '::sidebar.html.twig' %}
->>>>>>> 55c075db51ab5504c1df9e26dfd86b5cb187a9c8
 {% endblock %}
 
 
