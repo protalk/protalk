@@ -24,10 +24,27 @@ class MediaRepository extends EntityRepository
     public function getMediaOrderedBy($orderField, $page, $max)
     {
         return $this->getEntityManager()
-            ->createQuery('SELECT m, s FROM ProtalkMediaBundle:Media m
-                           JOIN m.speaker s
+            ->createQuery('SELECT m FROM ProtalkMediaBundle:Media m
                            ORDER BY m.'.$orderField.' DESC')
             ->setMaxResults($max)
             ->getResult();
+    }
+
+    /**
+     * Override native findOneBySlug method to include
+     * mediatype join and reduce no. of queries to db
+     *
+     * @param string $slug
+     * @return Doctrine Record
+     */
+    public function findOneBySlug($slug) {
+
+        return $this->getEntityManager()
+        ->createQuery('
+            SELECT m, mt FROM ProtalkMediaBundle:Media m
+            JOIN m.mediatype mt
+            WHERE m.slug = :slug'
+        )->setParameter('slug', $slug)
+        ->getSingleResult();
     }
 }

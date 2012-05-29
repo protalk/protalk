@@ -13,6 +13,10 @@
 <script src="{{ asset('js/page.js') }}"></script>
 {% endblock %}
 
+{% block bluestrip %}
+    {% include '::bluestripThin.html.twig' %}
+{% endblock %}
+
 {% block body %}
 <h1>{{ page.title }}</h1>
 <p>{{ page.content }}</p>
@@ -21,6 +25,7 @@
 {# TODO: Work out max no. of Category, Tag and Speaker that can be displayed.  If retrieved rcords exceed this, display 'more' link (??) #}
 
 {% block rightcolumn %}
+<<<<<<< HEAD
 <div id="sidebar">
     <section>
         <div id="categories">
@@ -41,6 +46,9 @@
         </div>
     </section>
 </div>
+=======
+    {% include '::sidebar.html.twig' %}
+>>>>>>> 55c075db51ab5504c1df9e26dfd86b5cb187a9c8
 {% endblock %}
 
 

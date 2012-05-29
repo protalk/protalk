@@ -1,0 +1,60 @@
+{% extends "::base.html.twig" %}
+
+{% block title "Search results" %}
+
+{% block body %}
+<h1 id="resultHeading">SHOWING <span class="numberHiLite">120</span> RESULTS</h1>
+{% for media in results %}
+
+<article class="mediaLarge">
+    <div class="mediaThumbNailLarge">
+        <img src="{{ asset('images/mediaThumbNail.png') }}" alt="Media ThumbNail Image"/>
+    </div>
+    <div class="mediaTextLarge">
+        <header>
+            <h2 title="{{media.title}}">{{ media.getTruncatedTitle(34) }}</h2>
+            <p><time datetime="{{ media.date|date("Y/m/d") }}" >{{ media.date|date("d M Y") }} by </time><span class="name">{{ media.speaker.name }}</span></p>
+        </header>
+        <p>{{ media.description }}</p>
+        <footer>
+            <span class="metadata">Rating: {% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span>
+        </footer>
+    </div>
+
+</article>
+{% endfor %}
+<div id="pagerContainer">
+    <span class="pagerText">PAGE 2 OF 6</span>
+    <ul>
+        <li><a class="pagerButton" href="#"><span>1</span></a></li>
+        <li><a class="pagerButton" href="#"><span>2</span></a></li>
+        <li><a class="pagerButton" href="#"><span>3</span></a></li>
+        <li><a class="pagerButton" href="#"><span>4</span></a></li>
+        <li><a class="pagerButton" href="#"><span>5</span></a></li>
+        <li><a class="pagerButton" href="#"><span>6</span></a></li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block rightcolumn %}
+<div id="sidebar">
+    <section>
+        <div id="categories">
+            <h1>CATEGORIES</h1>
+            {% render "ProtalkMediaBundle:Category:list" %}
+        </div>
+    </section>
+    <section>
+        <div id="tags">
+            <h1>TAGS</h1>
+            {% render "ProtalkMediaBundle:Tag:list" %}
+        </div>
+    </section>
+    <section>
+        <div id="speakers">
+            <h1>SPEAKERS</h1>
+            {% render "ProtalkMediaBundle:Speaker:list" %}
+        </div>
+    </section>
+</div>
+{% endblock %}

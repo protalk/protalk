@@ -1,0 +1,46 @@
+<div id="mediaTextContent">
+
+    <hr />
+
+    <section>
+<div id="infoBar">
+        <div class="social_sharing">
+            <div class="mail"><a href="mailto:?subject=Check this out&amp;body=I think you'll like this {{ url('media_show', {'slug': media.slug}) }}" title="Share by Email"><img src="{{ asset('images/mailIcon_small.png') }}" alt="Mail"/></a></div>
+
+            <div class="linkedinBtn"><script type="IN/Share" data-url="{{ url('media_show', {'slug': media.slug}) }}" data-counter="right"></script></div>
+
+            <div class="pinterest"><a href="http://pinterest.com/pin/create/button/?url={{ url('media_show', {'slug': media.slug}) }}&description={{ media.description }}" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a></div>
+
+            <div class="twitter"><a href="https://twitter.com/share" class="twitter-share-button" data-text="I just enjoyed '{{media.getTruncatedTitle(60)}}'" data-via="pro_talk" data-hashtags="ProTalk">Tweet</a></div>
+
+            <div id="fb-root"></div><div class="fb-like" data-href="{{ url('media_show', {'slug': media.slug}) }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
+
+
+        </div>
+<div id="rating">{% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</div>
+</div>
+    </section>
+
+    <hr />
+
+    <section id="description">
+        <p>{{ media.description }}</p>
+    </section>
+
+    <hr />
+
+    <section id="comments">
+        {% if media.comments|length > 0 %}
+        <h1>COMMENTS</h1>
+        {% endif %}
+        {% for comment in media.comments %}
+            <article class="comment">
+                <p><time datetime="{{ comment.datetime|date("Y/m/d")}}" >{{ comment.datetime|date("d M Y") }} by </time><span class="name">{{ comment.author }}</span></p>
+                <p class="commentText">{{ comment.content }}</p>
+            </article>
+        {% endfor %}
+        <div>
+            <a id="button_add_comment" class="button" href="#"><span>COMMENT</span></a>
+        </div>
+    </section>
+</div>

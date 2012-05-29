@@ -23,9 +23,11 @@ class Speaker
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Media", mappedBy="speaker")
+     * @var ArrayCollection $medias
+     *
+     * @ORM\ManyToMany(targetEntity="Media", mappedBy="speakers")
      */
-    protected $medias;
+    private $medias;
 
     /**
      * @var string $name
@@ -145,5 +147,25 @@ class Speaker
     public function getMedias()
     {
         return $this->medias;
+    }
+
+    /**
+     * Get object as string (name)
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Add medias
+     *
+     * @param Protalk\MediaBundle\Entity\Media_Speaker $medias
+     */
+    public function addMedia_Speaker(\Protalk\MediaBundle\Entity\Media_Speaker $medias)
+    {
+        $this->medias[] = $medias;
     }
 }

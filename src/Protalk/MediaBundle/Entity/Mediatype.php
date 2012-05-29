@@ -35,11 +35,29 @@ class Mediatype
      */
     private $type;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Media", mappedBy="mediatype")
+     */
+    protected $medias;
+
+    /*
+     * Constructor
+     *
+     * Initialize all collection fields to empty ArrayCollections
+     * in order to support the relationship before object persisted
+     * to database (when it would otherwise be null)
+     *
+     */
+    public function __construct()
+    {
+        $this->medias = new ArrayCollection();
+    }
+
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -59,7 +77,7 @@ class Mediatype
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -79,7 +97,7 @@ class Mediatype
     /**
      * Get type
      *
-     * @return string 
+     * @return string
      */
     public function getType()
     {

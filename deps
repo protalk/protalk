@@ -93,7 +93,7 @@
     git=http://github.com/sonata-project/SonataDoctrineORMAdminBundle.git
     target=/bundles/Sonata/DoctrineORMAdminBundle
     version=origin/2.0
-    
+
 [SonataEasyExtendsBundle]
     git=git://github.com/sonata-project/SonataEasyExtendsBundle.git
     target=/bundles/Sonata/EasyExtendsBundle
@@ -110,3 +110,6 @@
     git=http://github.com/excelwebzone/EWZRecaptchaBundle.git
     target=/bundles/EWZ/Bundle/RecaptchaBundle
     version=origin/2.0
+
+[DoctrineSluggableBundle]
+    git=https://github.com/samjarrett/DoctrineSluggableBundle.git

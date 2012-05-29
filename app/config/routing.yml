@@ -18,6 +18,10 @@ speaker_show:
     requirements:
         id:  \d+
 
+get_speakers:
+  pattern:  /media/{id}/speakers
+  defaults: {_controller: ProtalkMediaBundle:Media:speakers}
+
 contribute_new:
     pattern: /contribute/new
     defaults: {_controller: ProtalkMediaBundle:Contribution:new }
@@ -50,6 +54,14 @@ category_search:
 speaker_search:
     pattern:  /search/speaker/{id}
     defaults: { _controller: ProtalkMediaBundle:Explore:speaker }                
+
+media_show:
+    pattern:  /media/{slug}
+    defaults: { _controller: ProtalkMediaBundle:Media:index }
+
+comment_new:
+    pattern:  /comment/{media_id}
+    defaults: { _controller: ProtalkMediaBundle:Comment:new }
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
