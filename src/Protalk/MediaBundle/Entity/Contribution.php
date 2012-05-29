@@ -55,7 +55,7 @@ class Contribution
     private $email;
 
     /**
-     * @var date $hostUrl
+     * @var string $hostUrl
      *
      * @ORM\Column(name="hostUrl", type="string", length=100)
      * @Assert\NotBlank(

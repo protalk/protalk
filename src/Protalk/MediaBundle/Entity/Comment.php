@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Protalk\MediaBundle\Entity\CommentRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Comment
 {
@@ -27,6 +28,12 @@ class Comment
      * @ORM\Column(name="media_id", type="integer")
      */
     private $media_id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Media", inversedBy="comments")
+     * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
+     */
+    protected $media;
 
     /**
      * @var string $author
@@ -67,7 +74,7 @@ class Comment
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -87,7 +94,7 @@ class Comment
     /**
      * Get media_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getMediaId()
     {
@@ -107,7 +114,7 @@ class Comment
     /**
      * Get author
      *
-     * @return string 
+     * @return string
      */
     public function getAuthor()
     {
@@ -127,7 +134,7 @@ class Comment
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -147,7 +154,7 @@ class Comment
     /**
      * Get website
      *
-     * @return string 
+     * @return string
      */
     public function getWebsite()
     {
@@ -167,11 +174,19 @@ class Comment
     /**
      * Get datetime
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getDatetime()
     {
         return $this->datetime;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setDatetimeValue()
+    {
+        $this->datetime = new \DateTime();
     }
 
     /**
@@ -187,10 +202,30 @@ class Comment
     /**
      * Get content
      *
-     * @return text 
+     * @return text
      */
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * Set media
+     *
+     * @param Protalk\MediaBundle\Entity\Media $media
+     */
+    public function setMedia(\Protalk\MediaBundle\Entity\Media $media)
+    {
+        $this->media = $media;
+    }
+
+    /**
+     * Get media
+     *
+     * @return Protalk\MediaBundle\Entity\Media
+     */
+    public function getMedia()
+    {
+        return $this->media;
     }
 }
