@@ -25,6 +25,13 @@ a {
     float:left;
 }
 
+#beta {
+    float: left;
+    width: 10px;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
 .navigation {
     position:relative;
     float:left;
@@ -50,7 +57,7 @@ a {
 }
 
 #firstNavLink {
-    margin-left:150px;
+    margin-left:140px;
 }
 
 header {
@@ -454,18 +461,18 @@ nav {
     -webkit-border-radius: 20px;
     background-color: white;
     border:1px solid #dcdada;
-    height: 300px;
     margin-top: 31px;
     padding: 0px 22px 0px 22px;
-    height:1011px;
 }
 
 #categories {
-    height: 350px;
+    height: 400px;
+    overflow: hidden;
 }
 
 #tags {
     height:300px;
+    overflow: hidden;
 }
 
 #speakers {
@@ -490,7 +497,7 @@ nav {
     font-family: Helvetica Neue, Helvetica;
     font-size:14px;
     margin-right: 23px;
-    width: 133px;
+    width: 250px;
     height:31px;
     border-bottom:1px solid #dcdada;
     vertical-align: text-bottom;

@@ -25,6 +25,7 @@ class MediaRepository extends EntityRepository
     {
         return $this->getEntityManager()
             ->createQuery('SELECT m FROM ProtalkMediaBundle:Media m
+                           WHERE m.isPublished = 1
                            ORDER BY m.'.$orderField.' DESC')
             ->setMaxResults($max)
             ->getResult();
@@ -43,7 +44,7 @@ class MediaRepository extends EntityRepository
                                     ->createQuery('
                                         SELECT m, mt FROM ProtalkMediaBundle:Media m
                                         JOIN m.mediatype mt
-                                        WHERE m.slug = :slug'
+                                        WHERE m.slug = :slug AND m.isPublished = 1' 
                                         )
                                     ->setParameter('slug', $slug)
                                     ->getSingleResult();
@@ -66,6 +67,7 @@ class MediaRepository extends EntityRepository
                                FROM ProtalkMediaBundle:Media m
                                JOIN m.categories mc
                                WHERE mc.category_id = :catId
+                               AND m.isPublished = 1
                                ORDER BY m.'.$orderField.' DESC')
                 ->setParameter('catId', $categoryId)               
                 ->setMaxResults($max)
@@ -89,6 +91,7 @@ class MediaRepository extends EntityRepository
                 FROM ProtalkMediaBundle:Media m
                 JOIN m.tags mt
                 WHERE mt.tag_id = :tagId
+                AND m.isPublished = 1
                 ORDER BY m.'.$orderField.' DESC')
                 ->setParameter('tagId', $tagId)
                 ->setMaxResults($max)
@@ -112,6 +115,7 @@ class MediaRepository extends EntityRepository
                 FROM ProtalkMediaBundle:Media m
                 JOIN m.speakers s
                 WHERE s.id = :speakerId
+                AND m.isPublished = 1
                 ORDER BY m.'.$orderField.' DESC')
                 ->setParameter('speakerId', $speakerId)
                 ->setMaxResults($max)

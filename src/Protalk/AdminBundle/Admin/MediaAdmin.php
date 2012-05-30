@@ -14,7 +14,8 @@ class MediaAdmin extends Admin
     {
         $formMapper->add('title')->add('mediatype_id')->add('speakers')->add('date')
                 ->add('description')->add('length')->add('rating')->add('visits')
-                ->add('content')->add('slides')->add('joindin')->add('language');
+                ->add('content')->add('slides')->add('joindin')->add('language')
+                ->add('isPublished')->add('hostName')->add('hostUrl');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
