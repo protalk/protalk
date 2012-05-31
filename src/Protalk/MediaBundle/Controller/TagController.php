@@ -13,7 +13,9 @@ class TagController extends Controller
      */
     public function listAction()
     {
-        $tags = $this->getDoctrine()->getRepository("ProtalkMediaBundle:Tag")->findAll();
+        $em = $this->getDoctrine()->getEntityManager();
+        $repository = $em->getRepository('ProtalkMediaBundle:Tag');
+        $tags = $repository->getMostUsedTags();
         return array('tags' => $tags);
     }
 }

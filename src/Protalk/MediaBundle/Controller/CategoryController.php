@@ -13,7 +13,9 @@ class CategoryController extends Controller
      */
     public function listAction()
     {
-        $categories = $this->getDoctrine()->getRepository("ProtalkMediaBundle:Category")->findAll();
+        $em = $this->getDoctrine()->getEntityManager();
+        $repository = $em->getRepository('ProtalkMediaBundle:Category');
+        $categories = $repository->getMostUsedCategories();
         return array('categories' => $categories);
     }
 }

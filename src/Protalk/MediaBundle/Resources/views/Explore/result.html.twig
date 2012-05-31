@@ -2,6 +2,10 @@
 
 {% block title "Search results" %}
 
+{% block bluestrip %}
+    {% include '::bluestripThin.html.twig' %}
+{% endblock %}
+
 {% block body %}
 <h1 id="resultHeading">SHOWING <span class="numberHiLite">{{ total }}</span> RESULTS</h1>
 {% for media in results %}

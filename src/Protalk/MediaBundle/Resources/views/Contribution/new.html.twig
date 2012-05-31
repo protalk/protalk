@@ -13,6 +13,10 @@
 <script src="{{ asset('js/page.js') }}"></script>
 {% endblock %}
 
+{% block bluestrip %}
+    {% include '::bluestripThin.html.twig' %}
+{% endblock %}
+
 {% block body %}
 <h1>Contribution</h1>
 {% render "ProtalkPageBundle:Page:content" with { 'url' : 'contribute' } %}

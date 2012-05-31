@@ -12,4 +12,25 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
+    /**
+     * Get the most used categories
+     * 
+     * @param int $max 
+     * @return Doctrine Collection
+     */
+    public function getMostUsedCategories($max = 20)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+ 
+        $qb->select('c.id', 'c.name', 'COUNT(mc.media_id) as mediaCount');
+        $qb->from('\Protalk\MediaBundle\Entity\Category', 'c');
+        $qb->leftJoin('c.medias', 'mc');
+        $qb->leftJoin('mc.media', 'm', 'WITH', 'm.id = mc.media_id AND m.isPublished = 1');
+        $qb->groupBy('c.id');
+        $qb->orderBy('mediaCount', 'DESC');
+        $qb->setMaxResults($max);
+ 
+        $query = $qb->getQuery();
+        return $query->execute();
+    }
 }
