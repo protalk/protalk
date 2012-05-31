@@ -56,7 +56,25 @@ INSERT INTO `Media_speaker` (media_id, speaker_id ) VALUES ('4', '10');
 
 TRUNCATE TABLE `Category`;
 
-INSERT INTO `Category` (`name`) VALUES ('Tootie Frootie'),('Candi Bonbons'),('Toffee Apple'),('Rhubarb & Custard'),('Hard Boiled Sweets'),('Chewy Chews'),('Jam Donut');
+INSERT INTO `category` (`id`, `parent_id`, `name`) VALUES
+(8, NULL, 'PHP'),
+(9, 8, 'Quality Assurance'),
+(10, NULL, 'Databases'),
+(11, 10, 'MySQL'),
+(12, 9, 'Test Driven Development'),
+(13, 8, 'Object Orientation'),
+(14, 13, 'Design Patterns'),
+(15, 10, 'CouchDB'),
+(16, 8, 'Frameworks'),
+(17, 16, 'Zend Framework'),
+(18, 16, 'Symfony'),
+(19, 16, 'Symfony2'),
+(20, 8, 'Webservices'),
+(21, NULL, 'Version Control Systems'),
+(22, 21, 'Git'),
+(23, 21, 'Subversion'),
+(24, 20, 'Restful API'),
+(25, 9, 'Technical debt');
 
 /* Delete all Media records then re-load sample data */
 
