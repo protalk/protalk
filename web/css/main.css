@@ -648,7 +648,6 @@ a.tagButton:active span {
 }
 
 #mediaTextContent {
-    padding-left:24px;
     font-family: Helvetica Neue, Helvetica;
     clear:both;
 }
@@ -664,9 +663,7 @@ a.tagButton:active span {
 
 /*  left column on detail page */
 #mediaPlayerSection {
-    width: 448px;
-    padding-left:24px;
-    padding-right: 10px;
+    width:448px;
     float:left;
 }
 
