@@ -44,9 +44,19 @@ class Category
     private $children;
     
     /**
-     * @ORM\OneToMany(targetEntity="Media_category", mappedBy="category")
+     * @var ArrayCollection $medias
+     *
+     * @ORM\ManyToMany(targetEntity="Media", mappedBy="categories")
      */
     protected $medias;
+    
+    /**
+     * Constructor 
+     */
+    public function __construct()
+    {
+        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+    }
     
     /**
      * Get id
@@ -106,10 +116,6 @@ class Category
     public function __toString()
     {
         return $this->name;
-    }
-    public function __construct()
-    {
-        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**

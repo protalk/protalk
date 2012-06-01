@@ -52,12 +52,18 @@ class Media implements SluggableInterface
     protected $comments;
     
     /**
-     * @ORM\OneToMany(targetEntity="Media_category", mappedBy="media")
+     * @var ArrayCollection $categories
+     *
+     * @ORM\ManyToMany(targetEntity="Category", inversedBy="medias")
+     * @ORM\JoinTable(name="media_category")
      */
     protected $categories;
     
     /**
-     * @ORM\OneToMany(targetEntity="Media_tag", mappedBy="media")
+     * @var ArrayCollection $tags
+     *
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="medias")
+     * @ORM\JoinTable(name="media_tag")
      */
     protected $tags;
 
@@ -490,6 +496,16 @@ class Media implements SluggableInterface
     {
         return $this->speakers;
     }
+    
+    /**
+     * Set speakers
+     *
+     * @param Doctrine\Common\Collections\Collection $speakers
+     */
+    public function setSpeakers($speakers)
+    {
+        $this->speakers = $speakers;
+    }
 
     /**
      * Add speakers
@@ -640,5 +656,54 @@ class Media implements SluggableInterface
     public function getComments()
     {
         return $this->comments;
+    }
+    
+    /**
+     * Get categories
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+    
+    /**
+     * Set categories
+     *
+     * @param Doctrine\Common\Collections\Collection $categories
+     */
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
+    }
+    
+    /**
+     * Get tags
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+    
+    /**
+     * Set tags
+     *
+     * @param Doctrine\Common\Collections\Collection $tags
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;;
+    }
+    
+    /**
+     * Convert object to string
+     * @return string 
+     */
+    public function __toString()
+    {
+        return $this->title;
     }
 }

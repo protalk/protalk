@@ -3,7 +3,7 @@
         <p>We are the online audio & video community resource</p>
         <p id="textLight">that aims to provide a central point of access to content with a PHP focus</p>
 
-        <form method='post' action='#'>
+        <form method='post' action='{{ path('search_results') }}'>
             <input id="searchCriteria" class="search" name="search" type="text" placeholder="What can we find for you?"/>
             <input id="searchButton" class="search" type="image" alt="Search" src="{{ asset('images/searchButton.png') }}" />
         </form>

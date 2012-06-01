@@ -22,10 +22,10 @@ class CategoryRepository extends EntityRepository
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
  
-        $qb->select('c.id', 'c.name', 'COUNT(mc.media_id) as mediaCount');
+        $qb->select('c.id', 'c.name', 'COUNT(m.id) as mediaCount');
         $qb->from('\Protalk\MediaBundle\Entity\Category', 'c');
-        $qb->leftJoin('c.medias', 'mc');
-        $qb->leftJoin('mc.media', 'm', 'WITH', 'm.id = mc.media_id AND m.isPublished = 1');
+        $qb->join('c.medias', 'm');
+        $qb->where('m.isPublished = 1');
         $qb->groupBy('c.id');
         $qb->orderBy('mediaCount', 'DESC');
         $qb->setMaxResults($max);

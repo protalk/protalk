@@ -25,6 +25,6 @@ class HomeController extends Controller
         $topViewedMedia = $repository->getMediaOrderedBy('visits', 1, $numRows);
         $topRatedMedia = $repository->getMediaOrderedBy('rating', 1, $numRows);
 
-        return array('latestMedia' => $latestMedia , 'topViewedMedia' => $topViewedMedia, 'topRatedMedia' => $topRatedMedia);
+        return array('latestMedia' => $latestMedia['results'] , 'topViewedMedia' => $topViewedMedia['results'], 'topRatedMedia' => $topRatedMedia['results']);
     }
 }

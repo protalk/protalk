@@ -7,7 +7,13 @@
 {% endblock %}
 
 {% block body %}
-<h1 id="resultHeading">SHOWING <span class="numberHiLite">{{ total }}</span> RESULTS</h1>
+{% if search != '' %}
+    <h1 id="resultHeading">You have searched for '{{ search }}'</h1>
+    <h1>SHOWING <span class="numberHiLite">{{ total }}</span> RESULTS</h1>
+{% else %}
+    <h1 id="resultHeading">Found <span class="numberHiLite">{{ total }}</span> RESULTS</h1>
+{% endif %}
+
 {% for media in results %}
 
 <article class="mediaLarge">

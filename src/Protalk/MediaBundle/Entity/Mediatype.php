@@ -103,4 +103,14 @@ class Mediatype
     {
         return $this->type;
     }
+    
+    /**
+     * Convert this entity to a string
+     * 
+     * @return string 
+     */
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

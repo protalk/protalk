@@ -25,14 +25,23 @@ class ExploreController extends Controller
     {
         $pageSize = $this->container->getParameter('search_results_page');
         
-        $results = array();
-        if (-1 == $search) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $repository = $em->getRepository('ProtalkMediaBundle:Media');
-            $results = $repository->getMediaOrderedBy($sort, $page, $pageSize);
+        if ($this->getRequest()->getMethod() == 'POST') {
+            $search = $this->getRequest()->get('search');
         }
         
-        return array('results' => $results, 'total' => count($results));
+        $results = array();
+        $em = $this->getDoctrine()->getEntityManager();
+        $repository = $em->getRepository('ProtalkMediaBundle:Media');
+        
+        if (-1 == $search) {    
+            $results = $repository->getMediaOrderedBy($sort, $page, $pageSize);
+            $results['search'] = '';
+        } else {
+            $results = $repository->findMedia($search, $sort, $page, $pageSize);
+            $results['search'] = $search;
+        }
+        
+        return $results;
     }
     
     /**
@@ -45,9 +54,7 @@ class ExploreController extends Controller
         
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
-        $results = $repository->findByTag($id, $sort, $page, $pageSize);
-        
-        return array("results" => $results, 'total' => count($results));
+        return $repository->findByTag($id, $sort, $page, $pageSize);
     }
     
     /**
@@ -60,9 +67,7 @@ class ExploreController extends Controller
         
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
-        $results = $repository->findByCategory($id, $sort, $page, $pageSize);
-        
-        return array("results" => $results, 'total' => count($results));
+        return $repository->findByCategory($id, $sort, $page, $pageSize);
     }
     
     /**
@@ -75,8 +80,6 @@ class ExploreController extends Controller
         
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
-        $results = $repository->findBySpeaker($id, $sort, $page, $pageSize);
-        
-        return array("results" => $results, 'total' => count($results));
+        return $repository->findBySpeaker($id, $sort, $page, $pageSize);
     }
 }

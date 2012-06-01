@@ -105,7 +105,9 @@ INSERT INTO Media_tag (media_id, tag_id) VALUES (1, 2);
 TRUNCATE TABLE `Mediatype`;
 
 INSERT INTO `Mediatype` (`name`, `type`) VALUES ('video', 'video');
+INSERT INTO `Mediatype` (`name`, `type`) VALUES ('conference video', 'video');
 INSERT INTO `Mediatype` (`name`, `type`) VALUES ('podcast', 'podcast');
+INSERT INTO `Mediatype` (`name`, `type`) VALUES ('conference podcast', 'podcast');
 
 /* Delete all Comment records then re-load sample data */
 

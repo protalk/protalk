@@ -29,7 +29,9 @@ class Tag
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Media_tag", mappedBy="tag")
+     * @var ArrayCollection $medias
+     *
+     * @ORM\ManyToMany(targetEntity="Media", mappedBy="tags")
      */
     protected $medias;
 
@@ -59,6 +61,16 @@ class Tag
      * @return string 
      */
     public function getName()
+    {
+        return $this->name;
+    }
+    
+    /**
+     * Convert object to string
+     * 
+     * @return string 
+     */
+    public function __toString()
     {
         return $this->name;
     }

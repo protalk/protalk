@@ -12,10 +12,23 @@ class MediaAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('title')->add('mediatype_id')->add('speakers')->add('date')
-                ->add('description')->add('length')->add('rating')->add('visits')
-                ->add('content')->add('slides')->add('joindin')->add('language')
-                ->add('isPublished')->add('hostName')->add('hostUrl');
+        $formMapper->add('title')
+                ->add('mediatype')
+                ->add('speakers', 'sonata_type_model', array('expanded' => true))
+                ->add('date')
+                ->add('description')
+                ->add('length')
+                ->add('rating')
+                ->add('visits')
+                ->add('content')
+                ->add('slides')
+                ->add('joindin')
+                ->add('language')
+                ->add('isPublished')
+                ->add('hostName')
+                ->add('hostUrl')
+                ->add('categories', 'sonata_type_model', array('expanded' => true))
+                ->add('tags', 'sonata_type_model', array('expanded' => true));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
