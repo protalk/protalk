@@ -24,7 +24,8 @@ class MediaRepository extends EntityRepository
     public function getMediaOrderedBy($orderField, $page, $max)
     {
         return $this->getEntityManager()
-            ->createQuery('SELECT m FROM ProtalkMediaBundle:Media m
+            ->createQuery('SELECT m
+                           FROM ProtalkMediaBundle:Media m
                            WHERE m.isPublished = 1
                            ORDER BY m.'.$orderField.' DESC')
             ->setMaxResults($max)
@@ -33,47 +34,55 @@ class MediaRepository extends EntityRepository
 
     /**
      * Override native findOneBySlug method to include
-     * mediatype join and reduce no. of queries to db
+     * mediatype join, reducing no. of queries to db
+     * and increment no of visits made to media item
      *
      * @param string $slug
      * @return Doctrine Record
      */
-    public function findOneBySlug($slug) 
+    public function findOneBySlug($slug)
     {
-        return $this->getEntityManager()
-                                    ->createQuery('
-                                        SELECT m, mt FROM ProtalkMediaBundle:Media m
-                                        JOIN m.mediatype mt
-                                        WHERE m.slug = :slug AND m.isPublished = 1' 
-                                        )
-                                    ->setParameter('slug', $slug)
-                                    ->getSingleResult();
+        $em = $this->getEntityManager();
+
+        $media = $em->createQuery('SELECT m, mt
+                                   FROM ProtalkMediaBundle:Media m
+                                   JOIN m.mediatype mt
+                                   WHERE m.slug = :slug AND m.isPublished = 1')
+                    ->setParameter('slug', $slug)
+                    ->getSingleResult();
+
+        $currentVisits = $media->getVisits();
+
+        $media->setVisits($currentVisits + 1);
+        $em->flush();
+
+        return $media;
     }
-    
+
     /**
      * Find media items by category
-     * 
+     *
      * @param int $categoryId
      * @param string $orderField
      * @param int $page
      * @param int $max
-     * 
+     *
      * @return Doctrine Collection
      */
     public function findByCategory($categoryId, $orderField, $page, $max)
     {
         return $this->getEntityManager()
-                ->createQuery('SELECT m 
+                ->createQuery('SELECT m
                                FROM ProtalkMediaBundle:Media m
                                JOIN m.categories mc
                                WHERE mc.category_id = :catId
                                AND m.isPublished = 1
                                ORDER BY m.'.$orderField.' DESC')
-                ->setParameter('catId', $categoryId)               
+                ->setParameter('catId', $categoryId)
                 ->setMaxResults($max)
                 ->getResult();
     }
-    
+
     /**
      * Find media items by tag
      *
@@ -97,7 +106,7 @@ class MediaRepository extends EntityRepository
                 ->setMaxResults($max)
                 ->getResult();
     }
-    
+
     /**
      * Find media items by speaker
      *
