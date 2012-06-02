@@ -256,7 +256,7 @@ class Media implements SluggableInterface
      * @param  integer Maximum allowed length of description
      * @return string
      */
-    public function getTruncatedDescription($length = 200)
+    public function getTruncatedDescription($length = 75)
     {
 
         $description = $this->getDescription();
