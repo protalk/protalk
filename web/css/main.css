@@ -261,7 +261,7 @@ time, .metadata {
     border-radius: 7px;
 }
 
-.tabMediaText h2 {
+.tabMediaText h2 a {
     font-size:16px;
 }
 
