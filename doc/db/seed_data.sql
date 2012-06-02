@@ -36,12 +36,12 @@ INSERT INTO `Tag` (id, name) VALUES
     (9, 'Build Process'),
     (10, 'Deployment'), 
     (11, 'Integration'), 
-    (12, 'DPC2012'),
+    (12, 'dpc12'),
     (13, 'PHPDocumentor'), 
     (14, 'Security'),
     (15, 'Design Patterns'),
-    (16, 'PHPNW2011'), 
-    (17, 'DPC2011'),
+    (16, 'phpnw11'), 
+    (17, 'dpc11'),
     (18, 'Webservices');
 
 
@@ -49,16 +49,12 @@ INSERT INTO `Tag` (id, name) VALUES
 
 TRUNCATE TABLE `Speaker`;
 
-INSERT INTO `Speaker` (`id`, `name`, photo, biography ) VALUES (1, 'Cookie Monster','cookie.png','Likes to eat biscuits. Chocolate chip cookies are his favourite');
-INSERT INTO `Speaker` (`id`, `name`, photo, biography ) VALUES (2, 'Ernie','ernie.png','Best friends with Bert.  They do everything together.');
-INSERT INTO `Speaker` (`id`, `name`, photo, biography ) VALUES (3, 'Fozzie','fozzie.png','Really friendly muppet.  Kids love him and he is so nice.');
-INSERT INTO `Speaker` (`id`, `name`, photo, biography ) VALUES (4, 'Gonzo','gonzo.png','Mischevious but loveable.  Is moody at times but generally good natured, if a little naughty.');
-INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (5, 'Nils Adermann','I could not find a bio for him online. Presumably we are going to have to email speakers and ask them to provide us with something?  Even if we find something online we probably should not use it without asking first.  Photos are also probably going to be tricky(?)');
-INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (6, 'Lorna Mitchell','PHP specialist, writer, speaker, consultant and trainer.');
-INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (7, 'Cal Evans','PHP community legend.');
-INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (8, 'Derick Rethans','Creator of Xdebug and general PHP genius.');
-INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (9, 'Chris Hartjes','The Grumpy Programmer');
-INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (10, 'Ed Finkler','DevHell podcaster');
+INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (5, 'Nils Adermann','');
+INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (6, 'Lorna Mitchell','');
+INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (7, 'Cal Evans','');
+INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (8, 'Derick Rethans','');
+INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (9, 'Chris Hartjes','');
+INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (10, 'Ed Finkler','');
 INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (11, 'Harrie Verveer','');
 INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (12, 'Aral Balkan','');
 INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (13, 'Rowan Merewood','');
@@ -105,7 +101,7 @@ INSERT INTO `Category` (`id`, `parent_id`, `name`) VALUES
 (24, 20, 'Restful API'),
 (25, 9, 'Technical debt'),
 (26, NULL, 'User Experience'),
-(27, NULL, 'Best Practices');
+(27, 9, 'Best Practices');
 
 /* Delete all Media records then re-load sample data */
 
@@ -147,7 +143,6 @@ TRUNCATE TABLE `Comment`;
 INSERT INTO `Comment` (media_id, author, email, website, content, datetime ) VALUES ('1', 'Kim Rowan', 'kim.rowan@cancer.org.uk', 'http://protalk.me', 'Awesome site! Great talk too', '2012-05-19 09:01:36' );
 INSERT INTO `Comment` (media_id, author, email, website, content, datetime) VALUES ('1', 'Michelle Sanver', 'michelle@sanver.com', 'http://www.jippey.com', 'I learned a lot from this amazing talk.  Great topic.', '2012-06-02 13:25:52' );
 
-
 /* 
  * 
  * DPC 2011 talks and associated data
@@ -156,27 +151,27 @@ INSERT INTO `Comment` (media_id, author, email, website, content, datetime) VALU
 
 /* 
 INSERT INTO `Media` 
-    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug ) 
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl ) 
 VALUES 
     (x, mediatype_id, null, 'Description', 
     'time', '5', 0, 
     'Source',
     'slides', 
-    joindinid, 'en', 'Title', 'URL');
+    joindinid, 'en', 'Title', 'URL', 1, 'name of the source', 'direct url to the page where to find this specific talk');
     
 */
 
 /* Making the new everyday things  */
 INSERT INTO `Media` 
-    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished ) 
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl ) 
 VALUES 
     (5, 4, '2011-05-20', 'We are the makers of the new everyday things. We design and develop the virtual pens, telephones, newspapers, calendars, and door-handles that people interact with every single day. We are the virtual architects and the products that we design and develop have the power to determine whether people have a good day or a bad day.
 
 In this session, Aral Balkan will outline the important role that user experience design plays in the making of virtual products and inspire you to see that it is your job – regardless of whether you make web sites, mobile apps, intranet systems, or ticket machines – to make this new world that we are crafting together not only usable and accessible but beautiful, fun, inspiring, pleasurable, delightful, and – dare I say – magical.', 
-    '56:42', '5', 0, 
+    '56:42', 0, 0, 
     'http://dpcradio.s3.amazonaws.com/2011_013.mp3',
     '', 
-    3375, 'en', 'Making the new everyday things', 'making-the-new-everyday-things', 1);
+    3375, 'en', 'Making the new everyday things', 'making-the-new-everyday-things', 1, 'DPCRadio', 'http://techportal.inviqa.com/2012/04/27/dpc-radio-keynote-the-art-of-the-user-experience-making-beautiful-delightful-fun-things/');
     
 INSERT INTO media_category (media_id, category_id) VALUES (5, 26);
 INSERT INTO media_tag (media_id, tag_id) VALUES (5, 17);
@@ -184,13 +179,13 @@ INSERT INTO `media_speaker` (media_id, speaker_id ) VALUES (5, 12);
 
 /* TDD and getting paid  */
 INSERT INTO `Media` 
-    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished ) 
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl ) 
 VALUES 
     (6, 4, '2011-05-20', 'Test-driven development is generally regarded as a good move: it should result in simple decoupled design, your tests tend to cover behaviour not methods, and far fewer bugs. However, just getting unit tests in on a real, commercial project is hard - switching to TDD is even harder. Often you can start a project with good intentions and coverage, then the deadline looms and the tests go out then the hacks come in. So, instead of beating ourselves up about not being perfect let\'s look at an interative approach to adopting TDD principles. We\'ll look at tactics for selling TDD to your client, boss and colleagues. This talk will also cover methods for making TDD easier for you by showing you what tools you can use to integrate it into your development environment. In the project itself, we\'ll examine how we can make small but permanent steps towards full TDD, without losing that progress when deadlines hit. We\'ll also cover a few methods for learning on your own time and how the whole process can actually be made quite enjoyable.', 
-    '51:50', '5', 0, 
+    '51:50', 0, 0, 
     'http://dpcradio.s3.amazonaws.com/2011_017.mp3',
     '<div style="width:425px" id="__ss_7510674"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/rowan_m/tdd-and-getting-paid" title="TDD and Getting Paid" target="_blank">TDD and Getting Paid</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/7510674" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/rowan_m" target="_blank">Rowan Merewood</a> </div> </div>', 
-    3218, 'en', 'TDD and getting paid', 'tdd-and-getting-paid', 1);
+    3218, 'en', 'TDD and getting paid', 'tdd-and-getting-paid', 1, 'DPCRadio', 'http://techportal.inviqa.com/2012/04/10/dpc-radio-tdd-and-getting-paid/');
     
 INSERT INTO media_category (media_id, category_id) VALUES (6, 9), (6, 12);
 INSERT INTO media_tag (media_id, tag_id) VALUES (6, 2), (6, 6), (6, 8), (6, 17);
@@ -198,13 +193,13 @@ INSERT INTO `media_speaker` (media_id, speaker_id ) VALUES (6, 13);
 
 /* Clean PHP */
 INSERT INTO `Media` 
-    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished ) 
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl ) 
 VALUES 
     (7, 4, '2011-05-20', 'Even bad code can function. But if code isn\'t clean, it can bring a development organization to its knees. Every year, countless hours and significant resources are lost because of poorly written code. But it doesn\'t have to be that way. In this session you will learn how you can offset your technical debt with clean code that is readable and testable as well as reusable.', 
-    '47:55', '5', 0, 
+    '47:55', 0, 0, 
     'http://dpcradio.s3.amazonaws.com/2011_003.mp3',
     '', 
-    3235, 'en', 'Clean PHP', 'clean-php', 1);
+    3235, 'en', 'Clean PHP', 'clean-php', 1, 'DPCRadio', 'http://techportal.inviqa.com/2012/03/22/dpc-radio-clean-php/');
     
 INSERT INTO media_category (media_id, category_id) VALUES (7, 8), (7, 27);
 INSERT INTO media_tag (media_id, tag_id) VALUES (7, 1), (7, 17);
@@ -212,13 +207,13 @@ INSERT INTO `media_speaker` (media_id, speaker_id ) VALUES (7, 14);
 
 /* Implementing OAuth */
 INSERT INTO `Media` 
-    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished ) 
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl ) 
 VALUES 
     (8, 4, '2011-05-21', 'With Twitter moving its API to OAuth the idea of using tokens rather than passwords for authentication went mainstream. Many explanations of OAuth make it seem complicated whereas in reality the "OAuth Dance" is a series of simple steps executed in sequence. This talk covers consuming and providing OAuth services, includes implementation examples, and is recommended for all technical leads, architects, and integration specialists.', 
-    '45:55', '5', 0, 
+    '45:55', 0, 0, 
     'http://dpcradio.s3.amazonaws.com/2011_010.mp3',
     '<div style="width:425px" id="__ss_7990565"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/lornajane/oauth-7990565" title="Implementing OAuth with PHP" target="_blank">Implementing OAuth with PHP</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/7990565" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/lornajane" target="_blank">Lorna Mitchell</a> </div> </div>', 
-    3243, 'en', 'Implementing OAuth', 'implementing-oauth', 1);
+    3243, 'en', 'Implementing OAuth', 'implementing-oauth', 1, 'DPCRadio', 'http://techportal.inviqa.com/2012/02/08/dpc-radio-implementing-oauth/');
     
 INSERT INTO media_category (media_id, category_id) VALUES (8, 20), (8, 24), (8, 27);
 INSERT INTO media_tag (media_id, tag_id) VALUES (8, 17), (8, 18);
