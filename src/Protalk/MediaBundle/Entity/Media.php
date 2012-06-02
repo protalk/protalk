@@ -708,4 +708,20 @@ class Media implements SluggableInterface
     {
         return $this->tags;
     }
+
+    /**
+     * Display thumbnail
+     *
+     * @return string thumnail filename
+     */
+    public function displayThumbnail()
+    {
+        if ($this->getMediatype()->getName() != 'video') {
+            return "podcast_icon.png";
+        } elseif ( !$this->thumbnail ) {
+            return "coming_soon.png";
+        } else {
+            return $this->thumbnail;
+        }
+    }
 }

@@ -250,7 +250,15 @@ time, .metadata {
 
 .tabMediaThumbNail {
     float:left;
-    width:114px;
+}
+
+.tabMediaThumbNail img {
+    width:98px;
+    height:67px;
+    border: 8px solid #e4e4e4;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
 }
 
 .tabMediaText h2 {
