@@ -62,4 +62,28 @@ class Tag
     {
         return $this->name;
     }
+    public function __construct()
+    {
+        $this->medias = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add medias
+     *
+     * @param Protalk\MediaBundle\Entity\Media_tag $medias
+     */
+    public function addMedia_tag(\Protalk\MediaBundle\Entity\Media_tag $medias)
+    {
+        $this->medias[] = $medias;
+    }
+
+    /**
+     * Get medias
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getMedias()
+    {
+        return $this->medias;
+    }
 }

@@ -97,4 +97,44 @@ class Media_category
     {
         return $this->category_id;
     }
+
+    /**
+     * Set media
+     *
+     * @param Protalk\MediaBundle\Entity\Media $media
+     */
+    public function setMedia(\Protalk\MediaBundle\Entity\Media $media)
+    {
+        $this->media = $media;
+    }
+
+    /**
+     * Get media
+     *
+     * @return Protalk\MediaBundle\Entity\Media 
+     */
+    public function getMedia()
+    {
+        return $this->media;
+    }
+
+    /**
+     * Set category
+     *
+     * @param Protalk\MediaBundle\Entity\Category $category
+     */
+    public function setCategory(\Protalk\MediaBundle\Entity\Category $category)
+    {
+        $this->category = $category;
+    }
+
+    /**
+     * Get category
+     *
+     * @return Protalk\MediaBundle\Entity\Category 
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
 }

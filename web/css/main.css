@@ -201,7 +201,15 @@ time, .metadata {
 
 .mediaThumbNailLarge {
     float:left;
-    width:168px;
+}
+
+.mediaThumbNailLarge img {
+    width:150px;
+    height:112px;
+    border: 8px solid #e4e4e4;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
 }
 
 #rightColumn {
@@ -815,11 +823,9 @@ form ul {
 #contribute_submit_button {
     margin-top:15px;
     margin-left:260px;
-
 }
 
 #recaptcha_area {
-
     padding-left: 53px;
 }
 

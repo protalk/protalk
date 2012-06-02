@@ -131,4 +131,24 @@ class Category
     {
         return $this->children;
     }
+
+    /**
+     * Add medias
+     *
+     * @param Protalk\MediaBundle\Entity\Media_category $medias
+     */
+    public function addMedia_category(\Protalk\MediaBundle\Entity\Media_category $medias)
+    {
+        $this->medias[] = $medias;
+    }
+
+    /**
+     * Get medias
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getMedias()
+    {
+        return $this->medias;
+    }
 }

@@ -50,12 +50,12 @@ class Media implements SluggableInterface
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="media")
      */
     protected $comments;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Media_category", mappedBy="media")
      */
     protected $categories;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Media_tag", mappedBy="media")
      */
@@ -158,6 +158,13 @@ class Media implements SluggableInterface
      * @ORM\Column(name="hostUrl", type="string")
      */
     private $hostUrl;
+
+    /**
+     * @var string $thumbnail
+     *
+     * @ORM\Column(name="thumbnail", type="string", length=50, nullable=true)
+     */
+    private $thumbnail;
 
     /*
      * Constructor
@@ -635,10 +642,70 @@ class Media implements SluggableInterface
     /**
      * Get comments
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getComments()
     {
         return $this->comments;
+    }
+
+    /**
+     * Set thumbnail
+     *
+     * @param string $thumbnail
+     */
+    public function setThumbnail($thumbnail)
+    {
+        $this->thumbnail = $thumbnail;
+    }
+
+    /**
+     * Get thumbnail
+     *
+     * @return string
+     */
+    public function getThumbnail()
+    {
+        return $this->thumbnail;
+    }
+
+    /**
+     * Add categories
+     *
+     * @param Protalk\MediaBundle\Entity\Media_category $categories
+     */
+    public function addMedia_category(\Protalk\MediaBundle\Entity\Media_category $categories)
+    {
+        $this->categories[] = $categories;
+    }
+
+    /**
+     * Get categories
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * Add tags
+     *
+     * @param Protalk\MediaBundle\Entity\Media_tag $tags
+     */
+    public function addMedia_tag(\Protalk\MediaBundle\Entity\Media_tag $tags)
+    {
+        $this->tags[] = $tags;
+    }
+
+    /**
+     * Get tags
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }

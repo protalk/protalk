@@ -96,4 +96,44 @@ class Media_tag
     {
         return $this->tag_id;
     }
+
+    /**
+     * Set media
+     *
+     * @param Protalk\MediaBundle\Entity\Media $media
+     */
+    public function setMedia(\Protalk\MediaBundle\Entity\Media $media)
+    {
+        $this->media = $media;
+    }
+
+    /**
+     * Get media
+     *
+     * @return Protalk\MediaBundle\Entity\Media 
+     */
+    public function getMedia()
+    {
+        return $this->media;
+    }
+
+    /**
+     * Set tag
+     *
+     * @param Protalk\MediaBundle\Entity\Tag $tag
+     */
+    public function setTag(\Protalk\MediaBundle\Entity\Tag $tag)
+    {
+        $this->tag = $tag;
+    }
+
+    /**
+     * Get tag
+     *
+     * @return Protalk\MediaBundle\Entity\Tag 
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
 }

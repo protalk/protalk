@@ -20,7 +20,7 @@
 {% for media in latestMedia %}
 <article class="mediaLarge">
     <div class="mediaThumbNailLarge">
-        <img src="{{ asset('images/mediaThumbNail.png') }}" alt="Media ThumbNail Image"/>
+        <img src="{{ asset('images/thumbnails/') }}{% if media.mediatype.name != 'video' %}podcast_icon.png{% elseif media.thumbnail is empty %}coming_soon.png{% else %}{{ media.thumbnail }}{% endif %}"alt="Media ThumbNail Image"/>
     </div>
     <div class="mediaTextLarge">
         <header>
@@ -51,7 +51,7 @@
                 {% for media in topViewedMedia %}
                 <article class="tabMedia">
                     <div class="tabMediaThumbNail">
-                        <img src="{{ asset('images/tabMediaThumbNail.png') }}" alt="Media ThumbNail Image"/>
+                        <img src="{{ asset('images/thumbnails/') }}{% if media.mediatype.name != 'video' %}podcast_icon.png {% else %}{{ media.thumbnail }}{% endif %}" alt="Media ThumbNail Image"/>
                     </div>
                     <div class="tabMediaText">
                         <header>
@@ -74,7 +74,7 @@
                 {% for media in topRatedMedia %}
                 <article class="tabMedia">
                     <div class="tabMediaThumbNail">
-                        <img src="{{ asset('images/tabMediaThumbNail.png') }}" alt="Media ThumbNail Image"/>
+                        <img src="{{ asset('images/thumbnails/') }}{% if media.mediatype.name != 'video' %}podcast_icon.png {% else %}{{ media.thumbnail }}{% endif %}" alt="Media ThumbNail Image"/>
                     </div>
                     <div class="tabMediaText">
                         <header>
