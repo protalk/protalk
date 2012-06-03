@@ -24,7 +24,7 @@ class MediaRepository extends EntityRepository
      */
     public function getMediaOrderedBy($orderField, $page, $max)
     {
-        return $this->getEntityManager()
+        $results = $this->getEntityManager()
             ->createQuery('SELECT m
                            FROM ProtalkMediaBundle:Media m
                            WHERE m.isPublished = 1
@@ -69,20 +69,6 @@ class MediaRepository extends EntityRepository
      */
     public function findMedia($search, $sort, $page, $max)
     {
-        /* query in mysql:
-         * SELECT DISTINCT m.*, mtype.name 
-            FROM `media` m 
-            LEFT JOIN media_category mc ON (mc.media_id = m.id)
-            LEFT JOIN category c ON (c.id = mc.category_id)
-            LEFT JOIN media_tag mt ON (mt.media_id = m.id)
-            LEFT JOIN tag t ON (t.id = mt.tag_id)
-            JOIN media_speaker ms ON (ms.media_id = m.id)
-            JOIN speaker s ON (s.id = ms.speaker_id)
-            JOIN mediatype mtype ON (mtype.id = m.mediatype_id)
-            WHERE (LOWER(c.name) LIKE '%php%' OR t.name LIKE '%php%' OR s.name LIKE '%php%' OR )
-            AND m.isPublished = 1
-            ORDER BY `date` DESC
-         */
         $results = $this->getEntityManager()
                 ->createQuery("SELECT DISTINCT m 
                                FROM ProtalkMediaBundle:Media m
@@ -121,15 +107,13 @@ class MediaRepository extends EntityRepository
      */
     public function findOneBySlug($slug)
     {
-        $media = $this->getEntityManager()
+        return $this->getEntityManager()
                       ->createQuery('SELECT m, mt
                                      FROM ProtalkMediaBundle:Media m
                                      JOIN m.mediatype mt
                                      WHERE m.slug = :slug AND m.isPublished = 1')
                       ->setParameter('slug', $slug)
                       ->getSingleResult();
-
-        return $media;
     }
 
     /**
@@ -170,12 +154,12 @@ class MediaRepository extends EntityRepository
     public function findByTag($tagId, $orderField, $page, $max)
     {
         $results = $this->getEntityManager()
-        ->createQuery('SELECT m
-                FROM ProtalkMediaBundle:Media m
-                JOIN m.tags t
-                WHERE t.id = :tagId
-                AND m.isPublished = 1
-                ORDER BY m.'.$orderField.' DESC')
+                ->createQuery('SELECT m
+                               FROM ProtalkMediaBundle:Media m
+                               JOIN m.tags t
+                               WHERE t.id = :tagId
+                               AND m.isPublished = 1
+                               ORDER BY m.'.$orderField.' DESC')
                 ->setParameter('tagId', $tagId)
                 ->getResult();
         
@@ -195,12 +179,12 @@ class MediaRepository extends EntityRepository
     public function findBySpeaker($speakerId, $orderField, $page, $max)
     {
         $results = $this->getEntityManager()
-        ->createQuery('SELECT m
-                FROM ProtalkMediaBundle:Media m
-                JOIN m.speakers s
-                WHERE s.id = :speakerId
-                AND m.isPublished = 1
-                ORDER BY m.'.$orderField.' DESC')
+                ->createQuery('SELECT m
+                               FROM ProtalkMediaBundle:Media m
+                               JOIN m.speakers s
+                               WHERE s.id = :speakerId
+                               AND m.isPublished = 1
+                               ORDER BY m.'.$orderField.' DESC')
                 ->setParameter('speakerId', $speakerId)
                 ->getResult();
         
