@@ -42,19 +42,15 @@ class MediaRepository extends EntityRepository
      */
     public function findOneBySlug($slug)
     {
-        $em = $this->getEntityManager();
+        $media = $this->getEntityManager()
+                      ->createQuery('SELECT m, mt
+                                     FROM ProtalkMediaBundle:Media m
+                                     JOIN m.mediatype mt
+                                     WHERE m.slug = :slug AND m.isPublished = 1')
+                      ->setParameter('slug', $slug)
+                      ->getSingleResult();
 
-        $media = $em->createQuery('SELECT m, mt
-                                   FROM ProtalkMediaBundle:Media m
-                                   JOIN m.mediatype mt
-                                   WHERE m.slug = :slug AND m.isPublished = 1')
-                    ->setParameter('slug', $slug)
-                    ->getSingleResult();
-
-        $currentVisits = $media->getVisits();
-
-        $media->setVisits($currentVisits + 1);
-        $em->flush();
+        $this->incrementVisitCount($media);
 
         return $media;
     }
@@ -129,5 +125,17 @@ class MediaRepository extends EntityRepository
                 ->setParameter('speakerId', $speakerId)
                 ->setMaxResults($max)
                 ->getResult();
+    }
+
+    /**
+     * Increment number of visits to media item
+     *
+     * @param object $media
+     */
+    public function incrementVisitCount($media)
+    {
+        $currentVisits = $media->getVisits();
+        $media->setVisits($currentVisits + 1);
+        $this->getEntityManager()->flush();
     }
 }
