@@ -24,8 +24,9 @@ class MediaRepository extends EntityRepository
      */
     public function getMediaOrderedBy($orderField, $page, $max)
     {
-        $results = $this->getEntityManager()
-            ->createQuery('SELECT m FROM ProtalkMediaBundle:Media m
+        return $this->getEntityManager()
+            ->createQuery('SELECT m
+                           FROM ProtalkMediaBundle:Media m
                            WHERE m.isPublished = 1
                            ORDER BY m.'.$orderField.' DESC')
             ->getResult();
@@ -112,26 +113,28 @@ class MediaRepository extends EntityRepository
 
     /**
      * Override native findOneBySlug method to include
-     * mediatype join and reduce no. of queries to db
+     * mediatype join, reducing no. of queries to db
+     * and increment no of visits made to media item
      *
      * @param string $slug
      * @return Doctrine Record
      */
-    public function findOneBySlug($slug) 
+    public function findOneBySlug($slug)
     {
-        return $this->getEntityManager()
-                                    ->createQuery('
-                                        SELECT m, mt FROM ProtalkMediaBundle:Media m
-                                        JOIN m.mediatype mt
-                                        WHERE m.slug = :slug AND m.isPublished = 1' 
-                                        )
-                                    ->setParameter('slug', $slug)
-                                    ->getSingleResult();
+        $media = $this->getEntityManager()
+                      ->createQuery('SELECT m, mt
+                                     FROM ProtalkMediaBundle:Media m
+                                     JOIN m.mediatype mt
+                                     WHERE m.slug = :slug AND m.isPublished = 1')
+                      ->setParameter('slug', $slug)
+                      ->getSingleResult();
+
+        return $media;
     }
-    
+
     /**
      * Find media items by category
-     * 
+     *
      * @param int $categoryId
      * @param string $orderField
      * @param int $page
@@ -153,7 +156,7 @@ class MediaRepository extends EntityRepository
         
         return $this->getResultList($results, $page, $max);
     }
-    
+
     /**
      * Find media items by tag
      *
@@ -178,7 +181,7 @@ class MediaRepository extends EntityRepository
         
         return $this->getResultList($results, $page, $max);
     }
-    
+
     /**
      * Find media items by speaker
      *
@@ -202,5 +205,17 @@ class MediaRepository extends EntityRepository
                 ->getResult();
         
         return $this->getResultList($results, $page, $max);
+    }
+
+    /**
+     * Increment number of visits to media item
+     *
+     * @param object $media
+     */
+    public function incrementVisitCount($media)
+    {
+        $currentVisits = $media->getVisits();
+        $media->setVisits($currentVisits + 1);
+        $this->getEntityManager()->flush();
     }
 }

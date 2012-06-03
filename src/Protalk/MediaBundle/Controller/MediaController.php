@@ -16,8 +16,13 @@ class MediaController extends Controller
     {
         $media = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->findOneBySlug($slug);
 
-        if (is_object($media)) return array('media' => $media);
-        else throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        if (is_object($media)) {
+            $this->incrementVisitCount($media);
+            return array('media' => $media);
+        }
+        else {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
     }
 
     public function speakersAction($id)

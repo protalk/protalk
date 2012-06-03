@@ -165,6 +165,13 @@ class Media implements SluggableInterface
      */
     private $hostUrl;
 
+    /**
+     * @var string $thumbnail
+     *
+     * @ORM\Column(name="thumbnail", type="string", length=50, nullable=true)
+     */
+    private $thumbnail;
+
     /*
      * Constructor
      *
@@ -257,7 +264,7 @@ class Media implements SluggableInterface
      * @param  integer Maximum allowed length of description
      * @return string
      */
-    public function getTruncatedDescription($length = 200)
+    public function getTruncatedDescription($length = 75)
     {
 
         $description = $this->getDescription();
@@ -653,7 +660,7 @@ class Media implements SluggableInterface
     /**
      * Get comments
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getComments()
     {
@@ -727,5 +734,41 @@ class Media implements SluggableInterface
     public function addTag(\Protalk\MediaBundle\Entity\Tag $tags)
     {
         $this->tags[] = $tags;
+    }
+
+    /**
+     * Set thumbnail
+     *
+     * @param string $thumbnail
+     */
+    public function setThumbnail($thumbnail)
+    {
+        $this->thumbnail = $thumbnail;
+    }
+
+    /**
+     * Get thumbnail
+     *
+     * @return string
+     */
+    public function getThumbnail()
+    {
+        return $this->thumbnail;
+    }
+    
+    /**
+     * Display thumbnail
+     *
+     * @return string thumnail filename
+     */
+    public function displayThumbnail()
+    {
+        if ($this->getMediatype()->getType() != 'video') {
+            return "podcast_icon.png";
+        } elseif ( !$this->thumbnail ) {
+            return "coming_soon.png";
+        } else {
+            return $this->thumbnail;
+        }
     }
 }

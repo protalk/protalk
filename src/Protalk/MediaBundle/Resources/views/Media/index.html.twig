@@ -21,7 +21,7 @@
 {% endblock %}
 
 {% block body %}
-<div id="leftColumn">
+
     <section>
         <div id="mediaPlayerSection">
             <section>
@@ -45,8 +45,6 @@
     {% if media.slides is empty %}
         {% include 'ProtalkMediaBundle:Media:mediaText.html.twig' %}
     {% endif %}
-
-</div>
 {% endblock %}
 
 {% block rightcolumn %}

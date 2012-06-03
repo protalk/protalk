@@ -20,7 +20,7 @@
 {% for media in latestMedia %}
 <article class="mediaLarge">
     <div class="mediaThumbNailLarge">
-        <img src="{{ asset('images/mediaThumbNail.png') }}" alt="Media ThumbNail Image"/>
+        <a href="{{ path('media_show', { 'slug': media.slug }) }}"><img src="{{ asset('images/thumbnails/') }}{{ media.displayThumbnail() }}"alt="Media ThumbNail Image"/></a>
     </div>
     <div class="mediaTextLarge">
         <header>
@@ -51,11 +51,11 @@
                 {% for media in topViewedMedia %}
                 <article class="tabMedia">
                     <div class="tabMediaThumbNail">
-                        <img src="{{ asset('images/tabMediaThumbNail.png') }}" alt="Media ThumbNail Image"/>
+                        <a href="{{ path('media_show', { 'slug': media.slug }) }}"><img src="{{ asset('images/thumbnails/')}}{{ media.displayThumbnail() }}" alt="Media ThumbNail Image"/></a>
                     </div>
                     <div class="tabMediaText">
                         <header>
-                            <h2 title="{{media.title}}">{{ media.getTruncatedTitle(25) }}</h2>
+                            <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.getTruncatedTitle(25) }}</a></h2>
                             <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.date is empty ? media.getTruncatedSpeaker(20) : media.getTruncatedSpeaker() }}</a></span></p>
                         </header>
 
@@ -74,11 +74,11 @@
                 {% for media in topRatedMedia %}
                 <article class="tabMedia">
                     <div class="tabMediaThumbNail">
-                        <img src="{{ asset('images/tabMediaThumbNail.png') }}" alt="Media ThumbNail Image"/>
+                        <a href="{{ path('media_show', { 'slug': media.slug }) }}"><img src="{{ asset('images/thumbnails/') }}{{ media.displayThumbnail() }}" alt="Media ThumbNail Image"/></a>
                     </div>
                     <div class="tabMediaText">
                         <header>
-                            <h2 title="{{media.title}}">{{ media.getTruncatedTitle(25) }}</h2>
+                            <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.getTruncatedTitle(25) }}</a></h2>
                             <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.date is empty ? media.getTruncatedSpeaker(20) : media.getTruncatedSpeaker() }}</a></span></p>
                         </header>
 
