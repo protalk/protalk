@@ -38,7 +38,7 @@ class Mediatype
     /**
      * @ORM\OneToMany(targetEntity="Media", mappedBy="mediatype")
      */
-    protected $medias;
+    private $medias;
 
     /*
      * Constructor
@@ -112,5 +112,25 @@ class Mediatype
     public function __toString()
     {
         return $this->name;
+    }
+    
+    /**
+     * Add medias
+     *
+     * @param Protalk\MediaBundle\Entity\Media $medias
+     */
+    public function addMedia(\Protalk\MediaBundle\Entity\Media $medias)
+    {
+        $this->medias[] = $medias;
+    }
+
+    /**
+     * Get medias
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getMedias()
+    {
+        return $this->medias;
     }
 }

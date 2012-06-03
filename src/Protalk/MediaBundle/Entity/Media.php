@@ -49,7 +49,7 @@ class Media implements SluggableInterface
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="media")
      */
-    protected $comments;
+    private $comments;
     
     /**
      * @var ArrayCollection $categories
@@ -57,7 +57,7 @@ class Media implements SluggableInterface
      * @ORM\ManyToMany(targetEntity="Category", inversedBy="medias")
      * @ORM\JoinTable(name="media_category")
      */
-    protected $categories;
+    private $categories;
     
     /**
      * @var ArrayCollection $tags
@@ -65,7 +65,7 @@ class Media implements SluggableInterface
      * @ORM\ManyToMany(targetEntity="Tag", inversedBy="medias")
      * @ORM\JoinTable(name="media_tag")
      */
-    protected $tags;
+    private $tags;
 
     /**
      * @var date $date
@@ -142,7 +142,7 @@ class Media implements SluggableInterface
      *
      * @ORM\Column(type="string")
      */
-    protected $slug;
+    private $slug;
 
     /**
      * @var boolean $isPublished
@@ -177,6 +177,8 @@ class Media implements SluggableInterface
     {
         $this->speakers = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->categories = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -705,5 +707,25 @@ class Media implements SluggableInterface
     public function __toString()
     {
         return $this->title;
+    }
+    
+    /**
+     * Add categories
+     *
+     * @param Protalk\MediaBundle\Entity\Category $categories
+     */
+    public function addCategory(\Protalk\MediaBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+    }
+
+    /**
+     * Add tags
+     *
+     * @param Protalk\MediaBundle\Entity\Tag $tags
+     */
+    public function addTag(\Protalk\MediaBundle\Entity\Tag $tags)
+    {
+        $this->tags[] = $tags;
     }
 }
