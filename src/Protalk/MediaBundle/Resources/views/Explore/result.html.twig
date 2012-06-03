@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-{% if search != '' %}
+{% if search is defined and search != '' %}
     <h1 id="resultHeading">You have searched for '{{ search }}'</h1>
     <h1>SHOWING <span class="numberHiLite">{{ total }}</span> RESULTS</h1>
 {% else %}

@@ -35,7 +35,6 @@ class ExploreController extends Controller
         
         if (-1 == $search) {    
             $results = $repository->getMediaOrderedBy($sort, $page, $pageSize);
-            $results['search'] = '';
         } else {
             $results = $repository->findMedia($search, $sort, $page, $pageSize);
             $results['search'] = $search;
