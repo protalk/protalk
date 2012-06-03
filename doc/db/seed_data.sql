@@ -42,7 +42,12 @@ INSERT INTO `Tag` (id, name) VALUES
     (15, 'Design Patterns'),
     (16, 'phpnw11'), 
     (17, 'dpc11'),
-    (18, 'Webservices');
+    (18, 'Webservices'),
+    (19, 'Optimisation'),
+    (20, 'CouchDB'),
+    (21, 'Scalability'),
+    (22, 'Zend Framework')
+    ;
 
 
 /* Delete all Speaker records then re-load sample data */
@@ -101,7 +106,10 @@ INSERT INTO `Category` (`id`, `parent_id`, `name`) VALUES
 (24, 20, 'Restful API'),
 (25, 9, 'Technical debt'),
 (26, NULL, 'User Experience'),
-(27, 9, 'Best Practices');
+(27, 9, 'Best Practices'),
+(28, NULL, 'Tools'),
+(29, 28, 'Solr')
+;
 
 /* Delete all Media records then re-load sample data */
 
@@ -216,6 +224,110 @@ VALUES
 INSERT INTO media_category (media_id, category_id) VALUES (8, 20), (8, 24), (8, 27);
 INSERT INTO media_tag (media_id, tag_id) VALUES (8, 17), (8, 18);
 INSERT INTO `media_speaker` (media_id, speaker_id ) VALUES (8, 6);
+
+/* Advanced OO Patterns */
+INSERT INTO `Media` 
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl ) 
+VALUES 
+    (9, 4, '2011-05-20', 'You already know Singleton, Signal/Observer, Factory and friends. But, which object oriented patterns are en vogue in the PHP world and how can you seize their power? This talk gives you an overview on Dependency Injection, Data Mapper and more OO patterns the PHP world talks about right know, using practical code examples.', 
+    '43:41', 0, 0, 
+    'http://dpcradio.s3.amazonaws.com/2011_001.mp3',
+    'http://qafoo.com/presentations.html', 
+    3240, 'en', 'Advanced OO Patterns', 'advanced-oo-patterns', 1, 'DPCRadio', 'http://techportal.inviqa.com/2012/01/17/dpc-radio-advanced-oo-patterns/');
+    
+INSERT INTO media_category (media_id, category_id) VALUES (9, 8), (9, 13), (9, 14);
+INSERT INTO media_tag (media_id, tag_id) VALUES (9, 1), (9, 15), (9, 17);
+INSERT INTO `media_speaker` (media_id, speaker_id ) VALUES (9, 15);
+
+/* Profiling PHP Applications */
+INSERT INTO `Media` 
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl ) 
+VALUES 
+    (10, 4, '2011-05-21', 'The web is full of useful advice focussed on pushing out the last bit of performance of your code. They mention trivial changes. like changing every occurrence of print with echo even suggesting to use for instead of foreach. These optimisations help, but you are not going to notice it unless they\'re in a tight loop with many iterations. It is also a wrong approach for tackling performance issues. Before you can optimise, you need to find out if your codeis actually slow; then you need to *understand* the code; and *then* you need to find out where you can optimise it. This talk introduces tools and concepts to optimise the optimisation of your PHP applications.', 
+    '48:50', 0, 0, 
+    'http://dpcradio.s3.amazonaws.com/2011_015.mp3',
+    'http://derickrethans.nl/talks/profiling-dpc11.pdf', 
+    3242, 'en', 'Profiling PHP Applications', 'profiling-php-applications', 1, 'DPCRadio', 'http://techportal.inviqa.com/2011/12/14/dpc-radio-profiling-php-applications/');
+    
+INSERT INTO media_category (media_id, category_id) VALUES (10, 8), (10, 27);
+INSERT INTO media_tag (media_id, tag_id) VALUES (10, 1), (10, 17), (10, 19);
+INSERT INTO `media_speaker` (media_id, speaker_id ) VALUES (10, 8);
+
+/* Distributed Couch Apps - Embracing eventual consistency */
+INSERT INTO `Media` 
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl ) 
+VALUES 
+    (11, 4, '2011-05-20', 'CouchDB is a prominent representative of the NoSQL movement. Using its integrated web server and eventual consistent replication you can not only distribute data, but also full application code. This even works for clients which are not always connected to the internet, like e.g. mobile devices. This session gives you an insight Couch apps, their beauty and pitfalls.', 
+    '42:12', 0, 0, 
+    'http://dpcradio.s3.amazonaws.com/2011_006.mp3',
+    'http://qafoo.com/presentations.html', 
+    3236, 'en', 'Distributed Couch Apps - Embracing eventual consistency', 'distributed-couch-apps-embracing-eventual-consistency', 1, 'DPCRadio', 'http://techportal.inviqa.com/2011/11/21/dpc-radio-distributed-couch-apps-embracing-eventual-consistency/');
+    
+INSERT INTO media_category (media_id, category_id) VALUES (11, 10), (11, 15);
+INSERT INTO media_tag (media_id, tag_id) VALUES (11, 17), (11, 20), (11, 21);
+INSERT INTO `media_speaker` (media_id, speaker_id ) VALUES (11, 16);
+
+/* Developing and Deploying High Performance PHP Applications */
+INSERT INTO `Media` 
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl ) 
+VALUES 
+    (12, 4, '2011-05-20', 'This session starts with a brief but important overview about the growing Oracle technology eco-system. It shows what Oracle\'s direction means for PHP application development and deployment.
+
+The majority of the talk then highlights techniques on building high performance PHP applications with the very widely used Oracle Database. Techniques include connection pooling, application monitoring, automatic data privacy for PHP application users, online application upgrades, caching for performance, and how to suspend and resume database transactions to effectively build stateful web applications.', 
+    '49:50', 0, 0, 
+    'http://dpcradio.s3.amazonaws.com/2011_005.mp3',
+    'http://www.oracle.com/technetwork/topics/php/highperf-php-preso-405765.pdf', 
+    3225, 'en', 'Developing and Deploying High Performance PHP Applications', 'developing-and-deploying-high-performance-php-applications', 1, 'DPCRadio', 'http://techportal.inviqa.com/2011/11/10/dpc-radio-developing-and-deploying-high-performance-php-applications/');
+    
+INSERT INTO media_category (media_id, category_id) VALUES (12, 8), (12, 27);
+INSERT INTO media_tag (media_id, tag_id) VALUES (12, 1), (12, 9), (12, 10), (12, 17), (12, 19);
+INSERT INTO `media_speaker` (media_id, speaker_id) VALUES (12, 17);
+
+/* Searching with Solr - Why, When, and How */
+INSERT INTO `Media` 
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl ) 
+VALUES 
+    (13, 4, '2011-05-20', 'With Google constantly pushing the customer expectations of searching, is it time to move away from our database full-text search in pursuit of a more targeted platform? Can implementing Solr offer more than an answer to a search? Implementing a search platform isn\'t always suitable for all applications, but in this talk we\'ll look at identifying the right search solution, choosing the best way to integrate it into our application and exploring all the benefits a search server can offer.', 
+    '44:54', 0, 0, 
+    'http://dpcradio.s3.amazonaws.com/2011_016.mp3',
+    '<div style="width:425px" id="__ss_8040150"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/paulmatthews86/search-with-solr" title="Search with Solr" target="_blank">Search with Solr</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/8040150" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/thecroaker/death-by-powerpoint" target="_blank">PowerPoint</a> from <a href="http://www.slideshare.net/paulmatthews86" target="_blank">Paul Matthews</a> </div> </div>', 
+    3221, 'en', 'Searching with Solr - Why, When, and How', 'searching-with-solr-why-when-and-how', 1, 'DPCRadio', 'http://techportal.inviqa.com/2011/10/05/dpc-radio-searching-with-solr-why-when-and-how/');
+    
+INSERT INTO media_category (media_id, category_id) VALUES (13, 29);
+INSERT INTO media_tag (media_id, tag_id) VALUES (13, 8), (13, 17);
+INSERT INTO `media_speaker` (media_id, speaker_id) VALUES (13, 18);
+
+/* Let's take over the world with Zend Framework */
+INSERT INTO `Media` 
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl ) 
+VALUES 
+    (14, 4, '2011-05-21', 'Many people use Zend Framework for it\'s MVC implementation, but it has a lot of hidden gems. Internationalization (i18n) is one of them. We will look how you can create an application that will have the right languages, currencies, dates and times all based on the location of the visiting user. This session will take away a lot of headaches in international projects and will improve the quality in overall.', 
+    '42:13', 0, 0, 
+    'http://dpcradio.s3.amazonaws.com/2011_012.mp3',
+    '<div style="width:425px" id="__ss_8063834"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/Martin82/lets-take-over-the-world-with-zend-framework-8063834" title="Let&#39;s take over the world with Zend Framework" target="_blank">Let&#39;s take over the world with Zend Framework</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/8063834" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/Martin82" target="_blank">Martin de Keijzer</a> </div> </div>', 
+    3253, 'en', 'Let\'s take over the world with Zend Framework', 'lets-take-over-the-world-with-zend-framework', 1, 'DPCRadio', 'http://techportal.inviqa.com/2011/09/21/dpc-radio-lets-take-over-the-world-with-zend-framework/');
+    
+INSERT INTO media_category (media_id, category_id) VALUES (14, 8), (14, 16), (14, 17);
+INSERT INTO media_tag (media_id, tag_id) VALUES (14, 1), (14, 17), (14, 22);
+INSERT INTO `media_speaker` (media_id, speaker_id) VALUES (14, 19);
+
+/* Keynote - First Class APIs */
+INSERT INTO `Media` 
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl ) 
+VALUES 
+    (15, 4, '2011-05-21', 'APIs are commonly an afterthought, like a hot tub awkwardly attached to a house — a shoehorned approach that produces a suboptimal app with scarce support that lacks documentation. In effect, APIs are the ugly stepchild of the Web.
+
+This is a sad reality that we are faced with, because many companies make their living consuming third-party APIs and mixing in their own data to create amazing and interesting mashups. In the initial phases of development, there is rarely enough money to develop the app and its API. By the time there’s both demand and money, it can be hard to fit an API on top of the architecture in such a way that the whole thing won\'t fall over. APIs should be first class citizens of the Web. Inconceivable? Possimpible? Not at all!
+
+In this talk we will dive deeper into why APIs are an afterthought, how we can change that. We will also touch on how that can benefit your product down the line in terms of resource savings and infrastructure efficiency, as well as the impact it will have on your infrastructure.', 
+    '52:08', 0, 0, 
+    'http://dpcradio.s3.amazonaws.com/2011_007.mp3',
+    '<div style="width:425px" id="__ss_8081619"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/helgith/firstclass-apis-dpc-2011-amsterdam" title="First-Class APIs, DPC 2011, Amsterdam" target="_blank">First-Class APIs, DPC 2011, Amsterdam</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/8081619" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/helgith" target="_blank">Helgi Þormar Þorbjörnsson</a> </div> </div>', 
+    3241, 'en', 'Keynote - First Class APIs', 'keynote-first-class-apis', 1, 'DPCRadio', 'http://techportal.inviqa.com/2011/09/13/dpc-radio-keynote-first-class-apis/');
+    
+INSERT INTO media_category (media_id, category_id) VALUES (15, 20), (15, 24);
+INSERT INTO media_tag (media_id, tag_id) VALUES (15, 17), (15, 18);
+INSERT INTO `media_speaker` (media_id, speaker_id) VALUES (15, 20);
 
 
 /* Reenable foreign key constrain checks in MySQL */
