@@ -26,6 +26,13 @@ contribute_new:
     pattern: /contribute/new
     defaults: {_controller: ProtalkMediaBundle:Contribution:new }
 
+rate_media:
+    pattern: /rate/{id}/{rating}
+    defaults: {_controller: ProtalkMediaBundle:Media:rate }
+    requirements:
+        id:     \d+
+        rating: \d+
+
 ProtalkPageBundle:
     resource: "@ProtalkPageBundle/Controller/"
     type:     annotation
@@ -34,26 +41,26 @@ ProtalkPageBundle:
 page_show:
     pattern:  /page/{url}
     defaults: { _controller: ProtalkPageBundle:Page:index }
-    
+
 explore:
     pattern:  /explore
-    defaults: { _controller: ProtalkMediaBundle:Explore:index }   
+    defaults: { _controller: ProtalkMediaBundle:Explore:index }
 
 search_results:
     pattern:  /result
     defaults: { _controller: ProtalkMediaBundle:Explore:result }
-    
+
 tag_search:
     pattern:  /tag/{id}
     defaults: { _controller: ProtalkMediaBundle:Explore:tag }
-    
+
 category_search:
     pattern:  /category/{id}
-    defaults: { _controller: ProtalkMediaBundle:Explore:category } 
-    
+    defaults: { _controller: ProtalkMediaBundle:Explore:category }
+
 speaker_search:
     pattern:  /search/speaker/{id}
-    defaults: { _controller: ProtalkMediaBundle:Explore:speaker }                
+    defaults: { _controller: ProtalkMediaBundle:Explore:speaker }
 
 media_show:
     pattern:  /media/{slug}

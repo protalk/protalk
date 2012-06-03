@@ -29,6 +29,12 @@ class Rating
     private $media_id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Media", inversedBy="ratings")
+     * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
+     */
+    protected $media;
+
+    /**
      * @var string $ipaddress
      *
      * @ORM\Column(name="ipaddress", type="string", length=15)
@@ -46,7 +52,7 @@ class Rating
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -66,7 +72,7 @@ class Rating
     /**
      * Get media_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getMediaId()
     {
@@ -86,7 +92,7 @@ class Rating
     /**
      * Get ipaddress
      *
-     * @return string 
+     * @return string
      */
     public function getIpaddress()
     {
@@ -106,10 +112,30 @@ class Rating
     /**
      * Get rating
      *
-     * @return integer 
+     * @return integer
      */
     public function getRating()
     {
         return $this->rating;
+    }
+
+    /**
+     * Set media
+     *
+     * @param Protalk\MediaBundle\Entity\Media $media
+     */
+    public function setMedia(\Protalk\MediaBundle\Entity\Media $media)
+    {
+        $this->media = $media;
+    }
+
+    /**
+     * Get media
+     *
+     * @return Protalk\MediaBundle\Entity\Media 
+     */
+    public function getMedia()
+    {
+        return $this->media;
     }
 }

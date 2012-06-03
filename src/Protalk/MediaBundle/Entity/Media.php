@@ -52,6 +52,11 @@ class Media implements SluggableInterface
     protected $comments;
 
     /**
+     * @ORM\OneToMany(targetEntity="Rating", mappedBy="media")
+     */
+    protected $ratings;
+
+    /**
      * @var ArrayCollection $categories
      *
      * @ORM\ManyToMany(targetEntity="Category", inversedBy="medias")
@@ -177,6 +182,7 @@ class Media implements SluggableInterface
     {
         $this->speakers = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->ratings = new ArrayCollection();
     }
 
     /**
@@ -523,7 +529,7 @@ class Media implements SluggableInterface
      * @param  integer Maximum allowed length of speaker name
      * @return string
      */
-    public function getTruncatedSpeaker($length = 12)
+    public function getTruncatedSpeaker($length = 16)
     {
         $speaker = $this->getOneSpeaker();
 
@@ -725,5 +731,25 @@ class Media implements SluggableInterface
     public function addTag(\Protalk\MediaBundle\Entity\Tag $tags)
     {
         $this->tags[] = $tags;
+    }
+
+    /**
+     * Add ratings
+     *
+     * @param Protalk\MediaBundle\Entity\Rating $ratings
+     */
+    public function addRating(\Protalk\MediaBundle\Entity\Rating $ratings)
+    {
+        $this->ratings[] = $ratings;
+    }
+
+    /**
+     * Get ratings
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getRatings()
+    {
+        return $this->ratings;
     }
 }

@@ -222,9 +222,6 @@ time, .metadata {
 }
 
 .tabMedia {
-    font-family: Helvetica Neue, Helvetica;
-    font-size:13px;
-    color:#444444;
     display: inline-block;
     padding-bottom: 15px;
 }
@@ -234,11 +231,19 @@ time, .metadata {
     padding-top: 3px;
     padding-left: 11px;
     float:left;
+
 }
 
 .tabMediaText p {
     margin-top:4px;
     margin-bottom:4px;
+    font-family: Helvetica Neue, Helvetica;
+    font-size:13px;
+    color:#444444;
+}
+
+.tabMediaText p img {
+    vertical-align: middle;
 }
 
 .tabMediaThumbNail {
@@ -836,6 +841,7 @@ form ul {
 #duration {
     color:#999999;
 }
+
 .social_sharing {
     float:left;
     padding-bottom: 3px;
@@ -847,4 +853,26 @@ form ul {
 
 #button_add_comment {
     margin-bottom: 10px;
+}
+
+#rate_this {
+    background-color: white;
+    border: 3px solid #C2E078;
+    -moz-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    height: 25px;
+    width: 120px;
+    padding-top: 7px;
+    padding-left:30px;
+}
+
+.hidden {
+    display: none;
+    visibility: hidden;
+}
+
+#rate_button_container {
+    float:right;
 }
