@@ -19,7 +19,7 @@ class MediaController extends Controller
         $media = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->findOneBySlug($slug);
 
         if (is_object($media)) {
-            $this->incrementVisitCount($media);
+            $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->incrementVisitCount($media);
             return array('media' => $media);
         }
         else {
