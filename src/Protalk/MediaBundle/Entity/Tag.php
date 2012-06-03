@@ -47,7 +47,7 @@ class Tag
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -67,17 +67,17 @@ class Tag
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
         return $this->name;
     }
-    
+
     /**
      * Convert object to string
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function __toString()
     {

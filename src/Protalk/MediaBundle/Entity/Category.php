@@ -36,14 +36,14 @@ class Category
      * @ORM\Column(name="name", type="string", length=50)
      */
     private $name;
-    
+
     /**
      * @var array $children
-     * 
+     *
      * @ORM\OneToMany(targetEntity="Category", mappedBy="parent_id")
      */
     private $children;
-    
+
     /**
      * @var ArrayCollection $medias
      *
@@ -52,13 +52,13 @@ class Category
     private $medias;
     
     /**
-     * Constructor 
+     * Constructor
      */
     public function __construct()
     {
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
@@ -118,7 +118,7 @@ class Category
     {
         return $this->name;
     }
-    
+
     /**
      * Add children
      *
@@ -132,13 +132,13 @@ class Category
     /**
      * Get children
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getChildren()
     {
         return $this->children;
     }
-    
+
     /**
      * Add medias
      *

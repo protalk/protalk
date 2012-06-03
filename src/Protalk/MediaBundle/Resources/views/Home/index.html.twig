@@ -56,11 +56,11 @@
                     <div class="tabMediaText">
                         <header>
                             <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.getTruncatedTitle(25) }}</a></h2>
-                            <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.date is empty ? media.getTruncatedSpeaker(20) : media.getTruncatedSpeaker() }}</a></span></p>
+                            <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.date is empty ? media.getTruncatedSpeaker(25) : media.getTruncatedSpeaker() }}</a></span></p>
                         </header>
 
                         <footer>
-                            <img src="{{ asset('images/binoculars.png') }}" alt="Binoculars Image"/><span class="metadata"> {{ media.visits }} views</span>
+                            <p><img src="{{ asset('images/binoculars.png') }}" alt="Binoculars Image"/><span class="metadata"> {{ media.visits }} views</span></p>
                         </footer>
                     </div>
                 </article>

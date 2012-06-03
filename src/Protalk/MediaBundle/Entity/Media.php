@@ -51,6 +51,12 @@ class Media implements SluggableInterface
      */
     private $comments;
     
+
+    /**
+     * @ORM\OneToMany(targetEntity="Rating", mappedBy="media")
+     */
+    private $ratings;
+
     /**
      * @var ArrayCollection $categories
      *
@@ -186,6 +192,7 @@ class Media implements SluggableInterface
         $this->comments = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->ratings = new ArrayCollection();
     }
 
     /**
@@ -505,7 +512,7 @@ class Media implements SluggableInterface
     {
         return $this->speakers;
     }
-    
+
     /**
      * Set speakers
      *
@@ -532,7 +539,7 @@ class Media implements SluggableInterface
      * @param  integer Maximum allowed length of speaker name
      * @return string
      */
-    public function getTruncatedSpeaker($length = 12)
+    public function getTruncatedSpeaker($length = 16)
     {
         $speaker = $this->getOneSpeaker();
 
@@ -666,7 +673,7 @@ class Media implements SluggableInterface
     {
         return $this->comments;
     }
-    
+
     /**
      * Get categories
      *
@@ -676,7 +683,7 @@ class Media implements SluggableInterface
     {
         return $this->categories;
     }
-    
+
     /**
      * Set categories
      *
@@ -686,7 +693,7 @@ class Media implements SluggableInterface
     {
         $this->categories = $categories;
     }
-    
+
     /**
      * Get tags
      *
@@ -696,7 +703,7 @@ class Media implements SluggableInterface
     {
         return $this->tags;
     }
-    
+
     /**
      * Set tags
      *
@@ -706,10 +713,10 @@ class Media implements SluggableInterface
     {
         $this->tags = $tags;;
     }
-    
+
     /**
      * Convert object to string
-     * @return string 
+     * @return string
      */
     public function __toString()
     {
@@ -770,5 +777,25 @@ class Media implements SluggableInterface
         } else {
             return $this->thumbnail;
         }
+    }
+    
+    /**
+     * Add ratings
+     *
+     * @param Protalk\MediaBundle\Entity\Rating $ratings
+     */
+    public function addRating(\Protalk\MediaBundle\Entity\Rating $ratings)
+    {
+        $this->ratings[] = $ratings;
+    }
+
+    /**
+     * Get ratings
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getRatings()
+    {
+        return $this->ratings;
     }
 }
