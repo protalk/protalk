@@ -14,10 +14,11 @@ class MediaController extends Controller
      */
     public function indexAction($slug)
     {
-        $media = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->findOneBySlug($slug);
+        $mediaRepository = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media');
+        $media = $mediaRepository->findOneBySlug($slug);
 
         if (is_object($media)) {
-            $this->incrementVisitCount($media);
+            $mediaRepository->incrementVisitCount($media);
             return array('media' => $media);
         }
         else {
