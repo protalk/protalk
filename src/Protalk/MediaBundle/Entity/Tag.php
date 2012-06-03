@@ -3,6 +3,7 @@
 namespace Protalk\MediaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Protalk\MediaBundle\Entity\Tag
@@ -33,12 +34,12 @@ class Tag
      *
      * @ORM\ManyToMany(targetEntity="Media", mappedBy="tags")
      */
-    protected $medias;
+    private $medias;
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -58,20 +59,45 @@ class Tag
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
         return $this->name;
     }
-    
+
     /**
      * Convert object to string
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function __construct()
+    {
+        $this->medias = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add medias
+     *
+     * @param Protalk\MediaBundle\Entity\Media $medias
+     */
+    public function addMedia(\Protalk\MediaBundle\Entity\Media $medias)
+    {
+        $this->medias[] = $medias;
+    }
+
+    /**
+     * Get medias
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getMedias()
+    {
+        return $this->medias;
     }
 }

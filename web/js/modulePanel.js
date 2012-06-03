@@ -5,12 +5,12 @@
 *
 */
 
-YUI.add("protalk-speaker-panel", function(Y) {
-  Y.log('protalk-speaker-panel is loaded', "info");
+YUI.add("protalk-panel", function(Y) {
+  Y.log('protalk-panel is loaded', "info");
 
   //create a namespace and name as a reference for custom class and assign class to it
   //store namespaced class in local scope variable for use as a 'shortcut' reference in Y.log statements
-  var Clazz = Y.namespace("ProTalk").SpeakerPanel = Y.Base.create("protalk-speaker-panel", Y.Base, [], {
+  var Clazz = Y.namespace("ProTalk").Panel = Y.Base.create("protalk-panel", Y.Base, [], {
 
 
     initializer: function (config) {

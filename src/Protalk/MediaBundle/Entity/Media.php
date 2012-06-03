@@ -50,22 +50,22 @@ class Media implements SluggableInterface
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="media")
      */
     protected $comments;
-    
+
     /**
      * @var ArrayCollection $categories
      *
      * @ORM\ManyToMany(targetEntity="Category", inversedBy="medias")
      * @ORM\JoinTable(name="media_category")
      */
-    protected $categories;
-    
+    private $categories;
+
     /**
      * @var ArrayCollection $tags
      *
      * @ORM\ManyToMany(targetEntity="Tag", inversedBy="medias")
      * @ORM\JoinTable(name="media_tag")
      */
-    protected $tags;
+    private $tags;
 
     /**
      * @var date $date
@@ -496,7 +496,7 @@ class Media implements SluggableInterface
     {
         return $this->speakers;
     }
-    
+
     /**
      * Set speakers
      *
@@ -651,13 +651,13 @@ class Media implements SluggableInterface
     /**
      * Get comments
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getComments()
     {
         return $this->comments;
     }
-    
+
     /**
      * Get categories
      *
@@ -667,7 +667,7 @@ class Media implements SluggableInterface
     {
         return $this->categories;
     }
-    
+
     /**
      * Set categories
      *
@@ -677,7 +677,7 @@ class Media implements SluggableInterface
     {
         $this->categories = $categories;
     }
-    
+
     /**
      * Get tags
      *
@@ -687,7 +687,7 @@ class Media implements SluggableInterface
     {
         return $this->tags;
     }
-    
+
     /**
      * Set tags
      *
@@ -697,13 +697,33 @@ class Media implements SluggableInterface
     {
         $this->tags = $tags;;
     }
-    
+
     /**
      * Convert object to string
-     * @return string 
+     * @return string
      */
     public function __toString()
     {
         return $this->title;
+    }
+
+    /**
+     * Add categories
+     *
+     * @param Protalk\MediaBundle\Entity\Category $categories
+     */
+    public function addCategory(\Protalk\MediaBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+    }
+
+    /**
+     * Add tags
+     *
+     * @param Protalk\MediaBundle\Entity\Tag $tags
+     */
+    public function addTag(\Protalk\MediaBundle\Entity\Tag $tags)
+    {
+        $this->tags[] = $tags;
     }
 }

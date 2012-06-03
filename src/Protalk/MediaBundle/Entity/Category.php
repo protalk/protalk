@@ -3,6 +3,7 @@
 namespace Protalk\MediaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Protalk\MediaBundle\Entity\Category
@@ -35,29 +36,29 @@ class Category
      * @ORM\Column(name="name", type="string", length=50)
      */
     private $name;
-    
+
     /**
      * @var array $children
-     * 
+     *
      * @ORM\OneToMany(targetEntity="Category", mappedBy="parent_id")
      */
     private $children;
-    
+
     /**
      * @var ArrayCollection $medias
      *
      * @ORM\ManyToMany(targetEntity="Media", mappedBy="categories")
      */
-    protected $medias;
-    
+    private $medias;
+
     /**
-     * Constructor 
+     * Constructor
      */
     public function __construct()
     {
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
@@ -117,7 +118,7 @@ class Category
     {
         return $this->name;
     }
-    
+
     /**
      * Add children
      *
@@ -131,10 +132,30 @@ class Category
     /**
      * Get children
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getChildren()
     {
         return $this->children;
+    }
+
+    /**
+     * Add medias
+     *
+     * @param Protalk\MediaBundle\Entity\Media $medias
+     */
+    public function addMedia(\Protalk\MediaBundle\Entity\Media $medias)
+    {
+        $this->medias[] = $medias;
+    }
+
+    /**
+     * Get medias
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getMedias()
+    {
+        return $this->medias;
     }
 }

@@ -8,16 +8,16 @@
 YUI({
   groups: {
     protalk: {
-      base:  protalk.baseurl ,
+      base:  protalk.baseurl,
 
       modules: {
 
         'protalk-io': {
-          fullpath: "/protalk/web/js/moduleIO.js",
+          fullpath: "/js/moduleIO.js",
           requires: ["base-build", "io-base", "io-form", "widget", "json-parse"]
         },
-        'protalk-speaker-panel': {
-          fullpath: "/protalk/web/js/moduleSpeakerPanel.js",
+        'protalk-panel': {
+          fullpath: "/js/modulePanel.js",
           requires: [ "base-build", "panel", "protalk-io", "dd-plugin"]
         }
       }
@@ -27,7 +27,7 @@ YUI({
 
   combine: true
 
-}).use( 'protalk-io', 'protalk-speaker-panel', 'node-event-delegate',   function(Y) {
+}).use( 'protalk-io', 'protalk-panel', 'node-event-delegate',   function(Y) {
 
 
 
@@ -46,7 +46,7 @@ YUI({
 
 
     //retrieve & display relevant form partial from server
-    var panel = new Y.ProTalk.SpeakerPanel({
+    var panel = new Y.ProTalk.Panel({
       panelType: 'dialog',
       panelTitle: 'Speaker Biography',
       getUrl : e.currentTarget.getAttribute('href')
