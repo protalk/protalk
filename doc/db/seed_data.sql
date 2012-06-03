@@ -119,8 +119,6 @@ INSERT INTO `Media` (mediatype_id,`date`, description, `length`, rating, visits,
 
 TRUNCATE TABLE `media_category`;
 
-INSERT INTO media_category (media_id, category_id) VALUES (1, 1);
-
 /* Delete all Media_tag records then re-load sample data */
 
 TRUNCATE TABLE `media_tag`;
