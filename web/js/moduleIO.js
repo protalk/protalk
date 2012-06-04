@@ -12,34 +12,16 @@ YUI.add("protalk-io", function(Y) {
   //store namespaced class in local scope variable for use as a 'shortcut' reference in Y.log statements
   var Clazz = Y.namespace("ProTalk").IO = Y.Base.create("protalk-io", Y.Base, [], {
 
-
-
     _request: null,
     _url: null,
     _responseNode: {},
     _config: {},
 
-
-    /**
-        * Store config values to local variables, instantiate IO request
-        * and store object in local variable
-        *
-        * @method initializer
-        * @public
-        * @since 0.0.1
-        */
-
-
     initializer: function(config) {
       Y.log(Clazz.NAME + '::initializer', "info");
-      Y.log(config);
 
       this._url = config.url;
       this._responseNode = config.responseNode;
-
-      Y.log(config.responseNode);
-      Y.log(this._responseNode);
-
 
       if (Y.Lang.isValue(config.setup)) {
         this._config = config.setup;
@@ -52,8 +34,6 @@ YUI.add("protalk-io", function(Y) {
       }
 
       var configure = Y.merge(this._getDefaultConfig(), this._config);
-
-
       this._request = Y.io(this._url, configure);
 
     },
@@ -70,39 +50,24 @@ YUI.add("protalk-io", function(Y) {
       });
     },
 
-
     _handleSuccess: function(id, o, args) {
       Y.log(Clazz.NAME + '::_handleSuccess [id: ' + id + ']', 'info');
 
       if (o.responseText !== undefined) {
-
         if(this._json)  {
-
           this._processJSONResponse(o.responseText);
-
         } else if (!this._json && this._responseNode.success != undefined) {
-
           this._processHTMLResponse(o.responseText);
         }
-
       } else {
-
         this._processUndefinedResponse(o.responseText);
-
       }
-
     },
-
 
     _handleFailure: function(id, o, args) {
       Y.log(Clazz.NAME + '::_handleFailure [id: ' + id + ']', 'info');
-
- Y.log(o);
-
       if (o.responseText !== undefined)
       {
-
-        Y.log("I'm running");
         var s = "<p>Transaction id: " + o.tId + "<br />";
         s += "HTTP status: " + o.status + "<br />";
         s += "Status code message: " + o.statusText + "</p>";
@@ -114,15 +79,13 @@ YUI.add("protalk-io", function(Y) {
     _parseJSON: function(rawJSON) {
       Y.log(Clazz.NAME + '::_parseJSON', 'info');
 
-      // Process the JSON data returned from the server
       try {
-
         Y.log('parsing JSON');
         var data = Y.JSON.parse(rawJSON);
         return data;
       }
       catch (e) {
-        alert("JSON Parse failed!");
+        Y.log("JSON Parse failed!");
         return false;
       }
     },
@@ -132,21 +95,11 @@ YUI.add("protalk-io", function(Y) {
 
       //parse the JSON responseText to array format
       this._parsedJSON = this._parseJSON(responseText);
-  Y.log('parsed json is:')
-  Y.log(this._parsedJSON);
       //extract the contents of the 'content' namespace within the parsed JSON
       var response = this._parsedJSON.content;
-
       //extract the contents of the 'status' namespace within the parsed JSON and
       //save to 'status' ATTRS variable (success or failure expected)
       this.set('status', this._parsedJSON.status);
-
-  //this._status = this._parsedJSON.status;
-  Y.log('status is:')
-  Y.log(this.get('status'));
-
-  Y.log('response is:')
-  Y.log(response);
 
       //if the status of the server response was 'success'
       if(this.get('status') == "success")  {
@@ -162,7 +115,6 @@ YUI.add("protalk-io", function(Y) {
         //for server responses with a status of 'failure' or 'forbidden')
         this._responseNode.failure.setContent(response);
       }
-
     },
 
     _processHTMLResponse: function(responseText) {
@@ -170,12 +122,9 @@ YUI.add("protalk-io", function(Y) {
       //inject the single item of responseText into the single
       //'success' responseNode
       this._responseNode.success.setContent(responseText);
-
-
     },
 
     _processUndefinedResponse: function(responseText) {
-
       //inject an error messasge into the single 'failure' responseNode
       this._responseNode.failure.setContent('Error: Server response was "undefined"');
     },
@@ -185,16 +134,11 @@ YUI.add("protalk-io", function(Y) {
 
       return this.get('status');
     }
-
-
-
   }, {
     ATTRS: {
-
       status: {
         value: null
       }
-
     }
   });
 }, "0.0.1", {

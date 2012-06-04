@@ -1,10 +1,3 @@
-/*
- *		YUI sandbox to run on main Mouse page
- *
- *		@version 1.0.0
- */
-
-
 YUI({
     groups: {
         protalk: {
@@ -22,30 +15,40 @@ YUI({
             }
         }
     },
-
-
     combine: true
-
-}).use( 'protalk-io', 'protalk-panel', 'node-event-delegate', 'widget-anim', 'overlay', 'event', 'io-base',  function(Y) {
+}).use( 'protalk-io', 'protalk-panel', 'node-event-delegate', 'widget-anim', 'overlay', 'event', 'io',  function(Y) {
 
     var commentsNode    = Y.one('#comments_content'),
-        commentBtn = Y.one('#button_add_comment'),
-        ratingBtn = Y.one('#button_rate_media');
+    commentBtn = Y.one('#button_add_comment'),
+    ratingBtn = Y.one('#button_rate_media'),
+    stars = Y.all('.star'),
+    starsContainer = Y.one('#rate_this_content');
+
+    starsContainer.delegate('click', function(e) {
+        e.preventDefault();
+        var target = e.currentTarget
+        var url = e.currentTarget.getAttribute('href');
+        var config = {
+            responseNode : {
+                success : Y.one('#rating'),
+                failure : Y.one('#rating')
+            },
+            url : url
+        };
+
+        var request = new Y.ProTalk.IO(config);
+        rate.hide();
+    }, 'a');
 
     commentBtn.on('click', function(e) {
-
         e.preventDefault();
-
         var panel = new Y.ProTalk.Panel({
             panelType: 'form',
             panelTitle: 'Enter your comment',
             updateNode: commentsNode,
             getUrl : e.currentTarget.getAttribute('href')
         });
-
-    //GIVE THE AUTHOR FIELD FOCUS
     // Y.one('#comment_input').focus();
-
     });
 
     var rate = new Y.Overlay({
@@ -57,51 +60,25 @@ YUI({
     rate.render();
 
     ratingBtn.on('click', function (e) {
-
         e.preventDefault();
-
         rate.set("align", {
             node:"#button_rate_media",
             points:[Y.WidgetPositionAlign.BR, Y.WidgetPositionAlign.TL]
         });
         rate.get("contentBox").removeClass("hidden");
         rate.show();
-
         rate.get("contentBox").delegate('hover', function(e) {
-
             var id = e.currentTarget.get('id'),
-                myRating = id.charAt(id.length-1),
-                stars = Y.all('.star');
-
+            myRating = id.charAt(id.length-1);
             stars.each(function(star) {
                 var star_id = star.get('id');
                 var rating = star_id.charAt(star_id.length-1);
-
                 if (rating <= myRating) {
                     star.set('src', "/images/star_full.png");
                 } else {
                     star.set('src', "/images/star_empty.png");
                 }
             });
-
-            stars.delegate('click', function(e) {
-
-                e.preventDefault();
-                var link = e.currentTarget.ancestor();
-                var uri = link.getAttribute('href');
-
-                function complete(id, o, args) {
-
-                    Y.one('#rating').setHTML(o.responseText);
-                    Y.log(o.responseText);
-                    //TODO: Update the rating node to display the new rating stars
-                    //      or display an error msg of some kind
-                }
-
-                Y.on('io:complete', complete, Y, ['lorem', 'ipsum']);
-                var request = Y.io(uri);
-            });
-
         }, 'img');
 
         rate.get("contentBox").on('mouseleave', function () {

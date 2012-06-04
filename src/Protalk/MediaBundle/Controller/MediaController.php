@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Protalk\MediaBundle\Entity\Rating;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class MediaController extends Controller
 {
@@ -33,31 +35,25 @@ class MediaController extends Controller
     public function rateAction($id, $rating)
     {
         $media = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->findOneById($id);
-
-        $currentRating = $media->getRating();
+        $em = $this->getDoctrine()->getEntityManager();
 
         $newRating = new Rating();
         $newRating->setRating($rating);
         $newRating->setIpaddress($this->container->get('request')->getClientIp());
         $newRating->setMedia($media);
-        // relate this rating to the media object
-        $media->addRating($newRating);
-        // update the running total stored in the media record
 
-
-        $em = $this->getDoctrine()->getEntityManager();
         $em->persist($newRating);
-        //$em->flush();
+        $em->flush();
 
         $newAverage = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->getAverageRating($id);
 
+        // relate this rating to the media object
+        $media->addRating($newRating);
+        // update the running total stored in the media record
         $media->setRating($newAverage);
-
         $em->persist($media);
         $em->flush();
 
         return $this->forward('ProtalkMediaBundle:Rating:index', array('rating' => $media->getRating()));
     }
-
-
 }

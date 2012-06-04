@@ -41,11 +41,8 @@ class CommentController extends Controller
                 $response->headers->set('Content-type', 'application/json; charset=utf-8');
 
                 return $response;
-
-
-
+                
             } else {
-
                 $ret['status'] = 'failure';
                 $ret['content'] = $this->renderView('ProtalkMediaBundle:Comment:new.html.twig', array('form' => $form->createView(), 'media' => $media, 'errors' => true));
 

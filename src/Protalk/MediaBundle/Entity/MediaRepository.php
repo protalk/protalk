@@ -204,20 +204,23 @@ class MediaRepository extends EntityRepository
         return $this->getResultList($results, $page, $max);
     }
 
+    /**
+     * Get the average rating of a media item
+     *
+     * @param integer $mediaId
+     * @return integer
+     */
     public function getAverageRating($mediaId) {
 
-
         $result = $this->getEntityManager()
-                ->createQuery('SELECT AVG(r.rating)
-    FROM ProtalkMediaBundle:Rating r
-    WHERE r.media_id=:id')
-                ->setParameter('id', $mediaId)
-                ->getResult();
+                       ->createQuery('SELECT AVG(r.rating)
+                                      FROM ProtalkMediaBundle:Rating r
+                                      WHERE r.media_id=:id')
+                       ->setParameter('id', $mediaId)
+                       ->getResult();
 
         $average = $result[0][1];
 
-
         return $average;
-
     }
 }
