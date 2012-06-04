@@ -9,9 +9,9 @@
 {% block body %}
 {% if search is defined and search != '' %}
     <h1 id="resultHeading">You have searched for '{{ search }}'</h1>
-    <h1>SHOWING <span class="numberHiLite">{{ total }}</span> RESULTS</h1>
+    <h1>SHOWING {% if total > 0 %}<span class="hilite">{% if total < paginator.limit %}{{ total }}{% else %}{{ paginator.limit }}{% endif %}</span> OF {% endif %}<span class="hilite">{{ total }}</span> RESULTS</h1>
 {% else %}
-    <h1 id="resultHeading">Found <span class="numberHiLite">{{ total }}</span> RESULTS</h1>
+    <h1 id="resultHeading">SHOWING {% if total > 0 %}<span class="hilite">{% if total < paginator.limit %}{{ total }}{% else %}{{ paginator.limit }}{% endif %}</span> OF {% endif %}<span class="hilite">{{ total }}</span> RESULTS</h1>
 {% endif %}
 
 {% for media in results %}
@@ -33,17 +33,37 @@
 
 </article>
 {% endfor %}
+
+{% if total > 0 %}
 <div id="pagerContainer">
-    <span class="pagerText">PAGE 2 OF 6</span>
+    <span class="pagerText">PAGE {{ paginator.currentpage }} OF {{ paginator.numpages }}</span>
     <ul>
-        <li><a class="pagerButton" href="#"><span>1</span></a></li>
-        <li><a class="pagerButton" href="#"><span>2</span></a></li>
-        <li><a class="pagerButton" href="#"><span>3</span></a></li>
-        <li><a class="pagerButton" href="#"><span>4</span></a></li>
-        <li><a class="pagerButton" href="#"><span>5</span></a></li>
-        <li><a class="pagerButton" href="#"><span>6</span></a></li>
+        {% if paginator.currentpage != 1 %}
+            <li> <a class="pagerButton" href="{{ paginator.getUrl(baseUrl, paginator.currentpage-1) }}"><span>Previous</span></a>
+        {% endif %}
+        {% for i in 1..paginator.numpages%}
+            {% if paginator.range.0 > 2 and i == paginator.range.0 %}
+                  ...
+            {% endif %}
+
+            {%  if(i==1 or i==paginator.numpages or i in paginator.range) %}
+                {% if i==paginator.currentpage %}
+                    <li><a class="pagerButton active" href="{{ paginator.getUrl(baseUrl, i) }}"><span>{{i}}</span></a></li>
+                {% else %}
+                <li><a class="pagerButton" href="{{ paginator.getUrl(baseUrl, i) }}"><span>{{i}}</span></a></li>
+                {% endif %}
+            {% endif %}
+
+            {% if paginator.range[paginator.midrange -1] < paginator.numpages -1 and i == paginator.range[paginator.midrange-1] %}
+                ...
+            {% endif %}
+        {% endfor %}
+        {% if paginator.currentpage != paginator.numpages %}
+            <li> <a class="pagerButton" href="{{ paginator.getUrl(baseUrl, paginator.currentpage+1) }}"><span>Next</span></a>
+        {% endif %}
     </ul>
 </div>
+{% endif %}
 {% endblock %}
 
 {% block rightcolumn %}
