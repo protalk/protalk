@@ -34,26 +34,28 @@ class MediaController extends Controller
 
     public function rateAction($id, $rating)
     {
-        $media = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->findOneById($id);
-        $em = $this->getDoctrine()->getEntityManager();
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            $media = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->findOneById($id);
+            $em = $this->getDoctrine()->getEntityManager();
 
-        $newRating = new Rating();
-        $newRating->setRating($rating);
-        $newRating->setIpaddress($this->container->get('request')->getClientIp());
-        $newRating->setMedia($media);
+            $newRating = new Rating();
+            $newRating->setRating($rating);
+            $newRating->setIpaddress($this->container->get('request')->getClientIp());
+            $newRating->setMedia($media);
 
-        $em->persist($newRating);
-        $em->flush();
+            $em->persist($newRating);
+            $em->flush();
 
-        $newAverage = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->getAverageRating($id);
+            $newAverage = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->getAverageRating($id);
 
-        // relate this rating to the media object
-        $media->addRating($newRating);
-        // update the running total stored in the media record
-        $media->setRating($newAverage);
-        $em->persist($media);
-        $em->flush();
+            // relate this rating to the media object
+            $media->addRating($newRating);
+            // update the running total stored in the media record
+            $media->setRating($newAverage);
+            $em->persist($media);
+            $em->flush();
 
-        return $this->forward('ProtalkMediaBundle:Rating:index', array('rating' => $media->getRating()));
+            return $this->forward('ProtalkMediaBundle:Rating:index', array('rating' => $media->getRating()));
+        }
     }
 }
