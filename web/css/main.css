@@ -777,6 +777,14 @@ form {
     margin: 0;
 }
 
+#comment_form_content label {
+    text-align: left;
+}
+
+#comment_content {
+    height:150px;
+}
+
 form li, .contribution-notice {
     background-color: #C43C35;
     background-image: -moz-linear-gradient(center top , #EE5F5B, #C43C35);
@@ -876,3 +884,5 @@ form ul {
 #rate_button_container {
     float:right;
 }
+
+
