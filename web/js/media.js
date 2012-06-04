@@ -28,7 +28,8 @@ YUI({
 
 }).use( 'protalk-io', 'protalk-panel', 'node-event-delegate', 'widget-anim', 'overlay', 'event', 'io-base',  function(Y) {
 
-    var commentBtn = Y.one('#button_add_comment'),
+    var commentsNode    = Y.one('#comments_content'),
+        commentBtn = Y.one('#button_add_comment'),
         ratingBtn = Y.one('#button_rate_media');
 
     commentBtn.on('click', function(e) {
@@ -38,6 +39,7 @@ YUI({
         var panel = new Y.ProTalk.Panel({
             panelType: 'form',
             panelTitle: 'Enter your comment',
+            updateNode: commentsNode,
             getUrl : e.currentTarget.getAttribute('href')
         });
 
@@ -82,13 +84,15 @@ YUI({
                 }
             });
 
-            stars.on('click', function(e) {
+            stars.delegate('click', function(e) {
 
                 e.preventDefault();
                 var link = e.currentTarget.ancestor();
                 var uri = link.getAttribute('href');
 
                 function complete(id, o, args) {
+
+                    Y.one('#rating').setHTML(o.responseText);
                     Y.log(o.responseText);
                     //TODO: Update the rating node to display the new rating stars
                     //      or display an error msg of some kind

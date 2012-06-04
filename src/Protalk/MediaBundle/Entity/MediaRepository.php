@@ -19,7 +19,7 @@ class MediaRepository extends EntityRepository
      * @param string $orderField
      * @param int $page
      * @param int $max
-     * 
+     *
      * @return array Array with total and results
      */
     public function getMediaOrderedBy($orderField, $page, $max)
@@ -29,48 +29,48 @@ class MediaRepository extends EntityRepository
                            WHERE m.isPublished = 1
                            ORDER BY m.'.$orderField.' DESC')
             ->getResult();
-        
+
         return $this->getResultList($results, $page, $max);
     }
-    
+
     /**
      * Create result list by manually doing the limit/offset
-     * 
+     *
      * @param array $results
      * @param int $page
      * @param int $max
-     * 
-     * @return array Array with total and results 
+     *
+     * @return array Array with total and results
      */
     private function getResultList($results, $page, $max)
     {
         $start = ($page - 1) * $max;
         $end = ($page * $max) - 1;
         $total = count($results);
-        
+
         $result = array();
         for ($i = $start; $i <= $end && $i < $total; $i++) {
             $result[] = $results[$i];
         }
-        
+
         return array('total' => $total, 'results' => $result);
     }
-    
+
     /**
      * Find media by search term
-     * 
+     *
      * @param string $search
      * @param string $sort
      * @param int $page
-     * @param int $max 
-     * 
+     * @param int $max
+     *
      * @return array Array with count and result
      */
     public function findMedia($search, $sort, $page, $max)
     {
         /* query in mysql:
-         * SELECT DISTINCT m.*, mtype.name 
-            FROM `media` m 
+         * SELECT DISTINCT m.*, mtype.name
+            FROM `media` m
             LEFT JOIN media_category mc ON (mc.media_id = m.id)
             LEFT JOIN category c ON (c.id = mc.category_id)
             LEFT JOIN media_tag mt ON (mt.media_id = m.id)
@@ -83,7 +83,7 @@ class MediaRepository extends EntityRepository
             ORDER BY `date` DESC
          */
         $results = $this->getEntityManager()
-                ->createQuery("SELECT DISTINCT m 
+                ->createQuery("SELECT DISTINCT m
                                FROM ProtalkMediaBundle:Media m
                                LEFT JOIN m.categories c
                                LEFT JOIN m.tags t
@@ -93,8 +93,8 @@ class MediaRepository extends EntityRepository
                                     LOWER(c.name) LIKE :search1 OR
                                     LOWER(t.name) LIKE :search2 OR
                                     LOWER(s.name) LIKE :search3 OR
-                                    LOWER(m.title) LIKE :search4 OR 
-                                    LOWER(m.description) LIKE :search5 OR 
+                                    LOWER(m.title) LIKE :search4 OR
+                                    LOWER(m.description) LIKE :search5 OR
                                     LOWER(mtype.name) LIKE :search6
                                    )
                                AND m.isPublished = 1
@@ -106,7 +106,7 @@ class MediaRepository extends EntityRepository
                 ->setParameter('search5', '%'.strtolower($search).'%')
                 ->setParameter('search6', '%'.strtolower($search).'%')
                 ->getResult();
-        
+
         return $this->getResultList($results, $page, $max);
     }
 
@@ -117,43 +117,43 @@ class MediaRepository extends EntityRepository
      * @param string $slug
      * @return Doctrine Record
      */
-    public function findOneBySlug($slug) 
+    public function findOneBySlug($slug)
     {
         return $this->getEntityManager()
                                     ->createQuery('
                                         SELECT m, mt FROM ProtalkMediaBundle:Media m
                                         JOIN m.mediatype mt
-                                        WHERE m.slug = :slug AND m.isPublished = 1' 
+                                        WHERE m.slug = :slug AND m.isPublished = 1'
                                         )
                                     ->setParameter('slug', $slug)
                                     ->getSingleResult();
     }
-    
+
     /**
      * Find media items by category
-     * 
+     *
      * @param int $categoryId
      * @param string $orderField
      * @param int $page
      * @param int $max
-     * 
+     *
      * @return array Array with total and results
      */
     public function findByCategory($categoryId, $orderField, $page, $max)
     {
         $results = $this->getEntityManager()
-                ->createQuery('SELECT m 
+                ->createQuery('SELECT m
                                FROM ProtalkMediaBundle:Media m
                                JOIN m.categories c
                                WHERE c.id = :catId
                                AND m.isPublished = 1
                                ORDER BY m.'.$orderField.' DESC')
-                ->setParameter('catId', $categoryId)               
+                ->setParameter('catId', $categoryId)
                 ->getResult();
-        
+
         return $this->getResultList($results, $page, $max);
     }
-    
+
     /**
      * Find media items by tag
      *
@@ -175,10 +175,10 @@ class MediaRepository extends EntityRepository
                 ORDER BY m.'.$orderField.' DESC')
                 ->setParameter('tagId', $tagId)
                 ->getResult();
-        
+
         return $this->getResultList($results, $page, $max);
     }
-    
+
     /**
      * Find media items by speaker
      *
@@ -200,7 +200,24 @@ class MediaRepository extends EntityRepository
                 ORDER BY m.'.$orderField.' DESC')
                 ->setParameter('speakerId', $speakerId)
                 ->getResult();
-        
+
         return $this->getResultList($results, $page, $max);
+    }
+
+    public function getAverageRating($mediaId) {
+
+
+        $result = $this->getEntityManager()
+                ->createQuery('SELECT AVG(r.rating)
+    FROM ProtalkMediaBundle:Rating r
+    WHERE r.media_id=:id')
+                ->setParameter('id', $mediaId)
+                ->getResult();
+
+        $average = $result[0][1];
+
+
+        return $average;
+
     }
 }

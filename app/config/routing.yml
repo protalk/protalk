@@ -33,6 +33,12 @@ rate_media:
         id:     \d+
         rating: \d+
 
+comment_new:
+    pattern: /comment/{media_id}
+    defaults: {_controller: ProtalkMediaBundle:Comment:new }
+    requirements:
+        id:     \d+
+
 ProtalkPageBundle:
     resource: "@ProtalkPageBundle/Controller/"
     type:     annotation
@@ -65,10 +71,6 @@ speaker_search:
 media_show:
     pattern:  /media/{slug}
     defaults: { _controller: ProtalkMediaBundle:Media:index }
-
-comment_new:
-    pattern:  /comment/{media_id}
-    defaults: { _controller: ProtalkMediaBundle:Comment:new }
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

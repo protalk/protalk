@@ -752,4 +752,7 @@ class Media implements SluggableInterface
     {
         return $this->ratings;
     }
+
+    
+
 }

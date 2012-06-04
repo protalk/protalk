@@ -34,13 +34,10 @@
         {% if media.comments|length > 0 %}
         <h1>COMMENTS</h1>
         {% endif %}
-        {% for comment in media.comments %}
-            <article class="comment">
-                <p><time datetime="{{ comment.datetime|date("Y/m/d")}}" >{{ comment.datetime|date("d M Y") }} by </time><span class="name">{{ comment.author }}</span></p>
-                <p class="commentText">{{ comment.content }}</p>
-            </article>
-        {% endfor %}
-        <div><a id="button_add_comment" class="button" href="#"><span>COMMENT</span></a></div>
+         <div id="comments_content">
+            {% render "ProtalkMediaBundle:Comment:list" with {'media_id' : media.id } %}
+        </div>
+        <div><a id="button_add_comment" class="button" href="{{ url('comment_new', {'media_id': media.id }) }}"><span>COMMENT</span></a></div>
     </section>
 </div>
 

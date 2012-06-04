@@ -1,4 +1,4 @@
-<form action="{{ path('comment_new', {'media_id': media.id}) }}" method="post" {{ form_enctype(form) }} id="comment">
+<form action="{{ path('comment_new', {'media_id': media.id}) }}" method="post" {{ form_enctype(form) }} id="form">
 
     {{ form_errors(form) }}
 
@@ -30,7 +30,5 @@
 
     {{ form_rest(form) }}
 
-    <div>
-         <a id="comment_submit_button" class="button" href="#" onclick="document.getElementById('comment').submit();" ><span>SUBMIT</span></a>
-    </div>
+   
 </form>

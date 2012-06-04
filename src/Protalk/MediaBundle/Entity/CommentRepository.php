@@ -12,4 +12,21 @@ use Doctrine\ORM\EntityRepository;
  */
 class CommentRepository extends EntityRepository
 {
+
+    /**
+     * Get comments for a media item
+     *
+     * @param int $max
+     * @return Doctrine Collection
+     */
+    public function getMediaComments($media_id)
+    {
+        return $this->getEntityManager()
+                    ->createQuery('
+                        SELECT c FROM ProtalkMediaBundle:Comment c
+                        WHERE c.media_id = :id
+                        ORDER BY c.datetime DESC')
+                    ->setParameter('id', $media_id)
+                    ->getResult();
+    }
 }

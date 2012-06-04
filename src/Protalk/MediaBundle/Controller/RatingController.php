@@ -26,9 +26,17 @@ class RatingController extends Controller
         //calculate number of empty stars required to display
         $emptyStars = 5 - $fullStars - $partialStar;
 
-        return array("fullStars"   => $fullStars,
+        $rating = array("fullStars"   => $fullStars,
                      "emptyStars"  => $emptyStars,
                      "partialStar" => $partialStar,
                      "rating"      => $rating);
+
+        $request = $this->getRequest();
+        if($request->isXmlHttpRequest()) {
+
+            return $this->renderView('ProtalkMediaBundle:Comment:list.html.twig', $rating);
+        }
+
+        return $rating;
     }
 }

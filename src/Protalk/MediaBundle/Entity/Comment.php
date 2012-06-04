@@ -3,6 +3,7 @@
 namespace Protalk\MediaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Protalk\MediaBundle\Entity\Comment
@@ -39,6 +40,9 @@ class Comment
      * @var string $author
      *
      * @ORM\Column(name="author", type="string", length=100)
+     * @Assert\NotBlank(
+     *      message = "Please enter your name:"
+     * )
      */
     private $author;
 
@@ -46,13 +50,16 @@ class Comment
      * @var string $email
      *
      * @ORM\Column(name="email", type="string", length=200)
+     * @Assert\NotBlank(
+     *      message = "Please enter your email address:"
+     * )
      */
     private $email;
 
     /**
      * @var string $website
      *
-     * @ORM\Column(name="website", type="string", length=200)
+     * @ORM\Column(name="website", type="string", length=200, nullable=true)
      */
     private $website;
 
@@ -67,6 +74,9 @@ class Comment
      * @var text $content
      *
      * @ORM\Column(name="content", type="text")
+     * @Assert\NotBlank(
+     *      message = "Please enter a comment:"
+     * )
      */
     private $content;
 
