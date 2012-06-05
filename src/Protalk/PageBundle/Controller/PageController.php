@@ -8,7 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class PageController extends Controller
 {
-
     /**
      * @Route("/{url}")
      * @Template()
