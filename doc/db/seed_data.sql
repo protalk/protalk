@@ -15,9 +15,12 @@ SET foreign_key_checks = 0;
 
 TRUNCATE TABLE `Page`;
 
-INSERT INTO `Page` (url,pagetitle,title,content) VALUES ('contact','Contact Us','Contact','Some dummy text for contact page');
-INSERT INTO `Page` (url,pagetitle,title,content) VALUES ('contribute','How to Contribute','Contribute','Some dummy text for contribute page');
-INSERT INTO `Page` (url,pagetitle,title,content) VALUES ('about','About Us','About','Some dummy text for about page');
+INSERT INTO `Page` (url,pagetitle,title,content) VALUES ('contact','Contact Us','Contact','We\'d really appreciate any feedback you have about the site. Bug reports are also very welcome. Go on, let us know what you think: </p><p>Email: <a href="mailto:info@protalk.me">info@protalk.me</a><br>Twitter: <a href="http://twitter.com/pro_talk">@pro_talk</a></p><p>You can also subscribe to our mailing list to keep in touch via our newsletter:<form action="http://protalk.us4.list-manage.com/subscribe/post?u=4192f6a464ac9b433d406efff&amp;id=e97aea0468" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate">
+<input id="subscribeEmail" class="subscribe" name="EMAIL" type="email" placeholder="Enter your email address here"/>
+<input id="subscribeButton" class="subscribe" type="image" src="http://protalk.me/images/subscribe_btn.png" />
+</form>');
+INSERT INTO `Page` (url,pagetitle,title,content) VALUES ('contribute','How to Contribute','Contribute','Contributing to ProTalk couldn\'t be easier. All you need to do is find a video or audio recording about PHP that you enjoyed and think others could learn from, complete the form below and we\'ll take it from there.</p><p>Once we\'ve verified that we\'re allowed to embed the material, we\'ll publish it on the site and send you an email letting you know its available. Well….what are you waiting for?</p><p>If you want to help us develop ProTalk and make it even better, watch this space for details on how to do that. We have plans to open source the project real soon and look forward to building a thriving community around the site.');
+INSERT INTO `Page` (url,pagetitle,title,content) VALUES ('about','About Us','About','ProTalk is the brain child of Kim Rowan and Lineke Kerckhoffs-Willems. A spark of an idea on IRC in July 2011 transformed into the site you see before you and we really hope you like it.</p><p>ProTalk\'s mission is to provide a central point of access to online audio / video content with a PHP focus. We hope to expand and include other programming languages in the future, but for now we\'re focussing solely on PHP and surrounding tools and skills.</p><p>ProTalk aims to be a community resource and, as such, we will depend on you to <a href="http://protalk.me/contribute">contribute content</a>. Just send us links to recorded talks, postcasts, screencasts, etc., that are already online or hosted elsewhere and we\'ll do the rest.');
 
 
 /* Delete all Tag records then re-load sample data */
