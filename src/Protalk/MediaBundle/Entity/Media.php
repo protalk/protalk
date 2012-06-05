@@ -174,9 +174,16 @@ class Media implements SluggableInterface
     /**
      * @var string $thumbnail
      *
-     * @ORM\Column(name="thumbnail", type="string", length=50, nullable=true)
+     * @ORM\Column(name="thumbnail", type="string", length=250, nullable=true)
      */
     private $thumbnail;
+    
+    /**
+     * @var date $creationDate
+     *
+     * @ORM\Column(name="creationData", type="date")
+     */
+    private $creationDate;
 
     /*
      * Constructor
@@ -193,6 +200,7 @@ class Media implements SluggableInterface
         $this->categories = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->ratings = new ArrayCollection();
+        $this->creationDate = date('Y-m-d');
     }
 
     /**
@@ -764,6 +772,26 @@ class Media implements SluggableInterface
     }
     
     /**
+     * Set creationDate
+     *
+     * @param string $creationDate
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
+    }
+
+    /**
+     * Get creationDate
+     *
+     * @return string
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+    
+    /**
      * Display thumbnail
      *
      * @return string thumnail filename
@@ -771,9 +799,9 @@ class Media implements SluggableInterface
     public function displayThumbnail()
     {
         if ($this->getMediatype()->getType() != 'video') {
-            return "podcast_icon.png";
+            return "images/thumbnails/podcast_icon.png";
         } elseif ( !$this->thumbnail ) {
-            return "coming_soon.png";
+            return "images/thumbnails/coming_soon.png";
         } else {
             return $this->thumbnail;
         }

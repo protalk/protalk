@@ -20,7 +20,7 @@
 {% for media in latestMedia %}
 <article class="mediaLarge">
     <div class="mediaThumbNailLarge">
-        <a href="{{ path('media_show', { 'slug': media.slug }) }}"><img src="{{ asset('images/thumbnails/') }}{{ media.displayThumbnail() }}"alt="Media ThumbNail Image"/></a>
+        <a href="{{ path('media_show', { 'slug': media.slug }) }}"><img src="{{ media.displayThumbnail() }}" alt="Media ThumbNail Image"/></a>
     </div>
     <div class="mediaTextLarge">
         <header>
@@ -51,7 +51,7 @@
                 {% for media in topViewedMedia %}
                 <article class="tabMedia">
                     <div class="tabMediaThumbNail">
-                        <a href="{{ path('media_show', { 'slug': media.slug }) }}"><img src="{{ asset('images/thumbnails/')}}{{ media.displayThumbnail() }}" alt="Media ThumbNail Image"/></a>
+                        <a href="{{ path('media_show', { 'slug': media.slug }) }}"><img src="{{ media.displayThumbnail() }}" alt="Media ThumbNail Image"/></a>
                     </div>
                     <div class="tabMediaText">
                         <header>
@@ -74,7 +74,7 @@
                 {% for media in topRatedMedia %}
                 <article class="tabMedia">
                     <div class="tabMediaThumbNail">
-                        <a href="{{ path('media_show', { 'slug': media.slug }) }}"><img src="{{ asset('images/thumbnails/') }}{{ media.displayThumbnail() }}" alt="Media ThumbNail Image"/></a>
+                        <a href="{{ path('media_show', { 'slug': media.slug }) }}"><img src="{{ media.displayThumbnail() }}" alt="Media ThumbNail Image"/></a>
                     </div>
                     <div class="tabMediaText">
                         <header>
