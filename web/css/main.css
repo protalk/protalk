@@ -478,6 +478,27 @@ nav {
     padding-left:27px;
 }
 
+#copyright a.normalLink {
+    padding-left: 0;
+}
+
+#copyright p.noMarginBottom {
+    margin-bottom: 0;
+}
+
+#subscribeEmail {
+    height: 25px;
+    width: 200px;
+}
+
+#subscribeButton {
+    height: 29px;
+}
+
+.subscribe {
+    vertical-align: middle;
+}
+
 #sidebar {
     -moz-border-radius: 20px;
     -webkit-border-radius: 20px;
