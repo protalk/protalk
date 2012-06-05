@@ -358,7 +358,7 @@ In this session we\'ll look at how the history of the web itself is rooted in sh
     '30:58', 0, 0, 
     '<iframe src="http://blip.tv/play/h75rguDRYwI.html?p=1" width="596" height="334" frameborder="0" allowfullscreen></iframe><embed type="application/x-shockwave-flash" src="http://a.blip.tv/api.swf#h75rguDRYwI" style="display:none"></embed>',
     '<div style="width:425px" id="__ss_9605304"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/IanBarber/how-to-stand-on-the-shoulders-of-giants" title="How to stand on the shoulders of giants" target="_blank">How to stand on the shoulders of giants</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/9605304" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/IanBarber" target="_blank">Ian Barber</a> </div> </div>', 
-    3582, 'en', 'How to Stand on the Shoulders of Giants', 'how-to-stand-on-the-shoulders-of-giants', 1, 'Blip.TV', 'http://blip.tv/phpnw/phpnw11-keynote-ian-barber-how-to-stand-on-the-shoulders-of-giants-5777535'
+    3582, 'en', 'How to Stand on the Shoulders of Giants', 'how-to-stand-on-the-shoulders-of-giants', 1, 'Blip.TV', 'http://blip.tv/phpnw/phpnw11-keynote-ian-barber-how-to-stand-on-the-shoulders-of-giants-5777535',
     'http://a.images.blip.tv/Phpcodemonkey-69107169.png');
     
 INSERT INTO media_category (media_id, category_id) VALUES (16, 32);
@@ -376,7 +376,7 @@ VALUES
     '48:21', 0, 0, 
     '<iframe src="http://blip.tv/play/h75rguW_agI.html?p=1" width="596" height="334" frameborder="0" allowfullscreen></iframe><embed type="application/x-shockwave-flash" src="http://a.blip.tv/api.swf#h75rguW_agI" style="display:none"></embed>',
     '', 
-    3584, 'en', 'Zend Framework 2 - State of the Art', 'zend-framework-2-state-of-the-art', 1, 'Blip.TV', 'http://blip.tv/phpnw/phpnw11-enrico-zimuel-zend-framework-2-state-of-the-art-5857158'
+    3584, 'en', 'Zend Framework 2 - State of the Art', 'zend-framework-2-state-of-the-art', 1, 'Blip.TV', 'http://blip.tv/phpnw/phpnw11-enrico-zimuel-zend-framework-2-state-of-the-art-5857158',
     'http://a.images.blip.tv/Phpcodemonkey-19803918.png');
     
 INSERT INTO media_category (media_id, category_id) VALUES (17, 8), (17, 16), (17, 31);
@@ -392,7 +392,7 @@ This presentation provides an overview of the goals of each of these tools and s
     '60:00', 0, 0, 
     '<iframe src="http://blip.tv/play/h75rguXJSAI.html?p=1" width="596" height="334" frameborder="0" allowfullscreen></iframe><embed type="application/x-shockwave-flash" src="http://a.blip.tv/api.swf#h75rguXJSAI" style="display:none"></embed>',
     '', 
-    3585, 'en', 'PHP Tester\'s Toolbox', 'php-testers-toolbox', 1, 'Blip.TV', 'http://blip.tv/phpnw/phpnw11-sebastian-bergmann-php-tester-s-toolbox-5858404'
+    3585, 'en', 'PHP Tester\'s Toolbox', 'php-testers-toolbox', 1, 'Blip.TV', 'http://blip.tv/phpnw/phpnw11-sebastian-bergmann-php-tester-s-toolbox-5858404',
     'http://a.images.blip.tv/Phpcodemonkey-33878487.png');
     
 INSERT INTO media_category (media_id, category_id) VALUES (18, 8), (18, 9), (18, 12), (18, 28);
@@ -407,7 +407,7 @@ VALUES
     '58:55', 0, 0, 
     '<iframe src="http://blip.tv/play/h75rguXJbgI.html?p=1" width="596" height="334" frameborder="0" allowfullscreen></iframe><embed type="application/x-shockwave-flash" src="http://a.blip.tv/api.swf#h75rguXJbgI" style="display:none"></embed>',
     '', 
-    3593, 'en', 'Scaling your Development Team', 'scaling-your-development-team', 1, 'Blip.TV', 'http://blip.tv/phpnw/phpnw11-scott-macvicar-scaling-your-development-team-5858442'
+    3593, 'en', 'Scaling your Development Team', 'scaling-your-development-team', 1, 'Blip.TV', 'http://blip.tv/phpnw/phpnw11-scott-macvicar-scaling-your-development-team-5858442',
     'http://a.images.blip.tv/Phpcodemonkey-67840256.png');
     
 INSERT INTO media_category (media_id, category_id) VALUES (19, 8), (19, 9);
@@ -423,7 +423,7 @@ VALUES
     '45:24', 0, 0, 
     '<iframe src="http://blip.tv/play/h75rguXJJwI.html?p=1" width="596" height="334" frameborder="0" allowfullscreen></iframe><embed type="application/x-shockwave-flash" src="http://a.blip.tv/api.swf#h75rguXJJwI" style="display:none"></embed>',
     '<div style="width:425px" id="__ss_9609415"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/rowan_m/estimation-or-how-to-dig-your-grave" title="Estimation or, &quot;How to Dig your Grave&quot;" target="_blank">Estimation or, &quot;How to Dig your Grave&quot;</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/9609415" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/rowan_m" target="_blank">Rowan Merewood</a> </div> </div> ', 
-    3599, 'en', 'Estimation or \'How To Dig Your Own Grave\'', 'estimation-or-how-to-dig-your-own-grave', 1, 'Blip.TV', 'http://blip.tv/phpnw/phpnw11-rowan-merewood-estimation-or-how-to-dig-your-own-grave-5858371'
+    3599, 'en', 'Estimation or \'How To Dig Your Own Grave\'', 'estimation-or-how-to-dig-your-own-grave', 1, 'Blip.TV', 'http://blip.tv/phpnw/phpnw11-rowan-merewood-estimation-or-how-to-dig-your-own-grave-5858371',
     'http://a.images.blip.tv/Phpcodemonkey-56226257.png');
     
 INSERT INTO media_category (media_id, category_id) VALUES (20, 27);
@@ -439,7 +439,7 @@ VALUES
     '58:54', 0, 0, 
     '<iframe src="http://blip.tv/play/h75rguXKBwI.html?p=1" width="596" height="334" frameborder="0" allowfullscreen></iframe><embed type="application/x-shockwave-flash" src="http://a.blip.tv/api.swf#h75rguXKBwI" style="display:none"></embed>',
     '<div style="width:425px" id="__ss_9618458"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/elblinkin/are-your-tests-really-helping-you" title="Are Your Tests Really Helping You?" target="_blank">Are Your Tests Really Helping You?</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/9618458?rel=0" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen></iframe> <div style="padding:5px 0 12px"> View more presentations from <a href="http://www.slideshare.net/elblinkin" target="_blank">LB Denker</a> </div> </div>', 
-    3583, 'en', 'Are Your Tests Really Helping?', 'are-your-tests-really-helping', 1, 'Blip.TV', 'http://blip.tv/phpnw/phpnw11-laura-beth-denker-are-your-tests-really-helping-5858467'
+    3583, 'en', 'Are Your Tests Really Helping?', 'are-your-tests-really-helping', 1, 'Blip.TV', 'http://blip.tv/phpnw/phpnw11-laura-beth-denker-are-your-tests-really-helping-5858467',
     'http://a.images.blip.tv/Phpcodemonkey-41122137.png');
     
 INSERT INTO media_category (media_id, category_id) VALUES (21, 8), (21, 9), (21, 12), (21, 27), (21, 28);
