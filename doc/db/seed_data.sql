@@ -438,7 +438,7 @@ VALUES
     '58:54', 0, 0, 
     '<iframe src="http://blip.tv/play/h75rguXKBwI.html?p=1" width="596" height="334" frameborder="0" allowfullscreen></iframe><embed type="application/x-shockwave-flash" src="http://a.blip.tv/api.swf#h75rguXKBwI" style="display:none"></embed>',
     '<div style="width:425px" id="__ss_9618458"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/elblinkin/are-your-tests-really-helping-you" title="Are Your Tests Really Helping You?" target="_blank">Are Your Tests Really Helping You?</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/9618458?rel=0" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen></iframe> <div style="padding:5px 0 12px"> View more presentations from <a href="http://www.slideshare.net/elblinkin" target="_blank">LB Denker</a> </div> </div>', 
-    3599, 'en', 'Are Your Tests Really Helping?', 'are-your-tests-really-helping', 1, 'Blip.TV', 'http://blip.tv/phpnw/phpnw11-laura-beth-denker-are-your-tests-really-helping-5858467'
+    3583, 'en', 'Are Your Tests Really Helping?', 'are-your-tests-really-helping', 1, 'Blip.TV', 'http://blip.tv/phpnw/phpnw11-laura-beth-denker-are-your-tests-really-helping-5858467'
     );
     
 INSERT INTO media_category (media_id, category_id) VALUES (21, 8), (21, 9), (21, 12), (21, 27), (21, 28);
