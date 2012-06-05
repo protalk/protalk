@@ -113,7 +113,7 @@ services:
       class: Protalk\AdminBundle\Admin\MediaAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_media, label: Media }
-      arguments: [null, Protalk\MediaBundle\Entity\Media, ProtalkAdminBundle:MediaAdmin]
+      arguments: [null, Protalk\MediaBundle\Entity\Media, ProtalkAdminBundle:MediaAdmin]  
    protalk.media.admin.speaker:
       class: Protalk\AdminBundle\Admin\SpeakerAdmin
       tags:
@@ -176,7 +176,7 @@ fos_user:
 
 parameters:
     home_lists_max:  6
-    search_results_page: 20
+    search_results_page: 10
 
 ewz_recaptcha:
     public_key:   6LcAINESAAAAAC1V_QhiarIfD-ikLaLqnmAayo_0
