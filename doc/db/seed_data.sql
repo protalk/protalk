@@ -46,7 +46,8 @@ INSERT INTO `Tag` (id, name) VALUES
     (19, 'Optimisation'),
     (20, 'CouchDB'),
     (21, 'Scalability'),
-    (22, 'Zend Framework')
+    (22, 'Zend Framework'),
+    (23, 'Zend Framework 2')
     ;
 
 
@@ -70,6 +71,10 @@ INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (17, 'Christopher
 INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (18, 'Paul Matthews','');
 INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (19, 'Martin de Keijzer','');
 INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (20, 'Helgi Þormar Þorbjörnsson','');
+INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (21, 'Ian Barber','');
+INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (22, 'Enrico Zimuel','');
+INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (23, 'Scott MacVicar','');
+INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (24, 'Laura Beth Denker','');
 
 /* Delete all Media-speaker records then re-load sample data */
 
@@ -108,7 +113,9 @@ INSERT INTO `Category` (`id`, `parent_id`, `name`) VALUES
 (26, NULL, 'User Experience'),
 (27, 9, 'Best Practices'),
 (28, NULL, 'Tools'),
-(29, 28, 'Solr')
+(29, 28, 'Solr'),
+(30, NULL, 'Keynote / Inspirational'),
+(31, 16, 'Zend Framework 2')
 ;
 
 /* Delete all Media records then re-load sample data */
@@ -328,6 +335,116 @@ In this talk we will dive deeper into why APIs are an afterthought, how we can c
 INSERT INTO media_category (media_id, category_id) VALUES (15, 20), (15, 24);
 INSERT INTO media_tag (media_id, tag_id) VALUES (15, 17), (15, 18);
 INSERT INTO `media_speaker` (media_id, speaker_id) VALUES (15, 20);
+
+/*
+ * PHPNW11 talks
+ */
+
+/* 
+How to Stand on the Shoulders of Giants
+http://a.images.blip.tv/Phpcodemonkey-69107169.png 
+*/
+INSERT INTO `Media` 
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl ) 
+VALUES 
+    (16, 2, '2011-10-08', 'Every great breakthrough is built on the work that has come before it.
+
+The most successful innovators in our industry ignore the conventional wisdom of the moment and draw on the rich history of computing, the internet and the web to transform the simplest of ideas into defining pieces of technology.
+
+As software engineers, we all have the potential to navigate the history of our industry, tease out the genius from what has come before, and build a platform for our own ideas. By doing so, we can see that little bit further and in turn provide the foundations for others to build on what we have done.
+
+In this session we\'ll look at how the history of the web itself is rooted in sharing information and how modern giants like Google and Facebook are founded on what came before them, while being driven forwards by the ecosystems they helped build. We\'ll see how successful open source projects leverage the past, and how by following some simple principles we can make use of the information, projects and people around us to improve ourselves and our careers.', 
+    '30:58', 0, 0, 
+    '<iframe src="http://blip.tv/play/h75rguDRYwI.html?p=1" width="596" height="334" frameborder="0" allowfullscreen></iframe><embed type="application/x-shockwave-flash" src="http://a.blip.tv/api.swf#h75rguDRYwI" style="display:none"></embed>',
+    '<div style="width:425px" id="__ss_9605304"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/IanBarber/how-to-stand-on-the-shoulders-of-giants" title="How to stand on the shoulders of giants" target="_blank">How to stand on the shoulders of giants</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/9605304" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/IanBarber" target="_blank">Ian Barber</a> </div> </div>', 
+    3582, 'en', 'How to Stand on the Shoulders of Giants', 'how-to-stand-on-the-shoulders-of-giants', 1, 'Blip.TV', 'http://blip.tv/phpnw/phpnw11-keynote-ian-barber-how-to-stand-on-the-shoulders-of-giants-5777535'
+    );
+    
+INSERT INTO media_category (media_id, category_id) VALUES (16, 30);
+INSERT INTO media_tag (media_id, tag_id) VALUES (16, 16);
+INSERT INTO `media_speaker` (media_id, speaker_id) VALUES (16, 21);
+
+/* 
+Zend Framework 2 - State of the Art
+http://a.images.blip.tv/Phpcodemonkey-19803918.png
+*/
+INSERT INTO `Media` 
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl ) 
+VALUES 
+    (17, 2, '2011-10-08', 'In this talk we will present the state of the art of the Zend Framework 2 project. We will discuss the new architecture, the new features, the performance improvement and the new classes of the 2.0 release. Moreover, we will discuss about the differences between ZF1 and ZF2 and how to migrate a ZF1 project to the new version.', 
+    '48:21', 0, 0, 
+    '<iframe src="http://blip.tv/play/h75rguW_agI.html?p=1" width="596" height="334" frameborder="0" allowfullscreen></iframe><embed type="application/x-shockwave-flash" src="http://a.blip.tv/api.swf#h75rguW_agI" style="display:none"></embed>',
+    '', 
+    3584, 'en', 'Zend Framework 2 - State of the Art', 'zend-framework-2-state-of-the-art', 1, 'Blip.TV', 'http://blip.tv/phpnw/phpnw11-enrico-zimuel-zend-framework-2-state-of-the-art-5857158'
+    );
+    
+INSERT INTO media_category (media_id, category_id) VALUES (17, 8), (17, 16), (17, 31);
+INSERT INTO media_tag (media_id, tag_id) VALUES (17, 1), (17, 16), (17, 23);
+INSERT INTO `media_speaker` (media_id, speaker_id) VALUES (17, 22);
+
+/* PHP Tester's Toolbox - http://a.images.blip.tv/Phpcodemonkey-33878487.png */
+INSERT INTO `Media` 
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl ) 
+VALUES 
+    (18, 2, '2011-10-08', 'Various testing tools exist to test the different aspects and layers of PHP applications. There is PHPUnit for Unit Testing (and Test-Driven Development), Behat and PHPSpec for Acceptance Testing (and Behaviour-Driven Development), Selenium for System Testing, and a plethora of tools for testing non-functional aspects such as performance and security.
+This presentation provides an overview of the goals of each of these tools and shows the first steps to leveraging them in your daily routine.', 
+    '60:00', 0, 0, 
+    '<iframe src="http://blip.tv/play/h75rguXJSAI.html?p=1" width="596" height="334" frameborder="0" allowfullscreen></iframe><embed type="application/x-shockwave-flash" src="http://a.blip.tv/api.swf#h75rguXJSAI" style="display:none"></embed>',
+    '', 
+    3585, 'en', 'PHP Tester\'s Toolbox', 'php-testers-toolbox', 1, 'Blip.TV', 'http://blip.tv/phpnw/phpnw11-sebastian-bergmann-php-tester-s-toolbox-5858404'
+    );
+    
+INSERT INTO media_category (media_id, category_id) VALUES (18, 8), (18, 9), (18, 12), (18, 28);
+INSERT INTO media_tag (media_id, tag_id) VALUES (18, 1), (18, 2), (18, 6), (18, 8), (18, 16);
+INSERT INTO `media_speaker` (media_id, speaker_id) VALUES (18, 14);
+
+/* Scaling Your Development Team - http://a.images.blip.tv/Phpcodemonkey-67840256.png */
+INSERT INTO `Media` 
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl ) 
+VALUES 
+    (19, 2, '2011-10-08', '10 people working on a single code base can be considered high, but what about 600 people? At Facebook code is pushed 5 times a week to over 500 million people, the small amount of downtime is down to the practices our engineering team use and the process in which we do a release. This talk is going to cover everything that goes into the development of a feature at Facebook and how that code is pushed. We\'ll try to cover as much as possible about the underlying technology stack and the open source software we use and release to make it all happen.', 
+    '58:55', 0, 0, 
+    '<iframe src="http://blip.tv/play/h75rguXJbgI.html?p=1" width="596" height="334" frameborder="0" allowfullscreen></iframe><embed type="application/x-shockwave-flash" src="http://a.blip.tv/api.swf#h75rguXJbgI" style="display:none"></embed>',
+    '', 
+    3593, 'en', 'Scaling your Development Team', 'scaling-your-development-team', 1, 'Blip.TV', 'http://blip.tv/phpnw/phpnw11-scott-macvicar-scaling-your-development-team-5858442'
+    );
+    
+INSERT INTO media_category (media_id, category_id) VALUES (19, 8), (19, 9);
+INSERT INTO media_tag (media_id, tag_id) VALUES (19, 1), (19, 11), (19, 16), (19, 21);
+INSERT INTO `media_speaker` (media_id, speaker_id) VALUES (19, 23);
+
+
+/* Estimation or 'How To Dig Your Own Grave' - http://a.images.blip.tv/Phpcodemonkey-56226257.png */
+INSERT INTO `Media` 
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl ) 
+VALUES 
+    (20, 2, '2011-10-08', 'Clients need to know how much a project will cost. Waterfall development is always late and over-budget. Agile development is done when it\'s done. You\'re left with estimates that you know are too low and then you squeeze them anyway. It shouldn\'t be this way. We\'ll look at how this happens, early warning signs, ways out and ways of avoiding it in the first place.', 
+    '45:24', 0, 0, 
+    '<iframe src="http://blip.tv/play/h75rguXJJwI.html?p=1" width="596" height="334" frameborder="0" allowfullscreen></iframe><embed type="application/x-shockwave-flash" src="http://a.blip.tv/api.swf#h75rguXJJwI" style="display:none"></embed>',
+    '<div style="width:425px" id="__ss_9609415"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/rowan_m/estimation-or-how-to-dig-your-grave" title="Estimation or, &quot;How to Dig your Grave&quot;" target="_blank">Estimation or, &quot;How to Dig your Grave&quot;</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/9609415" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/" target="_blank">presentations</a> from <a href="http://www.slideshare.net/rowan_m" target="_blank">Rowan Merewood</a> </div> </div> ', 
+    3599, 'en', 'Estimation or \'How To Dig Your Own Grave\'', 'estimation-or-how-to-dig-your-own-grave', 1, 'Blip.TV', 'http://blip.tv/phpnw/phpnw11-rowan-merewood-estimation-or-how-to-dig-your-own-grave-5858371'
+    );
+    
+INSERT INTO media_category (media_id, category_id) VALUES (20, 27);
+INSERT INTO media_tag (media_id, tag_id) VALUES (20, 16);
+INSERT INTO `media_speaker` (media_id, speaker_id) VALUES (20, 13);
+
+
+/* Are Your Tests Really Helping? - http://a.images.blip.tv/Phpcodemonkey-41122137.png */
+INSERT INTO `Media` 
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl ) 
+VALUES 
+    (21, 2, '2011-10-08', 'Developer testing can reduce debug time, serve as executable documentation, build confidence, expose questionable patterns running rampant in your code, and in general, increase the speed of development and deployment. Tests can also cost you time, sanity, and agility.This session will not be the same old re-hash of the Misko Hevry talk on testability. Instead of a talk that is generic, syntactically translated from Java to PHP, and neglectful the major coding patterns prevalent in existing PHP 5 code bases, all of which results in the majority of the audience as un-sold, we will look at coding and testing patterns inspired by a real PHP project. We will also discuss how to identify patterns and make small adjustments where testing is and is not helping. The end result will be a toolbox of habits we can use to improve testability and forward momentum in development.', 
+    '58:54', 0, 0, 
+    '<iframe src="http://blip.tv/play/h75rguXKBwI.html?p=1" width="596" height="334" frameborder="0" allowfullscreen></iframe><embed type="application/x-shockwave-flash" src="http://a.blip.tv/api.swf#h75rguXKBwI" style="display:none"></embed>',
+    '<div style="width:425px" id="__ss_9618458"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/elblinkin/are-your-tests-really-helping-you" title="Are Your Tests Really Helping You?" target="_blank">Are Your Tests Really Helping You?</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/9618458?rel=0" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen></iframe> <div style="padding:5px 0 12px"> View more presentations from <a href="http://www.slideshare.net/elblinkin" target="_blank">LB Denker</a> </div> </div>', 
+    3583, 'en', 'Are Your Tests Really Helping?', 'are-your-tests-really-helping', 1, 'Blip.TV', 'http://blip.tv/phpnw/phpnw11-laura-beth-denker-are-your-tests-really-helping-5858467'
+    );
+    
+INSERT INTO media_category (media_id, category_id) VALUES (21, 8), (21, 9), (21, 12), (21, 27), (21, 28);
+INSERT INTO media_tag (media_id, tag_id) VALUES (21, 1), (21, 2), (21, 6), (21, 8), (21, 16);
+INSERT INTO `media_speaker` (media_id, speaker_id) VALUES (21, 24);
+
 
 
 /* Reenable foreign key constrain checks in MySQL */
