@@ -17,7 +17,9 @@
 
 
     </div>
-    <div id="rating">{% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</div>
+    <div id="rating">
+        {% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}
+    </div>
 </div>
     </section>
 
@@ -34,19 +36,16 @@
         {% if media.comments|length > 0 %}
         <h1>COMMENTS</h1>
         {% endif %}
-        {% for comment in media.comments %}
-            <article class="comment">
-                <p><time datetime="{{ comment.datetime|date("Y/m/d")}}" >{{ comment.datetime|date("d M Y") }} by </time><span class="name">{{ comment.author }}</span></p>
-                <p class="commentText">{{ comment.content }}</p>
-            </article>
-        {% endfor %}
-        <div><a id="button_add_comment" class="button" href="#"><span>COMMENT</span></a></div>
+         <div id="comments_content">
+            {% render "ProtalkMediaBundle:Comment:list" with {'media_id' : media.id } %}
+        </div>
+        <div><a id="button_add_comment" class="button" href="{{ url('comment_new', {'media_id': media.id }) }}"><span>COMMENT</span></a></div>
     </section>
 </div>
 
 {# YUI Overlay markup for rating media item #}
 <div id="rate_this" class="hidden">
-    <div class="yui3-widget-bd">
+    <div id="rate_this_content" class="yui3-widget-bd">
         <a href="{{ url('rate_media', {'id': media.id, 'rating' : '1'}) }}"><img id='rate_1' class="star" src="{{ asset('images/star_empty.png') }}" alt="Star image"/></a>
         <a href="{{ url('rate_media', {'id': media.id, 'rating' : '2'}) }}"><img id='rate_2' class="star" src="{{ asset('images/star_empty.png') }}" alt="Star image"/></a>
         <a href="{{ url('rate_media', {'id': media.id, 'rating' : '3'}) }}"><img id='rate_3' class="star" src="{{ asset('images/star_empty.png') }}" alt="Star image"/></a>

@@ -12,7 +12,7 @@ class CommentMedia extends AbstractType
         $builder->add('author', 'text');
         $builder->add('email', 'email');
         $builder->add('website', 'url', array('required' => false));
-        $builder->add('content', 'text');
+        $builder->add('content', 'textarea');
     }
 
     public function getDefaultOptions(array $options)

@@ -1,36 +1,35 @@
-<form action="{{ path('comment_new', {'media_id': media.id}) }}" method="post" {{ form_enctype(form) }} id="comment">
+<form action="{{ path('comment_new', {'media_id': media.id}) }}" method="post" {{ form_enctype(form) }} id="form">
 
     {{ form_errors(form) }}
 
-    <div>
-        {{ form_errors(form.author, { 'attr': {'class': 'form_error'} }) }}
-        {{ form_label(form.author, 'Your name*', { 'attr': {'class': 'form_label'} }) }}
-        {{ form_widget(form.author, { 'attr': {'class': 'form_field'} }) }}
-    </div>
+    <div id="comment_form_content">
+        <div>
+            {{ form_errors(form.author, { 'attr': {'class': 'form_error'} }) }}
+            {{ form_label(form.author, 'Name*', { 'attr': {'class': 'form_label'} }) }}
+            {{ form_widget(form.author, { 'attr': {'class': 'form_field'} }) }}
+        </div>
 
-    <div>
-        {{ form_errors(form.email, { 'attr': {'class': 'form_error'} }) }}
-        {{ form_label(form.email, 'Your email address*', { 'attr': {'class': 'form_label'} }) }}
-        {{ form_widget(form.email, { 'attr': {'class': 'form_field'} }) }}
-    </div>
+        <div>
+            {{ form_errors(form.email, { 'attr': {'class': 'form_error'} }) }}
+            {{ form_label(form.email, 'Email*', { 'attr': {'class': 'form_label'} }) }}
+            {{ form_widget(form.email, { 'attr': {'class': 'form_field'} }) }}
+        </div>
 
 
-    <div>
-        {{ form_errors(form.website, { 'attr': {'class': 'form_error'} }) }}
-        {{ form_label(form.website, 'Your website', { 'attr': {'class': 'form_label'} }) }}
-        {{ form_widget(form.website, { 'attr': {'class': 'form_field'} }) }}
-    </div>
+        <div>
+            {{ form_errors(form.website, { 'attr': {'class': 'form_error'} }) }}
+            {{ form_label(form.website, 'Website', { 'attr': {'class': 'form_label'} }) }}
+            {{ form_widget(form.website, { 'attr': {'class': 'form_field'} }) }}
+        </div>
 
-    <div>
-        {{ form_errors(form.content, { 'attr': {'class': 'form_error'} }) }}
-        {{ form_label(form.content, 'Your comment*', { 'attr': {'class': 'form_label'} }) }}
-        {{ form_widget(form.content, { 'attr': {'class': 'form_field'} }) }}
-    </div>
-
+        <div>
+            {{ form_errors(form.content, { 'attr': {'class': 'form_error'} }) }}
+            {{ form_label(form.content, 'Comment*', { 'attr': {'class': 'form_label'} }) }}
+            {{ form_widget(form.content, { 'attr': {'class': 'form_field'} }) }}
+        </div>
+     </div>
 
     {{ form_rest(form) }}
 
-    <div>
-         <a id="comment_submit_button" class="button" href="#" onclick="document.getElementById('comment').submit();" ><span>SUBMIT</span></a>
-    </div>
+
 </form>

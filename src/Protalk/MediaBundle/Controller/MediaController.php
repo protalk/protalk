@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Protalk\MediaBundle\Entity\Rating;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class MediaController extends Controller
 {
@@ -36,21 +38,28 @@ class MediaController extends Controller
 
     public function rateAction($id, $rating)
     {
-        $media = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->findOneById($id);
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            $media = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->findOneById($id);
+            $em = $this->getDoctrine()->getEntityManager();
 
-        $currentRating = $media->getRating();
+            $newRating = new Rating();
+            $newRating->setRating($rating);
+            $newRating->setIpaddress($this->container->get('request')->getClientIp());
+            $newRating->setMedia($media);
 
-        $newRating = new Rating();
-        $newRating->setRating($rating);
-        // relate this rating to the media object
-        $media->addRating($newRating);
-        // update the running total stored in the media record
-        $media->setRating($currentRating + $rating);
+            $em->persist($newRating);
+            $em->flush();
 
-        $em = $this->getDoctrine()->getEntityManager();
-        $em->persist($newRating);
-        $em->persist($media);
-        $em->flush();
+            $newAverage = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->getAverageRating($id);
+
+            // relate this rating to the media object
+            $media->addRating($newRating);
+            // update the running total stored in the media record
+            $media->setRating($newAverage);
+            $em->persist($media);
+            $em->flush();
+
+            return $this->forward('ProtalkMediaBundle:Rating:index', array('rating' => $media->getRating()));
+        }
     }
-
 }

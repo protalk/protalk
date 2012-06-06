@@ -5,6 +5,7 @@ namespace Protalk\MediaBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
 
 class RatingController extends Controller
 {
@@ -13,7 +14,6 @@ class RatingController extends Controller
      */
     public function indexAction($rating)
     {
-
         //initialise partialStar variable to false
         $partialStar = 0;
 
@@ -26,9 +26,15 @@ class RatingController extends Controller
         //calculate number of empty stars required to display
         $emptyStars = 5 - $fullStars - $partialStar;
 
-        return array("fullStars"   => $fullStars,
+        $result = array("fullStars"   => $fullStars,
                      "emptyStars"  => $emptyStars,
                      "partialStar" => $partialStar,
                      "rating"      => $rating);
+
+        if($this->getRequest()->isXmlHttpRequest()) {
+            return $this->render('ProtalkMediaBundle:Rating:index.html.twig', $result);
+        }
+
+        return $result;
     }
 }
