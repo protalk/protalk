@@ -30,6 +30,7 @@ YUI().use( "tabview", 'node-focusmanager', function(Y) {
         //  tabview has been skinned.
 
         tabControl.get("ownerDocument").get("documentElement").removeClass("yui-loading");
+        Y.one("#tabControl").removeClass("hidden");
 
         //  Apply the ARIA roles, states and properties
 
