@@ -453,6 +453,10 @@ div#combellLogo:hover {
     padding-left: 25px;
 }
 
+#copyright p {
+    padding-bottom:10px;
+}
+
 #followUs p {
     font-size:21px;
     margin-bottom: 12px;
