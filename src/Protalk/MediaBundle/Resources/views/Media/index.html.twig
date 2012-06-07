@@ -37,7 +37,7 @@
                     {% elseif media.mediatype.type == "video" %}
                     {{ media.content|raw }}
                     {% endif %}
-
+                    <p id="source">sourced from <a href="{{ media.hostUrl }}">{{ media.hostName }}</a></p>
                 </article>
             </section>
         </div>
