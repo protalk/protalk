@@ -50,8 +50,9 @@ class Comment
      * @var string $email
      *
      * @ORM\Column(name="email", type="string", length=200)
-     * @Assert\NotBlank(
-     *      message = "Please enter your email address:"
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email:",
+     *     checkMX = true
      * )
      */
     private $email;
