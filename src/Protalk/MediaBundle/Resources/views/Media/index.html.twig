@@ -71,7 +71,7 @@
 {% endblock %}
 
 {% block moreContent %}
-    {% if media.slides != null %}
+    {% if media.slides != null and media.mediatype.type != "podcast" %}
         {% include 'ProtalkMediaBundle:Media:mediaText.html.twig' %}
     {% endif %}
 {% endblock %}
