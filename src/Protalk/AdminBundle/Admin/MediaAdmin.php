@@ -27,6 +27,7 @@ class MediaAdmin extends Admin
                 ->add('isPublished')
                 ->add('hostName')
                 ->add('hostUrl')
+                ->add('thumbnail')
                 ->add('categories', 'sonata_type_model', array('expanded' => true))
                 ->add('tags', 'sonata_type_model', array('expanded' => true));
     }
