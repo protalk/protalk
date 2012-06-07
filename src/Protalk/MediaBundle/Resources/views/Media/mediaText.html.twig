@@ -33,9 +33,6 @@
     <hr />
 
     <section id="comments">
-        {% if media.comments|length > 0 %}
-        <h1>COMMENTS</h1>
-        {% endif %}
          <div id="comments_content">
             {% render "ProtalkMediaBundle:Comment:list" with {'media_id' : media.id } %}
         </div>

@@ -50,7 +50,7 @@ class Media implements SluggableInterface
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="media")
      */
     private $comments;
-    
+
 
     /**
      * @ORM\OneToMany(targetEntity="Rating", mappedBy="media")
@@ -64,7 +64,7 @@ class Media implements SluggableInterface
      * @ORM\JoinTable(name="media_category")
      */
     private $categories;
-    
+
     /**
      * @var ArrayCollection $tags
      *
@@ -177,7 +177,7 @@ class Media implements SluggableInterface
      * @ORM\Column(name="thumbnail", type="string", length=250, nullable=true)
      */
     private $thumbnail;
-    
+
     /**
      * @var date $creationDate
      *
@@ -720,7 +720,7 @@ class Media implements SluggableInterface
     {
         return $this->title;
     }
-    
+
     /**
      * Add categories
      *
@@ -760,7 +760,7 @@ class Media implements SluggableInterface
     {
         return $this->thumbnail;
     }
-    
+
     /**
      * Set creationDate
      *
@@ -780,7 +780,7 @@ class Media implements SluggableInterface
     {
         return $this->creationDate;
     }
-    
+
     /**
      * Display thumbnail
      *
@@ -796,7 +796,7 @@ class Media implements SluggableInterface
             return $this->thumbnail;
         }
     }
-    
+
     /**
      * Add ratings
      *
@@ -817,6 +817,6 @@ class Media implements SluggableInterface
         return $this->ratings;
     }
 
-    
+
 
 }

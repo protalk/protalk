@@ -19,10 +19,10 @@
 
 {% block body %}
 <h1>{{ page.title }}</h1>
-<p>{{ page.content|raw }}</p>
+<div id="pageContent">
+    <p>{{ page.content|raw }}</p>
+</div>
 {% endblock %}
-
-{# TODO: Work out max no. of Category, Tag and Speaker that can be displayed.  If retrieved rcords exceed this, display 'more' link (??) #}
 
 {% block rightcolumn %}
     {% include '::sidebar.html.twig' %}

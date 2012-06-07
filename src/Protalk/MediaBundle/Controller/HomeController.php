@@ -22,8 +22,8 @@ class HomeController extends Controller
         $numRows = $this->container->getParameter('home_lists_max');
 
         $latestMedia = $repository->getMediaOrderedBy('date', 1, $numRows);
-        $topViewedMedia = $repository->getMediaOrderedBy('visits', 1, $numRows);
-        $topRatedMedia = $repository->getMediaOrderedBy('rating', 1, $numRows);
+        $topViewedMedia = $repository->getMediaOrderedBy('visits', 1, $numRows + 2);
+        $topRatedMedia = $repository->getMediaOrderedBy('rating', 1, $numRows + 2);
 
         return array('latestMedia' => $latestMedia['results'] , 'topViewedMedia' => $topViewedMedia['results'], 'topRatedMedia' => $topRatedMedia['results']);
     }
