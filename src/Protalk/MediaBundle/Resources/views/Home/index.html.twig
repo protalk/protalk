@@ -41,7 +41,7 @@
 
 {% block rightcolumn %}
 <section>
-    <div id="tabControl">
+    <div id="tabControl" class="hidden">
         <ul>
             <li><a href="#viewed">TOP VISITED</a></li>
             <li><a href="#rated">TOP RATED</a></li>
@@ -97,6 +97,8 @@
     </div>
 </section>
 
-{% render "ProtalkMediaBundle:Sponsor:index" %}
+<div class="hidden">
+    {% render "ProtalkMediaBundle:Sponsor:index" %}
+</div>
 
 {% endblock %}

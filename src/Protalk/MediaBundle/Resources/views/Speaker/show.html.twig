@@ -1,12 +1,18 @@
 {% for speaker in speakers %}
 <div class="speakerBio">
-  <header>
-    {% if speaker.photo %}
-        <img id="speakerThumbNail" src="{{ asset(['images/photos/', speaker.photo]|join) }}" alt="Author Image"/>
-    {% endif %}
-    <span id="speakerName">{{ speaker.name }}</span>
+    <header>
+        {% if speaker.photo %}
+            <img id="speakerThumbNail" src="{{ asset(['images/photos/', speaker.photo]|join) }}" alt="Author Image"/>
+        {% endif %}
+        <span id="speakerName">{{ speaker.name }}</span>
 
-  </header>
-  <p>{{ speaker.biography}}</p>
+    </header>
+    <p>
+        {% if speaker.biography is empty %}
+            If you are {{ speaker.name }}, please <a href="mailto:info@protalk.me">email</a> your biography to us!  :)
+        {% else %}
+            {{ speaker.biography}}
+        {% endif %}
+    </p>
 </div>
 {% endfor %}

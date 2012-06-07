@@ -169,12 +169,16 @@ h2, h2 a, #speakerName {
     padding-bottom: 7px;
 }
 
-.speaker, .name {
+.speaker, .name, #source a, .speakerBio a, #pageContent a {
     color:#C2E078;
 }
 
-time, .metadata {
+time, .metadata, #source {
     color:#999999;
+}
+
+#source {
+    font-size: small;
 }
 
 #leftColumn {
@@ -261,7 +265,7 @@ time, .metadata {
 .tabMediaThumbNail img {
     width:98px;
     height:67px;
-    border: 8px solid #e4e4e4;
+    border: 3px solid #e4e4e4;
     -moz-border-radius: 7px;
     -webkit-border-radius: 7px;
     border-radius: 7px;
@@ -363,7 +367,7 @@ time, .metadata {
 }
 
 .yui3-tabview .yui3-tabview-content .yui3-tabview-panel {
-    height:625px;
+    height:795px;
 }
 
 div#ibuildingsLogo {
@@ -406,8 +410,8 @@ div#combellLogo:hover {
 }
 
 #sponsorLogoContainer {
-    height:200px;
-    margin-top:40px;
+    height:100px;
+    margin-top:30px;
 
 }
 
@@ -451,6 +455,10 @@ div#combellLogo:hover {
     float:left;
     width:379px;
     padding-left: 25px;
+}
+
+#copyright p {
+    padding-bottom:10px;
 }
 
 #followUs p {
@@ -712,12 +720,16 @@ a.tagButton:active span {
     float:left;
 }
 
+#audioPlayer {
+    width:532px;
+}
+
 /*  right column on detail page */
 #mediaSlidesSection {
     float:left;
     width:448px;
     padding-left: 10px;
-    padding-top: 92px;
+    padding-top: 65px;
 }
 
 #mediaSlidesSectionPodcast {
