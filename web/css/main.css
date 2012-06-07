@@ -716,12 +716,16 @@ a.tagButton:active span {
     float:left;
 }
 
+#audioPlayer {
+    width:532px;
+}
+
 /*  right column on detail page */
 #mediaSlidesSection {
     float:left;
     width:448px;
     padding-left: 10px;
-    padding-top: 92px;
+    padding-top: 65px;
 }
 
 #mediaSlidesSectionPodcast {
