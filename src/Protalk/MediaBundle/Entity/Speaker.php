@@ -158,14 +158,4 @@ class Speaker
     {
         return $this->name;
     }
-
-    /**
-     * Add medias
-     *
-     * @param Protalk\MediaBundle\Entity\Media_Speaker $medias
-     */
-    public function addMedia_Speaker(\Protalk\MediaBundle\Entity\Media_Speaker $medias)
-    {
-        $this->medias[] = $medias;
-    }
 }

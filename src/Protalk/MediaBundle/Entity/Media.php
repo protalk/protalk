@@ -532,16 +532,6 @@ class Media implements SluggableInterface
     }
 
     /**
-     * Add speakers
-     *
-     * @param Protalk\MediaBundle\Entity\Media_Speaker $speakers
-     */
-    public function addMedia_Speaker(\Protalk\MediaBundle\Entity\Media_Speaker $speakers)
-    {
-        $this->speakers[] = $speakers;
-    }
-
-    /**
      * Get one speaker's truncated name
      *
      * @param  integer Maximum allowed length of speaker name
