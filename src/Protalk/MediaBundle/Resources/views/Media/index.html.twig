@@ -28,7 +28,7 @@
             <section>
                 <article class="mediaLarge mediaDisplay">
                     <header>
-                        <h1 id="title" class="{{ media.slides is empty ? "wrap" : "nowrap" }}">{{media.title}}</h1>
+                        <h1 id="title" class="{{ (media.slides is empty or media.mediatype.type == "podcast") ? "wrap" : "nowrap" }}">{{media.title}}</h1>
                             <p><time datetime={{ media.date is empty ? "" : media.date|date("Y/m/d") }}>{{ media.date is empty ? "" : media.date|date("d M Y") }} by</time>
                             <span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.speakers.toArray|join(', ') }}</a></span><span id="duration">({{ media.length }})</span></p>
                     </header>
