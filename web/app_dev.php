@@ -9,7 +9,8 @@
 if (!in_array(@$_SERVER['REMOTE_ADDR'], array(
     '127.0.0.1',
     '::1',
-    '192.168.56.1'
+    '192.168.56.1',
+    '33.33.33.1',
 ))) {
     header('HTTP/1.0 403 Forbidden');
     exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
