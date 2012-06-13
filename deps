@@ -40,6 +40,7 @@
 [SensioFrameworkExtraBundle]
     git=http://github.com/sensio/SensioFrameworkExtraBundle.git
     target=/bundles/Sensio/Bundle/FrameworkExtraBundle
+    version=origin/2.0
 
 [JMSSecurityExtraBundle]
     git=http://github.com/schmittjoh/JMSSecurityExtraBundle.git
@@ -113,3 +114,7 @@
 
 [DoctrineSluggableBundle]
     git=https://github.com/samjarrett/DoctrineSluggableBundle.git
+
+[SonataDoctrineExtensions]
+    git=http://github.com/sonata-project/sonata-doctrine-extensions.git
+    target=/sonata-doctrine-extensions
