@@ -69,7 +69,7 @@ speaker_search:
     defaults: { _controller: ProtalkMediaBundle:Explore:speaker }
 
 media_show:
-    pattern:  /media/{slug}
+    pattern:  /{slug}
     defaults: { _controller: ProtalkMediaBundle:Media:index }
 
 fos_user_security:
