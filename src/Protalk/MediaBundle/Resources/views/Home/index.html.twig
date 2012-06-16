@@ -29,7 +29,7 @@
         </header>
         <p>{{ media.getTruncatedDescription() }}</p>
         <footer>
-            <span class="metadata">Rating: {% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span>
+            <p><span class="metadata">Rating: {% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span></p>
         </footer>
     </div>
 </article>

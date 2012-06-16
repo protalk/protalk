@@ -30,7 +30,7 @@
                     <header>
                         <h1 id="title" class="{{ (media.slides is empty or media.mediatype.type == "podcast") ? "wrap" : "nowrap" }}">{{media.title}}</h1>
                             <p><time datetime={{ media.date is empty ? "" : media.date|date("Y/m/d") }}>{{ media.date is empty ? "" : media.date|date("d M Y") }} by</time>
-                            <span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.speakers.toArray|join(', ') }}</a></span><span id="duration">({{ media.length }})</span></p>
+                            <span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.speakers.toArray|join(', ') }}</a></span><span id="duration">({{ media.length }})</span> <img src="{{ asset('images/binoculars.png') }}" alt="Binoculars Image"/><span class="metadata"> {{ media.visits }} {{ (media.visits == 1) ? "view" : "views" }}</span></p>
                     </header>
                     {% if media.mediatype.type == "podcast" %}
                     <embed id="audioPlayer" type="application/x-shockwave-flash" src="http://www.google.com/reader/ui/3523697345-audio-player.swf" quality="best" flashvars="audioUrl={{ media.content }}" width="450" height="27"></embed>

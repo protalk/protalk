@@ -254,8 +254,9 @@ time, .metadata, #source {
     color:#444444;
 }
 
-.tabMediaText p img {
+.tabMediaText p img, .mediaTextLarge p img, #mediaPlayerSection p img {
     vertical-align: middle;
+    padding-bottom: 3px;
 }
 
 .tabMediaThumbNail {
@@ -944,4 +945,8 @@ form ul {
 
 #button_rate_media {
     margin-left:5px;
+}
+
+#leftPaddingTen {
+    padding-left:10px;
 }
