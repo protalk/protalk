@@ -14,7 +14,6 @@ class ContributeMedia extends AbstractType
         $builder->add('hostUrl', 'url');
         $builder->add('hostName', 'text');
         $builder->add('title', 'text');
-        $builder->add('mediaUrl', 'url');
         $builder->add('slidesUrl', 'url', array('required' => false));
         $builder->add('speaker', 'text', array('required' => false));
         $builder->add('tags', 'text', array('required' => false));
