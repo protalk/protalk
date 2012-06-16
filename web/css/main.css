@@ -370,6 +370,11 @@ time, .metadata, #source {
     height:795px;
 }
 
+.yui3-tab-loading {
+background: url(../images/ajax-loader.gif) no-repeat center center;
+height:70px;
+}
+
 div#ibuildingsLogo {
     display: block;
     width: 168px;
@@ -403,22 +408,17 @@ div#combellLogo:hover {
 }
 
 #sponsorLogoContainer p {
-    color:#FFFFFF;
+    color:#999;
     font-family: Helvetica Neue, Helvetica;
     font-size:14px;
     font-weight:100;
+    text-align: center;
 }
 
 #sponsorLogoContainer {
     height:100px;
     margin-top:30px;
 
-}
-
-#sponsorLogoContainer p {
-    color:#999;
-    font-size:14px;
-    text-align: center;
 }
 
 #sponsorLogoContainer img {
@@ -935,7 +935,6 @@ form ul {
 }
 
 .hidden {
-    display: none;
     visibility: hidden;
 }
 
