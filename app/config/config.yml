@@ -42,6 +42,8 @@ doctrine:
         user:     %database_user%
         password: %database_password%
         charset:  UTF8
+        types:
+            json: Sonata\Doctrine\Types\JsonType 
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%
