@@ -13,8 +13,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Protalk\MediaBundle\Entity\CategoryRepository")
+ * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity("name")
- * 
+ *
  */
 class Category implements SluggableInterface
 {
