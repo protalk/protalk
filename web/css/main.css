@@ -169,6 +169,10 @@ h2, h2 a, #speakerName {
     color:#89B029;
 }
 
+#source a:hover, .speaker:hover, #pageContent a:hover {
+    color: #454546;
+}
+
 time, .metadata, #source {
     color:#999999;
 }
@@ -519,8 +523,9 @@ nav {
 }
 
 #tags {
-    height:300px;
+    height:310px;
     overflow: hidden;
+    padding-bottom:20px;
 }
 
 #speakers {
@@ -939,8 +944,24 @@ form ul {
 
 #button_rate_media {
     margin-left:5px;
+    margin-right: 0px;
 }
 
 #leftPaddingTen {
     padding-left:10px;
+
+#slidesLink {
+    float:left;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: normal;
+    font-size: small;
+    color: #999999;
+}
+
+#slidesLink a {
+    color: #C2E078;
+}
+
+#slidesLink a:hover {
+    color: #454546;
 }

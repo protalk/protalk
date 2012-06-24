@@ -43,23 +43,25 @@
         </div>
     </section>
 
-    {% if media.mediatype.type == "podcast" %}
+    {% if media.mediatype.type == "podcast" and media.slidesIsLink() == false %}
         <section>
             <div id="mediaSlidesSectionPodcast">
                 <section>
+
                     {{ media.slides|raw }}
+
                 </section>
             </div>
         </section>
     {% endif %}
 
-    {% if media.slides is empty or media.mediatype.type == "podcast" %}
+    {% if media.slides is empty or media.slidesIsLink() or media.mediatype.type == "podcast" %}
         {% include 'ProtalkMediaBundle:Media:mediaText.html.twig' %}
     {% endif %}
 {% endblock %}
 
 {% block rightcolumn %}
-    {% if media.slides is empty or media.mediatype.type == "podcast" %}
+    {% if media.slides is empty or media.slidesisLink() or media.mediatype.type == "podcast" %}
 {% include '::sidebar.html.twig' %}
     {% else %}
         <div id="mediaSlidesSection">
@@ -71,7 +73,7 @@
 {% endblock %}
 
 {% block moreContent %}
-    {% if media.slides != null and media.mediatype.type != "podcast" %}
+    {% if media.slides != null and media.slidesIsLink() != true and media.mediatype.type != "podcast" %}
         {% include 'ProtalkMediaBundle:Media:mediaText.html.twig' %}
     {% endif %}
 {% endblock %}

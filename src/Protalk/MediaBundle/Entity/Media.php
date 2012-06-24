@@ -817,6 +817,16 @@ class Media implements SluggableInterface
         return $this->ratings;
     }
 
+    /**
+     * Check whether value in slides field
+     * is a URL
+     *
+     * @return boolean
+     */
+    public function slidesIsLink()
+    {
+        $boolean = (substr($this->slides, 0, 4) == "http") ? true : false;
 
-
+        return $boolean;
+    }
 }
