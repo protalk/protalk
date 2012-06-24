@@ -13,6 +13,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Protalk\MediaBundle\Entity\CategoryRepository")
+ * @UniqueEntity("name")
+ * 
  */
 class Category implements SluggableInterface
 {
@@ -22,7 +24,6 @@ class Category implements SluggableInterface
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @UniqueEntity("name")
      *
      */
     private $id;
