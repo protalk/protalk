@@ -27,7 +27,7 @@
         </header>
         <p>{{ media.getTruncatedDescription() }}</p>
         <footer>
-            <p><img src="{{ asset('images/binoculars.png') }}" alt="Binoculars Image"/><span class="metadata"> {{ media.visits }} views</span>
+            <p><img src="{{ asset('images/binoculars.png') }}" alt="Binoculars Image"/><span class="metadata"> {{ media.visits }} {{ (media.visits == 1) ? "view" : "views" }}</span>
                <span id="leftPaddingTen">{% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span>
             </p>
         </footer>
