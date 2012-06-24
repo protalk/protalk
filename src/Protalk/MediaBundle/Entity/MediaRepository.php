@@ -119,23 +119,23 @@ class MediaRepository extends EntityRepository
     /**
      * Find media items by category
      *
-     * @param int $categoryId
+     * @param string $slug (category name)
      * @param string $orderField
      * @param int $page
      * @param int $max
      *
      * @return array Array with total and results
      */
-    public function findByCategory($categoryId, $orderField, $page, $max)
+    public function findByCategory($slug, $orderField, $page, $max)
     {
         $results = $this->getEntityManager()
                 ->createQuery('SELECT m
                                FROM ProtalkMediaBundle:Media m
                                JOIN m.categories c
-                               WHERE c.id = :catId
+                               WHERE c.slug = :slug
                                AND m.isPublished = 1
                                ORDER BY m.'.$orderField.' DESC')
-                ->setParameter('catId', $categoryId)
+                ->setParameter('slug', $slug)
                 ->getResult();
 
         return $this->getResultList($results, $page, $max);
@@ -202,7 +202,7 @@ class MediaRepository extends EntityRepository
         $media->setVisits($currentVisits + 1);
         $this->getEntityManager()->flush();
     }
-    
+
     /**
      * Get the average rating of a media item
      *

@@ -61,7 +61,7 @@ tag_search:
     defaults: { _controller: ProtalkMediaBundle:Explore:tag }
 
 category_search:
-    pattern:  /category/{id}
+    pattern:  /category/{slug}
     defaults: { _controller: ProtalkMediaBundle:Explore:category }
 
 speaker_search:
