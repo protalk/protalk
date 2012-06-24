@@ -144,23 +144,23 @@ class MediaRepository extends EntityRepository
     /**
      * Find media items by tag
      *
-     * @param int $tagId
+     * @param string $slug (tag name)
      * @param string $orderField
      * @param int $page
      * @param int $max
      *
      * @return array Array with total and results
      */
-    public function findByTag($tagId, $orderField, $page, $max)
+    public function findByTag($slug, $orderField, $page, $max)
     {
         $results = $this->getEntityManager()
                 ->createQuery('SELECT m
                                FROM ProtalkMediaBundle:Media m
                                JOIN m.tags t
-                               WHERE t.id = :tagId
+                               WHERE t.slug = :slug
                                AND m.isPublished = 1
                                ORDER BY m.'.$orderField.' DESC')
-                ->setParameter('tagId', $tagId)
+                ->setParameter('slug', $slug)
                 ->getResult();
 
         return $this->getResultList($results, $page, $max);

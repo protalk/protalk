@@ -55,10 +55,10 @@ class ExploreController extends Controller
     }
 
     /**
-     * @Route("/tag/{id}")
+     * @Route("/tag/{slug}")
      * @Template("ProtalkMediaBundle:Explore:result.html.twig")
      */
-    public function tagAction($id)
+    public function tagAction($slug)
     {
         $sort = 'date';
         if ($this->getRequest()->get('sort') != '') {
@@ -74,9 +74,9 @@ class ExploreController extends Controller
 
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
-        $results = $repository->findByTag($id, $sort, $page, $pageSize);
+        $results = $repository->findByTag($slug, $sort, $page, $pageSize);
 
-        return $this->_getViewParameters($results, 'id', $id, $sort, $page, $pageSize, 'tag_search');
+        return $this->_getViewParameters($results, 'slug', $slug, $sort, $page, $pageSize, 'tag_search');
     }
 
     /**
