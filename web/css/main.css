@@ -165,7 +165,7 @@ h2, h2 a, #speakerName {
     padding-bottom: 7px;
 }
 
-.speaker, .name, #source a, .speakerBio a, #pageContent a, .metadata span, .hilite {
+.speaker, .name, #source a, .speakerBio a, #pageContent a, .metadata span, .hilite, #slidesLink a {
     color:#89B029;
 }
 
@@ -949,6 +949,7 @@ form ul {
 
 #leftPaddingTen {
     padding-left:10px;
+}
 
 #slidesLink {
     float:left;
@@ -956,10 +957,6 @@ form ul {
     font-weight: normal;
     font-size: small;
     color: #999999;
-}
-
-#slidesLink a {
-    color: #C2E078;
 }
 
 #slidesLink a:hover {
