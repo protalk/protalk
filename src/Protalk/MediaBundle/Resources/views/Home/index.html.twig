@@ -35,7 +35,7 @@
 </article>
 {% endfor %}
 <div>
-    <a class="button" href="{{ path('search_results') }}"><span>MORE RECENT ITEMS</span></a>
+    <a class="button" href="{{ path('search_results', { 'sort': 'date' }) }}"><span>MORE RECENT ITEMS</span></a>
 </div>
 {% endblock %}
 
@@ -66,7 +66,7 @@
                 </article>
                 {% endfor %}
                 <div>
-                    <a class="button" href="{{ path('search_results') }}"><span>TOP VISITED ITEMS</span></a>
+                    <a class="button" href="{{ path('search_results', { 'sort': 'visits' } ) }}"><span>TOP VISITED ITEMS</span></a>
                 </div>
             </div>
 
@@ -89,7 +89,7 @@
                 </article>
                 {% endfor %}
                 <div>
-                    <a class="button" href="{{ path('search_results') }}"><span>TOP RATED ITEMS</span></a>
+                    <a class="button" href="{{ path('search_results', { 'sort': 'rating' }) }}"><span>TOP RATED ITEMS</span></a>
                 </div>
             </div>
         </div>
