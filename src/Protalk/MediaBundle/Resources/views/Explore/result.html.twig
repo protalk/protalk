@@ -7,8 +7,8 @@
 {% endblock %}
 
 {% block body %}
-{% if app.request.get('search') is defined and app.request.get('search') != '' %}
-    <h1 id="resultHeading">You have searched for '{{ app.request.get('search') }}'</h1>
+{% if search is defined and search != '' %}
+    <h1 id="resultHeading">You have searched for '{{ search }}'</h1>
     <h1>SHOWING {% if total > 0 %}<span class="hilite">{% if total < paginator.limit %}{{ total }}{% else %}{{ paginator.limit }}{% endif %}</span> OF {% endif %}<span class="hilite">{{ total }}</span> RESULTS</h1>
 {% else %}
     <h1 id="resultHeading">SHOWING {% if total > 0 %}<span class="hilite">{% if total < paginator.limit %}{{ total }}{% else %}{{ paginator.limit }}{% endif %}</span> OF {% endif %}<span class="hilite">{{ total }}</span> RESULTS</h1>

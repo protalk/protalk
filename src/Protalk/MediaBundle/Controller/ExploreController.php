@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Protalk\MediaBundle\Helpers\Paginator;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class ExploreController extends Controller
 {
@@ -19,27 +21,17 @@ class ExploreController extends Controller
     }
 
     /**
-     * @Route("/result")
+     * @Route("/result/{search}/{sort}/{page}", name="search_results", defaults={"search" = "", "sort" = "date", "page" = 1})
      * @Template()
      */
-    public function resultAction()
+    public function resultAction($search, $sort, $page)
     {
         $pageSize = $this->container->getParameter('search_results_page');
+        $request = Request::createFromGlobals();
 
-        $search = '';
-        if ($this->getRequest()->get('search') != '') {
-            $search = $this->getRequest()->get('search');
-        }
-
-        $sort = 'date';
-        if ($this->getRequest()->get('sort') != '') {
-            $sort = $this->getRequest()->get('sort');
-        }
-
-        $page = 1;
-        if ($this->getRequest()->get('page') != '') {
-            $page = $this->getRequest()->get('page');
-        }
+        $search = $request->request->get('search', $search);
+        $sort = $this->getRequest()->get('sort');
+        $page = $this->getRequest()->get('page');
 
         $results = array();
         $em = $this->getDoctrine()->getEntityManager();
@@ -143,9 +135,11 @@ class ExploreController extends Controller
      */
     private function _getViewParameters($results, $searchField, $search, $sort, $page, $pageSize, $route)
     {
+        //var_dump($searchField);die;
         $paginator = new Paginator($results['total'], $page , $pageSize, 7);
         $results['paginator'] = $paginator;
         $results['baseUrl'] = $this->get('router')->generate($route, array($searchField => $search, 'sort' => $sort));
+        $results[$searchField] = $search;
 
         return $results;
     }
