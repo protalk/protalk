@@ -7,31 +7,32 @@
 {% endblock %}
 
 {% block body %}
-{% if search is defined and search != '' %}
-    <h1 id="resultHeading">You have searched for '{{ search }}'</h1>
+{% if app.request.get('search') is defined and app.request.get('search') != '' %}
+    <h1 id="resultHeading">You have searched for '{{ app.request.get('search') }}'</h1>
     <h1>SHOWING {% if total > 0 %}<span class="hilite">{% if total < paginator.limit %}{{ total }}{% else %}{{ paginator.limit }}{% endif %}</span> OF {% endif %}<span class="hilite">{{ total }}</span> RESULTS</h1>
 {% else %}
     <h1 id="resultHeading">SHOWING {% if total > 0 %}<span class="hilite">{% if total < paginator.limit %}{{ total }}{% else %}{{ paginator.limit }}{% endif %}</span> OF {% endif %}<span class="hilite">{{ total }}</span> RESULTS</h1>
 {% endif %}
 
 {% for media in results %}
+    <article class="mediaLarge">
+        <div class="mediaThumbNailLarge">
+            <a href="{{ path('media_show', { 'slug': media.slug }) }}"><img src="{{ media.displayThumbnail() }}" alt="Media ThumbNail Image"/></a>
+        </div>
+        <div class="mediaTextLarge">
+            <header>
+                <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.getTruncatedTitle(34) }}</a></h2>
+                <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.getTruncatedSpeaker(20) }}</a></span></p>
+            </header>
+            <p>{{ media.getTruncatedDescription() }}</p>
+            <footer>
+                <p><img src="{{ asset('images/binoculars.png') }}" alt="Binoculars Image"/><span class="metadata"> {{ media.visits }} {{ (media.visits == 1) ? "view" : "views" }}</span>
+                   <span id="leftPaddingTen">{% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span>
+                </p>
+            </footer>
+        </div>
 
-<article class="mediaLarge">
-    <div class="mediaThumbNailLarge">
-        <a href="{{ path('media_show', { 'slug': media.slug }) }}"><img src="{{ media.displayThumbnail() }}" alt="Media ThumbNail Image"/></a>
-    </div>
-    <div class="mediaTextLarge">
-        <header>
-            <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.getTruncatedTitle(34) }}</a></h2>
-            <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.getTruncatedSpeaker(20) }}</a></span></p>
-        </header>
-        <p>{{ media.getTruncatedDescription() }}</p>
-        <footer>
-            <span class="metadata">Rating: {% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span>
-        </footer>
-    </div>
-
-</article>
+    </article>
 {% endfor %}
 
 {% if total > 0 %}

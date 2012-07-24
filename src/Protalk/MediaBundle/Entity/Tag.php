@@ -2,14 +2,19 @@
 
 namespace Protalk\MediaBundle\Entity;
 
+use SamJ\DoctrineSluggableBundle\SluggableInterface;
+use SamJ\DoctrineSluggableBundle\Slugger;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Protalk\MediaBundle\Entity\Tag
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Protalk\MediaBundle\Entity\TagRepository")
+ * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity("name")
  */
 class Tag
 {
@@ -25,7 +30,7 @@ class Tag
     /**
      * @var string $name
      *
-     * @ORM\Column(name="name", type="string", length=50)
+     * @ORM\Column(name="name", type="string", length=50, unique=true)
      */
     private $name;
 
@@ -35,9 +40,16 @@ class Tag
      * @ORM\ManyToMany(targetEntity="Media", mappedBy="tags")
      */
     private $medias;
-    
+
+     /**
+     * @var string $slug
+     *
+     * @ORM\Column(type="string")
+     */
+    private $slug;
+
     /**
-     * Constructor 
+     * Constructor
      */
     public function __construct()
     {
@@ -102,5 +114,39 @@ class Tag
     public function getMedias()
     {
         return $this->medias;
+    }
+
+    /*
+     * Set slug
+     *
+     * @param string $slug
+     */
+
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /*
+     * Get slug fields
+     *
+     * @return string
+     */
+
+    public function getSlugFields() {
+        return $this->getName();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateSlug()
+    {
+
+        $slugger = new Slugger();
+
+        $slug = $slugger->getSlug($this->getSlugFields());
+
+        return $this->setSlug($slug);
     }
 }

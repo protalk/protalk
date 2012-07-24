@@ -29,7 +29,7 @@
         </header>
         <p>{{ media.getTruncatedDescription() }}</p>
         <footer>
-            <span class="metadata">Rating: {% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span>
+            <p><span class="metadata">Rating: {% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span></p>
         </footer>
     </div>
 </article>
@@ -92,7 +92,6 @@
                     <a class="button" href="{{ path('search_results', { 'sort': 'rating' }) }}"><span>TOP RATED ITEMS</span></a>
                 </div>
             </div>
-
         </div>
     </div>
 </section>

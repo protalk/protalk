@@ -57,11 +57,11 @@ search_results:
     defaults: { _controller: ProtalkMediaBundle:Explore:result }
 
 tag_search:
-    pattern:  /tag/{id}
+    pattern:  /tag/{slug}
     defaults: { _controller: ProtalkMediaBundle:Explore:tag }
 
 category_search:
-    pattern:  /category/{id}
+    pattern:  /category/{slug}
     defaults: { _controller: ProtalkMediaBundle:Explore:category }
 
 speaker_search:
@@ -69,7 +69,7 @@ speaker_search:
     defaults: { _controller: ProtalkMediaBundle:Explore:speaker }
 
 media_show:
-    pattern:  /media/{slug}
+    pattern:  /{slug}
     defaults: { _controller: ProtalkMediaBundle:Media:index }
 
 fos_user_security:

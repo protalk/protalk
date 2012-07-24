@@ -3,7 +3,13 @@
 {% endif %}
 {% for comment in comments %}
     <article class="comment">
-        <p><time datetime="{{ comment.datetime|date("Y/m/d")}}" >{{ comment.datetime|date("d M Y") }} by </time><span class="name">{{ comment.author }}</span></p>
+        <p><time datetime="{{ comment.datetime|date("Y/m/d")}}" >{{ comment.datetime|date("d M Y") }} by </time>
+            {% if comment.website is empty %}
+                <span class="name">{{comment.author}}</span>
+            {% else %}
+                <a href="{{comment.website}}"><span class="name">{{comment.author}}</span></a>
+            {% endif %}
+        </p>
         <p class="commentText">{{ comment.content }}</p>
     </article>
 {% endfor %}
