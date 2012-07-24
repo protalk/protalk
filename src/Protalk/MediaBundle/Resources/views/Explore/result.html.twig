@@ -35,7 +35,7 @@
     </article>
 {% endfor %}
 
-{% if total > 0 %}
+{% if total > 0 and paginator.numpages > 1 %}
 <div id="pagerContainer">
     <span class="pagerText">PAGE {{ paginator.currentpage }} OF {{ paginator.numpages }}</span>
     <ul>
