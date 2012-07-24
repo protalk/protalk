@@ -71,6 +71,10 @@ speaker_search:
 media_show:
     pattern:  /{slug}
     defaults: { _controller: ProtalkMediaBundle:Media:index }
+    
+rss:
+    pattern: /feed
+    defaults: { _controller: ProtalkMediaBundle:Home:rss }
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
