@@ -1,5 +1,17 @@
 {% extends "::base.html.twig" %}
 
+{% block javascriptsHead %}
+    {{ parent() }}
+
+    <script>
+    var protalk = {
+        baseurl : {{ url('_home')|json_encode|raw }}
+    }
+    </script>
+
+    <script src="{{ asset('js/page.js') }}"></script>
+{% endblock %}
+
 {% block title "Search results" %}
 
 {% block bluestrip %}
@@ -7,12 +19,27 @@
 {% endblock %}
 
 {% block body %}
-{% if search is defined and search != '' %}
-    <h1 id="resultHeading">You have searched for '{{ search }}'</h1>
-    <h1>SHOWING {% if total > 0 %}<span class="hilite">{% if total < paginator.limit %}{{ total }}{% else %}{{ paginator.limit }}{% endif %}</span> OF {% endif %}<span class="hilite">{{ total }}</span> RESULTS</h1>
-{% else %}
-    <h1 id="resultHeading">SHOWING {% if total > 0 %}<span class="hilite">{% if total < paginator.limit %}{{ total }}{% else %}{{ paginator.limit }}{% endif %}</span> OF {% endif %}<span class="hilite">{{ total }}</span> RESULTS</h1>
+<div id="resultHeading">
+    {% if search is defined and search != null %}
+        <h1>You have searched for '{{ search }}'</h1>
+    {% endif %}
+    <h1>SHOWING {% if total > 0 %}<span class="hilite">{% if total < paginator.limit %}{{ total }}{% else %}{{ results|length }}{% endif %}</span> OF {% endif %}<span class="hilite">{{ total }}</span> RESULTS</h1>
+</div>
+
+{% if total > 1 %}
+    <select id="sortOptions" class="form_field">
+        <option>Select a sort option</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'title', 'search':  search, 'order': 'asc', 'page': paginator.currentpage } ) }}">title (a - z)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'title', 'search':  search, 'order': 'desc', 'page': paginator.currentpage } ) }}">title (z - a)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'date', 'search':  search, 'order': 'asc', 'page': paginator.currentpage} ) }}">date (asc)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'date', 'search':  search, 'order': 'desc', 'page': paginator.currentpage } ) }}">date (desc)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'visits', 'search':  search, 'order': 'asc', 'page': paginator.currentpage } ) }}">visits (asc)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'visits', 'search':  search, 'order': 'desc', 'page': paginator.currentpage } ) }}">visits (desc)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'rating', 'search':  search, 'order': 'asc', 'page': paginator.currentpage } ) }}">rating (asc)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'rating', 'search':  search, 'order': 'desc', 'page': paginator.currentpage } ) }}">rating (desc)</option>
+    </select>
 {% endif %}
+
 
 {% for media in results %}
     <article class="mediaLarge">

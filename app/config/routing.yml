@@ -52,14 +52,6 @@ explore:
     pattern:  /explore
     defaults: { _controller: ProtalkMediaBundle:Explore:index }
 
-tag_search:
-    pattern:  /tag/{slug}
-    defaults: { _controller: ProtalkMediaBundle:Explore:tag }
-
-category_search:
-    pattern:  /category/{slug}
-    defaults: { _controller: ProtalkMediaBundle:Explore:category }
-
 speaker_search:
     pattern:  /search/speaker/{id}
     defaults: { _controller: ProtalkMediaBundle:Explore:speaker }

@@ -21,79 +21,80 @@ class ExploreController extends Controller
     }
 
     /**
-     * @Route("/result/{search}/{sort}/{page}", name="search_results", defaults={"search" = "", "sort" = "date", "page" = 1})
+     * @Route("/result/{search}/{sort}/{order}", name="search_results", defaults={"search" = null, "sort" = "date", "order" = null })
      * @Template()
      */
-    public function resultAction($search, $sort, $page)
+    public function resultAction($search, $sort, $order)
     {
         $pageSize = $this->container->getParameter('search_results_page');
         $request = Request::createFromGlobals();
 
         $search = $request->request->get('search', $search);
-        $sort = $this->getRequest()->get('sort');
-        $page = $this->getRequest()->get('page');
+        $page = ($this->getRequest()->get('page')) ? $this->getRequest()->get('page') : 1;
+
+        if (null == $order) {
+            $order = ($sort == 'title') ? 'ASC' : 'DESC';
+        } else {
+            $order = $this->getRequest()->get('order');
+        }
 
         $results = array();
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
 
-        if ('' == $search) {
-            $results = $repository->getMediaOrderedBy($sort, $page, $pageSize);
+        if (null == $search) {
+            $results = $repository->getMediaOrderedBy($sort, $page, $pageSize, $order);
         } else {
-            $results = $repository->findMedia($search, $sort, $page, $pageSize);
+            $results = $repository->findMedia($search, $sort, $page, $pageSize, $order);
         }
 
-        return $this->_getViewParameters($results, 'search', $search, $sort, $page, $pageSize, 'search_results');
+        return $this->_getViewParameters($results, 'search', $search, $sort, $page, $pageSize, 'search_results', $order);
     }
 
     /**
-     * @Route("/tag/{slug}")
+     * @Route("/tag/{search}/{sort}/{order}", name="tag_search", defaults={"sort" = "date", "order" = null })")
      * @Template("ProtalkMediaBundle:Explore:result.html.twig")
      */
-    public function tagAction($slug)
+    public function tagAction($search, $sort, $order)
     {
-        $sort = 'date';
-        if ($this->getRequest()->get('sort') != '') {
-            $sort = $this->getRequest()->get('sort');
-        }
+        $page = ($this->getRequest()->get('page')) ? $this->getRequest()->get('page') : 1;
 
-        $page = 1;
-        if ($this->getRequest()->get('page') != '') {
-            $page = $this->getRequest()->get('page');
+        if (null == $order) {
+            $order = ($sort == 'title') ? 'ASC' : 'DESC';
+        } else {
+            $order = $this->getRequest()->get('order');
         }
 
         $pageSize = $this->container->getParameter('search_results_page');
 
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
-        $results = $repository->findByTag($slug, $sort, $page, $pageSize);
+        $results = $repository->findByTag($search, $sort, $page, $pageSize, $order);
 
-        return $this->_getViewParameters($results, 'slug', $slug, $sort, $page, $pageSize, 'tag_search');
+        return $this->render(
+                'ProtalkMediaBundle:Explore:result.html.twig',
+                $this->_getViewParameters($results, 'search', $search, $sort, $page, $pageSize, 'tag_search', $order)
+            );
     }
 
     /**
-     * @Route("/category/{slug}")
+     * @Route("/category/{search}/{sort}/{order}", name="category_search", defaults={"sort" = "date", "order" = null })")
      * @Template("ProtalkMediaBundle:Explore:result.html.twig")
      */
-    public function categoryAction($slug)
+    public function categoryAction($search, $sort, $order)
     {
-        $sort = 'date';
-        if ($this->getRequest()->get('sort') != '') {
-            $sort = $this->getRequest()->get('sort');
-        }
-
-        $page = 1;
-        if ($this->getRequest()->get('page') != '') {
-            $page = $this->getRequest()->get('page');
-        }
+        $page = ($this->getRequest()->get('page')) ? $this->getRequest()->get('page') : 1;
 
         $pageSize = $this->container->getParameter('search_results_page');
 
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
-        $results = $repository->findByCategory($slug, $sort, $page, $pageSize);
+        $results = $repository->findByCategory($search, $sort, $page, $pageSize, $order);
 
-        return $this->_getViewParameters($results, 'slug', $slug, $sort, $page, $pageSize, 'category_search');
+        return $this->render(
+                'ProtalkMediaBundle:Explore:result.html.twig',
+                $this->_getViewParameters($results, 'search', $search, $sort, $page, $pageSize, 'category_search', $order)
+            );
     }
 
     /**
@@ -130,12 +131,12 @@ class ExploreController extends Controller
      * @param int        $page
      * @param int        $pageSize
      * @param string     $route
+     * @param string     $order
      *
      * @return array
      */
-    private function _getViewParameters($results, $searchField, $search, $sort, $page, $pageSize, $route)
+    private function _getViewParameters($results, $searchField, $search, $sort, $page, $pageSize, $route, $order)
     {
-        //var_dump($searchField);die;
         $paginator = new Paginator($results['total'], $page , $pageSize, 7);
         $results['paginator'] = $paginator;
         $results['baseUrl'] = $this->get('router')->generate($route, array($searchField => $search, 'sort' => $sort));
