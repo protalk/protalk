@@ -129,7 +129,7 @@ class MediaRepository extends EntityRepository
      *
      * @return array Array with total and results
      */
-    public function findByCategory($slug, $orderField, $page, $max, $order)
+    public function findByCategory($slug, $orderField, $page, $max, $order = 'DESC')
     {
         $results = $this->getEntityManager()
                 ->createQuery('SELECT m
@@ -155,7 +155,7 @@ class MediaRepository extends EntityRepository
      *
      * @return array Array with total and results
      */
-    public function findByTag($slug, $orderField, $page, $max, $order)
+    public function findByTag($slug, $orderField, $page, $max, $order = 'DESC')
     {
         $results = $this->getEntityManager()
                 ->createQuery('SELECT m

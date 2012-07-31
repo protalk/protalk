@@ -21,7 +21,7 @@ class ExploreController extends Controller
     }
 
     /**
-     * @Route("/result/{search}/{sort}/{order}", name="search_results", defaults={"search" = null, "sort" = "date", "order" = null })
+     * @Route("/result/{search}/{sort}/{order}", name="search_results", defaults={"search" = null, "sort" = "date", "order" = "desc" })
      * @Template()
      */
     public function resultAction($search, $sort, $order)
@@ -30,13 +30,8 @@ class ExploreController extends Controller
         $request = Request::createFromGlobals();
 
         $search = $request->request->get('search', $search);
+        $order = $request->request->get('order', $order);
         $page = ($this->getRequest()->get('page')) ? $this->getRequest()->get('page') : 1;
-
-        if (null == $order) {
-            $order = ($sort == 'title') ? 'ASC' : 'DESC';
-        } else {
-            $order = $this->getRequest()->get('order');
-        }
 
         $results = array();
         $em = $this->getDoctrine()->getEntityManager();
@@ -52,20 +47,16 @@ class ExploreController extends Controller
     }
 
     /**
-     * @Route("/tag/{search}/{sort}/{order}", name="tag_search", defaults={"sort" = "date", "order" = null })")
+     * @Route("/tag/{search}/{sort}/{order}", name="tag_search", defaults={"sort" = "date", "order" = "desc" })")
      * @Template("ProtalkMediaBundle:Explore:result.html.twig")
      */
     public function tagAction($search, $sort, $order)
     {
-        $page = ($this->getRequest()->get('page')) ? $this->getRequest()->get('page') : 1;
-
-        if (null == $order) {
-            $order = ($sort == 'title') ? 'ASC' : 'DESC';
-        } else {
-            $order = $this->getRequest()->get('order');
-        }
-
         $pageSize = $this->container->getParameter('search_results_page');
+        $request = Request::createFromGlobals();
+
+        $order = $request->request->get('order', $order);
+        $page = ($this->getRequest()->get('page')) ? $this->getRequest()->get('page') : 1;
 
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
@@ -78,14 +69,16 @@ class ExploreController extends Controller
     }
 
     /**
-     * @Route("/category/{search}/{sort}/{order}", name="category_search", defaults={"sort" = "date", "order" = null })")
+     * @Route("/category/{search}/{sort}/{order}", name="category_search", defaults={"sort" = "date", "order" = "desc" })
      * @Template("ProtalkMediaBundle:Explore:result.html.twig")
      */
     public function categoryAction($search, $sort, $order)
     {
-        $page = ($this->getRequest()->get('page')) ? $this->getRequest()->get('page') : 1;
-
         $pageSize = $this->container->getParameter('search_results_page');
+        $request = Request::createFromGlobals();
+
+        $order = $request->request->get('order', $order);
+        $page = ($this->getRequest()->get('page')) ? $this->getRequest()->get('page') : 1;
 
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
