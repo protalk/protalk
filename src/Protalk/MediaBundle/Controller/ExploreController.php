@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Protalk\MediaBundle\Helpers\Paginator;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class ExploreController extends Controller
 {
@@ -19,89 +21,73 @@ class ExploreController extends Controller
     }
 
     /**
-     * @Route("/result")
+     * @Route("/result/{search}/{sort}/{order}", name="search_results", defaults={"search" = null, "sort" = "date", "order" = "desc" })
      * @Template()
      */
-    public function resultAction()
+    public function resultAction($search, $sort, $order)
     {
         $pageSize = $this->container->getParameter('search_results_page');
+        $request = Request::createFromGlobals();
 
-        $search = '';
-        if ($this->getRequest()->get('search') != '') {
-            $search = $this->getRequest()->get('search');
-        }
-
-        $sort = 'date';
-        if ($this->getRequest()->get('sort') != '') {
-            $sort = $this->getRequest()->get('sort');
-        }
-
-        $page = 1;
-        if ($this->getRequest()->get('page') != '') {
-            $page = $this->getRequest()->get('page');
-        }
+        $search = $request->request->get('search', $search);
+        $order = $request->request->get('order', $order);
+        $page = ($this->getRequest()->get('page')) ? $this->getRequest()->get('page') : 1;
 
         $results = array();
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
 
-        if ('' == $search) {
-            $results = $repository->getMediaOrderedBy($sort, $page, $pageSize);
+        if (null == $search) {
+            $results = $repository->getMediaOrderedBy($sort, $page, $pageSize, $order);
         } else {
-            $results = $repository->findMedia($search, $sort, $page, $pageSize);
+            $results = $repository->findMedia($search, $sort, $page, $pageSize, $order);
         }
 
-        return $this->_getViewParameters($results, 'search', $search, $sort, $page, $pageSize, 'search_results');
+        return $this->_getViewParameters($results, 'search', $search, $sort, $page, $pageSize, 'search_results', $order);
     }
 
     /**
-     * @Route("/tag/{slug}")
+     * @Route("/tag/{search}/{sort}/{order}", name="tag_search", defaults={"sort" = "date", "order" = "desc" })")
      * @Template("ProtalkMediaBundle:Explore:result.html.twig")
      */
-    public function tagAction($slug)
+    public function tagAction($search, $sort, $order)
     {
-        $sort = 'date';
-        if ($this->getRequest()->get('sort') != '') {
-            $sort = $this->getRequest()->get('sort');
-        }
-
-        $page = 1;
-        if ($this->getRequest()->get('page') != '') {
-            $page = $this->getRequest()->get('page');
-        }
-
         $pageSize = $this->container->getParameter('search_results_page');
+        $request = Request::createFromGlobals();
+
+        $order = $request->request->get('order', $order);
+        $page = ($this->getRequest()->get('page')) ? $this->getRequest()->get('page') : 1;
 
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
-        $results = $repository->findByTag($slug, $sort, $page, $pageSize);
+        $results = $repository->findByTag($search, $sort, $page, $pageSize, $order);
 
-        return $this->_getViewParameters($results, 'slug', $slug, $sort, $page, $pageSize, 'tag_search');
+        return $this->render(
+                'ProtalkMediaBundle:Explore:result.html.twig',
+                $this->_getViewParameters($results, 'search', $search, $sort, $page, $pageSize, 'tag_search', $order)
+            );
     }
 
     /**
-     * @Route("/category/{slug}")
+     * @Route("/category/{search}/{sort}/{order}", name="category_search", defaults={"sort" = "date", "order" = "desc" })
      * @Template("ProtalkMediaBundle:Explore:result.html.twig")
      */
-    public function categoryAction($slug)
+    public function categoryAction($search, $sort, $order)
     {
-        $sort = 'date';
-        if ($this->getRequest()->get('sort') != '') {
-            $sort = $this->getRequest()->get('sort');
-        }
-
-        $page = 1;
-        if ($this->getRequest()->get('page') != '') {
-            $page = $this->getRequest()->get('page');
-        }
-
         $pageSize = $this->container->getParameter('search_results_page');
+        $request = Request::createFromGlobals();
+
+        $order = $request->request->get('order', $order);
+        $page = ($this->getRequest()->get('page')) ? $this->getRequest()->get('page') : 1;
 
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
-        $results = $repository->findByCategory($slug, $sort, $page, $pageSize);
+        $results = $repository->findByCategory($search, $sort, $page, $pageSize, $order);
 
-        return $this->_getViewParameters($results, 'slug', $slug, $sort, $page, $pageSize, 'category_search');
+        return $this->render(
+                'ProtalkMediaBundle:Explore:result.html.twig',
+                $this->_getViewParameters($results, 'search', $search, $sort, $page, $pageSize, 'category_search', $order)
+            );
     }
 
     /**
@@ -138,14 +124,16 @@ class ExploreController extends Controller
      * @param int        $page
      * @param int        $pageSize
      * @param string     $route
+     * @param string     $order
      *
      * @return array
      */
-    private function _getViewParameters($results, $searchField, $search, $sort, $page, $pageSize, $route)
+    private function _getViewParameters($results, $searchField, $search, $sort, $page, $pageSize, $route, $order)
     {
         $paginator = new Paginator($results['total'], $page , $pageSize, 7);
         $results['paginator'] = $paginator;
         $results['baseUrl'] = $this->get('router')->generate($route, array($searchField => $search, 'sort' => $sort));
+        $results[$searchField] = $search;
 
         return $results;
     }

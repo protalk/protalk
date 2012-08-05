@@ -6,33 +6,33 @@
 
 
 YUI({
-  groups: {
-    protalk: {
-      base:  protalk.baseurl,
+    groups: {
+        protalk: {
+            base:  protalk.baseurl,
 
-      modules: {
+            modules: {
 
-        'protalk-io': {
-          fullpath: "/js/moduleIO.js",
-          requires: ["base-build", "io-base", "io-form", "widget", "json-parse"]
-        },
-        'protalk-panel': {
-          fullpath: "/js/modulePanel.js",
-          requires: [ "base-build", "panel", "protalk-io", "dd-plugin"]
+                'protalk-io': {
+                    fullpath: "/js/moduleIO.js",
+                    requires: ["base-build", "io-base", "io-form", "widget", "json-parse"]
+                },
+                'protalk-panel': {
+                    fullpath: "/js/modulePanel.js",
+                    requires: [ "base-build", "panel", "protalk-io", "dd-plugin"]
+                }
+            }
         }
-      }
-    }
-  },
+    },
 
 
-  combine: true
+    combine: true
 
 }).use( 'protalk-io', 'protalk-panel', 'node-event-delegate',   function(Y) {
 
 
 
 
-  var bodyContainer  = Y.one('#bodyContainer');
+    var bodyContainer  = Y.one('#bodyContainer');
 
 
 
@@ -41,31 +41,29 @@ YUI({
 
     bodyContainer.delegate('click', function(e) {
 
-      e.preventDefault();
-      Y.log(e.currentTarget.getAttribute('href'));
+        e.preventDefault();
+        Y.log(e.currentTarget.getAttribute('href'));
 
 
-    //retrieve & display relevant form partial from server
-    var panel = new Y.ProTalk.Panel({
-      panelType: 'dialog',
-      panelTitle: 'Speaker Biography',
-      getUrl : e.currentTarget.getAttribute('href')
-    });
+        //retrieve & display relevant form partial from server
+        var panel = new Y.ProTalk.Panel({
+            panelType: 'dialog',
+            panelTitle: 'Speaker Biography',
+            getUrl : e.currentTarget.getAttribute('href')
+        });
 
     }, '.speaker');
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+    Y.on('available', function(e) {
+        var sort = Y.one('#sortOptions');
+        sort.on('change', function(e) {
+            var index = sort.get('selectedIndex');
+            if(index > 0) {
+                var url = sort.get("options").item(index).getAttribute('data-url');
+                window.location = url;
+            }
+        })
+    }, '#sortOptions');
 });

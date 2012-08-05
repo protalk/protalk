@@ -188,7 +188,7 @@ time, .metadata, #source {
     float:left;
 }
 
-#resultHeading {
+#resultHeading > h1:nth-child(1)  {
     margin-top:56px;
 }
 
@@ -961,4 +961,11 @@ form ul {
 
 #slidesLink a:hover {
     color: #454546;
+}
+
+#sortOptions {
+    height: 28px;
+    width:165px;
+    left:0;
+    margin-bottom:10px;
 }
