@@ -21,7 +21,7 @@ class ExploreController extends Controller
     }
 
     /**
-     * @Route("/result/{search}/{sort}/{order}", name="search_results", defaults={"search" = null, "sort" = "date", "order" = "desc" })
+     * @Route("/result/{search}/{sort}/{order}", name="search_results", defaults={"search" = "all", "sort" = "date", "order" = "desc" })
      * @Template()
      */
     public function resultAction($search, $sort, $order)
@@ -37,7 +37,7 @@ class ExploreController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
 
-        if (null == $search) {
+        if ('all' == $search) {
             $results = $repository->getMediaOrderedBy($sort, $page, $pageSize, $order);
         } else {
             $results = $repository->findMedia($search, $sort, $page, $pageSize, $order);
@@ -132,8 +132,10 @@ class ExploreController extends Controller
     {
         $paginator = new Paginator($results['total'], $page , $pageSize, 7);
         $results['paginator'] = $paginator;
-        $results['baseUrl'] = $this->get('router')->generate($route, array($searchField => $search, 'sort' => $sort));
         $results[$searchField] = $search;
+        $results['order'] = $order;
+        $results['sort'] = $sort;
+        $results['sortOption'] = $sort.' '.$order;
 
         return $results;
     }
