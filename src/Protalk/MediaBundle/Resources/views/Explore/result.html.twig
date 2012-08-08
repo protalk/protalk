@@ -20,23 +20,26 @@
 
 {% block body %}
 <div id="resultHeading">
-    {% if search is defined and search != null %}
+    {% if search is defined and search != 'all' %}
         <h1>You have searched for '{{ search }}'</h1>
     {% endif %}
     <h1>SHOWING {% if total > 0 %}<span class="hilite">{% if total < paginator.limit %}{{ total }}{% else %}{{ results|length }}{% endif %}</span> OF {% endif %}<span class="hilite">{{ total }}</span> RESULTS</h1>
 </div>
 
+{# set search var for use in sort and pagination code (necessary if search button pressed with no criteria entered) #}
+{% set search = search is empty ? 'all' : search %}
+
 {% if total > 1 %}
     <select id="sortOptions" class="form_field">
         <option>Select a sort option</option>
-        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'title', 'search':  search, 'order': 'asc', 'page': paginator.currentpage } ) }}">title (a - z)</option>
-        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'title', 'search':  search, 'order': 'desc', 'page': paginator.currentpage } ) }}">title (z - a)</option>
-        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'date', 'search':  search, 'order': 'asc', 'page': paginator.currentpage} ) }}">date (asc)</option>
-        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'date', 'search':  search, 'order': 'desc', 'page': paginator.currentpage } ) }}">date (desc)</option>
-        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'visits', 'search':  search, 'order': 'asc', 'page': paginator.currentpage } ) }}">visits (asc)</option>
-        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'visits', 'search':  search, 'order': 'desc', 'page': paginator.currentpage } ) }}">visits (desc)</option>
-        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'rating', 'search':  search, 'order': 'asc', 'page': paginator.currentpage } ) }}">rating (asc)</option>
-        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'rating', 'search':  search, 'order': 'desc', 'page': paginator.currentpage } ) }}">rating (desc)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'title', 'search':  search, 'order': 'asc', 'page': paginator.currentpage } ) }}" {{ sortOption == 'title asc' ? "selected" : ''}}>Sort by title (a - z)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'title', 'search':  search, 'order': 'desc', 'page': paginator.currentpage } ) }}" {{ sortOption == 'title desc' ? "selected" : ''}}>Sort by title (z - a)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'date', 'search':  search, 'order': 'asc', 'page': paginator.currentpage} ) }}" {{ sortOption == 'date asc' ? "selected" : ''}}>Sort by date (asc)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'date', 'search':  search, 'order': 'desc', 'page': paginator.currentpage } ) }}" {{ sortOption == 'date desc' ? "selected" : ''}}>Sort by date (desc)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'visits', 'search':  search, 'order': 'asc', 'page': paginator.currentpage } ) }}" {{ sortOption == 'visits asc' ? "selected" : ''}}>Sort by views (asc)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'visits', 'search':  search, 'order': 'desc', 'page': paginator.currentpage } ) }}" {{ sortOption == 'visits desc' ? "selected" : ''}}>Sort by views (desc)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'rating', 'search':  search, 'order': 'asc', 'page': paginator.currentpage } ) }}" {{ sortOption == 'rating asc' ? "selected" : ''}}>Sort by rating (asc)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'rating', 'search':  search, 'order': 'desc', 'page': paginator.currentpage } ) }}" {{ sortOption == 'rating desc' ? "selected" : ''}}>Sort by rating (desc)</option>
     </select>
 {% endif %}
 
@@ -63,6 +66,7 @@
 {% endfor %}
 
 {% if total > 0 and paginator.numpages > 1 %}
+{% set baseUrl = path(app.request.attributes.get('_route'), { 'sort': sort, 'search':  search, 'order': order }) %}
 <div id="pagerContainer">
     <span class="pagerText">PAGE {{ paginator.currentpage }} OF {{ paginator.numpages }}</span>
     <ul>
