@@ -24,7 +24,7 @@
         <h1>You have searched for '{{ search }}'</h1>
     {% endif %}
     <h1>SHOWING {% if total > 0 %}<span class="hilite">
-        {% if ((paginator.currentpage - 1) * paginator.limit) + 1 == ((paginator.currentpage - 1) * paginator.limit) + results|length %}
+        {% if ((paginator.currentpage - 1) * paginator.limit) + 1 == ((paginator.currentpage - 1) * paginator.limit) + results|length or total < paginator.limit %}
             {{ total }}</span>
         {% else %}
             {% if paginator.currentpage == 1 %}
