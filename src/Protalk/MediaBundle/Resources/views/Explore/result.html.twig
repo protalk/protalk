@@ -20,10 +20,21 @@
 
 {% block body %}
 <div id="resultHeading">
-    {% if search is defined and search != 'all' %}
+    {% if search is defined and  search != 'all' and search is not empty %}
         <h1>You have searched for '{{ search }}'</h1>
     {% endif %}
-    <h1>SHOWING {% if total > 0 %}<span class="hilite">{% if total < paginator.limit %}{{ total }}{% else %}{{ results|length }}{% endif %}</span> OF {% endif %}<span class="hilite">{{ total }}</span> RESULTS</h1>
+    <h1>SHOWING {% if total > 0 %}<span class="hilite">
+        {% if ((paginator.currentpage - 1) * paginator.limit) + 1 == ((paginator.currentpage - 1) * paginator.limit) + results|length %}
+            {{ total }}</span>
+        {% else %}
+            {% if paginator.currentpage == 1 %}
+                1
+            {% else %}
+                {{ ((paginator.currentpage - 1) * paginator.limit) + 1 }}
+            {% endif %}
+            </span>TO <span class="hilite">{{ total < paginator.limit ? total : ((paginator.currentpage - 1) * paginator.limit) + results|length }}</span>
+        {% endif %}
+    OF {% endif %}<span class="hilite">{{ total }}</span> RESULTS</h1>
 </div>
 
 {# set search var for use in sort and pagination code (necessary if search button pressed with no criteria entered) #}
