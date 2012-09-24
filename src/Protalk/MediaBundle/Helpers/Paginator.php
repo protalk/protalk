@@ -1,9 +1,9 @@
 <?php
 /**
- * Class to paginate a list of items in a old digg style 
+ * Class to paginate a list of items in a old digg style
  *
  * @author Darko Goleš
- * @author Carlos Mafla <gigo6000@hotmail.com> 
+ * @author Carlos Mafla <gigo6000@hotmail.com>
  * @www.inchoo.net
  */
 namespace Protalk\MediaBundle\Helpers;
@@ -19,7 +19,7 @@ class Paginator {
      * @var int items limit (items per page)
      */
     protected $limit;
-    
+
     /**
      * @var int total number of pages
      */
@@ -34,7 +34,7 @@ class Paginator {
      * @var int offset
      */
     protected $offset;
-    
+
     /**
      * @var int pages to show at left and right of current page
      */
@@ -64,12 +64,12 @@ class Paginator {
 
         //Calculate number of pages total
         $this->getInternalNumPages();
-        
+
         //Calculate first shown item on current page
         $this->calculateOffset();
         $this->calculateRange();
     }
-    
+
     private function calculateRange()
     {
         $startRange = $this->currentPage - floor($this->midRange/2);
@@ -80,13 +80,13 @@ class Paginator {
             $endRange += abs($startRange)+1;
             $startRange = 1;
         }
-        
+
         if($endRange > $this->numPages)
         {
             $startRange -= $endRange-$this->numPages;
             $endRange = $this->numPages;
         }
-        
+
         $this->range = range($startRange, $endRange);
     }
 
@@ -102,7 +102,7 @@ class Paginator {
         if ($this->limit == null)
         {
             $this->limit = 20;
-            //if limit is any number less than 1 then set it to 0 for displaying 
+            //if limit is any number less than 1 then set it to 0 for displaying
             //items without limit
         }
         else if ($this->limit < 1)
@@ -110,7 +110,7 @@ class Paginator {
             $this->limit = 0;
         }
     }
-    
+
     private function getInternalNumPages()
     {
         //If limit is set to 0 or set to number bigger then total items count
@@ -121,15 +121,15 @@ class Paginator {
         }
         else
         {
-            //Calculate rest numbers from dividing operation so we can add one 
+            //Calculate rest numbers from dividing operation so we can add one
             //more page for this items
             $restItemsNum = $this->itemsCount % $this->limit;
-            //if rest items > 0 then add one more page else just divide items 
+            //if rest items > 0 then add one more page else just divide items
             //by limit
             $this->numPages = $restItemsNum > 0 ? intval($this->itemsCount / $this->limit) + 1 : intval($this->itemsCount / $this->limit);
         }
     }
-    
+
     private function calculateOffset()
     {
         //Calculet offset for items based on current page number
@@ -154,17 +154,17 @@ class Paginator {
 
     /**
      * Get the url for this item of the paginator
-     * 
+     *
      * @param string $route
      * @param string $search
      * @param int    $page
      * @param string $sort
-     * 
-     * @return string The url for this page     
+     *
+     * @return string The url for this page
      */
     public function getUrl($baseUrl, $page = 1)
     {
-        return $baseUrl.'&page='.$page;
+        return $baseUrl.'?page='.$page;
     }
 
     /**

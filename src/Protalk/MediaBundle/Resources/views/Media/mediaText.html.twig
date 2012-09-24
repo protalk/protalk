@@ -1,3 +1,7 @@
+{% if media.slidesIsLink() %}
+    <div id="slidesLink">slides available <a href="{{ media.slides }}">here</a></div>
+{% endif %}
+<div id="rate_button_container"><a id="button_rate_media" class="tagButton" href="#"><span> RATE THIS </span></a></div>
 <div id="mediaTextContent">
 
     <hr />
@@ -26,7 +30,6 @@
     <hr />
 
     <section id="description">
-        <div id="rate_button_container"><a id="button_rate_media" class="tagButton" href="#"><span> RATE THIS </span></a></div>
         <p>{{ media.description }}</p>
     </section>
 

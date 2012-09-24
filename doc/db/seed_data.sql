@@ -27,30 +27,36 @@ INSERT INTO `Page` (url,pagetitle,title,content) VALUES ('about','About Us','Abo
 
 TRUNCATE TABLE `Tag`;
 
-INSERT INTO `Tag` (id, name) VALUES
-    (1, 'PHP'),
-    (2, 'Quality Assurance'),
-    (3, 'MySQL'),
-    (4, 'php|tek'),
-    (5, 'Arrays'),
-    (6, 'PHPUnit'),
-    (7, 'Refactoring'),
-    (8, 'Tools'),
-    (9, 'Build Process'),
-    (10, 'Deployment'),
-    (11, 'Integration'),
-    (12, 'dpc12'),
-    (13, 'PHPDocumentor'),
-    (14, 'Security'),
-    (15, 'Design Patterns'),
-    (16, 'phpnw11'),
-    (17, 'dpc11'),
-    (18, 'Webservices'),
-    (19, 'Optimisation'),
-    (20, 'CouchDB'),
-    (21, 'Scalability'),
-    (22, 'Zend Framework'),
-    (23, 'Zend Framework 2')
+INSERT INTO `Tag` (id, `name`, slug) VALUES
+    (1, 'PHP', 'php'),
+    (2, 'Quality Assurance', 'quality-assurance'),
+    (3, 'MySQL', 'mysql'),
+    (4, 'php|tek', 'php-tek'),
+    (5, 'Arrays', 'arrays'),
+    (6, 'PHPUnit', 'phpunit'),
+    (7, 'Refactoring', 'refactoring'),
+    (8, 'Tools', 'tools'),
+    (9, 'Build Process', 'build-process'),
+    (10, 'Deployment', 'deployment'),
+    (11, 'Integration', 'integration'),
+    (12, 'dpc12', 'dpc12'),
+    (13, 'PHPDocumentor', 'phpdocumentor'),
+    (14, 'Security', 'security'),
+    (15, 'Design Patterns', 'design-patterns'),
+    (16, 'phpnw11', 'phpnwll'),
+    (17, 'dpc11', 'dpc11'),
+    (18, 'Webservices', 'webservices'),
+    (19, 'Optimisation', 'optimisation'),
+    (20, 'CouchDB', 'couchdb'),
+    (21, 'Scalability', 'scalability'),
+    (22, 'Zend Framework', 'zend-framework'),
+    (23, 'Zend Framework 2', 'zend-framework-2'),
+    (24, 'symfony_live11' , 'symfony-live11'),
+	(25, 'Dependency Injection', 'dependency-injection'),
+	(26, 'AOP', 'aop'),
+	(27, 'Apostrophe', 'apostrophe'),
+	(28, 'CMS', 'cms'),
+	(29, 'Git', 'git')
     ;
 
 
@@ -78,6 +84,10 @@ INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (21, 'Ian Barber'
 INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (22, 'Enrico Zimuel','');
 INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (23, 'Scott MacVicar','');
 INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (24, 'Laura Beth Denker','');
+INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (25, 'Josh Holmes','');
+INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (26, 'Johannes Schmidt','');
+INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (27, 'Tom Boutell', '');
+INSERT INTO `Speaker` (`id`, `name`, biography )        VALUES (28, 'Scott Chacon', '');
 
 /* Delete all Media-speaker records then re-load sample data */
 
@@ -94,32 +104,33 @@ INSERT INTO `media_speaker` (media_id, speaker_id ) VALUES ('4', '10');
 
 TRUNCATE TABLE `Category`;
 
-INSERT INTO `Category` (`id`, `parent_id`, `name`) VALUES
-(8, NULL, 'PHP'),
-(9, 8, 'Quality Assurance'),
-(10, NULL, 'Databases'),
-(11, 10, 'MySQL'),
-(12, 9, 'Test Driven Development'),
-(13, 8, 'Object Orientation'),
-(14, 13, 'Design Patterns'),
-(15, 10, 'CouchDB'),
-(16, 8, 'Frameworks'),
-(17, 16, 'Zend Framework'),
-(18, 16, 'Symfony'),
-(19, 16, 'Symfony2'),
-(20, 8, 'Webservices'),
-(21, NULL, 'Version Control Systems'),
-(22, 21, 'Git'),
-(23, 21, 'Subversion'),
-(24, 20, 'Restful API'),
-(25, 9, 'Technical debt'),
-(26, NULL, 'User Experience'),
-(27, 9, 'Best Practices'),
-(28, NULL, 'Tools'),
-(29, 28, 'Solr'),
-(30, NULL, 'Soft skills'),
-(31, 16, 'Zend Framework 2'),
-(32, 30, 'Keynote / Inspirational')
+INSERT INTO `Category` (`id`, `parent_id`, `name`, slug) VALUES
+(8, NULL, 'PHP', 'php'),
+(9, 8, 'Quality Assurance', 'quality-assurance'),
+(10, NULL, 'Databases', 'databases'),
+(11, 10, 'MySQL', 'mysql'),
+(12, 9, 'Test Driven Development', 'test-driven-development'),
+(13, 8, 'Object Orientation', 'object-orientation'),
+(14, 13, 'Design Patterns', 'design-pattersn'),
+(15, 10, 'CouchDB', 'couchdb'),
+(16, 8, 'Frameworks', 'frameworks'),
+(17, 16, 'Zend Framework', 'zend-framework'),
+(18, 16, 'Symfony', 'symfony'),
+(19, 16, 'Symfony2', 'symfony2'),
+(20, 8, 'Webservices', 'webservices'),
+(21, NULL, 'Version Control Systems', 'version-control-systems'),
+(22, 21, 'Git', 'git'),
+(23, 21, 'Subversion', 'subversion'),
+(24, 20, 'Restful API', 'restful-api'),
+(25, 9, 'Technical Debt', 'technical-debt'),
+(26, NULL, 'User Experience', 'user-experience'),
+(27, 9, 'Best Practices', 'best-practices'),
+(28, NULL, 'Tools', 'tools'),
+(29, 28, 'Solr', 'solr'),
+(30, NULL, 'Soft skills', 'soft-skills'),
+(31, 16, 'Zend Framework 2', 'zend-framework-2'),
+(32, 30, 'Keynote / Inspirational', 'keynote-inspirational'),
+(33, NULL, 'Open Source', 'open-source' )
 ;
 
 /* Delete all Media records then re-load sample data */
@@ -448,6 +459,134 @@ VALUES
 INSERT INTO media_category (media_id, category_id) VALUES (21, 8), (21, 9), (21, 12), (21, 27), (21, 28);
 INSERT INTO media_tag (media_id, tag_id) VALUES (21, 1), (21, 2), (21, 6), (21, 8), (21, 16);
 INSERT INTO `media_speaker` (media_id, speaker_id) VALUES (21, 24);
+
+
+
+/* The Lost Art of Simplicity */
+
+INSERT INTO `Media`
+
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl, thumbnail )
+
+VALUES
+
+    (22, 2, '2011-03-03', 'Simplicity is a lost art in the application development space. The Wikipedia definition of simplicity is "Simplicity is the property, condition, or quality of being simple or un-combined. It often denotes beauty, purity or clarity. Simple things are usually easier to explain and understand than complicated ones. Simplicity can mean freedom from hardship, effort or confusion." This is a beautiful statement that we often lose sight of when we are building our applications. Instead we are on a never ending quest to fill out a checklist of features or to build something clever forgetting about the actual needs of our users to get a specific task done. This session takes complexity to task and challenges you to bring simplicity to the centre of your development with some straightforward ideas and guidance.',
+
+    '48:51', 0, 0,
+
+    '<iframe class="player" frameborder="0" scrolling="no" src="http://playertv-bscdn-admin.pad-playertv.brainsonic.com/web//player-html5-570.html" width="400" height="334"><noframes><img alt="&lt;h2&gt;3 Mars Introduction Symfony&lt;/h2&gt;" src="http://playertv-bscdn-admin.pad-playertv.brainsonic.com/uploads/32/20110310-095044/photo_1.jpg" /><h2>3 Mars Introduction Symfony</h2></noframes></iframe>',
+
+    '<div style="width:425px" id="__ss_1360628"> <strong style="display:block;margin:12px 0 4px"><a href="http://www.slideshare.net/joshholmes/the-lost-art-of-simplicity" title="The Lost Art of Simplicity" target="_blank">The Lost Art of Simplicity</a></strong> <iframe src="http://www.slideshare.net/slideshow/embed_code/1360628" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen></iframe> <div style="padding:5px 0 12px"> View more <a href="http://www.slideshare.net/thecroaker/death-by-powerpoint" target="_blank">PowerPoint</a> from <a href="http://www.slideshare.net/joshholmes" target="_blank">Josh Holmes</a> </div> </div>',
+
+    2741, 'en', 'The Lost Art of Simplicity', 'the-lost-art-of-simplicity', 1, 'Symfony', 'http://symfony.com/video/Paris2011/570',
+
+    'http://playertv-bscdn-admin.pad-playertv.brainsonic.com/uploads/32/20110310-095044/photo_1.jpg'
+
+    );
+
+INSERT INTO media_category (media_id, category_id) VALUES (22, 9);  /* Quality Assurance  */
+
+INSERT INTO media_tag (media_id, tag_id) VALUES (22, 2), (22, 24) ;  /* Quality Assurance / symfony_live11 */
+
+INSERT INTO `media_speaker` (media_id, speaker_id) VALUES (22, 25);  /*Josh Holmes */
+
+
+
+/* Application Security, Dependency Injection and AOP in Symfony2 */
+
+INSERT INTO `Media`
+
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl, thumbnail )
+
+VALUES
+
+    (23, 2, '2011-03-03', 'Security is a crucial aspect in most, if not all, applications and as such it is a concern that crosses application\'s functionality. In the first part of this talk, we will take a deeper look at the Symfony2 Security Component. In the second part, we will then unleash the power of the Dependency Injection container to add AOP capabilities, and see how you can secure your application without changing a single line of application code.',
+
+    '40:01', 0, 0,
+
+    '<iframe class="player" frameborder="0" scrolling="no" src="http://playertv-bscdn-admin.pad-playertv.brainsonic.com/web//player-html5-566.html" width="400" height="300"><noframes><img alt="&lt;h2&gt;3 Mars Session 01 Symfony &lt;/h2&gt;" src="http://playertv-bscdn-admin.pad-playertv.brainsonic.com/uploads/32/20110309-164915/photo_1.jpg" /><h2>3 Mars Session 01 Symfony </h2></noframes></iframe> ',
+
+    NULL,
+
+    2742, 'en', 'Application Security, Dependency Injection and AOP in Symfony2', 'application-security-dependency-injection-and-aop-in-symfony2', 1, 'Symfony', 'http://symfony.com/video/Paris2011/566',
+
+    'http://playertv-bscdn-admin.pad-playertv.brainsonic.com/uploads/32/20110309-164915/photo_1.jpg'
+
+    );
+
+
+
+INSERT INTO media_category (media_id, category_id) VALUES  (23, 19);  /* Symfony2 */
+
+INSERT INTO media_tag (media_id, tag_id) VALUES (23, 24), (23, 14), (23, 25), (23, 26) ;  /* symfony_live11 / Security / Dependency Injection / AOP */
+
+INSERT INTO `media_speaker` (media_id, speaker_id) VALUES (23, 26);  /*Johannes Schmidt */
+
+
+
+
+/* Apostrophe: a Symfony-powered CMS your clients will love */
+
+INSERT INTO `Media`
+
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl, thumbnail )
+
+VALUES
+
+    (24, 2, '2011-03-03', 'Apostrophe is a Symfony-powered, open-source CMS. Apostrophe rejects "back end" applications in favor of an enhanced experience for editors. We at P\'unk Avenue believe your client can manage their site without special study. Learn to integrate your own Symfony modules and plugins with Apostrophe. Includes a discussion of Apostrophe 2.0.',
+
+    '36:31', 0, 0,
+
+    '<iframe class="player" frameborder="0" scrolling="no" src="http://playertv-bscdn-admin.pad-playertv.brainsonic.com/web//player-html5-565.html" width="400" height="300"><noframes><img alt="&lt;h2&gt;3 Mars Session 02 Symfony &lt;/h2&gt;" src="http://playertv-bscdn-admin.pad-playertv.brainsonic.com/uploads/32/20110309-164059/photo_1.jpg" /><h2>3 Mars Session 02 Symfony </h2></noframes></iframe>',
+
+    NULL,
+
+    2744, 'en', 'Apostrophe: a Symfony-powered CMS your clients will love', 'apostrophe-a-symfony-powered-cms-your-clients-will-love', 1, 'Symfony', 'http://symfony.com/video/Paris2011/565',
+
+    'http://playertv-bscdn-admin.pad-playertv.brainsonic.com/uploads/32/20110309-164059/photo_1.jpg'
+
+    );
+
+
+
+INSERT INTO media_category (media_id, category_id) VALUES (24, 19);  /*  Symfony2  */
+
+INSERT INTO media_tag (media_id, tag_id) VALUES (24, 24), (24, 27), (24, 28) ;  /* symfony_live11 / Apostrophe / CMS */
+
+INSERT INTO `media_speaker` (media_id, speaker_id) VALUES (24, 27);  /* Tom Boutell */
+
+
+
+
+/* Contributing with Git: Reducing the frictions of Open Source collaboration with the Git VCS */
+
+INSERT INTO `Media`
+
+    (`id`, mediatype_id, `date`, description, `length`, rating, visits, content, slides, joindin, `language`, title, slug, isPublished, hostName, hostUrl, thumbnail )
+
+VALUES
+
+    (25, 2, '2011-03-03', 'This talk will describe how Git has eased the collaboration process for thousands of open source projects. From projects using mailing lists and patch series to small groups using centralized repositories to huge projects like the Linux kernel, Git enables several workflows to make the process of collaborating on source code as easy as possible for the developer and the project maintainer. We will go over each of the major workflows that open source and proprietary projects use and what tools each member of the team need and how to use them effectively. This talk should be helpful if you are a project contributor, a project maintainer, or both.',
+
+    '51:01', 0, 0,
+
+    '<iframe class="player" frameborder="0" scrolling="no" src="http://playertv-bscdn-admin.pad-playertv.brainsonic.com/web//player-html5-567.html" width="400" height="300"><noframes><img alt="&lt;h2&gt;3 Mars Session 03 Symfony&lt;/h2&gt;" src="http://playertv-bscdn-admin.pad-playertv.brainsonic.com/uploads/32/20110309-183215/photo_1.jpg" /><h2>3 Mars Session 03 Symfony</h2></noframes></iframe> ',
+
+    NULL,
+
+    2747, 'en', 'Contributing with Git: Reducing the frictions of Open Source collaboration with the Git VCS', 'contributing-with-git-reducing-the-frictions-of-open-source-collaboration-with-the-git-vcs', 1, 'Symfony', 'http://symfony.com/video/Paris2011/567',
+
+    'http://playertv-bscdn-admin.pad-playertv.brainsonic.com/uploads/32/20110309-183215/photo_1.jpg'
+
+    );
+
+
+
+INSERT INTO media_category (media_id, category_id) VALUES (25, 33), (25, 22);  /*  / Open Source / Git */
+
+INSERT INTO media_tag (media_id, tag_id) VALUES (25, 24), (25, 29) ;  /* symfony_live11 / Git  */
+
+INSERT INTO `media_speaker` (media_id, speaker_id) VALUES (25, 28);  /* Scott Chacon */
 
 
 /* Reenable foreign key constrain checks in MySQL */

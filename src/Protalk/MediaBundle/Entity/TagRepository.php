@@ -13,23 +13,23 @@ use Doctrine\ORM\EntityRepository;
 class TagRepository extends EntityRepository
 {
     /**
-     * Get the most used categories
-     * 
-     * @param int $max 
+     * Get the most used tags
+     *
+     * @param int $max
      * @return Doctrine Collection
      */
     public function getMostUsedTags($max = 20)
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
- 
-        $qb->select('t.id', 't.name', 'COUNT(m.id) as mediaCount');
+
+        $qb->select('t.slug', 't.name', 'COUNT(m.id) as mediaCount');
         $qb->from('\Protalk\MediaBundle\Entity\Tag', 't');
         $qb->join('t.medias', 'm');
         $qb->where('m.isPublished = 1');
-        $qb->groupBy('t.id');
+        $qb->groupBy('t.slug');
         $qb->orderBy('mediaCount', 'DESC');
         $qb->setMaxResults($max);
- 
+
         $query = $qb->getQuery();
         return $query->execute();
     }

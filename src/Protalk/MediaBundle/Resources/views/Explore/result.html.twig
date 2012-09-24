@@ -1,5 +1,17 @@
 {% extends "::base.html.twig" %}
 
+{% block javascriptsHead %}
+    {{ parent() }}
+
+    <script>
+    var protalk = {
+        baseurl : {{ url('_home')|json_encode|raw }}
+    }
+    </script>
+
+    <script src="{{ asset('js/page.js') }}"></script>
+{% endblock %}
+
 {% block title "Search results" %}
 
 {% block bluestrip %}
@@ -7,34 +19,65 @@
 {% endblock %}
 
 {% block body %}
-{% if search is defined and search != '' %}
-    <h1 id="resultHeading">You have searched for '{{ search }}'</h1>
-    <h1>SHOWING {% if total > 0 %}<span class="hilite">{% if total < paginator.limit %}{{ total }}{% else %}{{ paginator.limit }}{% endif %}</span> OF {% endif %}<span class="hilite">{{ total }}</span> RESULTS</h1>
-{% else %}
-    <h1 id="resultHeading">SHOWING {% if total > 0 %}<span class="hilite">{% if total < paginator.limit %}{{ total }}{% else %}{{ paginator.limit }}{% endif %}</span> OF {% endif %}<span class="hilite">{{ total }}</span> RESULTS</h1>
+<div id="resultHeading">
+    {% if search is defined and  search != 'all' and search is not empty %}
+        <h1>You have searched for '{{ search }}'</h1>
+    {% endif %}
+    <h1>SHOWING {% if total > 0 %}<span class="hilite">
+        {% if ((paginator.currentpage - 1) * paginator.limit) + 1 == ((paginator.currentpage - 1) * paginator.limit) + results|length or total < paginator.limit %}
+            {{ total }}</span>
+        {% else %}
+            {% if paginator.currentpage == 1 %}
+                1
+            {% else %}
+                {{ ((paginator.currentpage - 1) * paginator.limit) + 1 }}
+            {% endif %}
+            </span>TO <span class="hilite">{{ total < paginator.limit ? total : ((paginator.currentpage - 1) * paginator.limit) + results|length }}</span>
+        {% endif %}
+    OF {% endif %}<span class="hilite">{{ total }}</span> RESULTS</h1>
+</div>
+
+{# set search var for use in sort and pagination code (necessary if search button pressed with no criteria entered) #}
+{% set search = search is empty ? 'all' : search %}
+
+{% if total > 1 %}
+    <select id="sortOptions" class="form_field">
+        <option>Select a sort option</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'title', 'search':  search, 'order': 'asc', 'page': paginator.currentpage } ) }}" {{ sortOption == 'title asc' ? "selected" : ''}}>Sort by title (a - z)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'title', 'search':  search, 'order': 'desc', 'page': paginator.currentpage } ) }}" {{ sortOption == 'title desc' ? "selected" : ''}}>Sort by title (z - a)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'date', 'search':  search, 'order': 'asc', 'page': paginator.currentpage} ) }}" {{ sortOption == 'date asc' ? "selected" : ''}}>Sort by date (asc)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'date', 'search':  search, 'order': 'desc', 'page': paginator.currentpage } ) }}" {{ sortOption == 'date desc' ? "selected" : ''}}>Sort by date (desc)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'visits', 'search':  search, 'order': 'asc', 'page': paginator.currentpage } ) }}" {{ sortOption == 'visits asc' ? "selected" : ''}}>Sort by views (asc)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'visits', 'search':  search, 'order': 'desc', 'page': paginator.currentpage } ) }}" {{ sortOption == 'visits desc' ? "selected" : ''}}>Sort by views (desc)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'rating', 'search':  search, 'order': 'asc', 'page': paginator.currentpage } ) }}" {{ sortOption == 'rating asc' ? "selected" : ''}}>Sort by rating (asc)</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'rating', 'search':  search, 'order': 'desc', 'page': paginator.currentpage } ) }}" {{ sortOption == 'rating desc' ? "selected" : ''}}>Sort by rating (desc)</option>
+    </select>
 {% endif %}
 
+
 {% for media in results %}
+    <article class="mediaLarge">
+        <div class="mediaThumbNailLarge">
+            <a href="{{ path('media_show', { 'slug': media.slug }) }}"><img src="{{ media.displayThumbnail() }}" alt="Media ThumbNail Image"/></a>
+        </div>
+        <div class="mediaTextLarge">
+            <header>
+                <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.getTruncatedTitle(34) }}</a></h2>
+                <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.getTruncatedSpeaker(20) }}</a></span></p>
+            </header>
+            <p>{{ media.getTruncatedDescription() }}</p>
+            <footer>
+                <p><img src="{{ asset('images/binoculars.png') }}" alt="Binoculars Image"/><span class="metadata"> {{ media.visits }} {{ (media.visits == 1) ? "view" : "views" }}</span>
+                   <span id="leftPaddingTen">{% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span>
+                </p>
+            </footer>
+        </div>
 
-<article class="mediaLarge">
-    <div class="mediaThumbNailLarge">
-        <a href="{{ path('media_show', { 'slug': media.slug }) }}"><img src="{{ media.displayThumbnail() }}" alt="Media ThumbNail Image"/></a>
-    </div>
-    <div class="mediaTextLarge">
-        <header>
-            <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.getTruncatedTitle(34) }}</a></h2>
-            <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.getTruncatedSpeaker(20) }}</a></span></p>
-        </header>
-        <p>{{ media.getTruncatedDescription() }}</p>
-        <footer>
-            <span class="metadata">Rating: {% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span>
-        </footer>
-    </div>
-
-</article>
+    </article>
 {% endfor %}
 
-{% if total > 0 %}
+{% if total > 0 and paginator.numpages > 1 %}
+{% set baseUrl = path(app.request.attributes.get('_route'), { 'sort': sort, 'search':  search, 'order': order }) %}
 <div id="pagerContainer">
     <span class="pagerText">PAGE {{ paginator.currentpage }} OF {{ paginator.numpages }}</span>
     <ul>

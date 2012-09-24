@@ -19,16 +19,17 @@ class MediaRepository extends EntityRepository
      * @param string $orderField
      * @param int $page
      * @param int $max
+     * @param string $order
      *
      * @return array Array with total and results
      */
-    public function getMediaOrderedBy($orderField, $page, $max)
+    public function getMediaOrderedBy($sort, $page, $max, $order = 'DESC')
     {
         $results = $this->getEntityManager()
-            ->createQuery('SELECT m
+            ->createQuery("SELECT m
                            FROM ProtalkMediaBundle:Media m
                            WHERE m.isPublished = 1
-                           ORDER BY m.'.$orderField.' DESC')
+                           ORDER BY m.".$sort." ".$order)
             ->getResult();
 
         return $this->getResultList($results, $page, $max);
@@ -64,10 +65,11 @@ class MediaRepository extends EntityRepository
      * @param string $sort
      * @param int $page
      * @param int $max
+     * @param string $order
      *
      * @return array Array with count and result
      */
-    public function findMedia($search, $sort, $page, $max)
+    public function findMedia($search, $sort, $page, $max, $order)
     {
         $results = $this->getEntityManager()
                 ->createQuery("SELECT DISTINCT m
@@ -85,7 +87,7 @@ class MediaRepository extends EntityRepository
                                     LOWER(mtype.name) LIKE :search6
                                    )
                                AND m.isPublished = 1
-                               ORDER BY m.".$sort." DESC")
+                               ORDER BY m.".$sort." ".$order)
                 ->setParameter('search1', '%'.strtolower($search).'%')
                 ->setParameter('search2', '%'.strtolower($search).'%')
                 ->setParameter('search3', '%'.strtolower($search).'%')
@@ -119,23 +121,24 @@ class MediaRepository extends EntityRepository
     /**
      * Find media items by category
      *
-     * @param int $categoryId
+     * @param string $slug (category name)
      * @param string $orderField
      * @param int $page
      * @param int $max
+     * @param string $order
      *
      * @return array Array with total and results
      */
-    public function findByCategory($categoryId, $orderField, $page, $max)
+    public function findByCategory($slug, $orderField, $page, $max, $order = 'DESC')
     {
         $results = $this->getEntityManager()
                 ->createQuery('SELECT m
                                FROM ProtalkMediaBundle:Media m
                                JOIN m.categories c
-                               WHERE c.id = :catId
+                               WHERE c.slug = :slug
                                AND m.isPublished = 1
-                               ORDER BY m.'.$orderField.' DESC')
-                ->setParameter('catId', $categoryId)
+                               ORDER BY m.'.$orderField.' '.$order)
+                ->setParameter('slug', $slug)
                 ->getResult();
 
         return $this->getResultList($results, $page, $max);
@@ -144,23 +147,24 @@ class MediaRepository extends EntityRepository
     /**
      * Find media items by tag
      *
-     * @param int $tagId
+     * @param string $slug (tag name)
      * @param string $orderField
      * @param int $page
      * @param int $max
+     * @param string $order
      *
      * @return array Array with total and results
      */
-    public function findByTag($tagId, $orderField, $page, $max)
+    public function findByTag($slug, $orderField, $page, $max, $order = 'DESC')
     {
         $results = $this->getEntityManager()
                 ->createQuery('SELECT m
                                FROM ProtalkMediaBundle:Media m
                                JOIN m.tags t
-                               WHERE t.id = :tagId
+                               WHERE t.slug = :slug
                                AND m.isPublished = 1
-                               ORDER BY m.'.$orderField.' DESC')
-                ->setParameter('tagId', $tagId)
+                               ORDER BY m.'.$orderField.' '.$order)
+                ->setParameter('slug', $slug)
                 ->getResult();
 
         return $this->getResultList($results, $page, $max);
@@ -202,7 +206,7 @@ class MediaRepository extends EntityRepository
         $media->setVisits($currentVisits + 1);
         $this->getEntityManager()->flush();
     }
-    
+
     /**
      * Get the average rating of a media item
      *

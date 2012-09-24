@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+<channel>
+	<title>ProTalk RSS feed</title>
+	<atom:link href="http://protalk.me/feed/" rel="self" type="application/rss+xml" />
+	<link>http://protalk.me</link>
+	<description>Latest video and audio recordings of ProTalk</description>
+	<lastBuildDate>{{ date }}</lastBuildDate>
+	<generator>http://protalk.me/</generator>
+	<language>en</language>
+
+    {% for item in items %}
+    <item>
+		<title>{{ item.title }}</title>
+		<link>http://protalk.me/{{ item.slug }}</link>
+		<pubDate>{{ item.creationDate|date("d-m-Y") }}</pubDate>
+		<dc:creator>ProTalk</dc:creator>
+		<guid isPermaLink="false">http://protalk.me/{{ item.slug }}</guid>
+		<description><![CDATA[
+            
+            <p>{% if item.description %}{{ item.description }}{% else %}{{ item.title }}{% endif %}</p>
+
+        ]]></description>
+        <content:encoded><![CDATA[
+            
+            {% if item.content %}{{ item.content }}{% else %}{{ item.title }}{% endif %}
+
+            ]]></content:encoded>
+    </item>
+    {% endfor %}
+    
+	</channel>
+</rss>

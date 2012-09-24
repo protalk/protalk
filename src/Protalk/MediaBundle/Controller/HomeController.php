@@ -27,4 +27,24 @@ class HomeController extends Controller
 
         return array('latestMedia' => $latestMedia['results'] , 'topViewedMedia' => $topViewedMedia['results'], 'topRatedMedia' => $topRatedMedia['results']);
     }
+    
+    /**
+    * @Route("/feed")
+    * @Template()
+    */
+    public function rssAction()
+    {
+        $em = $this->get('doctrine');
+
+        $items = $em->getRepository('ProtalkMediaBundle:Media')->getMediaOrderedBy('creationDate', 1, 20);
+
+        $templateItems = array();
+        foreach($items['results'] as $item)
+        {
+            $templateItems[] = $item;
+        }
+        //var_dump($templateItems[0]->title); die();
+
+        return array('items' => $templateItems, 'date' => date('c'));
+    }
 }

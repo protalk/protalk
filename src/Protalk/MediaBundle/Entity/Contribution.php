@@ -51,6 +51,9 @@ class Contribution
      *     message = "The email '{{ value }}' is not a valid email:",
      *     checkMX = true
      * )
+     * @Assert\NotBlank(
+     *      message = "Please enter your email address:"
+     * )
      */
     private $email;
 
@@ -58,6 +61,9 @@ class Contribution
      * @var string $hostUrl
      *
      * @ORM\Column(name="hostUrl", type="string", length=100)
+     * @Assert\Url(
+     *  message = "The url '{{ value }}' is not a valid url:"
+     * )
      * @Assert\NotBlank(
      *      message = "Please enter the URL where the media is hosted:"
      * )
@@ -83,16 +89,6 @@ class Contribution
      * )
      */
     private $title;
-
-    /**
-     * @var string $mediaUrl
-     *
-     * @ORM\Column(name="mediaUrl", type="string", length=200)
-     * @Assert\NotBlank(
-     *      message = "Please enter the media item's URL:"
-     * )
-     */
-    private $mediaUrl;
 
     /**
      * @var float $slidesUrl
@@ -204,26 +200,6 @@ class Contribution
     public function getHostName()
     {
         return $this->hostName;
-    }
-
-    /**
-     * Set mediaUrl
-     *
-     * @param string $mediaUrl
-     */
-    public function setMediaUrl($mediaUrl)
-    {
-        $this->mediaUrl = $mediaUrl;
-    }
-
-    /**
-     * Get mediaUrl
-     *
-     * @return string
-     */
-    public function getMediaUrl()
-    {
-        return $this->mediaUrl;
     }
 
     /**

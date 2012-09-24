@@ -52,25 +52,17 @@ explore:
     pattern:  /explore
     defaults: { _controller: ProtalkMediaBundle:Explore:index }
 
-search_results:
-    pattern:  /result
-    defaults: { _controller: ProtalkMediaBundle:Explore:result }
-
-tag_search:
-    pattern:  /tag/{id}
-    defaults: { _controller: ProtalkMediaBundle:Explore:tag }
-
-category_search:
-    pattern:  /category/{id}
-    defaults: { _controller: ProtalkMediaBundle:Explore:category }
-
 speaker_search:
     pattern:  /search/speaker/{id}
     defaults: { _controller: ProtalkMediaBundle:Explore:speaker }
 
 media_show:
-    pattern:  /media/{slug}
+    pattern:  /{slug}
     defaults: { _controller: ProtalkMediaBundle:Media:index }
+    
+rss:
+    pattern: /feed
+    defaults: { _controller: ProtalkMediaBundle:Home:rss }
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
