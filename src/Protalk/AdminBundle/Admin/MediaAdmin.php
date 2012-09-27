@@ -39,11 +39,24 @@ class MediaAdmin extends Admin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('title');
+        $listMapper->addIdentifier('title')->add('isPublished');
     }
 
     public function validate(ErrorElement $errorElement, $object)
     {
         $errorElement->with('title')->assertMaxLength(array('limit' => 255))->end();
+    }
+    
+    public function getBatchActions()
+    {
+        // retrieve the default (currently only the delete action) actions
+        $actions = parent::getBatchActions();
+
+        $actions['unpublish']= array(
+            'label'            => 'Unpublish',
+            'ask_confirmation' => true
+        );
+
+        return $actions;
     }
 }

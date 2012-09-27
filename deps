@@ -1,34 +1,34 @@
 [symfony]
     git=http://github.com/symfony/symfony.git
-    version=v2.0.4
+    version=v2.0.17
 
 [twig]
     git=http://github.com/fabpot/Twig.git
-    version=v1.1.2
+    version=v1.9.2
 
 [monolog]
     git=http://github.com/Seldaek/monolog.git
-    version=1.0.1
+    version=1.0.2
 
 [doctrine-common]
     git=http://github.com/doctrine/common.git
-    version=2.1.2
+    version=2.1.4
 
 [doctrine-dbal]
     git=http://github.com/doctrine/dbal.git
-    version=2.1.3
+    version=2.1.7
 
 [doctrine]
     git=http://github.com/doctrine/doctrine2.git
-    version=2.1.2
+    version=2.1.7
 
 [swiftmailer]
     git=http://github.com/swiftmailer/swiftmailer.git
-    version=v4.1.2
+    version=v4.2.1
 
 [assetic]
     git=http://github.com/kriswallsmith/assetic.git
-    version=v1.0.2
+    version=v1.0.3
 
 [twig-extensions]
     git=http://github.com/fabpot/Twig-extensions.git
@@ -50,16 +50,17 @@
 [SensioDistributionBundle]
     git=http://github.com/sensio/SensioDistributionBundle.git
     target=/bundles/Sensio/Bundle/DistributionBundle
-    version=origin/1.0
+    version=origin/2.0
 
 [SensioGeneratorBundle]
     git=http://github.com/sensio/SensioGeneratorBundle.git
     target=/bundles/Sensio/Bundle/GeneratorBundle
+    version=origin/2.0
 
 [AsseticBundle]
     git=http://github.com/symfony/AsseticBundle.git
     target=/bundles/Symfony/Bundle/AsseticBundle
-    version=v1.0.1
+    version=origin/2.0
 
 [SonataAdminBundle]
     git=http://github.com/sonata-project/SonataAdminBundle.git
@@ -69,10 +70,12 @@
 [SonataBlockBundle]
     git=http://github.com/sonata-project/SonataBlockBundle.git
     target=/bundles/Sonata/BlockBundle
+    version=origin/2.0
 
 [SonataCacheBundle]
     git=http://github.com/sonata-project/SonataCacheBundle.git
     target=/bundles/Sonata/CacheBundle
+    version=origin/2.0
 
 [SonatajQueryBundle]
     git=http://github.com/sonata-project/SonatajQueryBundle.git
@@ -81,10 +84,12 @@
 [KnpMenuBundle]
     git=http://github.com/KnpLabs/KnpMenuBundle.git
     target=/bundles/Knp/Bundle/MenuBundle
+    version=v1.1.0
 
 [KnpMenu]
     git=http://github.com/KnpLabs/KnpMenu.git
     target=/knp/menu
+    version=v1.1.2
 
 [Exporter]
     git=http://github.com/sonata-project/exporter.git
@@ -95,17 +100,33 @@
     target=/bundles/Sonata/DoctrineORMAdminBundle
     version=origin/2.0
 
+[SonataNotificationBundle]
+    git=git://github.com/sonata-project/SonataNotificationBundle.git
+    target=/bundles/Sonata/NotificationBundle
+    version=origin/2.0
+
+[PhpAmqplib]
+    git=git://github.com/videlalvaro/php-amqplib.git
+    target=/php-amqplib
+
+[SonataDoctrineExtensions]
+    git=git@github.com:sonata-project/sonata-doctrine-extensions.git
+    target=/sonata-doctrine-extensions
+
 [SonataEasyExtendsBundle]
     git=git://github.com/sonata-project/SonataEasyExtendsBundle.git
     target=/bundles/Sonata/EasyExtendsBundle
+    version=origin/2.0
 
 [FOSUserBundle]
     git=git://github.com/FriendsOfSymfony/FOSUserBundle.git
     target=bundles/FOS/UserBundle
+    version=origin/1.2.x
 
 [SonataUserBundle]
     git=git://github.com/sonata-project/SonataUserBundle.git
     target=/bundles/Sonata/UserBundle
+    version=origin/2.0
 
 [EWZRecaptchaBundle]
     git=http://github.com/excelwebzone/EWZRecaptchaBundle.git
@@ -114,7 +135,3 @@
 
 [DoctrineSluggableBundle]
     git=https://github.com/samjarrett/DoctrineSluggableBundle.git
-
-[SonataDoctrineExtensions]
-    git=http://github.com/sonata-project/sonata-doctrine-extensions.git
-    target=/sonata-doctrine-extensions

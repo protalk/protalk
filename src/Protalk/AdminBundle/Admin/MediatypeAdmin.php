@@ -10,10 +10,23 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class MediatypeAdmin extends Admin
 {
+    /**
+     * Default Datagrid values
+     *
+     * @var array
+     */
+    protected $datagridValues = array(
+        '_page' => 1, 
+        '_sort_order' => 'ASC',
+        '_sort_by' => 'name' 
+    );
+    
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('name')
-                   ->add('type', 'choice', array('choices' => array('video'=>'video', 'audio'=>'audio')));
+        $formMapper->add('name', null, array('help' => 'This is the name of the media type'))
+                   ->add('type', 'choice', array('choices' => array(
+                                                                'video'=>'video', 
+                                                                'audio'=>'audio')));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

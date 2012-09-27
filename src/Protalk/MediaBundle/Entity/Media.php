@@ -564,8 +564,7 @@ class Media implements SluggableInterface
      */
     public function updateSlug()
     {
-
-        $slugger = new Slugger();
+        $slugger = new Slugger('-', '-');
 
         $slug = $slugger->getSlug($this->getSlugFields());
 

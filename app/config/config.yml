@@ -4,7 +4,7 @@ imports:
 
 framework:
     #esi:             ~
-    translator:      { fallback: %locale% }
+    translator:      { fallback: en }
     secret:          %secret%
     charset:         UTF-8
     router:          { resource: "%kernel.root_dir%/config/routing.yml" }
@@ -43,7 +43,7 @@ doctrine:
         password: %database_password%
         charset:  UTF8
         types:
-            json: Sonata\Doctrine\Types\JsonType 
+            json: Sonata\Doctrine\Types\JsonType
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%
@@ -67,21 +67,8 @@ sonata_block:
         sonata.admin.block.admin_list:
             contexts:   [admin]
 
-        sonata.block.service.text:
-        sonata.block.service.action:
-        sonata.block.service.rss:
-
 sonata_admin:
     title:      ProTalk
-    templates:
-        # default global templates
-        layout:  SonataAdminBundle::standard_layout.html.twig
-        ajax:    SonataAdminBundle::ajax_layout.html.twig
-
-        # default actions templates, should extend a global templates
-        list:    SonataAdminBundle:CRUD:list.html.twig
-        show:    SonataAdminBundle:CRUD:show.html.twig
-        edit:    SonataAdminBundle:CRUD:edit.html.twig
     dashboard:
         blocks:
             # display a dashboard block
@@ -100,76 +87,37 @@ services:
       class: Protalk\AdminBundle\Admin\CategoryAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_common, label: Category }
-      arguments: [null, Protalk\MediaBundle\Entity\Category, ProtalkAdminBundle:CategoryAdmin]
+      arguments: [null, Protalk\MediaBundle\Entity\Category, null]
    protalk.common.admin.tag:
       class: Protalk\AdminBundle\Admin\TagAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_common, label: Tag }
-      arguments: [null, Protalk\MediaBundle\Entity\Tag, ProtalkAdminBundle:TagAdmin]
+      arguments: [null, Protalk\MediaBundle\Entity\Tag, null]
    protalk.common.admin.mediatype:
       class: Protalk\AdminBundle\Admin\MediatypeAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_common, label: Mediatype }
-      arguments: [null, Protalk\MediaBundle\Entity\Mediatype, ProtalkAdminBundle:MediatypeAdmin]
+      arguments: [null, Protalk\MediaBundle\Entity\Mediatype, null]
    protalk.media.admin.media:
       class: Protalk\AdminBundle\Admin\MediaAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_media, label: Media }
-      arguments: [null, Protalk\MediaBundle\Entity\Media, ProtalkAdminBundle:MediaAdmin]  
+      arguments: [null, Protalk\MediaBundle\Entity\Media, ProtalkAdminBundle:MediaAdmin]
    protalk.media.admin.speaker:
       class: Protalk\AdminBundle\Admin\SpeakerAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_media, label: Speaker }
-      arguments: [null, Protalk\MediaBundle\Entity\Speaker, ProtalkAdminBundle:SpeakerAdmin]
+      arguments: [null, Protalk\MediaBundle\Entity\Speaker, null]
    protalk.media.admin.comment:
       class: Protalk\AdminBundle\Admin\CommentAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_media, label: Comment }
-      arguments: [null, Protalk\MediaBundle\Entity\Comment, ProtalkAdminBundle:CommentAdmin]
+      arguments: [null, Protalk\MediaBundle\Entity\Comment, null]
    protalk.media.admin.rating:
       class: Protalk\AdminBundle\Admin\RatingAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_media, label: Rating }
-      arguments: [null, Protalk\MediaBundle\Entity\Rating, ProtalkAdminBundle:RatingAdmin]
-
-sonata_doctrine_orm_admin:
-    # default value is null, so doctrine uses the value defined in the configuration
-    entity_manager: ~
-
-    templates:
-        form:
-            - SonataDoctrineORMAdminBundle:Form:form_admin_fields.html.twig
-        filter:
-            - SonataDoctrineORMAdminBundle:Form:filter_admin_fields.html.twig
-        types:
-            list:
-                array:      SonataAdminBundle:CRUD:list_array.html.twig
-                boolean:    SonataAdminBundle:CRUD:list_boolean.html.twig
-                date:       SonataAdminBundle:CRUD:list_date.html.twig
-                time:       SonataAdminBundle:CRUD:list_time.html.twig
-                datetime:   SonataAdminBundle:CRUD:list_datetime.html.twig
-                text:       SonataAdminBundle:CRUD:base_list_field.html.twig
-                trans:      SonataAdminBundle:CRUD:list_trans.html.twig
-                string:     SonataAdminBundle:CRUD:base_list_field.html.twig
-                smallint:   SonataAdminBundle:CRUD:base_list_field.html.twig
-                bigint:     SonataAdminBundle:CRUD:base_list_field.html.twig
-                integer:    SonataAdminBundle:CRUD:base_list_field.html.twig
-                decimal:    SonataAdminBundle:CRUD:base_list_field.html.twig
-                identifier: SonataAdminBundle:CRUD:base_list_field.html.twig
-
-            show:
-                array:      SonataAdminBundle:CRUD:show_array.html.twig
-                boolean:    SonataAdminBundle:CRUD:show_boolean.html.twig
-                date:       SonataAdminBundle:CRUD:show_date.html.twig
-                time:       SonataAdminBundle:CRUD:show_time.html.twig
-                datetime:   SonataAdminBundle:CRUD:show_datetime.html.twig
-                text:       SonataAdminBundle:CRUD:base_show_field.html.twig
-                trans:      SonataAdminBundle:CRUD:show_trans.html.twig
-                string:     SonataAdminBundle:CRUD:base_show_field.html.twig
-                smallint:   SonataAdminBundle:CRUD:base_show_field.html.twig
-                bigint:     SonataAdminBundle:CRUD:base_show_field.html.twig
-                integer:    SonataAdminBundle:CRUD:base_show_field.html.twig
-                decimal:    SonataAdminBundle:CRUD:base_show_field.html.twig
+      arguments: [null, Protalk\MediaBundle\Entity\Rating, null]
 
 fos_user:
     db_driver: orm

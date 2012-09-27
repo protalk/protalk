@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
             new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
             new SamJ\DoctrineSluggableBundle\SamJDoctrineSluggableBundle(),
+            new Sonata\NotificationBundle\SonataNotificationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
