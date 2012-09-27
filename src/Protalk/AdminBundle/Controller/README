@@ -1,0 +1,2 @@
+Do not remove this directory, Symfony2 needs this to be able to load this bundle.
+Apparently all bundles need to have a Controller directory.
