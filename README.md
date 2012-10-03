@@ -6,7 +6,7 @@ Welcome to the repository for [ProTalk](http://protalk.me), an online community 
 Contribute
 ----------
 
-ProTalk is an open-source project and we welcome contributions from developers of all skills levels.  
+ProTalk is an open-source project built using [Symfony 2](http://symfony.com/). We welcome contributions from developers of all skills levels.  
 
 ###Bugs
 
