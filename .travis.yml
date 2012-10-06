@@ -3,4 +3,5 @@ php:
   - "5.4"
   - "5.3"
 
+before_script: php bin/vendors install
 script: phpunit -c app/
