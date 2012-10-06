@@ -116,5 +116,10 @@ If you want to contribute by writing unit or functional tests, this is actually 
 This is a very basic unit test, but shows how testing works: It's simply writing PHPUnit tests for the classes and all methods. For every class there is one test class, and for each method you can
 have one or more test methods. It may be a good idea to not just test the valid use cases, but also test for error use cases.
 
+###Running the tests
+Running the tests is simple. Just go to your project root in a console and type:
+
+    $ phpunit -c app/
+
 ####Further Reading
 If you want to read more about writing tests for a Symfony2 project, check [the Symfony2 documentation](http://symfony.com/doc/current/book/testing.html)
