@@ -24,7 +24,7 @@ class MediaAdmin extends Admin
                 ->add('slides')
                 ->add('joindin')
                 ->add('language')
-                ->add('isPublished')
+                ->add('isPublished', null, array('required' => false))
                 ->add('hostName')
                 ->add('hostUrl')
                 ->add('thumbnail')
