@@ -110,7 +110,7 @@
     target=/php-amqplib
 
 [SonataDoctrineExtensions]
-    git=git@github.com:sonata-project/sonata-doctrine-extensions.git
+    git=git://github.com/sonata-project/sonata-doctrine-extensions.git
     target=/sonata-doctrine-extensions
 
 [SonataEasyExtendsBundle]
