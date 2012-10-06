@@ -5,3 +5,7 @@ php:
 
 before_script: php bin/vendors install
 script: phpunit -c app/
+
+notifications:
+  email:
+    - info@protalk.me
