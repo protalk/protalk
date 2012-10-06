@@ -1,28 +1,105 @@
-ProTalk
-=======
+Welcome to ProTalk
+==================
 
-Welcome to [ProTalk](http://protalk.me), a brand new and exciting open source project.
+Welcome to the repository for [ProTalk](http://protalk.me), an online community resource providing a central point of access to audio/ video content with a PHP focus.
 
-Mission
--------
+Contribute
+----------
 
-We are an online community-driven resource providing a central point of access to audio/ video content with a PHP focus.  
+ProTalk is an open-source project built using [Symfony 2](http://symfony.com/). We welcome contributions from developers of all skills levels.  
 
-We have big plans for the site which include expanding into other programming languages in the future.  In the meantime, we're covering all aspects of PHP and associated tools.
+###Bugs
 
-We soft-launched at DPC12, so we're box-fresh and still in beta - new features and content are being added all the time.
+If you're too busy, or just not quite ready to help us work on the codebase, you can help by finding and reporting bugs to us via the [issue tracker](https://github.com/protalk/protalk/issues).  
 
-Contributors
-------------
+###Code
+If you'd like to contribute code, pull requests containing new features or bug fixes are very welcome!
 
-Want to help?  Thanks to [JayTaph](https://github.com/jaytaph/) we have a cutting-edge Vagrant/ Puppet setup which makes creating a stable and reliable ProTalk development environment an absolute doddle.
+Before getting to work on a new feature, please talk your idea over with a member of the ProTalk development team on the [#protalk](irc://irc.freenode.net/#protalk) freenode IRC channel or open an issue in the tracker and wait for the go ahead.  We have a roadmap of features that we'd like to incorporate into the site and one of the team may already be working on something similar, so it may save you some time in the long run to talk it over with us first.
 
-Installation
-------------
+###Installation
 
-Vagrant installation: More info on this will follow shortly
+[Joshua Thijssen](http://www.adayinthelifeof.nl) has made it super-easy to get a development environment up and running 'on the fly' using [Vagrant](http://vagrantup.com/) and [Puppet](http://puppetlabs.com/).  With a single command, this powerful tool can set-up or tear-down a fully functional development environment inside an [Oracle VirtualBox](https://www.virtualbox.org/).  It works on all platforms and is the recommended way to get started with ProTalk.  
 
-Manual installation:
+If you prefer to do things old-school, go ahead and jump down to the [Manual Installation](#manual-installation) instructions at the end of the page.
+
+###Clone the repository
+
+Fork the ProTalk repository, then clone it to your local machine:
+
+	$ cd /path/to/where/you/want/the/cloned/repo/to/be
+	$ git clone https://github.com/{YourGitHubUsername}/protalk.git
+	$ cd protalk
+
+To keep your cloned fork up-to-date with the main ProTalk project repository, add it as a remote:
+
+	$ git remote add upstream https://github.com/protalk/protalk.git
+
+If you are new to Git and need some help with the basic commands, you may find [this basic tutorial](https://github.com/phpmentoring/resources-tools/blob/master/vcs/git-tutorial.md) useful.
+
+###Vagrant/Puppet Installation
+
+To get up and running you need the following installed on your machine:
+
+* [Ruby](http://www.ruby-lang.org/en/downloads/)
+* [Vagrant](http://downloads.vagrantup.com/)
+* [Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+
+To check if you already have Ruby installed, you can enter this at the command line:
+
+	$ ruby -v
+	
+Once you have the required software installed, and you have cloned your fork to your computer, navigate to the protalk root directory and run the following cli command:
+
+	$ vagrant up
+	
+That's it! I know, it's too easy. The first time you run this command, it may take a few minutes to complete. Subsequent invocations should run much faster.  A VBox window will open and multiple lines of output will appear inside it and at the command line. When it is finished, you will be returned to the command prompt and you can minimise the VBox window out of view (a future release will hide the VBox window for you automatically).
+
+Congratulations, you now have a fully functional ProTalk development environment!
+
+####URLs
+
+You can view the development version ProTalk or PHPMyAdmin in your browser using the following:
+
+	http://33.33.33.10
+	http://33.33.33.10/phpmyadmin         // login credentials are protalk / secret
+
+####app/console activities
+
+This is important, if you need to perform `php app/console` commands as part of your development work, do it _inside_ the Vbox:
+
+	$ vagrant ssh
+	$ cd /vagrant         //this is the protalk root directory inside the vbox
+	
+Other than that, you can work with the code directly in the location you cloned it to.
+
+####Essential Vagrant Commands
+
+Run this command before closing the VBox window, or shutting down your computer:
+
+	$ vagrant suspend
+	
+This starts the process again:
+
+	$ vagrant resume
+	
+Run this to destroy the VBox (removing the development environment completely from your machine):
+
+	$ vagrant destroy
+	
+This creates a new VBox (use this if you destroyed a previous installation):
+
+	$ vagrant up
+	
+The following command is a housekeeping action which you shouldn't need to worry about, but its here if you want it:
+
+	$ vagrant provision
+
+####Further Reading
+
+If you would like to know more about how this was set up, [read Joshua's informative blog post](http://www.adayinthelifeof.nl/2012/06/29/using-vagrant-and-puppet-to-setup-your-symfony2-environment/).
+
+###<a id="manual"></a>Manual Installation
 
 1. Fork the protalk repository
 2. Use git clone to get your fork on your local machine
