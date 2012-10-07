@@ -6,3 +6,6 @@
 /vendor/
 /web/bundles/
 /app/bootstrap*
+.buildpath
+.project
+.settings/
