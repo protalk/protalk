@@ -25,12 +25,12 @@ class MediaRepository extends EntityRepository
      */
     public function getMediaOrderedBy($sort, $page, $max, $order = 'DESC')
     {
-    	$qb = $this->getEntityManager()->createQueryBuilder();
-    	$qb->select("m")
-    	   ->from("ProtalkMediaBundle:Media", "m")
-    	   ->where("m.isPublished = 1")
-    	   ->orderBy("m." . $sort, $order);
-    	$results = $qb->getQuery()->getResult();
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select("m")
+           ->from("ProtalkMediaBundle:Media", "m")
+           ->where("m.isPublished = 1")
+           ->orderBy("m." . $sort, $order);
+        $results = $qb->getQuery()->getResult();
 
         return $this->getResultList($results, $page, $max);
     }
@@ -71,26 +71,26 @@ class MediaRepository extends EntityRepository
      */
     public function findMedia($search, $sort, $page, $max, $order)
     {
-    	$qb = $this->getEntityManager()->createQueryBuilder();
-    	$qb->select("m")->distinct(true)
-    	   ->from("ProtalkMediaBundle:Media", "m")
-    	   ->leftJoin("m.categories", "c")
-    	   ->leftJoin("m.tags", "t")
-    	   ->join("m.speakers", "s")
-    	   ->join("m.mediatype", "mtype")
-    	   ->where($qb->expr()->andX(
-    	   		$qb->expr()->orX(
-    	   			"LOWER(c.name) LIKE :search1",
-    	   			"LOWER(t.name) LIKE :search2",
-    	   			"LOWER(s.name) LIKE :search3",
-    	   			"LOWER(m.title) LIKE :search4",
-    	   			"LOWER(m.description) LIKE :search5",
-    	   			"LOWER(mtype.name) LIKE :search6"	 
-    	   		),
-    	   		"m.isPublished = 1"
-    	   ));
-    	$query = $qb->getQuery();
-    	$query->setParameter('search1', '%'.strtolower($search).'%')
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select("m")->distinct(true)
+           ->from("ProtalkMediaBundle:Media", "m")
+           ->leftJoin("m.categories", "c")
+           ->leftJoin("m.tags", "t")
+           ->join("m.speakers", "s")
+           ->join("m.mediatype", "mtype")
+           ->where($qb->expr()->andX(
+               $qb->expr()->orX(
+                   "LOWER(c.name) LIKE :search1",
+                   "LOWER(t.name) LIKE :search2",
+                   "LOWER(s.name) LIKE :search3",
+                   "LOWER(m.title) LIKE :search4",
+                   "LOWER(m.description) LIKE :search5",
+                   "LOWER(mtype.name) LIKE :search6"     
+               ),
+               "m.isPublished = 1"
+           ));
+        $query = $qb->getQuery();
+        $query->setParameter('search1', '%'.strtolower($search).'%')
               ->setParameter('search2', '%'.strtolower($search).'%')
               ->setParameter('search3', '%'.strtolower($search).'%')
               ->setParameter('search4', '%'.strtolower($search).'%')
@@ -111,12 +111,12 @@ class MediaRepository extends EntityRepository
     public function findOneBySlug($slug)
     {
         return $this->getEntityManager()
-                      ->createQuery('SELECT m, mt
-                                     FROM ProtalkMediaBundle:Media m
-                                     JOIN m.mediatype mt
-                                     WHERE m.slug = :slug AND m.isPublished = 1')
-                      ->setParameter('slug', $slug)
-                      ->getSingleResult();
+                    ->createQuery('SELECT m, mt
+                                   FROM ProtalkMediaBundle:Media m
+                                   JOIN m.mediatype mt
+                                   WHERE m.slug = :slug AND m.isPublished = 1')
+                    ->setParameter('slug', $slug)
+                    ->getSingleResult();
     }
 
     /**
@@ -132,18 +132,18 @@ class MediaRepository extends EntityRepository
      */
     public function findByCategory($slug, $orderField, $page, $max, $order = 'DESC')
     {
-    	$qb = $this->getEntityManager()->createQueryBuilder();
-    	$qb->select("m")
-    	   ->from("ProtalkMediaBundle:Media", "m")
-    	   ->join("m.categories", "c")
-    	   ->where($qb->expr()->andX(
-    	   		"c.slug = :slug",
-    	   		"m.isPublished = 1"
-    	   ))
-    	   ->orderBy("m." . $orderField, $order);
-    	$query = $qb->getQuery();
-    	$query->setParameter("slug", $slug);
-    	
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select("m")
+           ->from("ProtalkMediaBundle:Media", "m")
+           ->join("m.categories", "c")
+           ->where($qb->expr()->andX(
+               "c.slug = :slug",
+               "m.isPublished = 1"
+           ))
+           ->orderBy("m." . $orderField, $order);
+        $query = $qb->getQuery();
+        $query->setParameter("slug", $slug);
+        
         $results = $query->getResult();
 
         return $this->getResultList($results, $page, $max);
@@ -162,18 +162,18 @@ class MediaRepository extends EntityRepository
      */
     public function findByTag($slug, $orderField, $page, $max, $order = 'DESC')
     {
-    	$qb = $this->getEntityManager()->createQueryBuilder();
-    	$qb->select("m")
-    	   ->from("ProtalkMediaBundle:Media", "m")
-    	   ->join("m.tags", "t")
-    	   ->where($qb->expr()->andX(
-    	   		"t.slug = :slug",
-    	   		"m.isPublished = 1"
-    	   ))
-    	   ->orderBy("m." . $orderField, $order);
-    	$query = $qb->getQuery();
-    	$query->setParameter("slug", $slug);
-    	$results = $query->getResult();
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select("m")
+           ->from("ProtalkMediaBundle:Media", "m")
+           ->join("m.tags", "t")
+           ->where($qb->expr()->andX(
+               "t.slug = :slug",
+               "m.isPublished = 1"
+           ))
+           ->orderBy("m." . $orderField, $order);
+        $query = $qb->getQuery();
+        $query->setParameter("slug", $slug);
+        $results = $query->getResult();
 
         return $this->getResultList($results, $page, $max);
     }
@@ -190,17 +190,17 @@ class MediaRepository extends EntityRepository
      */
     public function findBySpeaker($speakerId, $orderField, $page, $max)
     {
-    	$qb = $this->getEntityManager()->createQueryBuilder();
-    	$qb->select("m")
-    	   ->from("ProtalkMediaBundle:Media", "m")
-    	   ->join("m.speakers", "s")
-    	   ->where($qb->expr()->andX(
-    	   		"s.id = :speakerId",
-    	   		"m.isPublished = 1"
-    	   ))
-    	   ->orderBy("m." . $orderField, "DESC");
-    	$query = $qb->getQuery();
-    	$query->setParameter('speakerId', $speakerId);
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select("m")
+           ->from("ProtalkMediaBundle:Media", "m")
+           ->join("m.speakers", "s")
+           ->where($qb->expr()->andX(
+               "s.id = :speakerId",
+               "m.isPublished = 1"
+           ))
+           ->orderBy("m." . $orderField, "DESC");
+        $query = $qb->getQuery();
+        $query->setParameter('speakerId', $speakerId);
         $results = $query->getResult();
         return $this->getResultList($results, $page, $max);
     }

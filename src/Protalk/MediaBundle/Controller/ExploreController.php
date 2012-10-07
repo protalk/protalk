@@ -4,8 +4,6 @@ namespace Protalk\MediaBundle\Controller;
 
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-use Symfony\Component\Config\Definition\Exception\ForbiddenOverwriteException;
-
 use Protalk\MediaBundle\Helpers\ExploreSortOptions;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -40,7 +38,7 @@ class ExploreController extends Controller
         $page = $this->getRequest()->get('page', 1);
         
         if (!ExploreSortOptions::verifySortOption($sort, $order)) {
-        	throw new AccessDeniedHttpException("The given sort option '$sort $order' is not supported");
+            throw new AccessDeniedHttpException("The given sort option '$sort $order' is not supported");
         }
 
         $results = array();
@@ -69,7 +67,7 @@ class ExploreController extends Controller
         $page = $this->getRequest()->get('page', 1);
 
         if (!ExploreSortOptions::verifySortOption($sort, $order)) {
-        	throw new AccessDeniedHttpException("The given sort option '$sort $order' is not supported");
+            throw new AccessDeniedHttpException("The given sort option '$sort $order' is not supported");
         }
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -95,7 +93,7 @@ class ExploreController extends Controller
         $page = $this->getRequest()->get('page', 1);
 
         if (!ExploreSortOptions::verifySortOption($sort, $order)) {
-        	throw new AccessDeniedHttpException("The given sort option '$sort $order' is not supported");
+            throw new AccessDeniedHttpException("The given sort option '$sort $order' is not supported");
         }
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -127,7 +125,7 @@ class ExploreController extends Controller
         $pageSize = $this->container->getParameter('search_results_page');
 
         if (!ExploreSortOptions::verifySortOption($sort)) {
-        	throw new AccessDeniedHttpException("The given sort option '$sort' is not supported");
+            throw new AccessDeniedHttpException("The given sort option '$sort' is not supported");
         }
         
         $em = $this->getDoctrine()->getEntityManager();
@@ -157,7 +155,7 @@ class ExploreController extends Controller
         $results[$searchField] = $search;
         $results['order'] = $order;
         $results['sort'] = $sort;
-		$results['availableSortOptions'] = ExploreSortOptions::getAvailableSortOptions();
+        $results['availableSortOptions'] = ExploreSortOptions::getAvailableSortOptions();
         return $results;
     }
 }

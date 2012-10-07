@@ -44,10 +44,10 @@
     <select id="sortOptions" class="form_field">
         <option>Select a sort option</option>
 {% for sortOption in availableSortOptions %}
-    	<option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': sortOption.sort, 'search':  search, 'order': sortOption.order, 'page': paginator.currentpage } ) }}"
-	{%- if sort == sortOption.sort and order == sortOption.order %}
-	    selected="selected"
-	{%- endif -%}>Sort by {{ sortOption.cleartext }}</option>
+        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': sortOption.sort, 'search':  search, 'order': sortOption.order, 'page': paginator.currentpage } ) }}"
+    {%- if sort == sortOption.sort and order == sortOption.order %}
+        selected="selected"
+    {%- endif -%}>Sort by {{ sortOption.cleartext }}</option>
 {% endfor %}
     </select>
 {% endif %}
