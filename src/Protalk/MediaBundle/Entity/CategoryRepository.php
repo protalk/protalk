@@ -20,17 +20,37 @@ class CategoryRepository extends EntityRepository
      */
     public function getMostUsedCategories($max = 20)
     {
-        $qb = $this->getEntityManager()->createQueryBuilder();
+		$qb = $this->getEntityManager()->createQueryBuilder();
 
-        $qb->select('c.slug', 'c.name', 'COUNT(m.id) as mediaCount');
-        $qb->from('\Protalk\MediaBundle\Entity\Category', 'c');
-        $qb->join('c.medias', 'm');
-        $qb->where('m.isPublished = 1');
-        $qb->groupBy('c.slug');
-        $qb->orderBy('mediaCount', 'DESC');
-        $qb->setMaxResults($max);
+		$qb->select('c.slug', 'c.name', 'COUNT(m.id) as mediaCount');
+		$qb->from('\Protalk\MediaBundle\Entity\Category', 'c');
+		$qb->join('c.medias', 'm');
+		$qb->where('m.isPublished = 1');
+		$qb->groupBy('c.slug');
+		$qb->orderBy('mediaCount', 'DESC');
+		$qb->setMaxResults($max);
 
-        $query = $qb->getQuery();
-        return $query->execute();
+		$query = $qb->getQuery();
+		return $query->execute();
+    }
+    
+    /**
+     * Get all used categories
+     *
+     * @return Doctrine Collection
+     */
+    public function getAllCategories()
+    {
+		$qb = $this->getEntityManager()->createQueryBuilder();
+
+		$qb->select('c.slug', 'c.name', 'COUNT(m.id) as mediaCount');
+		$qb->from('\Protalk\MediaBundle\Entity\Category', 'c');
+		$qb->join('c.medias', 'm');
+		$qb->where('m.isPublished = 1');
+		$qb->groupBy('c.slug');
+		$qb->orderBy('c.name', 'ASC');
+
+		$query = $qb->getQuery();
+		return $query->execute();
     }
 }

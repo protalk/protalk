@@ -13,7 +13,10 @@ class SpeakerController extends Controller {
    */
   public function listAction()
   {
-    $speakers = $this->getDoctrine()->getRepository("ProtalkMediaBundle:Speaker")->findAll();
+    $em = $this->getDoctrine()->getEntityManager();
+	$repository = $em->getRepository('ProtalkMediaBundle:Speaker');
+	$speakers = $repository->getAllSpeakers();
+	
     return array('speakers' => $speakers);
   }
 

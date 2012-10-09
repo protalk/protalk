@@ -1,5 +1,10 @@
 {% extends "::base.html.twig" %}
 
+{% block javascriptsHead %}
+    <script src="{{ asset('js/explore.js') }}"></script>
+    <script src="{{ asset('js/page.js') }}"></script>
+{% endblock %}
+
 {% block title "Explore" %}
 
 {% block bluestrip %}
@@ -8,9 +13,51 @@
 
 {% block body %}
 <h1>Explore</h1>
-<p>Use the search form above to search for content</p>
+<p>Welcome to explore ProTalk media by different category, tags or speakers by selecting the corresponding tab below.</p>
+<section>
+    <div id="tabControl" class="hidden tabControlExplore">
+        <ul>
+            <li><a href="#categories-link">CATEGORIES</a></li>
+            <li><a href="#tags-link">TAGS</a></li>
+            <li><a href="#speakers-link">SPEAKERS</a></li>
+        </ul>
+        <div>
+            <div id="categories">
+                <table class="categoryList">
+                <tr>
+                {% for category in categories %}
+                    <td><a class="category" href="{{ path('category_search', { 'search': category.slug }) }}"><span>{{ category.name }} ({{ category.mediaCount }})</span></a></td>
+                    {% if loop.index is even %}
+                        </tr>
+                        <tr>
+                    {% endif %}
+                {% endfor %}
+                </tr>
+            </table>
+            </div>
+
+            <div id="tags">
+                {% render "ProtalkMediaBundle:Tag:list" %}
+            </div>
+
+            <div id="speakers">
+                {% render "ProtalkMediaBundle:Speaker:list" %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
 {% endblock %}
 
 {% block rightcolumn %}
-    {% include '::sidebar.html.twig' %}
+    <div id="sidebar">
+        <section>
+            <div id="categories">
+                <h1>@TODO</h1>
+                Figure out content for this sidebar!
+            </div>
+        </section>
+    </div>
 {% endblock %}

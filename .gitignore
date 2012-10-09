@@ -6,3 +6,4 @@
 /vendor/
 /web/bundles/
 /app/bootstrap*
+/nbproject

@@ -17,7 +17,10 @@ class ExploreController extends Controller
      */
     public function indexAction()
     {
-        return array();
+        $em = $this->getDoctrine()->getEntityManager();
+        $repository = $em->getRepository('ProtalkMediaBundle:Category');
+        $categories = $repository->getAllCategories();
+        return array('categories' => $categories);
     }
 
     /**
@@ -91,12 +94,12 @@ class ExploreController extends Controller
     }
 
     /**
-     * @Route("/search/speaker/{id}")
-     * @Template("ProtalkMediaBundle:Explore:result.html.twig")
+     * @Route("/search/speaker/{search}")
+     * @Template("ProtalkMediaBundle:Speaker:result.html.twig")
      */
-    public function speakerAction($id)
+    public function speakerAction($search)
     {
-        $sort = 'date';
+		$sort = 'date';
         if ($this->getRequest()->get('sort') != '') {
             $sort = $this->getRequest()->get('sort');
         }
@@ -110,9 +113,9 @@ class ExploreController extends Controller
 
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
-        $results = $repository->findBySpeaker($id, $sort, $page, $pageSize);
+        $results = $repository->findBySpeaker($search, $sort, $page, $pageSize);
 
-        return $this->_getViewParameters($results, 'id', $id, $sort, $page, $pageSize, 'speaker_search');
+        return $this->_getViewParameters($results, 'id', $search, $sort, $page, $pageSize, 'speaker_search', 'id');
     }
 
     /**
@@ -131,6 +134,7 @@ class ExploreController extends Controller
     private function _getViewParameters($results, $searchField, $search, $sort, $page, $pageSize, $route, $order)
     {
         $paginator = new Paginator($results['total'], $page , $pageSize, 7);
+		$results['search'] = $search;
         $results['paginator'] = $paginator;
         $results[$searchField] = $search;
         $results['order'] = $order;

@@ -39,7 +39,7 @@ class PageController extends Controller
     protected function getPage($url)
     {
         $this->page = $this->getDoctrine()->getRepository('ProtalkPageBundle:Page')->findOneByUrl($url);
-        if (!is_object($this->page)) {
+		if (!is_object($this->page)) {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
         return true;
