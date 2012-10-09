@@ -1,4 +1,16 @@
 <?php
+
+/**
+ * ProTalk
+ *
+ * Copyright (c) 2012-2013, ProTalk
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Protalk\MediaBundle\Helpers;
+
 /**
  * Class to paginate a list of items in a old digg style
  *
@@ -6,8 +18,6 @@
  * @author Carlos Mafla <gigo6000@hotmail.com>
  * @www.inchoo.net
  */
-namespace Protalk\MediaBundle\Helpers;
-
 class Paginator {
 
     /**
