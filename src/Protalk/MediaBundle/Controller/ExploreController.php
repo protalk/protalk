@@ -99,7 +99,7 @@ class ExploreController extends Controller
      */
     public function speakerAction($search)
     {
-		$sort = 'date';
+        $sort = 'date';
         if ($this->getRequest()->get('sort') != '') {
             $sort = $this->getRequest()->get('sort');
         }
@@ -134,7 +134,7 @@ class ExploreController extends Controller
     private function _getViewParameters($results, $searchField, $search, $sort, $page, $pageSize, $route, $order)
     {
         $paginator = new Paginator($results['total'], $page , $pageSize, 7);
-		$results['search'] = $search;
+        $results['search'] = $search;
         $results['paginator'] = $paginator;
         $results[$searchField] = $search;
         $results['order'] = $order;
