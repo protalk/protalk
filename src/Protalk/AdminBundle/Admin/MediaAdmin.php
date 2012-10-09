@@ -23,7 +23,11 @@ class MediaAdmin extends Admin
     {
         $formMapper->add('title')
                 ->add('mediatype')
-                ->add('speakers', 'sonata_type_model', array('expanded' => true))
+                ->add('speakers', 'sonata_type_model', array(
+                    'expanded' => true,
+                    'compound' => true,
+                    'multiple' => true)
+                )
                 ->add('date')
                 ->add('description')
                 ->add('length')
@@ -37,8 +41,16 @@ class MediaAdmin extends Admin
                 ->add('hostName')
                 ->add('hostUrl')
                 ->add('thumbnail')
-                ->add('categories', 'sonata_type_model', array('expanded' => true))
-                ->add('tags', 'sonata_type_model', array('expanded' => true));
+                ->add('categories', 'sonata_type_model', array(
+                    'expanded' => true,
+                    'compound' => true,
+                    'multiple' => true)
+                )
+                ->add('tags', 'sonata_type_model', array(
+                    'expanded' => true,
+                    'compound' => true,
+                    'multiple' => true)
+                );
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -55,7 +67,7 @@ class MediaAdmin extends Admin
     {
         $errorElement->with('title')->assertMaxLength(array('limit' => 255))->end();
     }
-    
+
     public function getBatchActions()
     {
         // retrieve the default (currently only the delete action) actions

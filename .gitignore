@@ -1,6 +1,6 @@
 /app/cache/*
 /app/logs/*
-/app/config/parameters.ini
+/app/config/parameters.yml
 .idea
 .vagrant
 /vendor/
