@@ -2,6 +2,10 @@
 
 namespace Protalk\MediaBundle\Controller;
 
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
+use Protalk\MediaBundle\Helpers\ExploreSortOptions;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -34,7 +38,11 @@ class ExploreController extends Controller
 
         $search = $request->request->get('search', $search);
         $order = $request->request->get('order', $order);
-        $page = ($this->getRequest()->get('page')) ? $this->getRequest()->get('page') : 1;
+        $page = $this->getRequest()->get('page', 1);
+        
+        if (!ExploreSortOptions::verifySortOption($sort, $order)) {
+            throw new AccessDeniedHttpException("The given sort option '$sort $order' is not supported");
+        }
 
         $results = array();
         $em = $this->getDoctrine()->getEntityManager();
@@ -59,7 +67,11 @@ class ExploreController extends Controller
         $request = Request::createFromGlobals();
 
         $order = $request->request->get('order', $order);
-        $page = ($this->getRequest()->get('page')) ? $this->getRequest()->get('page') : 1;
+        $page = $this->getRequest()->get('page', 1);
+
+        if (!ExploreSortOptions::verifySortOption($sort, $order)) {
+            throw new AccessDeniedHttpException("The given sort option '$sort $order' is not supported");
+        }
 
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
@@ -81,7 +93,11 @@ class ExploreController extends Controller
         $request = Request::createFromGlobals();
 
         $order = $request->request->get('order', $order);
-        $page = ($this->getRequest()->get('page')) ? $this->getRequest()->get('page') : 1;
+        $page = $this->getRequest()->get('page', 1);
+
+        if (!ExploreSortOptions::verifySortOption($sort, $order)) {
+            throw new AccessDeniedHttpException("The given sort option '$sort $order' is not supported");
+        }
 
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
@@ -111,6 +127,10 @@ class ExploreController extends Controller
 
         $pageSize = $this->container->getParameter('search_results_page');
 
+        if (!ExploreSortOptions::verifySortOption($sort)) {
+            throw new AccessDeniedHttpException("The given sort option '$sort' is not supported");
+        }
+        
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
         $results = $repository->findBySpeaker($search, $sort, $page, $pageSize);
@@ -139,8 +159,7 @@ class ExploreController extends Controller
         $results[$searchField] = $search;
         $results['order'] = $order;
         $results['sort'] = $sort;
-        $results['sortOption'] = $sort.' '.$order;
-
+        $results['availableSortOptions'] = ExploreSortOptions::getAvailableSortOptions();
         return $results;
     }
 }
