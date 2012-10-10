@@ -43,14 +43,13 @@
 {% if total > 1 %}
     <select id="sortOptions" class="form_field">
         <option>Select a sort option</option>
-        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'title', 'search':  search, 'order': 'asc', 'page': paginator.currentpage } ) }}" {{ sortOption == 'title asc' ? "selected" : ''}}>Sort by title (a - z)</option>
-        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'title', 'search':  search, 'order': 'desc', 'page': paginator.currentpage } ) }}" {{ sortOption == 'title desc' ? "selected" : ''}}>Sort by title (z - a)</option>
-        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'date', 'search':  search, 'order': 'asc', 'page': paginator.currentpage} ) }}" {{ sortOption == 'date asc' ? "selected" : ''}}>Sort by date (asc)</option>
-        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'date', 'search':  search, 'order': 'desc', 'page': paginator.currentpage } ) }}" {{ sortOption == 'date desc' ? "selected" : ''}}>Sort by date (desc)</option>
-        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'visits', 'search':  search, 'order': 'asc', 'page': paginator.currentpage } ) }}" {{ sortOption == 'visits asc' ? "selected" : ''}}>Sort by views (asc)</option>
-        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'visits', 'search':  search, 'order': 'desc', 'page': paginator.currentpage } ) }}" {{ sortOption == 'visits desc' ? "selected" : ''}}>Sort by views (desc)</option>
-        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'rating', 'search':  search, 'order': 'asc', 'page': paginator.currentpage } ) }}" {{ sortOption == 'rating asc' ? "selected" : ''}}>Sort by rating (asc)</option>
-        <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': 'rating', 'search':  search, 'order': 'desc', 'page': paginator.currentpage } ) }}" {{ sortOption == 'rating desc' ? "selected" : ''}}>Sort by rating (desc)</option>
+        {% for sortOption in availableSortOptions %}
+            <option data-url="{{ path(app.request.attributes.get('_route'), { 'sort': sortOption.sort, 'search': search, 'order': sortOption.order, 'page': paginator.currentpage } ) }}"
+            {%- if sort == sortOption.sort and order == sortOption.order %}
+                selected="selected"
+            {%- endif -%}>Sort by {{ sortOption.cleartext }}
+            </option>
+        {% endfor %}
     </select>
 {% endif %}
 

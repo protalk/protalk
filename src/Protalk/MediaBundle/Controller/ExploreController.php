@@ -128,6 +128,11 @@ class ExploreController extends Controller
         if ($this->getRequest()->get('sort') != '') {
             $sort = $this->getRequest()->get('sort');
         }
+        
+        $order = 'asc';
+        if ($this->getRequest()->get('order') != '') {
+            $order = $this->getRequest()->get('order');
+        }
 
         $page = 1;
         if ($this->getRequest()->get('page') != '') {
@@ -136,7 +141,7 @@ class ExploreController extends Controller
 
         $pageSize = $this->container->getParameter('search_results_page');
 
-        if (!ExploreSortOptions::verifySortOption($sort)) {
+        if (!ExploreSortOptions::verifySortOption($sort, $order)) {
             throw new AccessDeniedHttpException("The given sort option '$sort' is not supported");
         }
         
