@@ -785,6 +785,12 @@ color:#999999;
     width: 425px;
 }
 
+/*  left column on explore page */
+#exploreSection {
+    width:885px;
+    float:left;
+}
+
 #comments p {
     margin-bottom:5px;
 }
