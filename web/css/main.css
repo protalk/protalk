@@ -969,3 +969,22 @@ form ul {
     left:0;
     margin-bottom:10px;
 }
+
+#githubrow {
+    padding-left: 20px;
+    float: left;
+}
+
+#githubrow a {
+    font-size: 1.3em;
+    color: #3a668b;
+}
+
+#githubrow a:hover {
+    font-size: 1.3em;
+    color: #0096ff;
+}
+
+img#githubicon {
+    float: left;
+}
