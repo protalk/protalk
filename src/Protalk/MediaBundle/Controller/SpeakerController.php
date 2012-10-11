@@ -22,11 +22,11 @@ class SpeakerController extends Controller {
      */
     public function listAction()
     {
-            $em = $this->getDoctrine()->getEntityManager();
-            $repository = $em->getRepository('ProtalkMediaBundle:Speaker');
-            $speakers = $repository->getAllSpeakers();
+        $em = $this->getDoctrine()->getEntityManager();
+        $repository = $em->getRepository('ProtalkMediaBundle:Speaker');
+        $speakers = $repository->getAllSpeakers();
 
-            return array('speakers' => $speakers);
+        return array('speakers' => $speakers);
     }
 
     public function showAction($id, $name)
