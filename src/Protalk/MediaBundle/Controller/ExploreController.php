@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * ProTalk
+ *
+ * Copyright (c) 2012-2013, ProTalk
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Protalk\MediaBundle\Controller;
 
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -21,7 +30,10 @@ class ExploreController extends Controller
      */
     public function indexAction()
     {
-        return array();
+        $em = $this->getDoctrine()->getEntityManager();
+        $repository = $em->getRepository('ProtalkMediaBundle:Category');
+        $categories = $repository->getAllCategories();
+        return array('categories' => $categories);
     }
 
     /**
@@ -107,14 +119,19 @@ class ExploreController extends Controller
     }
 
     /**
-     * @Route("/search/speaker/{id}")
+     * @Route("/search/speaker/{search}")
      * @Template("ProtalkMediaBundle:Explore:result.html.twig")
      */
-    public function speakerAction($id)
+    public function speakerAction($search)
     {
         $sort = 'date';
         if ($this->getRequest()->get('sort') != '') {
             $sort = $this->getRequest()->get('sort');
+        }
+        
+        $order = 'asc';
+        if ($this->getRequest()->get('order') != '') {
+            $order = $this->getRequest()->get('order');
         }
 
         $page = 1;
@@ -124,15 +141,15 @@ class ExploreController extends Controller
 
         $pageSize = $this->container->getParameter('search_results_page');
 
-        if (!ExploreSortOptions::verifySortOption($sort)) {
+        if (!ExploreSortOptions::verifySortOption($sort, $order)) {
             throw new AccessDeniedHttpException("The given sort option '$sort' is not supported");
         }
         
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
-        $results = $repository->findBySpeaker($id, $sort, $page, $pageSize);
+        $results = $repository->findBySpeaker($search, $sort, $page, $pageSize);
 
-        return $this->_getViewParameters($results, 'id', $id, $sort, $page, $pageSize, 'speaker_search');
+        return $this->_getViewParameters($results, 'id', $search, $sort, $page, $pageSize, 'speaker_search', 'id');
     }
 
     /**
@@ -151,6 +168,7 @@ class ExploreController extends Controller
     private function _getViewParameters($results, $searchField, $search, $sort, $page, $pageSize, $route, $order)
     {
         $paginator = new Paginator($results['total'], $page , $pageSize, 7);
+        $results['search'] = $search;
         $results['paginator'] = $paginator;
         $results[$searchField] = $search;
         $results['order'] = $order;
