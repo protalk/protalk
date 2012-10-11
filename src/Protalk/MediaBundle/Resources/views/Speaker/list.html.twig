@@ -1,5 +1,15 @@
-{% for speaker in speakers %}
-    {% if speaker.photo %}
-        <a class="speaker" href="{{ url('speaker_show', { 'name': speaker.name , 'id' : speaker.id }) }}"><img src="{{ asset(['images/photos/', speaker.photo]|join) }}" alt="Author Image"/></a>
-    {% endif %}
-{% endfor %}
+<table class="speakerList">
+    <tr>
+    {% for speaker in speakers %}
+        <td>
+			<a class="speaker" href="{{ url('speaker_search', { 'search' : speaker.id }) }}">{{ speaker.name }} ({{ speaker.mediaCount }})</a>
+		</td>
+        {% if loop.index is even %}
+            </tr>
+            <tr>
+        {% endif %}
+    {% endfor %}
+    </tr>
+</table>
+
+
