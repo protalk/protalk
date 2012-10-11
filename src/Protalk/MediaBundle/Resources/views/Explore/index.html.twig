@@ -23,17 +23,7 @@
         </ul>
         <div>
             <div id="categories">
-                <table class="categoryList">
-                <tr>
-                {% for category in categories %}
-                    <td><a class="category" href="{{ path('category_search', { 'search': category.slug }) }}"><span>{{ category.name }} ({{ category.mediaCount }})</span></a></td>
-                    {% if loop.index is even %}
-                        </tr>
-                        <tr>
-                    {% endif %}
-                {% endfor %}
-                </tr>
-            </table>
+                {% render "ProtalkMediaBundle:Category:list" %}
             </div>
 
             <div id="tags">

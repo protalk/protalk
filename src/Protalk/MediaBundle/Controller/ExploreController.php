@@ -120,7 +120,7 @@ class ExploreController extends Controller
 
     /**
      * @Route("/search/speaker/{search}")
-     * @Template("ProtalkMediaBundle:Speaker:result.html.twig")
+     * @Template("ProtalkMediaBundle:Explore:result.html.twig")
      */
     public function speakerAction($search)
     {
