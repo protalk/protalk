@@ -98,6 +98,11 @@ services:
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_common, label: Mediatype }
       arguments: [null, Protalk\MediaBundle\Entity\Mediatype, null]
+   protalk.common.admin.page:
+      class: Protalk\AdminBundle\Admin\PageAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: protalk_common, label: Page }
+      arguments: [null, Protalk\PageBundle\Entity\Page, null]   
    protalk.media.admin.media:
       class: Protalk\AdminBundle\Admin\MediaAdmin
       tags:
