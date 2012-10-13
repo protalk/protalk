@@ -29,8 +29,17 @@
         </header>
         <p>{{ media.getTruncatedDescription() }}</p>
         <footer>
-            <p><img src="{{ asset('images/binoculars.png') }}" alt="Binoculars Image" /> <span class="metadata">{{ media.visits }} views | </span>
-               <span class="metadata">Rating: {% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span></p>
+            <p>
+                <img src="{{ asset('images/binoculars.png') }}" alt="Binoculars Image" />
+                <span class="metadata">
+                    {% if media.visits == 1 %}
+                        {{ media.visits }} view
+                    {% else  %}
+                        {{ media.visits }} views
+                    {% endif %}
+                | </span>
+               <span class="metadata">Rating: {% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span>
+           </p>
         </footer>
     </div>
 </article>
@@ -61,7 +70,16 @@
                         </header>
 
                         <footer>
-                            <p><img src="{{ asset('images/binoculars.png') }}" alt="Binoculars Image"/><span class="metadata"> {{ media.visits }} views</span></p>
+                            <p>
+                               <img src="{{ asset('images/binoculars.png') }}" alt="Binoculars Image"/>
+                               <span class="metadata"> 
+                                   {% if media.visits == 1 %}
+                                       {{ media.visits }} view
+                                   {% else %}
+                                       {{ media.visits }} views
+                                   {% endif %}
+                               </span>
+                            </p>
                         </footer>
                     </div>
                 </article>
