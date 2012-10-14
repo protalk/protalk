@@ -21,21 +21,24 @@ class TagAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('name');
+        $formMapper->add('name')->add('slug');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('name');
+        $datagridMapper->add('name')->add('slug');
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('name');
+        $listMapper->addIdentifier('name')->add('slug');
     }
 
     public function validate(ErrorElement $errorElement, $object)
     {
-        $errorElement->with('name')->assertMaxLength(array('limit' => 50))->end();
+        $errorElement
+        ->with('name')
+        ->assertMaxLength(array('limit' => 50))
+        ->end();
     }
 }
