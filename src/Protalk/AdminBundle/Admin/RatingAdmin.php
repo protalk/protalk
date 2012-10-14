@@ -17,23 +17,57 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Form\FormMapper;
 
+/**
+ * Admin for ratings
+ * 
+ * This class handles fields for the ratings data.
+ */
 class RatingAdmin extends Admin
 {
+    /**
+     * Form fields configuration
+     * 
+     * This function adds Name to the form mapper.
+     * 
+     * @param FormMapper $formMapper 
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('name');
     }
 
+    /**
+     * Datagrid filter configuration
+     * 
+     * This function adds Name to the datagrid mapper.
+     * 
+     * @param DatagridMapper $datagridMapper 
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('name');
     }
 
+    /**
+     * List fields configuration
+     * 
+     * This function adds Name identifier to the list mapper.
+     * 
+     * @param ListMapper $listMapper 
+     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper->addIdentifier('name');
     }
 
+    /**
+     * Validator function
+     * 
+     * This function validates that name is no more than 50 characters long.
+     * 
+     * @param ErrorElement $errorElement
+     * @param mixed $object 
+     */
     public function validate(ErrorElement $errorElement, $object)
     {
         $errorElement->with('name')->assertMaxLength(array('limit' => 50))->end();

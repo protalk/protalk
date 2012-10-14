@@ -13,6 +13,11 @@ namespace Protalk\AdminBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
+/**
+ * ProtalkAdminBundle
+ * 
+ * Class that defines ProTalkAdminBundle. 
+ */
 class ProtalkAdminBundle extends Bundle
 {
 }

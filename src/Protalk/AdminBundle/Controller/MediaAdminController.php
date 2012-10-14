@@ -15,8 +15,21 @@ use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery as ProxyQueryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
+/**
+ * Media Admin Controller
+ * 
+ * This controller handles requests to handle media administration.
+ */
 class MediaAdminController extends Controller
 {
+    /**
+     * Publish media
+     * 
+     * This function publishes media that has been insterted previously.
+     * 
+     * @param ProxyQueryInterface $query
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse 
+     */
     public function batchActionUnpublish(ProxyQueryInterface $query)
     {
         $em = $this->getDoctrine()->getEntityManager();

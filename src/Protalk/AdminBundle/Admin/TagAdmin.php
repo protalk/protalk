@@ -17,23 +17,57 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Form\FormMapper;
 
+/**
+ * Admin for tags
+ * 
+ * This class handles fields for the tags data.
+ */
 class TagAdmin extends Admin
 {
+    /**
+     * Form fields configuration
+     * 
+     * This function adds Name to the form mapper.
+     * 
+     * @param FormMapper $formMapper 
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('name');
     }
 
+    /**
+     * Datagrid filters configuration
+     * 
+     * This function adds Name to the datagrid mapper.
+     * 
+     * @param DatagridMapper $datagridMapper 
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('name');
     }
 
+    /**
+     * List fields configuration
+     * 
+     * This function adds Name identifier to the list mapper.
+     * 
+     * @param ListMapper $listMapper 
+     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper->addIdentifier('name');
     }
 
+    /**
+     * Validator class
+     * 
+     * This function validates that Name is no longer that 50 characters long.
+     * 
+     * @param ErrorElement $errorElement
+     * @param type $object 
+     */
     public function validate(ErrorElement $errorElement, $object)
     {
         $errorElement->with('name')->assertMaxLength(array('limit' => 50))->end();
