@@ -45,22 +45,20 @@ class PageController extends Controller
         return true;
     }
 
+    /*
+     * Retrieves list of GitHub contributors using GitHub API
+     *
+     * @return template
+     */
     public function getContributorsAction()
     {
         $buzz = $this->container->get('buzz');
         $response = $buzz->get('https://api.github.com/repos/protalk/protalk/contributors');
-        $contributors = json_decode($response->getContent(), true);
-
-     
+        $contributors = json_decode($response->getContent(), true);    
 
         foreach ($contributors as $key => $row) {
             $contributions[$key] = $row['contributions'];
-            //var_dump( $contributions);
         }
-
-       // $contributors = array_multisort($contributions, SORT_DESC, $contributors);
-
-       // print_r($contributors);die;
 
         return $this->render('ProtalkPageBundle:Page:contributors.html.twig',array('contributors' => $contributors));
     }

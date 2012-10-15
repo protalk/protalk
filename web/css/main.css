@@ -970,9 +970,7 @@ form ul {
     margin-bottom:10px;
 }
 
-
-#contributors {
-    
+#contributors {  
     margin-left:0px;
     text-align:left;
 }
@@ -981,8 +979,7 @@ form ul {
   width:532px;
   margin-bottom:20px;
   overflow:hidden;
-  border-top:1px solid #ccc;
-  
+  border-top:1px solid #ccc; 
 }
 
 #contributors li{
@@ -990,10 +987,7 @@ form ul {
   display:inline;
   width:50%;
   padding-bottom:10px;
-
 }
-
-
 
 #contributors img {
     width:112px;
@@ -1006,15 +1000,10 @@ form ul {
     margin-top: 5px;
 }
 
-
-
 .contributor {
 
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: normal;
     font-size: 15px;
     padding-left: 8px;
-
-   
-
 }
