@@ -33,6 +33,7 @@ class AppKernel extends Kernel
             new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
             new SamJ\DoctrineSluggableBundle\SamJDoctrineSluggableBundle(),
             new Sonata\NotificationBundle\SonataNotificationBundle(),
+            new Sensio\Bundle\BuzzBundle\SensioBuzzBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
