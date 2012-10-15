@@ -22,6 +22,12 @@
 <div id="pageContent">
     <p>{{ page.content|raw }}</p>
 </div>
+
+{% if page.title == 'About' %}
+    {% render "ProtalkPageBundle:Page:getContributors" %}
+{% endif %}
+
+
 {% endblock %}
 
 {% block rightcolumn %}
