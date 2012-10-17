@@ -67,11 +67,6 @@
         <div class="contentContainer">
             {% block moreContent %}{% endblock %}
         </div>
-
-        <div class="contentContainer">
-           <p id="githubrow"><a href="https://github.com/protalk/protalk"><img id="githubicon" src="{{ asset('images/githubIcon.png') }}" alt="Github Icon"/>Fork us on github!</a></p>
-        </div>
-
         
         <div id="footerStrip">
           <div class="contentContainer">
@@ -80,6 +75,7 @@
                   <div id="followUs">
                   <p>FOLLOW US</p>
                   <nav>
+                      <a href="https://github.com/protalk/protalk"><img src="{{ asset('images/githubIcon.png') }}" alt="github Icon"/></a>
                       <a href="http://www.facebook.com/pages/ProTalk/216612481777731"><img src="{{ asset('images/facebookIcon.png') }}" alt="Facebook Icon"/></a>
                       <a href="http://twitter.com/pro_talk"><img src="{{ asset('images/twitterIcon.png') }}" alt="Twitter Icon"/></a>
                       <a href="mailto:info@protalk.me"><img src="{{ asset('images/mailIcon.png') }}" alt="Mail Icon"/></a>
