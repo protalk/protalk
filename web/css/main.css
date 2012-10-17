@@ -785,6 +785,12 @@ color:#999999;
     width: 425px;
 }
 
+/*  left column on explore page */
+#exploreSection {
+    width:885px;
+    float:left;
+}
+
 #comments p {
     margin-bottom:5px;
 }
@@ -1002,4 +1008,23 @@ form ul {
     width:165px;
     left:0;
     margin-bottom:10px;
+}
+
+#githubrow {
+    padding-left: 20px;
+    float: left;
+}
+
+#githubrow a {
+    font-size: 1.3em;
+    color: #3a668b;
+}
+
+#githubrow a:hover {
+    font-size: 1.3em;
+    color: #0096ff;
+}
+
+img#githubicon {
+    float: left;
 }

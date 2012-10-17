@@ -17,37 +17,33 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class SpeakerController extends Controller {
 
-  /**
-   * @Template()
-   */
-  public function listAction()
-  {
-    $em = $this->getDoctrine()->getEntityManager();
-	$repository = $em->getRepository('ProtalkMediaBundle:Speaker');
-	$speakers = $repository->getAllSpeakers();
-	
-    return array('speakers' => $speakers);
-  }
-
-  public function showAction($id, $name)
-  {
-
-    $request = $this->getRequest();
-    if ($request->isXmlHttpRequest())
+    /**
+     * @Template()
+     */
+    public function listAction()
     {
-      $speaker[] = $this->getDoctrine()
-          ->getRepository('ProtalkMediaBundle:Speaker')
-          ->find($id);
+        $em = $this->getDoctrine()->getEntityManager();
+        $repository = $em->getRepository('ProtalkMediaBundle:Speaker');
+        $speakers = $repository->getAllSpeakers();
 
-      if (!$speaker) {
-          throw $this->createNotFoundException($name.' not found with id '.$id);
-      }
-
-      return $this->render('ProtalkMediaBundle:Speaker:show.html.twig', array('speakers' => $speaker));
-
+        return array('speakers' => $speakers);
     }
 
-    throw new \Exception('Naughty naughty! This should be an ajax request.');
+    public function showAction($id, $name)
+    {
+        $request = $this->getRequest();
+        if ($request->isXmlHttpRequest()) {
+            $speaker[] = $this->getDoctrine()
+                ->getRepository('ProtalkMediaBundle:Speaker')
+                ->find($id);
 
-  }
+            if (!$speaker) {
+                throw $this->createNotFoundException($name.' not found with id '.$id);
+            }
+
+            return $this->render('ProtalkMediaBundle:Speaker:show.html.twig', array('speakers' => $speaker));
+        }
+
+        throw new \Exception('Naughty naughty! This should be an ajax request.');
+    }
 }

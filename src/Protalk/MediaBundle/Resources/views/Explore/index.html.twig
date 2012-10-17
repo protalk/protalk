@@ -13,8 +13,8 @@
 
 {% block body %}
 <h1>Explore</h1>
-<p>Welcome to explore ProTalk media by different category, tags or speakers by selecting the corresponding tab below.</p>
-<section>
+<p>You can explore ProTalk by tag, category or speaker when using the corresponding tabs below or you can search this website using the search form above.</p>
+<section id="exploreSection">
     <div id="tabControl" class="hidden tabControlExplore">
         <ul>
             <li><a href="#categories-link">CATEGORIES</a></li>
@@ -23,17 +23,7 @@
         </ul>
         <div>
             <div id="categories">
-                <table class="categoryList">
-                <tr>
-                {% for category in categories %}
-                    <td><a class="category" href="{{ path('category_search', { 'search': category.slug }) }}"><span>{{ category.name }} ({{ category.mediaCount }})</span></a></td>
-                    {% if loop.index is even %}
-                        </tr>
-                        <tr>
-                    {% endif %}
-                {% endfor %}
-                </tr>
-            </table>
+                {% render "ProtalkMediaBundle:Category:list" %}
             </div>
 
             <div id="tags">
@@ -46,18 +36,7 @@
         </div>
     </div>
 </section>
-
-
-
 {% endblock %}
 
 {% block rightcolumn %}
-    <div id="sidebar">
-        <section>
-            <div id="categories">
-                <h1>@TODO</h1>
-                Figure out content for this sidebar!
-            </div>
-        </section>
-    </div>
 {% endblock %}
