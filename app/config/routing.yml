@@ -53,7 +53,7 @@ explore:
     defaults: { _controller: ProtalkMediaBundle:Explore:index }
 
 speaker_search:
-    pattern:  /search/speaker/{id}
+    pattern:  /search/speaker/{search}
     defaults: { _controller: ProtalkMediaBundle:Explore:speaker }
 
 media_show:
