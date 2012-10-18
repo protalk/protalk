@@ -78,6 +78,9 @@ sonata_admin:
             protalk_common:
                 label: Common
                 items: ~
+            protalk_feed:
+                label: Feed
+                items: ~    
             protalk_media:
                 label: Media
                 items: ~   
@@ -102,7 +105,17 @@ services:
       class: Protalk\AdminBundle\Admin\PageAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_common, label: Page }
-      arguments: [null, Protalk\PageBundle\Entity\Page, null]   
+      arguments: [null, Protalk\PageBundle\Entity\Page, null] 
+   protalk.feed.admin.feed:
+      class: Protalk\AdminBundle\Admin\FeedAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: protalk_feed, label: Feed }
+      arguments: [null, Protalk\MediaBundle\Entity\Feed, null] 
+   protalk.feed.admin.feedtype:
+      class: Protalk\AdminBundle\Admin\FeedtypeAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: protalk_feed, label: Feedtype }
+      arguments: [null, Protalk\MediaBundle\Entity\Feedtype, null]    
    protalk.media.admin.media:
       class: Protalk\AdminBundle\Admin\MediaAdmin
       tags:
