@@ -6,6 +6,7 @@
 /vendor/
 /web/bundles/
 /app/bootstrap*
+/nbproject
 .buildpath
 .project
 .settings/

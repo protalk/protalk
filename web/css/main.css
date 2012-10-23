@@ -229,8 +229,12 @@ time, .metadata, #source {
     font-size:25px;
 }
 
-#tabControl {
+.tabControl {
     margin-top: 75px;
+}
+
+.tabControlExplore {
+    margin-top: 35px;
 }
 
 .tabMedia {
@@ -538,6 +542,7 @@ nav {
 }
 
 .categoryList {
+    width:  100%;
     margin: 0;
     padding 0;
     border: 0;
@@ -562,6 +567,35 @@ nav {
 }
 
 .categoryList td a:hover {
+    color: #454546;
+}
+
+.speakerList {
+    width:  100%;
+    margin: 0;
+    padding 0;
+    border: 0;
+}
+
+.speakerList td {
+    font-family: Helvetica Neue, Helvetica;
+    font-size:14px;
+    width: 170px;
+    height:31px;
+    border: 0;
+    padding: 0;
+    border-bottom:1px solid #dcdada;
+    vertical-align: text-bottom;
+}
+
+.speakerList td a {
+    margin: 0px;
+    color:#89B029;
+    vertical-align: text-bottom;
+    line-height:0px;
+}
+
+.speakerList td a:hover {
     color: #454546;
 }
 
@@ -749,6 +783,12 @@ color:#999999;
 
 #mediaPlayerSection p {
     width: 425px;
+}
+
+/*  left column on explore page */
+#exploreSection {
+    width:885px;
+    float:left;
 }
 
 #comments p {
@@ -968,23 +1008,4 @@ form ul {
     width:165px;
     left:0;
     margin-bottom:10px;
-}
-
-#githubrow {
-    padding-left: 20px;
-    float: left;
-}
-
-#githubrow a {
-    font-size: 1.3em;
-    color: #3a668b;
-}
-
-#githubrow a:hover {
-    font-size: 1.3em;
-    color: #0096ff;
-}
-
-img#githubicon {
-    float: left;
 }
