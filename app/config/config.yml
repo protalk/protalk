@@ -118,6 +118,11 @@ services:
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_media, label: Rating }
       arguments: [null, Protalk\MediaBundle\Entity\Rating, null]
+   protalk.media.admin.page:
+      class: Protalk\AdminBundle\Admin\PageAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: protalk_media, label: Page }
+      arguments: [null, Protalk\PageBundle\Entity\Page, null]
 
 fos_user:
     db_driver: orm
