@@ -9,16 +9,25 @@
  * file that was distributed with this source code.
  */
 
+/**
+ * Bundle config handler
+ * 
+ * This is the class that validates and merges configuration from your app/config files
+ *
+ * @category   AdminBundle
+ * @author     <author>
+ * @copyright  2012-2013 ProTalk
+ * @license    http://opensource.org/licenses/mit-license.php MIT
+ * @link       https://github.com/protalk/protalk
+ * @link       http://www.protalk.me
+ * @link       http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class
+ */
+
 namespace Protalk\AdminBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-/**
- * This is the class that validates and merges configuration from your app/config files
- *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
- */
 class Configuration implements ConfigurationInterface
 {
     /**

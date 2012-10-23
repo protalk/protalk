@@ -9,17 +9,25 @@
  * file that was distributed with this source code.
  */
 
+/**
+ * Media Admin Controller
+ * 
+ * This controller handles requests to handle media administration.
+ *
+ * @category   AdminBundle
+ * @author     <author>
+ * @copyright  2012-2013 ProTalk
+ * @license    http://opensource.org/licenses/mit-license.php MIT
+ * @link       https://github.com/protalk/protalk
+ * @link       http://www.protalk.me
+ */
+
 namespace Protalk\AdminBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery as ProxyQueryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-/**
- * Media Admin Controller
- * 
- * This controller handles requests to handle media administration.
- */
 class MediaAdminController extends Controller
 {
     /**
