@@ -137,11 +137,20 @@ class Tag
     }
 
     /*
+     * Maps to getSlugFields()
+     *
+     * Exists because the backend makes a call to getSlug()
+     * when creating/updating tags.
+     */
+    public function getSlug() {
+        return $this->getSlugFields();
+    }
+
+    /*
      * Get slug fields
      *
      * @return string
      */
-
     public function getSlugFields() {
         return $this->getName();
     }
@@ -151,8 +160,7 @@ class Tag
      */
     public function updateSlug()
     {
-
-        $slugger = new Slugger();
+        $slugger = new Slugger(' ', ',');
 
         $slug = $slugger->getSlug($this->getSlugFields());
 
