@@ -2,17 +2,18 @@ class protalk::symfony2 {
 
     # Install / Update the vendors
     exec { "vendorupdate" :
-        command => "/usr/bin/php /vagrant/bin/vendors install && /usr/bin/php /vagrant/bin/vendors update",
+        command => "/usr/bin/php /vagrant/bin/composer.phar install",
+        cwd     => "/vagrant/",
         creates => "/vagrant/vendor/twig",
         require => [ Package["php"], Package["git"] ],
         timeout => 0,
         tries   => 10,
     }
 
-    # Setup parameters.ini if it does not exist yet
-    file { "parameters.ini" :
-        path => "/vagrant/app/config/parameters.ini",
-        source => '/vagrant/app/config/parameters.ini-dist',
+    # Setup parameters.yml if it does not exist yet
+    file { "parameters.yml" :
+        path => "/vagrant/app/config/parameters.yml",
+        source => '/vagrant/app/config/parameters.yml-dist',
         replace => "no",                    # Don't update when file is present
         before  => Exec["vendorupdate"],
     }
