@@ -41,7 +41,12 @@ class TagAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('name')->add('slug');
+        $formMapper->add('name', NULL, 
+            array(
+                'help' => 'Slug is auto-generated based off the name. Spaces will be replaced with hyphens.',
+                'label' => 'Name: '
+            )
+        );
     }
 
     /**
@@ -53,7 +58,7 @@ class TagAdmin extends Admin
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('name')->add('slug');
+        $datagridMapper->add('name');
     }
 
     /**
