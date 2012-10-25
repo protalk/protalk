@@ -9,6 +9,19 @@
  * file that was distributed with this source code.
  */
 
+/**
+ * Bundle extension class
+ * 
+ * This class loads and manages your bundle configuration
+ *
+ * @category   AdminBundle
+ * @author     <author>
+ * @copyright  2012-2013 ProTalk
+ * @license    http://opensource.org/licenses/mit-license.php MIT
+ * @link       https://github.com/protalk/protalk
+ * @link       http://www.protalk.me
+ */
+
 namespace Protalk\AdminBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -16,15 +29,15 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
-/**
- * This is the class that loads and manages your bundle configuration
- *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
- */
 class ProtalkAdminExtension extends Extension
 {
     /**
-     * {@inheritDoc}
+     * Service loader
+     * 
+     * Function to process configurations and use DI container to load services.
+     * 
+     * @param array $configs
+     * @param ContainerBuilder $container 
      */
     public function load(array $configs, ContainerBuilder $container)
     {

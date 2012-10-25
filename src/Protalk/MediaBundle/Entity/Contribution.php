@@ -102,7 +102,7 @@ class Contribution
     /**
      * @var float $slidesUrl
      *
-     * @ORM\Column(name="slidesUrl", type="string", length=200, nullable="true")
+     * @ORM\Column(name="slidesUrl", type="string", length=200, nullable=true)
      */
     private $slidesUrl;
 
@@ -129,7 +129,7 @@ class Contribution
     /**
      * @var string $tags
      *
-     * @ORM\Column(name="tags", type="string", length=100, nullable="true")
+     * @ORM\Column(name="tags", type="string", length=100, nullable=true)
      */
     private $tags;
 

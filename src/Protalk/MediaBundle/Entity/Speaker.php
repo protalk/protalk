@@ -55,7 +55,7 @@ class Speaker
     /**
      * @var text $biography
      *
-     * @ORM\Column(name="biography", type="text", nullable="true")
+     * @ORM\Column(name="biography", type="text", nullable=true)
      */
     private $biography;
 

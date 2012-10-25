@@ -8,7 +8,7 @@ class params {
     # Original port (don't change)
     $port = '80'
 
-    # Database names (must match your app/config/parameters.ini file)
+    # Database names (must match your app/config/parameters.yml file)
     $dbname = 'protalk'
     $dbuser = 'protalk'
     $dbpass = 'secret'
