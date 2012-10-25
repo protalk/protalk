@@ -83,6 +83,7 @@ class Tag
     public function setName($name)
     {
         $this->name = $name;
+        $this->setSlug($name);
     }
 
     /**
@@ -152,7 +153,7 @@ class Tag
      * @return string
      */
     public function getSlugFields() {
-        return $this->getName();
+        return $this->slug;
     }
 
     /**
@@ -160,7 +161,7 @@ class Tag
      */
     public function updateSlug()
     {
-        $slugger = new Slugger(' ', ',');
+        $slugger = new Slugger('-', '-');
 
         $slug = $slugger->getSlug($this->getSlugFields());
 
