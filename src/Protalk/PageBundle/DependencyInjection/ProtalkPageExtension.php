@@ -24,7 +24,12 @@ use Symfony\Component\DependencyInjection\Loader;
 class ProtalkPageExtension extends Extension
 {
     /**
-     * {@inheritDoc}
+     * Service loader
+     * 
+     * Function to process configurations and use DI container to load services.
+     * 
+     * @param array $configs
+     * @param ContainerBuilder $container 
      */
     public function load(array $configs, ContainerBuilder $container)
     {
