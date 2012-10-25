@@ -41,7 +41,7 @@ class CommentAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('name');
+        $formMapper->add('name', 'text');
     }
 
     /**
