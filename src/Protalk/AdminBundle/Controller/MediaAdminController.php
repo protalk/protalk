@@ -9,6 +9,19 @@
  * file that was distributed with this source code.
  */
 
+/**
+ * Media Admin Controller
+ * 
+ * This controller handles requests to handle media administration.
+ *
+ * @category   AdminBundle
+ * @author     <author>
+ * @copyright  2012-2013 ProTalk
+ * @license    http://opensource.org/licenses/mit-license.php MIT
+ * @link       https://github.com/protalk/protalk
+ * @link       http://www.protalk.me
+ */
+
 namespace Protalk\AdminBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
@@ -17,6 +30,14 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class MediaAdminController extends Controller
 {
+    /**
+     * Publish media
+     * 
+     * This function publishes media that has been insterted previously.
+     * 
+     * @param ProxyQueryInterface $query
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse 
+     */
     public function batchActionUnpublish(ProxyQueryInterface $query)
     {
         $em = $this->getDoctrine()->getEntityManager();

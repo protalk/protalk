@@ -9,6 +9,19 @@
  * file that was distributed with this source code.
  */
 
+/**
+ * Admin for media types
+ * 
+ * This class handles fields for the media type data.
+ *
+ * @category   AdminBundle
+ * @author     <author>
+ * @copyright  2012-2013 ProTalk
+ * @license    http://opensource.org/licenses/mit-license.php MIT
+ * @link       https://github.com/protalk/protalk
+ * @link       http://www.protalk.me
+ */
+
 namespace Protalk\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
@@ -30,6 +43,13 @@ class MediatypeAdmin extends Admin
         '_sort_by' => 'name' 
     );
     
+    /**
+     * Cofigure form fields
+     * 
+     * This function adds name and type to the form.
+     * 
+     * @param FormMapper $formMapper 
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('name', null, array('help' => 'This is the name of the media type'))
@@ -38,16 +58,39 @@ class MediatypeAdmin extends Admin
                                                                 'audio'=>'audio')));
     }
 
+    /**
+     * Data grid configuration
+     * 
+     * This function adds Name to the datagrid mapper.
+     * 
+     * @param DatagridMapper $datagridMapper 
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('name');
     }
 
+    /**
+     * List fields configuration
+     * 
+     * This function adds identifier of Type to Name.
+     * 
+     * @param ListMapper $listMapper 
+     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper->addIdentifier('name')->add('type');
     }
 
+    /**
+     * Validator function
+     * 
+     * This function validates name to me no more than 50 characters long
+     * and type of no more than 10 characters long.
+     * 
+     * @param ErrorElement $errorElement
+     * @param type $object 
+     */
     public function validate(ErrorElement $errorElement, $object)
     {
         $errorElement->with('name')->assertMaxLength(array('limit' => 50))->end();
