@@ -39,6 +39,7 @@ class AppKernel extends Kernel
             new Protalk\MediaBundle\ProtalkMediaBundle(),
             new Protalk\AdminBundle\ProtalkAdminBundle(),
 
+            new Sensio\Bundle\BuzzBundle\SensioBuzzBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
