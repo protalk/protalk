@@ -11,8 +11,8 @@
 
 namespace Protalk\MediaBundle\Helpers;
 
-class ExploreSortOptions {
-
+class ExploreSortOptions
+{
     private static $availableSortOptions = array(
         array('sort' => 'title', 'order' => 'asc', 'cleartext' => 'title (a - z)'),
         array('sort' => 'title', 'order' => 'desc', 'cleartext' => 'title (z - a)'),
@@ -24,25 +24,30 @@ class ExploreSortOptions {
         array('sort' => 'rating', 'order' => 'desc', 'cleartext' => 'rating (desc)'),
     );
 
-    public static function getAvailableSortOptions() {
+    public static function getAvailableSortOptions()
+    {
         return static::$availableSortOptions;
     }
 
-    public static function verifySortOption($sort, $order) {
+    public static function verifySortOption($sort, $order)
+    {
         foreach (static::$availableSortOptions as $sortOption) {
             if ($sortOption['sort'] == $sort && $sortOption['order'] == $order) {
                 return true;
             }
         }
+
         return false;
     }
 
-    public static function verifySort($sort) {
+    public static function verifySort($sort)
+    {
         foreach (static::$availableSortOptions as $sortOption) {
             if ($sortOption['sort'] == $sort) {
                 return true;
             }
         }
+
         return false;
     }
 }

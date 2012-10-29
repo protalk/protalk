@@ -24,25 +24,27 @@ class PageController extends Controller
     public function indexAction($url)
     {
         $this->getPage($url);
+
         return array('page' => $this->page);
     }
 
     /*
      * Displays page content text from database
      *
-     * @param string $url
+     * @param  string   $url
      * @return template
      */
     public function contentAction($url)
     {
         $this->getPage($url);
+
         return $this->render('ProtalkPageBundle:Page:content.html.twig', array('page' => $this->page));
     }
 
     /*
      * Retrieves page content text from database
      *
-     * @param string $url
+     * @param  string  $url
      * @return boolean
      */
     protected function getPage($url)
@@ -51,6 +53,7 @@ class PageController extends Controller
         if (!is_object($this->page)) {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
+
         return true;
     }
 
@@ -63,12 +66,15 @@ class PageController extends Controller
     {
         $buzz = $this->container->get('buzz');
         $response = $buzz->get('https://api.github.com/repos/protalk/protalk/contributors');
-        $contributors = json_decode($response->getContent(), true);    
+        $contributors = json_decode($response->getContent(), true);
 
         foreach ($contributors as $key => $row) {
             $contributions[$key] = $row['contributions'];
         }
 
-        return $this->render('ProtalkPageBundle:Page:contributors.html.twig',array('contributors' => $contributors));
+        return $this->render(
+            'ProtalkPageBundle:Page:contributors.html.twig',
+            array('contributors' => $contributors)
+        );
     }
 }

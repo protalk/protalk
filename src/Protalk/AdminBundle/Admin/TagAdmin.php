@@ -11,7 +11,7 @@
 
 /**
  * Admin for tags
- * 
+ *
  * This class handles fields for the tags data.
  *
  * @category   AdminBundle
@@ -34,14 +34,16 @@ class TagAdmin extends Admin
 {
     /**
      * Form fields configuration
-     * 
+     *
      * This function adds Name to the form mapper.
-     * 
-     * @param FormMapper $formMapper 
+     *
+     * @param FormMapper $formMapper
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('name', NULL, 
+        $formMapper->add(
+            'name',
+            null,
             array(
                 'help' => 'Slug is auto-generated based off the name. Spaces will be replaced with hyphens.',
                 'label' => 'Name: '
@@ -51,10 +53,10 @@ class TagAdmin extends Admin
 
     /**
      * Datagrid filters configuration
-     * 
+     *
      * This function adds Name to the datagrid mapper.
-     * 
-     * @param DatagridMapper $datagridMapper 
+     *
+     * @param DatagridMapper $datagridMapper
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
@@ -63,10 +65,10 @@ class TagAdmin extends Admin
 
     /**
      * List fields configuration
-     * 
+     *
      * This function adds Name identifier to the list mapper.
-     * 
-     * @param ListMapper $listMapper 
+     *
+     * @param ListMapper $listMapper
      */
     protected function configureListFields(ListMapper $listMapper)
     {
@@ -75,11 +77,11 @@ class TagAdmin extends Admin
 
     /**
      * Validator class
-     * 
+     *
      * This function validates that Name is no longer that 50 characters long.
-     * 
+     *
      * @param ErrorElement $errorElement
-     * @param type $object 
+     * @param type         $object
      */
     public function validate(ErrorElement $errorElement, $object)
     {

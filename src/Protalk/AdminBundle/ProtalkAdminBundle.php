@@ -11,8 +11,8 @@
 
 /**
  * ProtalkAdminBundle
- * 
- * Class that defines ProTalkAdminBundle. 
+ *
+ * Class that defines ProTalkAdminBundle.
  *
  * @category   AdminBundle
  * @author     <author>
