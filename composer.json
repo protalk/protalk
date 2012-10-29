@@ -34,7 +34,9 @@
         "knplabs/knp-menu-bundle": "1.1.*",
         "videlalvaro/php-amqplib": "dev-master",
         "excelwebzone/recaptcha-bundle": "dev-master",
-        "samj/doctrine-sluggable-bundle": "dev-master"
+        "samj/doctrine-sluggable-bundle": "dev-master",
+        "kriswallsmith/Buzz": "dev-master",
+        "sensio/buzz-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
