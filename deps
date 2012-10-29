@@ -135,3 +135,10 @@
 
 [DoctrineSluggableBundle]
     git=https://github.com/samjarrett/DoctrineSluggableBundle.git
+
+[buzz]
+    git=http://github.com/kriswallsmith/Buzz.git
+
+[SensioBuzzBundle]
+    git=http://github.com/sensio/SensioBuzzBundle.git
+    target=bundles/Sensio/Bundle/BuzzBundle
