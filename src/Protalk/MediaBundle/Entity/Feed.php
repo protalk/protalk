@@ -51,14 +51,14 @@ class Feed
     /**
      * @var boolean $automaticImport
      *
-     * @ORM\Column(name="automaticImport", type="boolean", nullable="true")
+     * @ORM\Column(name="automaticImport", type="boolean", nullable=true)
      */
     private $automaticImport;
 
     /**
      * @var string $contact
      *
-     * @ORM\Column(name="contact", type="string", length=255, nullable="true")
+     * @ORM\Column(name="contact", type="string", length=255, nullable=true)
      */
     private $contact;
 
@@ -72,7 +72,7 @@ class Feed
     /**
      * @var text $remark
      *
-     * @ORM\Column(name="remark", type="text", nullable="true")
+     * @ORM\Column(name="remark", type="text", nullable=true)
      */
     private $remark;
 
