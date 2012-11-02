@@ -15,7 +15,5 @@ after_script:
   - phpcs --report=full --report=gitblame --standard=PSR2 src/ || true # true is here to make return true, so we don't fail on CS violations, yet.
 
 notifications:
-  email:
-    - info@protalk.me
   irc:
     - "irc.freenode.org#protalk"
