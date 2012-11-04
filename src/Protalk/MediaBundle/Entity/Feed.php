@@ -34,7 +34,7 @@ class Feed
      * @ORM\Column(name="feedtype_id", type="integer")
      */
     private $feedtype_id;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Feedtype", inversedBy="feeds")
      * @ORM\JoinColumn(name="feedtype_id", referencedColumnName="id")
@@ -76,11 +76,10 @@ class Feed
      */
     private $remark;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -100,7 +99,7 @@ class Feed
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -120,7 +119,7 @@ class Feed
     /**
      * Get feedtype_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getFeedtypeId()
     {
@@ -140,7 +139,7 @@ class Feed
     /**
      * Get url
      *
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {
@@ -160,7 +159,7 @@ class Feed
     /**
      * Get automaticImport
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getAutomaticImport()
     {
@@ -180,7 +179,7 @@ class Feed
     /**
      * Get contact
      *
-     * @return string 
+     * @return string
      */
     public function getContact()
     {
@@ -200,7 +199,7 @@ class Feed
     /**
      * Get confirmation
      *
-     * @return string 
+     * @return string
      */
     public function getConfirmation()
     {
@@ -220,13 +219,13 @@ class Feed
     /**
      * Get remark
      *
-     * @return text 
+     * @return text
      */
     public function getRemark()
     {
         return $this->remark;
     }
-    
+
     /**
      * Set feedtype
      *

@@ -58,11 +58,10 @@ class Page
      */
     private $content;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -122,7 +121,7 @@ class Page
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -142,7 +141,7 @@ class Page
     /**
      * Get content
      *
-     * @return text 
+     * @return text
      */
     public function getContent()
     {

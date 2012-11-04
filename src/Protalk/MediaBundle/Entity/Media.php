@@ -60,7 +60,6 @@ class Media implements SluggableInterface
      */
     private $comments;
 
-
     /**
      * @ORM\OneToMany(targetEntity="Rating", mappedBy="media")
      */
@@ -83,14 +82,14 @@ class Media implements SluggableInterface
     private $tags;
 
     /**
-     * @var date $date
+     * @var \DateTime $date
      *
      * @ORM\Column(name="date", type="date", nullable=true)
      */
     private $date;
 
     /**
-     * @var text $description
+     * @var string $description
      *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
@@ -125,14 +124,14 @@ class Media implements SluggableInterface
     private $visits;
 
     /**
-     * @var text $content
+     * @var string $content
      *
      * @ORM\Column(name="content", type="text")
      */
     private $content;
 
     /**
-     * @var text $slides
+     * @var string $slides
      *
      * @ORM\Column(name="slides", type="text", nullable=true)
      */
@@ -188,7 +187,7 @@ class Media implements SluggableInterface
     private $thumbnail;
 
     /**
-     * @var date $creationDate
+     * @var \DateTime $creationDate
      *
      * @ORM\Column(name="creationDate", type="date")
      */
@@ -245,7 +244,7 @@ class Media implements SluggableInterface
     /**
      * Set date
      *
-     * @param date $date
+     * @param \DateTime $date
      */
     public function setDate($date)
     {
@@ -255,7 +254,7 @@ class Media implements SluggableInterface
     /**
      * Get date
      *
-     * @return date
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -265,7 +264,7 @@ class Media implements SluggableInterface
     /**
      * Set description
      *
-     * @param text $description
+     * @param string $description
      */
     public function setDescription($description)
     {
@@ -275,7 +274,7 @@ class Media implements SluggableInterface
     /**
      * Get description
      *
-     * @return text
+     * @return string
      */
     public function getDescription()
     {
@@ -285,7 +284,7 @@ class Media implements SluggableInterface
     /**
      * Get truncated description
      *
-     * @param  integer Maximum allowed length of description
+     * @param  integer $length Maximum allowed length of description
      * @return string
      */
     public function getTruncatedDescription($length = 75)
@@ -293,9 +292,8 @@ class Media implements SluggableInterface
 
         $description = $this->getDescription();
 
-        if (strlen($description) > $length )
-        {
-           return substr($description, 0, $length) . '...';
+        if (strlen($description) > $length ) {
+            return substr($description, 0, $length) . '...';
         }
 
         return $description;
@@ -364,7 +362,7 @@ class Media implements SluggableInterface
     /**
      * Set content
      *
-     * @param text $content
+     * @param string $content
      */
     public function setContent($content)
     {
@@ -374,7 +372,7 @@ class Media implements SluggableInterface
     /**
      * Get content
      *
-     * @return text
+     * @return string
      */
     public function getContent()
     {
@@ -384,7 +382,7 @@ class Media implements SluggableInterface
     /**
      * Set slides
      *
-     * @param text $slides
+     * @param string $slides
      */
     public function setSlides($slides)
     {
@@ -394,7 +392,7 @@ class Media implements SluggableInterface
     /**
      * Get slides
      *
-     * @return text
+     * @return string
      */
     public function getSlides()
     {
@@ -464,14 +462,13 @@ class Media implements SluggableInterface
     /**
      * Get shorter version of media title
      *
-     * @param  Maximum allowed length of media title
+     * @param int $length Maximum allowed length of media title
      * @return string
      */
     public function getTruncatedTitle($length = 25)
     {
-        if (strlen($this->title) > $length )
-        {
-           return substr($this->title, 0, $length) . '...';
+        if (strlen($this->title) > $length ) {
+            return substr($this->title, 0, $length) . '...';
         }
 
         return $this->title;
@@ -505,15 +502,15 @@ class Media implements SluggableInterface
      * @return string
      */
 
-    public function getSlugFields() {
+    public function getSlugFields()
+    {
         return $this->getTitle();
     }
-
 
     /**
      * Add speakers
      *
-     * @param Protalk\MediaBundle\Entity\Speaker $speakers
+     * @param \Protalk\MediaBundle\Entity\Speaker $speakers
      */
     public function addSpeaker(\Protalk\MediaBundle\Entity\Speaker $speakers)
     {
@@ -523,7 +520,7 @@ class Media implements SluggableInterface
     /**
      * Get speakers
      *
-     * @return Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSpeakers()
     {
@@ -533,7 +530,7 @@ class Media implements SluggableInterface
     /**
      * Set speakers
      *
-     * @param Doctrine\Common\Collections\Collection $speakers
+     * @param \Doctrine\Common\Collections\Collection $speakers
      */
     public function setSpeakers($speakers)
     {
@@ -543,16 +540,15 @@ class Media implements SluggableInterface
     /**
      * Get one speaker's truncated name
      *
-     * @param  integer Maximum allowed length of speaker name
+     * @param integer $length Maximum allowed length of speaker name
      * @return string
      */
     public function getTruncatedSpeaker($length = 16)
     {
         $speaker = $this->getOneSpeaker();
 
-        if (strlen($speaker) > $length )
-        {
-           return substr($speaker, 0, $length) . '...';
+        if (strlen($speaker) > $length ) {
+            return substr($speaker, 0, $length) . '...';
         }
 
         return $speaker;
@@ -643,7 +639,7 @@ class Media implements SluggableInterface
     /**
      * Set mediatype
      *
-     * @param Protalk\MediaBundle\Entity\Mediatype $mediatype
+     * @param \Protalk\MediaBundle\Entity\Mediatype $mediatype
      */
     public function setMediatype(\Protalk\MediaBundle\Entity\Mediatype $mediatype)
     {
@@ -653,7 +649,7 @@ class Media implements SluggableInterface
     /**
      * Get mediatype
      *
-     * @return Protalk\MediaBundle\Entity\Mediatype
+     * @return \Protalk\MediaBundle\Entity\Mediatype
      */
     public function getMediatype()
     {
@@ -663,7 +659,7 @@ class Media implements SluggableInterface
     /**
      * Add comments
      *
-     * @param Protalk\MediaBundle\Entity\Comment $comments
+     * @param \Protalk\MediaBundle\Entity\Comment $comments
      */
     public function addComment(\Protalk\MediaBundle\Entity\Comment $comments)
     {
@@ -673,7 +669,7 @@ class Media implements SluggableInterface
     /**
      * Get comments
      *
-     * @return Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getComments()
     {
@@ -683,7 +679,7 @@ class Media implements SluggableInterface
     /**
      * Get categories
      *
-     * @return Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCategories()
     {
@@ -693,7 +689,7 @@ class Media implements SluggableInterface
     /**
      * Set categories
      *
-     * @param Doctrine\Common\Collections\Collection $categories
+     * @param \Doctrine\Common\Collections\Collection $categories
      */
     public function setCategories($categories)
     {
@@ -703,7 +699,7 @@ class Media implements SluggableInterface
     /**
      * Get tags
      *
-     * @return Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTags()
     {
@@ -713,11 +709,11 @@ class Media implements SluggableInterface
     /**
      * Set tags
      *
-     * @param Doctrine\Common\Collections\Collection $tags
+     * @param \Doctrine\Common\Collections\Collection $tags
      */
     public function setTags($tags)
     {
-        $this->tags = $tags;;
+        $this->tags = $tags;
     }
 
     /**
@@ -732,7 +728,7 @@ class Media implements SluggableInterface
     /**
      * Add categories
      *
-     * @param Protalk\MediaBundle\Entity\Category $categories
+     * @param \Protalk\MediaBundle\Entity\Category $categories
      */
     public function addCategory(\Protalk\MediaBundle\Entity\Category $categories)
     {
@@ -742,7 +738,7 @@ class Media implements SluggableInterface
     /**
      * Add tags
      *
-     * @param Protalk\MediaBundle\Entity\Tag $tags
+     * @param \Protalk\MediaBundle\Entity\Tag $tags
      */
     public function addTag(\Protalk\MediaBundle\Entity\Tag $tags)
     {
@@ -798,7 +794,7 @@ class Media implements SluggableInterface
     {
         if ($this->getMediatype()->getType() != 'video') {
             return "/images/thumbnails/podcast_icon.png";
-        } elseif ( !$this->thumbnail ) {
+        } elseif (!$this->thumbnail) {
             return "/images/thumbnails/coming_soon.png";
         } else {
             return $this->thumbnail;
@@ -808,7 +804,7 @@ class Media implements SluggableInterface
     /**
      * Add ratings
      *
-     * @param Protalk\MediaBundle\Entity\Rating $ratings
+     * @param \Protalk\MediaBundle\Entity\Rating $ratings
      */
     public function addRating(\Protalk\MediaBundle\Entity\Rating $ratings)
     {
@@ -818,7 +814,7 @@ class Media implements SluggableInterface
     /**
      * Get ratings
      *
-     * @return Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getRatings()
     {

@@ -34,10 +34,10 @@ class CategoryAdmin extends Admin
 {
     /**
      * Configure form fields
-     * 
+     *
      * This function adds parent_id as required field to the form mapper object.
-     * 
-     * @param FormMapper $formMapper 
+     *
+     * @param FormMapper $formMapper
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -46,10 +46,10 @@ class CategoryAdmin extends Admin
 
     /**
      * Configure data grid filters
-     * 
+     *
      * This function adds Name field to data grid mapper.
-     * 
-     * @param DatagridMapper $datagridMapper 
+     *
+     * @param DatagridMapper $datagridMapper
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
@@ -58,11 +58,11 @@ class CategoryAdmin extends Admin
 
     /**
      * Configure list fields
-     * 
+     *
      * This function configures list fields by adding identifier
      * of Name to parent_id.
-     * 
-     * @param ListMapper $listMapper 
+     *
+     * @param ListMapper $listMapper
      */
     protected function configureListFields(ListMapper $listMapper)
     {
@@ -71,11 +71,11 @@ class CategoryAdmin extends Admin
 
     /**
      * Validator function
-     * 
+     *
      * This function validares an object and assets max length of 50 characters.
-     * 
+     *
      * @param ErrorElement $errorElement
-     * @param mixed $object 
+     * @param mixed        $object
      */
     public function validate(ErrorElement $errorElement, $object)
     {

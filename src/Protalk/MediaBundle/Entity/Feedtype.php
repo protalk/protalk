@@ -40,7 +40,7 @@ class Feedtype
      * @ORM\OneToMany(targetEntity="Feed", mappedBy="feedtype")
      */
     private $feeds;
-    
+
     /*
      * Constructor
      *
@@ -57,7 +57,7 @@ class Feedtype
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -77,7 +77,7 @@ class Feedtype
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -97,23 +97,23 @@ class Feedtype
     /**
      * Get className
      *
-     * @return string 
+     * @return string
      */
     public function getClassName()
     {
         return $this->className;
     }
-    
+
     /**
      * Convert this entity to a string
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function __toString()
     {
         return $this->name;
     }
-    
+
     /**
      * Add feeds
      *
@@ -127,7 +127,7 @@ class Feedtype
     /**
      * Get feeds
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getFeeds()
     {

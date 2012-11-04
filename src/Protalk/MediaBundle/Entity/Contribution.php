@@ -138,9 +138,6 @@ class Contribution
      */
     public $recaptcha;
 
-
-
-
     /**
      * Get id
      *
