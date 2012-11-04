@@ -59,7 +59,7 @@ speaker_search:
 media_show:
     pattern:  /{slug}
     defaults: { _controller: ProtalkMediaBundle:Media:index }
-    
+
 rss:
     pattern: /feed
     defaults: { _controller: ProtalkMediaBundle:Home:rss }
@@ -95,6 +95,10 @@ _sonata_admin:
 sonata_user:
     resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
     prefix: /admin
+
+news:
+    resource: '@SonataNewsBundle/Resources/config/routing/news.xml'
+    prefix: /news
 
 # Internal routing configuration to handle ESI
 #_internal:

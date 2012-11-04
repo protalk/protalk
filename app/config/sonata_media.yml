@@ -1,0 +1,18 @@
+news:
+    providers:
+        - sonata.media.provider.dailymotion
+        - sonata.media.provider.youtube
+        - sonata.media.provider.image
+
+    formats:
+        small: { width: 150 , quality: 95}
+        big:   { width: 500 , quality: 90}
+
+sonata_formatter:
+    formatters:
+        markdown:
+            service: sonata.formatter.text.markdown
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+                - sonata.media.formatter.twig
