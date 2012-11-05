@@ -16,7 +16,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Protalk\MediaBundle\Entity\Rating;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class MediaController extends Controller
 {
@@ -32,9 +31,9 @@ class MediaController extends Controller
 
         if (is_object($media)) {
             $mediaRepository->incrementVisitCount($media);
+
             return array('media' => $media);
-        }
-        else {
+        } else {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
     }
@@ -42,6 +41,7 @@ class MediaController extends Controller
     public function speakersAction($id)
     {
         $media = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->findOneById($id);
+
         return $this->render('ProtalkMediaBundle:Speaker:show.html.twig', array('speakers' => $media->getSpeakers()));
     }
 

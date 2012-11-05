@@ -38,6 +38,7 @@ class SpeakerRepository extends EntityRepository
         $qb->orderBy('s.name', 'ASC');
 
         $query = $qb->getQuery();
+
         return $query->execute();
     }
 }

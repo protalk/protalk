@@ -25,11 +25,11 @@ class ProtalkMediaExtension extends Extension
 {
     /**
      * Service loader
-     * 
+     *
      * Function to process configurations and use DI container to load services.
-     * 
-     * @param array $configs
-     * @param ContainerBuilder $container 
+     *
+     * @param array            $configs
+     * @param ContainerBuilder $container
      */
     public function load(array $configs, ContainerBuilder $container)
     {

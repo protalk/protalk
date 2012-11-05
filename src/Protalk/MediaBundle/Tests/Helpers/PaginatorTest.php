@@ -65,6 +65,4 @@ class PaginatorTest extends \PHPUnit_Framework_TestCase
         $paginator = new Paginator(100, 1, 20, 2);
         $this->assertEquals($paginator->getMidRange(), 2);
     }
-
-
 }

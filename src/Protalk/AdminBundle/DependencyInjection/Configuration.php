@@ -11,7 +11,7 @@
 
 /**
  * Bundle config handler
- * 
+ *
  * This is the class that validates and merges configuration from your app/config files
  *
  * @category   AdminBundle
@@ -43,7 +43,6 @@ class Configuration implements ConfigurationInterface
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
-
         return $treeBuilder;
     }
 }

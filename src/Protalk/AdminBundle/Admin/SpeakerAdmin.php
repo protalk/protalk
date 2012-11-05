@@ -11,7 +11,7 @@
 
 /**
  * Admin for speakers
- * 
+ *
  * This class handles fields for the speakers data.
  *
  * @category   AdminBundle
@@ -34,11 +34,11 @@ class SpeakerAdmin extends Admin
 {
     /**
      * Form field configuration
-     * 
+     *
      * This function adds name, photo and biography data to the
      * form mapper.
-     * 
-     * @param FormMapper $formMapper 
+     *
+     * @param FormMapper $formMapper
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -47,10 +47,10 @@ class SpeakerAdmin extends Admin
 
     /**
      * Datagrid configuration
-     * 
+     *
      * This function adds Name to the datagrid mapper.
-     * 
-     * @param DatagridMapper $datagridMapper 
+     *
+     * @param DatagridMapper $datagridMapper
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
@@ -59,10 +59,10 @@ class SpeakerAdmin extends Admin
 
     /**
      * List fields configuration
-     * 
+     *
      * This function adds biography to the name field.
-     * 
-     * @param ListMapper $listMapper 
+     *
+     * @param ListMapper $listMapper
      */
     protected function configureListFields(ListMapper $listMapper)
     {
@@ -71,11 +71,11 @@ class SpeakerAdmin extends Admin
 
     /**
      * Validator function
-     * 
+     *
      * This function validates that name is no more tan 100 characters long.
-     * 
+     *
      * @param ErrorElement $errorElement
-     * @param mixed $object 
+     * @param mixed        $object
      */
     public function validate(ErrorElement $errorElement, $object)
     {

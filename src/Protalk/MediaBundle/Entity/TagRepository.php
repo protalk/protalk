@@ -24,7 +24,7 @@ class TagRepository extends EntityRepository
     /**
      * Get the most used tags
      *
-     * @param int $max
+     * @param  int      $max
      * @return Doctrine Collection
      */
     public function getMostUsedTags($max = 20)
@@ -40,6 +40,7 @@ class TagRepository extends EntityRepository
         $qb->setMaxResults($max);
 
         $query = $qb->getQuery();
+
         return $query->execute();
     }
 }

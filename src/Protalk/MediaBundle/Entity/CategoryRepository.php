@@ -24,7 +24,7 @@ class CategoryRepository extends EntityRepository
     /**
      * Get the most used categories
      *
-     * @param int $max
+     * @param  int      $max
      * @return Doctrine Collection
      */
     public function getMostUsedCategories($max = 20)
@@ -40,9 +40,10 @@ class CategoryRepository extends EntityRepository
         $qb->setMaxResults($max);
 
         $query = $qb->getQuery();
+
         return $query->execute();
     }
-    
+
     /**
      * Get all used categories
      *
@@ -60,6 +61,7 @@ class CategoryRepository extends EntityRepository
         $qb->orderBy('c.name', 'ASC');
 
         $query = $qb->getQuery();
+
         return $query->execute();
     }
 }

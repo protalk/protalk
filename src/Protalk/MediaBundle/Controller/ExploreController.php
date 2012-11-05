@@ -21,7 +21,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Protalk\MediaBundle\Helpers\Paginator;
 use Symfony\Component\HttpFoundation\Request;
 
-
 class ExploreController extends Controller
 {
     /**
@@ -33,11 +32,14 @@ class ExploreController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Category');
         $categories = $repository->getAllCategories();
+
         return array('categories' => $categories);
     }
 
     /**
-     * @Route("/result/{search}/{sort}/{order}", name="search_results", defaults={"search" = "all", "sort" = "date", "order" = "desc" })
+     * @Route("/result/{search}/{sort}/{order}",
+     *        name="search_results",
+     *        defaults={"search" = "all", "sort" = "date", "order" = "desc" })
      * @Template()
      */
     public function resultAction($search, $sort, $order)
@@ -48,12 +50,11 @@ class ExploreController extends Controller
         $search = $request->request->get('search', $search);
         $order = $request->request->get('order', $order);
         $page = $this->getRequest()->get('page', 1);
-        
+
         if (!ExploreSortOptions::verifySortOption($sort, $order)) {
             throw new AccessDeniedHttpException("The given sort option '$sort $order' is not supported");
         }
 
-        $results = array();
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
 
@@ -63,7 +64,7 @@ class ExploreController extends Controller
             $results = $repository->findMedia($search, $sort, $page, $pageSize, $order);
         }
 
-        return $this->_getViewParameters($results, 'search', $search, $sort, $page, $pageSize, 'search_results', $order);
+        return $this->getViewParameters($results, 'search', $search, $sort, $page, $pageSize, 'search_results', $order);
     }
 
     /**
@@ -87,13 +88,14 @@ class ExploreController extends Controller
         $results = $repository->findByTag($search, $sort, $page, $pageSize, $order);
 
         return $this->render(
-                'ProtalkMediaBundle:Explore:result.html.twig',
-                $this->_getViewParameters($results, 'search', $search, $sort, $page, $pageSize, 'tag_search', $order)
-            );
+            'ProtalkMediaBundle:Explore:result.html.twig',
+            $this->getViewParameters($results, 'search', $search, $sort, $page, $pageSize, 'tag_search', $order)
+        );
     }
 
     /**
-     * @Route("/category/{search}/{sort}/{order}", name="category_search", defaults={"sort" = "date", "order" = "desc" })
+     * @Route("/category/{search}/{sort}/{order}",
+     *        name="category_search", defaults={"sort" = "date", "order" = "desc" })
      * @Template("ProtalkMediaBundle:Explore:result.html.twig")
      */
     public function categoryAction($search, $sort, $order)
@@ -113,9 +115,9 @@ class ExploreController extends Controller
         $results = $repository->findByCategory($search, $sort, $page, $pageSize, $order);
 
         return $this->render(
-                'ProtalkMediaBundle:Explore:result.html.twig',
-                $this->_getViewParameters($results, 'search', $search, $sort, $page, $pageSize, 'category_search', $order)
-            );
+            'ProtalkMediaBundle:Explore:result.html.twig',
+            $this->getViewParameters($results, 'search', $search, $sort, $page, $pageSize, 'category_search', $order)
+        );
     }
 
     /**
@@ -128,7 +130,7 @@ class ExploreController extends Controller
         if ($this->getRequest()->get('sort') != '') {
             $sort = $this->getRequest()->get('sort');
         }
-        
+
         $order = 'asc';
         if ($this->getRequest()->get('order') != '') {
             $order = $this->getRequest()->get('order');
@@ -144,12 +146,12 @@ class ExploreController extends Controller
         if (!ExploreSortOptions::verifySortOption($sort, $order)) {
             throw new AccessDeniedHttpException("The given sort option '$sort' is not supported");
         }
-        
+
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
         $results = $repository->findBySpeaker($search, $sort, $page, $pageSize);
 
-        return $this->_getViewParameters($results, 'id', $search, $sort, $page, $pageSize, 'speaker_search', 'id');
+        return $this->getViewParameters($results, 'id', $search, $sort, $page, $pageSize, 'speaker_search', 'id');
     }
 
     /**
@@ -165,15 +167,16 @@ class ExploreController extends Controller
      *
      * @return array
      */
-    private function _getViewParameters($results, $searchField, $search, $sort, $page, $pageSize, $route, $order)
+    private function getViewParameters($results, $searchField, $search, $sort, $page, $pageSize, $route, $order)
     {
-        $paginator = new Paginator($results['total'], $page , $pageSize, 7);
+        $paginator = new Paginator($results['total'], $page, $pageSize, 7);
         $results['search'] = $search;
         $results['paginator'] = $paginator;
         $results[$searchField] = $search;
         $results['order'] = $order;
         $results['sort'] = $sort;
         $results['availableSortOptions'] = ExploreSortOptions::getAvailableSortOptions();
+
         return $results;
     }
 }

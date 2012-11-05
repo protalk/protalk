@@ -24,17 +24,17 @@
 		<dc:creator>ProTalk</dc:creator>
 		<guid isPermaLink="false">http://protalk.me/{{ item.slug }}</guid>
 		<description><![CDATA[
-            
+
             <p>{% if item.description %}{{ item.description }}{% else %}{{ item.title }}{% endif %}</p>
 
         ]]></description>
         <content:encoded><![CDATA[
-            
+
             {% if item.content %}{{ item.content }}{% else %}{{ item.title }}{% endif %}
 
             ]]></content:encoded>
     </item>
     {% endfor %}
-    
+
 	</channel>
 </rss>

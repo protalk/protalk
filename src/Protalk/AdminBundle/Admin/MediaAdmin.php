@@ -43,10 +43,14 @@ class MediaAdmin extends Admin
     {
         $formMapper->add('title')
                 ->add('mediatype')
-                ->add('speakers', 'sonata_type_model', array(
-                    'expanded' => true,
-                    'compound' => true,
-                    'multiple' => true)
+                ->add(
+                    'speakers',
+                    'sonata_type_model',
+                    array(
+                        'expanded' => true,
+                        'compound' => true,
+                        'multiple' => true
+                    )
                 )
                 ->add('date')
                 ->add('description')
@@ -61,15 +65,23 @@ class MediaAdmin extends Admin
                 ->add('hostName')
                 ->add('hostUrl')
                 ->add('thumbnail')
-                ->add('categories', 'sonata_type_model', array(
-                    'expanded' => true,
-                    'compound' => true,
-                    'multiple' => true)
+                ->add(
+                    'categories',
+                    'sonata_type_model',
+                    array(
+                        'expanded' => true,
+                        'compound' => true,
+                        'multiple' => true
+                    )
                 )
-                ->add('tags', 'sonata_type_model', array(
-                    'expanded' => true,
-                    'compound' => true,
-                    'multiple' => true)
+                ->add(
+                    'tags',
+                    'sonata_type_model',
+                    array(
+                        'expanded' => true,
+                        'compound' => true,
+                        'multiple' => true
+                    )
                 );
     }
 

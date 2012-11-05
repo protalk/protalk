@@ -14,7 +14,6 @@ namespace Protalk\MediaBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\DependencyInjection\ContainerAware;
 
 class HomeController extends Controller
 {
@@ -34,9 +33,13 @@ class HomeController extends Controller
         $topViewedMedia = $repository->getMediaOrderedBy('visits', 1, $numRows + 2);
         $topRatedMedia = $repository->getMediaOrderedBy('rating', 1, $numRows + 2);
 
-        return array('latestMedia' => $latestMedia['results'] , 'topViewedMedia' => $topViewedMedia['results'], 'topRatedMedia' => $topRatedMedia['results']);
+        return array(
+            'latestMedia' => $latestMedia['results'],
+            'topViewedMedia' => $topViewedMedia['results'],
+            'topRatedMedia' => $topRatedMedia['results']
+        );
     }
-    
+
     /**
     * @Route("/feed")
     * @Template()
@@ -48,12 +51,10 @@ class HomeController extends Controller
         $items = $em->getRepository('ProtalkMediaBundle:Media')->getMediaOrderedBy('creationDate', 1, 20);
 
         $templateItems = array();
-        foreach($items['results'] as $item)
-        {
+        foreach ($items['results'] as $item) {
             $templateItems[] = $item;
         }
         //var_dump($templateItems[0]->title); die();
-
         return array('items' => $templateItems, 'date' => date('c'));
     }
 }

@@ -11,7 +11,7 @@
 
 /**
  * Admin for ratings
- * 
+ *
  * This class handles fields for the ratings data.
  *
  * @category   AdminBundle
@@ -34,10 +34,10 @@ class RatingAdmin extends Admin
 {
     /**
      * Form fields configuration
-     * 
+     *
      * This function adds Name to the form mapper.
-     * 
-     * @param FormMapper $formMapper 
+     *
+     * @param FormMapper $formMapper
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -46,10 +46,10 @@ class RatingAdmin extends Admin
 
     /**
      * Datagrid filter configuration
-     * 
+     *
      * This function adds Name to the datagrid mapper.
-     * 
-     * @param DatagridMapper $datagridMapper 
+     *
+     * @param DatagridMapper $datagridMapper
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
@@ -58,10 +58,10 @@ class RatingAdmin extends Admin
 
     /**
      * List fields configuration
-     * 
+     *
      * This function adds Name identifier to the list mapper.
-     * 
-     * @param ListMapper $listMapper 
+     *
+     * @param ListMapper $listMapper
      */
     protected function configureListFields(ListMapper $listMapper)
     {
@@ -70,11 +70,11 @@ class RatingAdmin extends Admin
 
     /**
      * Validator function
-     * 
+     *
      * This function validates that name is no more than 50 characters long.
-     * 
+     *
      * @param ErrorElement $errorElement
-     * @param mixed $object 
+     * @param mixed        $object
      */
     public function validate(ErrorElement $errorElement, $object)
     {
