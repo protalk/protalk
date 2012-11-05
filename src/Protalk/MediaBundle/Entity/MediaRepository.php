@@ -26,8 +26,8 @@ class MediaRepository extends EntityRepository
      * a specific field
      *
      * @param string $orderField
-     * @param int $page
-     * @param int $max
+     * @param int    $page
+     * @param int    $max
      * @param string $order
      *
      * @return array Array with total and results
@@ -48,8 +48,8 @@ class MediaRepository extends EntityRepository
      * Create result list by manually doing the limit/offset
      *
      * @param array $results
-     * @param int $page
-     * @param int $max
+     * @param int   $page
+     * @param int   $max
      *
      * @return array Array with total and results
      */
@@ -72,8 +72,8 @@ class MediaRepository extends EntityRepository
      *
      * @param string $search
      * @param string $sort
-     * @param int $page
-     * @param int $max
+     * @param int    $page
+     * @param int    $max
      * @param string $order
      *
      * @return array Array with count and result
@@ -87,17 +87,19 @@ class MediaRepository extends EntityRepository
            ->leftJoin("m.tags", "t")
            ->join("m.speakers", "s")
            ->join("m.mediatype", "mtype")
-           ->where($qb->expr()->andX(
-               $qb->expr()->orX(
-                   "LOWER(c.name) LIKE :search1",
-                   "LOWER(t.name) LIKE :search2",
-                   "LOWER(s.name) LIKE :search3",
-                   "LOWER(m.title) LIKE :search4",
-                   "LOWER(m.description) LIKE :search5",
-                   "LOWER(mtype.name) LIKE :search6"     
-               ),
-               "m.isPublished = 1"
-           ));
+           ->where(
+               $qb->expr()->andX(
+                   $qb->expr()->orX(
+                       "LOWER(c.name) LIKE :search1",
+                       "LOWER(t.name) LIKE :search2",
+                       "LOWER(s.name) LIKE :search3",
+                       "LOWER(m.title) LIKE :search4",
+                       "LOWER(m.description) LIKE :search5",
+                       "LOWER(mtype.name) LIKE :search6"
+                   ),
+                   "m.isPublished = 1"
+               )
+           );
         $query = $qb->getQuery();
         $query->setParameter('search1', '%'.strtolower($search).'%')
               ->setParameter('search2', '%'.strtolower($search).'%')
@@ -106,6 +108,7 @@ class MediaRepository extends EntityRepository
               ->setParameter('search5', '%'.strtolower($search).'%')
               ->setParameter('search6', '%'.strtolower($search).'%');
         $results = $query->getResult();
+
         return $this->getResultList($results, $page, $max);
     }
 
@@ -114,16 +117,18 @@ class MediaRepository extends EntityRepository
      * mediatype join, reducing no. of queries to db
      * and increment no of visits made to media item
      *
-     * @param string $slug
+     * @param  string   $slug
      * @return Doctrine Record
      */
     public function findOneBySlug($slug)
     {
         return $this->getEntityManager()
-                    ->createQuery('SELECT m, mt
-                                   FROM ProtalkMediaBundle:Media m
-                                   JOIN m.mediatype mt
-                                   WHERE m.slug = :slug AND m.isPublished = 1')
+                    ->createQuery(
+                        'SELECT m, mt
+                         FROM ProtalkMediaBundle:Media m
+                         JOIN m.mediatype mt
+                         WHERE m.slug = :slug AND m.isPublished = 1'
+                    )
                     ->setParameter('slug', $slug)
                     ->getSingleResult();
     }
@@ -131,10 +136,10 @@ class MediaRepository extends EntityRepository
     /**
      * Find media items by category
      *
-     * @param string $slug (category name)
+     * @param string $slug       (category name)
      * @param string $orderField
-     * @param int $page
-     * @param int $max
+     * @param int    $page
+     * @param int    $max
      * @param string $order
      *
      * @return array Array with total and results
@@ -145,14 +150,16 @@ class MediaRepository extends EntityRepository
         $qb->select("m")
            ->from("ProtalkMediaBundle:Media", "m")
            ->join("m.categories", "c")
-           ->where($qb->expr()->andX(
-               "c.slug = :slug",
-               "m.isPublished = 1"
-           ))
+           ->where(
+               $qb->expr()->andX(
+                   "c.slug = :slug",
+                   "m.isPublished = 1"
+               )
+           )
            ->orderBy("m." . $orderField, $order);
         $query = $qb->getQuery();
         $query->setParameter("slug", $slug);
-        
+
         $results = $query->getResult();
 
         return $this->getResultList($results, $page, $max);
@@ -161,10 +168,10 @@ class MediaRepository extends EntityRepository
     /**
      * Find media items by tag
      *
-     * @param string $slug (tag name)
+     * @param string $slug       (tag name)
      * @param string $orderField
-     * @param int $page
-     * @param int $max
+     * @param int    $page
+     * @param int    $max
      * @param string $order
      *
      * @return array Array with total and results
@@ -175,10 +182,12 @@ class MediaRepository extends EntityRepository
         $qb->select("m")
            ->from("ProtalkMediaBundle:Media", "m")
            ->join("m.tags", "t")
-           ->where($qb->expr()->andX(
-               "t.slug = :slug",
-               "m.isPublished = 1"
-           ))
+           ->where(
+               $qb->expr()->andX(
+                   "t.slug = :slug",
+                   "m.isPublished = 1"
+               )
+           )
            ->orderBy("m." . $orderField, $order);
         $query = $qb->getQuery();
         $query->setParameter("slug", $slug);
@@ -190,10 +199,10 @@ class MediaRepository extends EntityRepository
     /**
      * Find media items by speaker
      *
-     * @param int $speakerId
+     * @param int    $speakerId
      * @param string $orderField
-     * @param int $page
-     * @param int $max
+     * @param int    $page
+     * @param int    $max
      *
      * @return array Array with total and results
      */
@@ -203,14 +212,17 @@ class MediaRepository extends EntityRepository
         $qb->select("m")
            ->from("ProtalkMediaBundle:Media", "m")
            ->join("m.speakers", "s")
-           ->where($qb->expr()->andX(
-               "s.id = :speakerId",
-               "m.isPublished = 1"
-           ))
+           ->where(
+               $qb->expr()->andX(
+                   "s.id = :speakerId",
+                   "m.isPublished = 1"
+               )
+           )
            ->orderBy("m." . $orderField, "DESC");
         $query = $qb->getQuery();
         $query->setParameter('speakerId', $speakerId);
         $results = $query->getResult();
+
         return $this->getResultList($results, $page, $max);
     }
 
@@ -229,15 +241,17 @@ class MediaRepository extends EntityRepository
     /**
      * Get the average rating of a media item
      *
-     * @param integer $mediaId
+     * @param  integer $mediaId
      * @return integer
      */
-    public function getAverageRating($mediaId) {
-
+    public function getAverageRating($mediaId)
+    {
         $result = $this->getEntityManager()
-                       ->createQuery('SELECT AVG(r.rating)
-                                      FROM ProtalkMediaBundle:Rating r
-                                      WHERE r.media_id=:id')
+                       ->createQuery(
+                           'SELECT AVG(r.rating)
+                            FROM ProtalkMediaBundle:Rating r
+                            WHERE r.media_id=:id'
+                       )
                        ->setParameter('id', $mediaId)
                        ->getResult();
 

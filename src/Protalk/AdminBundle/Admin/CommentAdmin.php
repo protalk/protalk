@@ -11,7 +11,7 @@
 
 /**
  * Admin for comments
- * 
+ *
  * This class handles fields for the comment data.
  *
  * @category   AdminBundle
@@ -34,10 +34,10 @@ class CommentAdmin extends Admin
 {
     /**
      * Configure form fields
-     * 
+     *
      * This function adds name field to the form mapper object.
-     * 
-     * @param FormMapper $formMapper 
+     *
+     * @param FormMapper $formMapper
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -46,10 +46,10 @@ class CommentAdmin extends Admin
 
     /**
      * Configure data grid filters
-     * 
+     *
      * This function adds Name field to data grid mapper.
-     * 
-     * @param DatagridMapper $datagridMapper 
+     *
+     * @param DatagridMapper $datagridMapper
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
@@ -58,11 +58,11 @@ class CommentAdmin extends Admin
 
     /**
      * Configure list fields
-     * 
+     *
      * This function configures list fields by adding identifier
      * of Name.
-     * 
-     * @param ListMapper $listMapper 
+     *
+     * @param ListMapper $listMapper
      */
     protected function configureListFields(ListMapper $listMapper)
     {
@@ -71,12 +71,12 @@ class CommentAdmin extends Admin
 
     /**
      * Validator function
-     * 
+     *
      * This function validates that the maximum amount of characters given for a
      * is 50 characters long.
-     * 
+     *
      * @param ErrorElement $errorElement
-     * @param mixed $object 
+     * @param mixed        $object
      */
     public function validate(ErrorElement $errorElement, $object)
     {

@@ -63,7 +63,6 @@ class Mediatype
         $this->medias = new ArrayCollection();
     }
 
-
     /**
      * Get id
      *
@@ -113,17 +112,17 @@ class Mediatype
     {
         return $this->type;
     }
-    
+
     /**
      * Convert this entity to a string
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public function __toString()
     {
         return $this->name;
     }
-    
+
     /**
      * Add medias
      *
@@ -137,7 +136,7 @@ class Mediatype
     /**
      * Get medias
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getMedias()
     {

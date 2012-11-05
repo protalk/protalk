@@ -25,16 +25,17 @@ class CommentRepository extends EntityRepository
     /**
      * Get comments for a media item
      *
-     * @param int $max
-     * @return Doctrine Collection
+     * @param int $media_id
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMediaComments($media_id)
     {
         return $this->getEntityManager()
-                    ->createQuery('
-                        SELECT c FROM ProtalkMediaBundle:Comment c
+                    ->createQuery(
+                        'SELECT c FROM ProtalkMediaBundle:Comment c
                         WHERE c.media_id = :id
-                        ORDER BY c.datetime DESC')
+                        ORDER BY c.datetime DESC'
+                    )
                     ->setParameter('id', $media_id)
                     ->getResult();
     }

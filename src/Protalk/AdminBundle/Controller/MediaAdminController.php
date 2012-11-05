@@ -11,7 +11,7 @@
 
 /**
  * Media Admin Controller
- * 
+ *
  * This controller handles requests to handle media administration.
  *
  * @category   AdminBundle
@@ -32,11 +32,11 @@ class MediaAdminController extends Controller
 {
     /**
      * Publish media
-     * 
+     *
      * This function publishes media that has been insterted previously.
-     * 
-     * @param ProxyQueryInterface $query
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse 
+     *
+     * @param  ProxyQueryInterface                                $query
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function batchActionUnpublish(ProxyQueryInterface $query)
     {
@@ -47,9 +47,9 @@ class MediaAdminController extends Controller
             $em->persist($entity[0]);
         }
         $em->flush();
-        
+
         $this->get('session')->setFlash('sonata_flash_success', 'flash_batch_merge_success');
 
-        return new RedirectResponse($this->admin->generateUrl('list',$this->admin->getFilterParameters()));
+        return new RedirectResponse($this->admin->generateUrl('list', $this->admin->getFilterParameters()));
     }
 }

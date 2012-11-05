@@ -15,10 +15,7 @@ use Protalk\MediaBundle\Form\Media\ContributeMedia;
 use Protalk\MediaBundle\Entity\Contribution;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Swift_Message;
-use Swift_Mail;
 
 class ContributionController extends Controller
 {
@@ -31,7 +28,7 @@ class ContributionController extends Controller
         $request = $this->getRequest();
 
         if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
+            $form->bind($request);
 
             if ($form->isValid()) {
 
@@ -42,7 +39,8 @@ class ContributionController extends Controller
 
                 $this->sendMail($contribution);
 
-                $this->get('session')->setFlash('contribution-notice', 'Thank you! Your contribution has been received.');
+                $this->get('session')
+                    ->setFlash('contribution-notice', 'Thank you! Your contribution has been received.');
 
                 return $this->redirect($this->generateUrl('contribute_new'));
             }
@@ -51,14 +49,19 @@ class ContributionController extends Controller
         return $this->render('ProtalkMediaBundle:Contribution:new.html.twig', array('form' => $form->createView()));
     }
 
-   private function sendMail($contribution)
-   {
-       $message = Swift_Message::newInstance()
+    private function sendMail($contribution)
+    {
+        $body = $this->renderView(
+            'ProtalkMediaBundle:Contribution:email.txt.twig',
+            array('contribution' => $contribution)
+        );
+
+        $message = Swift_Message::newInstance()
            ->setSubject('ProTalk - You have new contribution from: ' . $contribution->getEmail())
            ->setFrom('no-reply@protalk.me')
            ->setTo('info@protalk.me')
-           ->setBody($this->renderView('ProtalkMediaBundle:Contribution:email.txt.twig', array('contribution' => $contribution)))
-       ;
-       $this->get('mailer')->send($message);
-   }
+           ->setBody($body);
+
+        $this->get('mailer')->send($message);
+    }
 }
