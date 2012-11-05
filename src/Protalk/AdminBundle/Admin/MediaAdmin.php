@@ -55,8 +55,8 @@ class MediaAdmin extends Admin
                 ->add('date')
                 ->add('description')
                 ->add('length')
-                ->add('rating')
-                ->add('visits')
+                ->add('rating', null, array('required' => false))
+                ->add('visits', null, array('required' => false))
                 ->add('content')
                 ->add('slides')
                 ->add('joindin')
@@ -116,7 +116,7 @@ class MediaAdmin extends Admin
      * than 255 characters long.
      *
      * @param ErrorElement $errorElement
-     * @param type         $object
+     * @param type $object
      */
     public function validate(ErrorElement $errorElement, $object)
     {
