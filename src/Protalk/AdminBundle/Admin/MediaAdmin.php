@@ -11,7 +11,7 @@
 
 /**
  * Admin for media
- * 
+ *
  * This class handles fields for the media data.
  *
  * @category   AdminBundle
@@ -34,10 +34,10 @@ class MediaAdmin extends Admin
 {
     /**
      * Configure form fields
-     * 
+     *
      * This function creates a form for the media.
-     * 
-     * @param FormMapper $formMapper 
+     *
+     * @param FormMapper $formMapper
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -51,8 +51,8 @@ class MediaAdmin extends Admin
                 ->add('date')
                 ->add('description')
                 ->add('length')
-                ->add('rating')
-                ->add('visits')
+                ->add('rating', null, array('required' => false))
+                ->add('visits', null, array('required' => false))
                 ->add('content')
                 ->add('slides')
                 ->add('joindin')
@@ -75,10 +75,10 @@ class MediaAdmin extends Admin
 
     /**
      * Configure data grid filters
-     * 
+     *
      * This function add Title to datagrid mapper.
-     * 
-     * @param DatagridMapper $datagridMapper 
+     *
+     * @param DatagridMapper $datagridMapper
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
@@ -87,10 +87,10 @@ class MediaAdmin extends Admin
 
     /**
      * Configure list fields
-     * 
+     *
      * This function adds isPublished identifier to the Title.
-     * 
-     * @param ListMapper $listMapper 
+     *
+     * @param ListMapper $listMapper
      */
     protected function configureListFields(ListMapper $listMapper)
     {
@@ -99,23 +99,23 @@ class MediaAdmin extends Admin
 
     /**
      * Validator function
-     * 
+     *
      * This function validates that title of the media is no longer
      * than 255 characters long.
-     * 
+     *
      * @param ErrorElement $errorElement
-     * @param type $object 
+     * @param type $object
      */
     public function validate(ErrorElement $errorElement, $object)
     {
         $errorElement->with('title')->assertMaxLength(array('limit' => 255))->end();
     }
-    
+
     /**
      * Get batch actions for media
-     * 
+     *
      * This function retrieves the default (currently only the delete action) actions.
-     * 
+     *
      * @return array $action container for different actions for media
      */
     public function getBatchActions()
