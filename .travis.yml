@@ -3,9 +3,17 @@ php:
   - "5.4"
   - "5.3"
 
-before_script: php bin/vendors install
+before_script:
+  - cp app/config/parameters.yml-dist app/config/parameters.yml
+  - composer install
+  - pear install pear/PHP_CodeSniffer
+  - phpenv rehash
+
 script: phpunit -c app/ --coverage-text
 
+after_script:
+  - phpcs --report=full --report=gitblame --standard=PSR2 src/ || true # true is here to make return true, so we don't fail on CS violations, yet.
+
 notifications:
-  email:
-    - info@protalk.me
+  irc:
+    - "irc.freenode.org#protalk"

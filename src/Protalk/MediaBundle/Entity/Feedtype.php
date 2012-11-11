@@ -1,26 +1,17 @@
 <?php
 
-/**
- * ProTalk
- *
- * Copyright (c) 2012-2013, ProTalk
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Protalk\MediaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Protalk\MediaBundle\Entity\Mediatype
+ * Protalk\MediaBundle\Entity\Feedtype
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Protalk\MediaBundle\Entity\MediatypeRepository")
+ * @ORM\Entity(repositoryClass="Protalk\MediaBundle\Entity\FeedtypeRepository")
  */
-class Mediatype
+class Feedtype
 {
     /**
      * @var integer $id
@@ -34,21 +25,21 @@ class Mediatype
     /**
      * @var string $name
      *
-     * @ORM\Column(name="name", type="string", length=50)
+     * @ORM\Column(name="name", type="string", length=100)
      */
     private $name;
 
     /**
-     * @var string $type
+     * @var string $className
      *
-     * @ORM\Column(name="type", type="string", length=10)
+     * @ORM\Column(name="className", type="string", length=30)
      */
-    private $type;
+    private $className;
 
     /**
-     * @ORM\OneToMany(targetEntity="Media", mappedBy="mediatype")
+     * @ORM\OneToMany(targetEntity="Feed", mappedBy="feedtype")
      */
-    private $medias;
+    private $feeds;
 
     /*
      * Constructor
@@ -60,7 +51,7 @@ class Mediatype
      */
     public function __construct()
     {
-        $this->medias = new ArrayCollection();
+        $this->feeds = new ArrayCollection();
     }
 
     /**
@@ -94,23 +85,23 @@ class Mediatype
     }
 
     /**
-     * Set type
+     * Set className
      *
-     * @param string $type
+     * @param string $className
      */
-    public function setType($type)
+    public function setClassName($className)
     {
-        $this->type = $type;
+        $this->className = $className;
     }
 
     /**
-     * Get type
+     * Get className
      *
      * @return string
      */
-    public function getType()
+    public function getClassName()
     {
-        return $this->type;
+        return $this->className;
     }
 
     /**
@@ -124,22 +115,22 @@ class Mediatype
     }
 
     /**
-     * Add medias
+     * Add feeds
      *
-     * @param Protalk\MediaBundle\Entity\Media $medias
+     * @param Protalk\MediaBundle\Entity\Feed $feeds
      */
-    public function addMedia(\Protalk\MediaBundle\Entity\Media $medias)
+    public function addMedia(\Protalk\MediaBundle\Entity\Feed $feeds)
     {
-        $this->medias[] = $medias;
+        $this->feeds[] = $feeds;
     }
 
     /**
-     * Get medias
+     * Get feeds
      *
      * @return Doctrine\Common\Collections\Collection
      */
-    public function getMedias()
+    public function getFeeds()
     {
-        return $this->medias;
+        return $this->feeds;
     }
 }

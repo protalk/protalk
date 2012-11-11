@@ -90,7 +90,6 @@ class Comment
      */
     private $content;
 
-
     /**
      * Get id
      *

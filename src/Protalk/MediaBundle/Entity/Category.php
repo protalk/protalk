@@ -145,7 +145,9 @@ class Category implements SluggableInterface
     /**
      * Add children
      *
-     * @param Protalk\MediaBundle\Entity\Category $children
+     * @param \Protalk\MediaBundle\Entity\Category $children
+     *
+     * @return void
      */
     public function addCategory(\Protalk\MediaBundle\Entity\Category $children)
     {
@@ -155,7 +157,7 @@ class Category implements SluggableInterface
     /**
      * Get children
      *
-     * @return Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getChildren()
     {
@@ -165,7 +167,7 @@ class Category implements SluggableInterface
     /**
      * Add medias
      *
-     * @param Protalk\MediaBundle\Entity\Media $medias
+     * @param \Protalk\MediaBundle\Entity\Media $medias
      */
     public function addMedia(\Protalk\MediaBundle\Entity\Media $medias)
     {
@@ -175,7 +177,7 @@ class Category implements SluggableInterface
     /**
      * Get medias
      *
-     * @return Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getMedias()
     {
@@ -210,7 +212,8 @@ class Category implements SluggableInterface
      * @return string
      */
 
-    public function getSlugFields() {
+    public function getSlugFields()
+    {
         return $this->getName();
     }
 
@@ -226,5 +229,4 @@ class Category implements SluggableInterface
 
         return $this->setSlug($slug);
     }
-
 }

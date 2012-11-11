@@ -1,0 +1,8 @@
+<div id="contributors">
+    <h1>OUR CONTRIBUTORS!</h1>
+    <ul>
+{% for contributor in contributors %}
+  <li><a href="{{ contributor.url }}"><span class="contributor">{{ contributor.login }}</span><img src="{{ contributor.avatar_url }}" /></a></li>
+{% endfor %}
+    </ul>
+</div>

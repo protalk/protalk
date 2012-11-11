@@ -3,8 +3,8 @@
 
 Vagrant::Config.run do |config|
     # This vagrant will be running on centos 6.2, 64bit with puppet provisioning
-    config.vm.box = 'centos-62-64-puppet'
-    config.vm.box_url = 'http://packages.vstone.eu/vagrant-boxes/centos/6.2/centos-6.2-64bit-puppet-vbox.4.1.12.box'
+    config.vm.box = 'centos-63-32-puppet'
+    config.vm.box_url = 'https://dl.dropbox.com/sh/9rldlpj3cmdtntc/chqwU6EYaZ/centos-63-32bit-puppet.box'
 
     # Use :gui for showing a display for easy debugging of vagrant
     config.vm.boot_mode = :gui
