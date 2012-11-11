@@ -28,7 +28,7 @@
         "sonata-project/notification-bundle": "dev-master",
         "sonata-project/doctrine-extensions": "dev-master",
         "sonata-project/easy-extends-bundle": "dev-master",
-        "sonata-project/user-bundle": "dev-master",
+        "sonata-project/user-bundle": ">=2.0",
         "sonata-project/doctrine-orm-admin-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "dev-master",
         "knplabs/knp-menu-bundle": "1.1.*",
