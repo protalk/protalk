@@ -1,23 +1,12 @@
 sonata_news:
-    title:        Sonata Project
-    link:         http://sonata-project.org
-    description:  Cool bundles on top of Symfony2
-    salt:         'secureToken'
-    permalink_generator: sonata.news.permalink.date # sonata.news.permalink.category
+  title:        "Mon titre"
+  link:         http://sonata-project.org
+  description:  Cool bundles on top of Symfony2
+  salt:         'secureToken'
+  permalink_generator: sonata.news.permalink.date # sonata.news.permalink.category
 
-    comment:
+  comment:
         notification:
-            emails:   [email@example.org, email2@example.org]
-            from:     no-reply@sonata-project.org
+            emails:   [info@protalk.me, email2@example.org]
+            from:     no-reply@protalk.me
             template: 'SonataNewsBundle:Mail:comment_notification.txt.twig'
-
-doctrine:
-    orm:
-        entity_managers:
-            default:
-                #metadata_cache_driver: apc
-                #query_cache_driver: apc
-                #result_cache_driver: apc
-                mappings:
-                    ApplicationSonataNewsBundle: ~
-                    SonataNewsBundle: ~

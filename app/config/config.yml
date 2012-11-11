@@ -2,6 +2,8 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: sonata_news.yml }
+    - { resource: sonata_media.yml }
+
 
 framework:
     #esi:             ~
@@ -126,6 +128,8 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Application\Sonata\UserBundle\Entity\User
+    group:
+      group_class: Application\Sonata\UserBundle\Entity\Group
 
 parameters:
     home_lists_max:  6
