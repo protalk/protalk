@@ -11,7 +11,6 @@
 
 namespace Protalk\MediaBundle\Entity;
 
-use SamJ\DoctrineSluggableBundle\SluggableInterface;
 use SamJ\DoctrineSluggableBundle\Slugger;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -143,7 +142,8 @@ class Tag
      * Exists because the backend makes a call to getSlug()
      * when creating/updating tags.
      */
-    public function getSlug() {
+    public function getSlug()
+    {
         return $this->getSlugFields();
     }
 
@@ -152,7 +152,8 @@ class Tag
      *
      * @return string
      */
-    public function getSlugFields() {
+    public function getSlugFields()
+    {
         return $this->slug;
     }
 

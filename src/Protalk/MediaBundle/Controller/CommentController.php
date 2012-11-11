@@ -15,7 +15,6 @@ use Protalk\MediaBundle\Form\Media\CommentMedia;
 use Protalk\MediaBundle\Entity\Comment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -25,9 +24,11 @@ class CommentController extends Controller
     public function newAction(Request $request)
     {
         $request = $this->getRequest();
-        
+
         if ($request->isXmlHttpRequest()) {
-            $media = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->findOneById($request->get('media_id'));
+            $media = $this->getDoctrine()
+                ->getRepository('ProtalkMediaBundle:Media')
+                ->findOneById($request->get('media_id'));
 
             $comment = new Comment();
             $comment->setMedia($media);
@@ -54,7 +55,10 @@ class CommentController extends Controller
                     return $response;
                 } else {
                     $ret['status'] = 'failure';
-                    $ret['content'] = $this->renderView('ProtalkMediaBundle:Comment:new.html.twig', array('form' => $form->createView(), 'media' => $media, 'errors' => true));
+                    $ret['content'] = $this->renderView(
+                        'ProtalkMediaBundle:Comment:new.html.twig',
+                        array('form' => $form->createView(), 'media' => $media, 'errors' => true)
+                    );
 
                     $response = new Response(json_encode($ret));
                     $response->headers->set('Content-type', 'application/json; charset=utf-8');
@@ -63,7 +67,10 @@ class CommentController extends Controller
                 }
             }
 
-            return $this->render('ProtalkMediaBundle:Comment:new.html.twig', array('form' => $form->createView(), 'media' => $media));
+            return $this->render(
+                'ProtalkMediaBundle:Comment:new.html.twig',
+                array('form' => $form->createView(), 'media' => $media)
+            );
         }
     }
 
@@ -78,11 +85,9 @@ class CommentController extends Controller
 
         $request = $this->getRequest();
         if ($request->isXmlHttpRequest()) {
-
             return $this->renderView('ProtalkMediaBundle:Comment:list.html.twig', array('comments' => $comments));
         }
 
         return $this->render('ProtalkMediaBundle:Comment:list.html.twig', array('comments' => $comments));
     }
-
 }

@@ -5,7 +5,6 @@ namespace Protalk\AdminBundle\Admin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Form\FormMapper;
 
 class FeedAdmin extends Admin
@@ -16,11 +15,11 @@ class FeedAdmin extends Admin
      * @var array
      */
     protected $datagridValues = array(
-        '_page' => 1, 
+        '_page' => 1,
         '_sort_order' => 'ASC',
-        '_sort_by' => 'name' 
+        '_sort_by' => 'name'
     );
-    
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('name')
@@ -28,12 +27,18 @@ class FeedAdmin extends Admin
                    ->add('url')
                    ->add('automaticImport')
                    ->add('contact')
-                   ->add('confirmation', 'choice', array('choices'=>array(
-                       'none'=>'',
-                       'email'=>'Email',
-                       'twitter'=>'Twitter',
-                       'person'=>'In person'
-                   )))
+                   ->add(
+                       'confirmation',
+                       'choice',
+                       array(
+                           'choices' => array(
+                               'none' => '',
+                               'email' => 'Email',
+                               'twitter' => 'Twitter',
+                               'person' => 'In person'
+                           )
+                       )
+                   )
                    ->add('remark');
     }
 

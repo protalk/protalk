@@ -57,7 +57,6 @@ class Rating
      */
     private $rating;
 
-
     /**
      * Get id
      *
@@ -141,7 +140,7 @@ class Rating
     /**
      * Get media
      *
-     * @return Protalk\MediaBundle\Entity\Media 
+     * @return Protalk\MediaBundle\Entity\Media
      */
     public function getMedia()
     {
