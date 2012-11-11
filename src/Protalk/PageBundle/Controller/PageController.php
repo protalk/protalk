@@ -17,6 +17,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class PageController extends Controller
 {
+
     /**
      * @Route("/{url}")
      * @Template()
@@ -34,6 +35,7 @@ class PageController extends Controller
      * @param  string   $url
      * @return template
      */
+
     public function contentAction($url)
     {
         $this->getPage($url);
@@ -47,6 +49,7 @@ class PageController extends Controller
      * @param  string  $url
      * @return boolean
      */
+
     protected function getPage($url)
     {
         $this->page = $this->getDoctrine()->getRepository('ProtalkPageBundle:Page')->findOneByUrl($url);
@@ -62,14 +65,15 @@ class PageController extends Controller
      *
      * @return template
      */
+
     public function getContributorsAction()
     {
         $buzz = $this->container->get('buzz');
         $response = $buzz->get('https://api.github.com/repos/protalk/protalk/contributors');
-        $contributors = json_decode($response->getContent(), true);
 
-        foreach ($contributors as $key => $row) {
-            $contributions[$key] = $row['contributions'];
+        $contributors = array();
+        if ($response->getStatusCode() == 200) {
+            $contributors = json_decode($response->getContent(), true);
         }
 
         return $this->render(
