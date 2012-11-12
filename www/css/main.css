@@ -21,16 +21,8 @@ a {
 #logo {
     height: 100px;
     width: auto;
-    margin: 9px 0px;
+    margin: 9px 10px 9px 0px;
     float:left;
-}
-
-#beta {
-    float: left;
-    width: 10px;
-    font-size: 32px;
-    margin-top: 20px;
-    color: #454546;
 }
 
 .navigation {
