@@ -135,7 +135,8 @@ class Tag implements SluggableInterface
         $this->slug = $slug;
     }
 
-    /** Exists because the backend makes a call to getSlug()
+    /**
+     * Exists because the backend makes a call to getSlug()
      * when creating/updating tags.
      */
     public function getSlug()
