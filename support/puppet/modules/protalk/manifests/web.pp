@@ -25,7 +25,7 @@ class protalk::web {
 
     # Configure apache virtual host
     apache::vhost { $params::host :
-        docroot   => "/vagrant/web",
+        docroot   => "/vagrant/www",
         template  => "protalk/vhost.conf.erb",
         port      => $port,
     }
