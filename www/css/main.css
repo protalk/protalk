@@ -502,7 +502,8 @@ nav {
 }
 
 #subscribeButton {
-    height: 29px;
+    height: 31px;
+    margin-left:-5px;
 }
 
 .subscribe {
