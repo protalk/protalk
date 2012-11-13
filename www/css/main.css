@@ -367,6 +367,11 @@ time, .metadata, #source {
     height:795px;
 }
 
+.yui3-tabview .tabControlExplore .yui3-tabview-panel {
+    height:500px;
+}
+
+
 .yui3-tab-loading {
 background: url(../images/ajax-loader.gif) no-repeat center center;
 height:70px;
@@ -514,18 +519,18 @@ nav {
 }
 
 #categories {
-    height: 400px;
-    overflow: hidden;
+    overflow-y: auto;
+    max-height: 435px;
 }
 
 #tags {
-    height:310px;
-    overflow: hidden;
-    padding-bottom:20px;
+    overflow-y: auto;
+    max-height: 435px;
 }
 
 #speakers {
-    margin-top: 20px;
+    overflow-y: auto;
+    max-height: 435px;
 }
 
 .speaker {
