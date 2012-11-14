@@ -157,11 +157,11 @@ h2, h2 a, #speakerName {
     padding-bottom: 7px;
 }
 
-p a {
+p a, #contributors a {
     color:#89B029;
 }
 
-p a:hover {
+p a:hover, #contributors a:hover {
     color: #454546;
 }
 
@@ -1014,7 +1014,7 @@ form ul {
 }
 
 #contributors ul{
-  width:532px;
+  width:100%;
   margin-bottom:20px;
   margin-left:0px;
   overflow:hidden;
@@ -1023,7 +1023,7 @@ form ul {
 #contributors li{
   float:left;
   display:inline;
-  width:33%;
+  width:20%;
   padding-bottom:10px;
 }
 
