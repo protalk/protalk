@@ -42,7 +42,7 @@ class MediaController extends Controller
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/media/{id}/speakers", name="get_speakers")
+     * @Route("/media/{id}/speakers", name="get_speakers", requirements={"id" = "\d+"})
      */
     public function speakersAction($id)
     {
