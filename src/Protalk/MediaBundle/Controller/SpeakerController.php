@@ -13,6 +13,7 @@ namespace Protalk\MediaBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class SpeakerController extends Controller
 {
@@ -28,6 +29,15 @@ class SpeakerController extends Controller
         return array('speakers' => $speakers);
     }
 
+    /**
+     * @param $id
+     * @param $name
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @throws \Exception
+     *
+     * @Route("/speaker/{name}/{id}", name="speaker_show", requirements={"id" = "\d+"})
+     */
     public function showAction($id, $name)
     {
         $request = $this->getRequest();
