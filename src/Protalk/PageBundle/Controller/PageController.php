@@ -35,7 +35,6 @@ class PageController extends Controller
      * @param  string   $url
      * @return template
      */
-
     public function contentAction($url)
     {
         $this->getPage($url);
@@ -49,7 +48,6 @@ class PageController extends Controller
      * @param  string  $url
      * @return boolean
      */
-
     protected function getPage($url)
     {
         $this->page = $this->getDoctrine()->getRepository('ProtalkPageBundle:Page')->findOneByUrl($url);
@@ -65,7 +63,6 @@ class PageController extends Controller
      *
      * @return template
      */
-
     public function getContributorsAction()
     {
         $buzz = $this->container->get('buzz');
