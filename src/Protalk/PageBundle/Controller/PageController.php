@@ -35,7 +35,6 @@ class PageController extends Controller
      * @param  string   $url
      * @return template
      */
-
     public function contentAction($url)
     {
         $this->getPage($url);
@@ -49,7 +48,6 @@ class PageController extends Controller
      * @param  string  $url
      * @return boolean
      */
-
     protected function getPage($url)
     {
         $this->page = $this->getDoctrine()->getRepository('ProtalkPageBundle:Page')->findOneByUrl($url);
@@ -58,27 +56,5 @@ class PageController extends Controller
         }
 
         return true;
-    }
-
-    /*
-     * Retrieves list of GitHub contributors using GitHub API
-     *
-     * @return template
-     */
-
-    public function getContributorsAction()
-    {
-        $buzz = $this->container->get('buzz');
-        $response = $buzz->get('https://api.github.com/repos/protalk/protalk/contributors');
-
-        $contributors = array();
-        if ($response->getStatusCode() == 200) {
-            $contributors = json_decode($response->getContent(), true);
-        }
-
-        return $this->render(
-            'ProtalkPageBundle:Page:contributors.html.twig',
-            array('contributors' => $contributors)
-        );
     }
 }
