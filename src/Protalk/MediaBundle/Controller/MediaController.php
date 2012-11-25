@@ -21,7 +21,7 @@ class MediaController extends Controller
 {
 
     /**
-     * @Route("/home")
+     * @Route("/{slug}", name="media_show")
      * @Template()
      */
     public function indexAction($slug)
@@ -38,6 +38,12 @@ class MediaController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("/media/{id}/speakers", name="get_speakers", requirements={"id" = "\d+"})
+     */
     public function speakersAction($id)
     {
         $media = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->findOneById($id);
@@ -45,6 +51,13 @@ class MediaController extends Controller
         return $this->render('ProtalkMediaBundle:Speaker:show.html.twig', array('speakers' => $media->getSpeakers()));
     }
 
+    /**
+     * @param $id
+     * @param $rating
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("/rate/{id}/{rating}", name="rate_media", requirements={"id" = "\d+", "rating" = "\d+"})
+     */
     public function rateAction($id, $rating)
     {
         if ($this->getRequest()->isXmlHttpRequest()) {

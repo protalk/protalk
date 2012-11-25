@@ -15,12 +15,19 @@ use Protalk\MediaBundle\Form\Media\CommentMedia;
 use Protalk\MediaBundle\Entity\Comment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 
 class CommentController extends Controller
 {
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("/comment/{media_id}", name="comment_new", requirements={"media_id" = "\d+"})
+     */
     public function newAction(Request $request)
     {
         $request = $this->getRequest();

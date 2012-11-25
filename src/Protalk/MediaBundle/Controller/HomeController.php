@@ -19,7 +19,7 @@ class HomeController extends Controller
 {
 
     /**
-     * @Route("/home")
+     * @Route("/", name="_home")
      * @Template()
      */
     public function indexAction()
@@ -41,7 +41,7 @@ class HomeController extends Controller
     }
 
     /**
-    * @Route("/feed")
+    * @Route("/feed", name="rss")
     * @Template()
     */
     public function rssAction()
