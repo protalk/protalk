@@ -12,6 +12,7 @@
 namespace Protalk\MediaBundle\Entity;
 
 use SamJ\DoctrineSluggableBundle\Slugger;
+use SamJ\DoctrineSluggableBundle\SluggableInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
