@@ -8,61 +8,10 @@ ProtalkMediaBundle:
     type:     annotation
     prefix:   /
 
-_home:
-    pattern:  /
-    defaults: { _controller: ProtalkMediaBundle:Home:index }
-
-speaker_show:
-    pattern: /speaker/{name}/{id}
-    defaults: {_controller: ProtalkMediaBundle:Speaker:show }
-    requirements:
-        id:  \d+
-
-get_speakers:
-  pattern:  /media/{id}/speakers
-  defaults: {_controller: ProtalkMediaBundle:Media:speakers}
-
-contribute_new:
-    pattern: /contribute/new
-    defaults: {_controller: ProtalkMediaBundle:Contribution:new }
-
-rate_media:
-    pattern: /rate/{id}/{rating}
-    defaults: {_controller: ProtalkMediaBundle:Media:rate }
-    requirements:
-        id:     \d+
-        rating: \d+
-
-comment_new:
-    pattern: /comment/{media_id}
-    defaults: {_controller: ProtalkMediaBundle:Comment:new }
-    requirements:
-        id:     \d+
-
 ProtalkPageBundle:
     resource: "@ProtalkPageBundle/Controller/"
     type:     annotation
     prefix:   /page
-
-page_show:
-    pattern:  /page/{url}
-    defaults: { _controller: ProtalkPageBundle:Page:index }
-
-explore:
-    pattern:  /explore
-    defaults: { _controller: ProtalkMediaBundle:Explore:index }
-
-speaker_search:
-    pattern:  /search/speaker/{search}
-    defaults: { _controller: ProtalkMediaBundle:Explore:speaker }
-
-media_show:
-    pattern:  /{slug}
-    defaults: { _controller: ProtalkMediaBundle:Media:index }
-    
-rss:
-    pattern: /feed
-    defaults: { _controller: ProtalkMediaBundle:Home:rss }
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

@@ -14,12 +14,19 @@ namespace Protalk\MediaBundle\Controller;
 use Protalk\MediaBundle\Form\Media\ContributeMedia;
 use Protalk\MediaBundle\Entity\Contribution;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Swift_Message;
 
 class ContributionController extends Controller
 {
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("/contribute/new", name="contribute_new")
+     */
     public function newAction(Request $request)
     {
         $contribution = new Contribution();

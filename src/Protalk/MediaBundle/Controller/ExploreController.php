@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Request;
 class ExploreController extends Controller
 {
     /**
-     * @Route("/explore")
+     * @Route("/explore", name="explore")
      * @Template()
      */
     public function indexAction()
@@ -121,7 +121,7 @@ class ExploreController extends Controller
     }
 
     /**
-     * @Route("/search/speaker/{search}")
+     * @Route("/search/speaker/{search}", name="speaker_search")
      * @Template("ProtalkMediaBundle:Explore:result.html.twig")
      */
     public function speakerAction($search)
