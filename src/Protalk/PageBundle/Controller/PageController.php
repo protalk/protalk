@@ -19,7 +19,7 @@ class PageController extends Controller
 {
 
     /**
-     * @Route("/{url}")
+     * @Route("/{url}", name="page_show")
      * @Template()
      */
     public function indexAction($url)
