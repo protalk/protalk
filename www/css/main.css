@@ -157,11 +157,11 @@ h2, h2 a, #speakerName {
     padding-bottom: 7px;
 }
 
-.speaker, .name, #source a, .speakerBio a, #pageContent a, .metadata span, .hilite, #slidesLink, #contributors a {
+.speaker, .name, #source a, .speakerBio a, #pageContent a, .metadata span, .hilite, #slidesLink, #contributors a, .pageLink {
     color:#89B029;
 }
 
-#source a:hover, .speaker:hover, #pageContent a:hover, #contributors a:hover {
+#source a:hover, .speaker:hover, #pageContent a:hover, #contributors a:hover, .pageLink:hover {
     color: #454546;
 }
 
