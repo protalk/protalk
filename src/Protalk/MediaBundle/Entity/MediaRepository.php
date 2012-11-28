@@ -48,7 +48,7 @@ class MediaRepository extends EntityRepository
                 /* I don't really care about the size of $order as long as
                  * it's bigger than $sort. */
                 throw new \Exception(
-                    "Sizes of sort and order parameters given to " 
+                    "Sizes of sort and order parameters given to "
                     . "MediaRepository#getMediaOrderedBy do not match."
                 );
             }
