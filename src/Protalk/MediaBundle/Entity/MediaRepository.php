@@ -52,7 +52,7 @@ class MediaRepository extends EntityRepository
                     . "MediaRepository#getMediaOrderedBy do not match."
                 );
             }
-        } else if (is_array($sort) && is_string($order)) {
+        } elseif (is_array($sort) && is_string($order)) {
             $order = array_fill(0, count($sort), $order);
         } else {
             $sort = (array) $sort;
