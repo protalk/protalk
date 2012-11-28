@@ -47,9 +47,10 @@ class MediaRepository extends EntityRepository
             if (count($sort) > count($order)) {
                 /* I don't really care about the size of $order as long as
                  * it's bigger than $sort. */
-                throw new \Exception("Sizes of sort and order parameters given"
-                                   . "to MediaRepository#getMediaOrderedBy"
-                                   . "do not match.");
+                throw new \Exception(
+                    "Sizes of sort and order parameters given to " 
+                    . "MediaRepository#getMediaOrderedBy do not match."
+                );
             }
         } else if (is_array($sort) && is_string($order)) {
             $order = array_fill(0, count($sort), $order);
@@ -57,16 +58,16 @@ class MediaRepository extends EntityRepository
             $sort = (array) $sort;
             $order = (array) $order;
         }
-    	
+
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select("m")
            ->from("ProtalkMediaBundle:Media", "m")
            ->where("m.isPublished = 1");
-        
+
         for ($i = 0; $i < count($sort); $i++) {
             $qb->addOrderBy("m." . $sort[$i], $order[$i]);
         }
-        
+
         $results = $qb->getQuery()->getResult();
 
         return $this->getResultList($results, $page, $max);
