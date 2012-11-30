@@ -1,7 +1,7 @@
 <table class="categoryList">
     <tr>
     {% for category in categories %}
-        <td><a class="category" title="{{ category.name }}" href="{{ path('category_search', { 'search': category.slug }) }}"><span>{{ category.truncated }} ({{ category.mediaCount }})</span></a></td>
+        <td><a class="category" title="{{ category.name }}" href="{{ path('category_search', { 'search': category.slug }) }}"><span>{{ category.name|truncate(17) }} ({{ category.mediaCount }})</span></a></td>
         {% if loop.index is even %}
             </tr>
             <tr>
