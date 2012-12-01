@@ -53,10 +53,6 @@ a {
     margin-left:140px;
 }
 
-header {
-    white-space: nowrap;
-}
-
 .navigation a:hover {
     background-color:#C2E078;
     color:white;
