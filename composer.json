@@ -36,7 +36,8 @@
         "excelwebzone/recaptcha-bundle": "dev-master",
         "samj/doctrine-sluggable-bundle": "dev-master",
         "kriswallsmith/Buzz": "dev-master",
-        "sensio/buzz-bundle": "dev-master"
+        "sensio/buzz-bundle": "dev-master",
+        "fkr/simplepie-bundle": "*"
     },
     "scripts": {
         "post-install-cmd": [

@@ -28,7 +28,9 @@ class FeedtypeAdmin extends Admin
                        'choice',
                        array('choices' => array(
                            'feedburner'=>'feedburner',
-                           'rss'=>'rss')
+                           'rss'=>'rss',
+                           'dpc'=>'dpc',
+                           'aws' => 'aws')
                        )
                    );
     }
