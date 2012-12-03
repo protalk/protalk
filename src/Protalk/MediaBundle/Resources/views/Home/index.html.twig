@@ -30,7 +30,7 @@
         <p>{{ media.getTruncatedDescription() }}</p>
         <footer>
             <p>
-                <span id="duration" class="metadata">{{ media.length }}</span> |
+                <span class="metadata duration">{{ media.length }}</span> |
 
                 <img src="{{ asset('images/binoculars.png') }}" alt="Binoculars Image" />
 
@@ -41,7 +41,7 @@
                         {{ media.visits }} views
                     {% endif %}
                 </span> |
-                
+
                 <span class="metadata">Rating: {% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span>
            </p>
         </footer>
@@ -75,7 +75,7 @@
 
                         <footer>
                             <p>
-                               <span id="duration" class="metadata">{{ media.length }}</span> |
+                               <span class="metadata duration">{{ media.length }}</span> |
                                <img src="{{ asset('images/binoculars.png') }}" alt="Binoculars Image"/>
                                <span class="metadata">
                                    {% if media.visits == 1 %}
@@ -107,7 +107,7 @@
                         </header>
 
                         <footer>
-                            <span id="duration" class="metadata">{{ media.length }}</span> |
+                            <span class="metadata duration">{{ media.length }}</span> |
                             <span class="metadata">{% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span>
                         </footer>
                     </div>
