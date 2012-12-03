@@ -72,6 +72,10 @@ header {
     font-size:16px;
 }
 
+#rated {
+    font-family: "Helvetica Neue", "Helvetica", sans-serif;
+}
+
 .blueStrip {
     background-color:#38526d;
     height:183px;
