@@ -23,22 +23,51 @@ class MediaRepository extends EntityRepository
 {
     /**
      * Query database for a fixed number of media records ordered by
-     * a specific field
+     * one or more specific fields.
+     * 
+     * If $sort and $order are strings, the resultset will be ordered by $sort
+     * in the order set in $order. If $sort is an array and $order is a string,
+     * the resultset will be ordered by the fields named in $sort in the order
+     * set in $order. If $sort and $order are arrays, each array element of
+     * $order is treated as the sort order of the field in $sort with the same
+     * index. In the last case, $sort and $order must be the same size. 
      *
-     * @param string $orderField
-     * @param int    $page
-     * @param int    $max
-     * @param string $order
+     * @param string|array $sort
+     * @param int          $page
+     * @param int          $max
+     * @param string|array $order
      *
      * @return array Array with total and results
+     * @throws \Exception If the sizes of $sort and $order do not match
      */
     public function getMediaOrderedBy($sort, $page, $max, $order = 'DESC')
     {
+        // Sort out the different cases of array parameters this method takes
+        if (is_array($sort) && is_array($order)) {
+            if (count($sort) > count($order)) {
+                /* I don't really care about the size of $order as long as
+                 * it's bigger than $sort. */
+                throw new \Exception(
+                    "Sizes of sort and order parameters given to "
+                    . "MediaRepository#getMediaOrderedBy do not match."
+                );
+            }
+        } elseif (is_array($sort) && is_string($order)) {
+            $order = array_fill(0, count($sort), $order);
+        } else {
+            $sort = (array) $sort;
+            $order = (array) $order;
+        }
+
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select("m")
            ->from("ProtalkMediaBundle:Media", "m")
-           ->where("m.isPublished = 1")
-           ->orderBy("m." . $sort, $order);
+           ->where("m.isPublished = 1");
+
+        for ($i = 0; $i < count($sort); $i++) {
+            $qb->addOrderBy("m." . $sort[$i], $order[$i]);
+        }
+
         $results = $qb->getQuery()->getResult();
 
         return $this->getResultList($results, $page, $max);
