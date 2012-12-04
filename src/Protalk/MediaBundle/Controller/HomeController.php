@@ -31,7 +31,7 @@ class HomeController extends Controller
 
         $latestMedia = $repository->getMediaOrderedBy('date', 1, $numRows);
         $topViewedMedia = $repository->getMediaOrderedBy('visits', 1, $numRows + 2);
-        $topRatedMedia = $repository->getMediaOrderedBy('rating', 1, $numRows + 2);
+        $topRatedMedia = $repository->getMediaOrderedBy(array('rating', 'date'), 1, $numRows + 2);
 
         return array(
             'latestMedia' => $latestMedia['results'],
