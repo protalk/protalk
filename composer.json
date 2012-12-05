@@ -38,6 +38,9 @@
         "kriswallsmith/Buzz": "dev-master",
         "sensio/buzz-bundle": "dev-master"
     },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
     "scripts": {
         "post-install-cmd": [
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
