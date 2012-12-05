@@ -8,13 +8,16 @@ class YouTubeProvider implements ProviderInterface
     {
         $url_info = parse_url($url);
 
-        if (!isset($url_info['host']))
+        $has_host = isset($url_info['host']);
+        if (false === $has_host)
             return false;
 
-        if (strpos($url_info['host'], '.youtube.com') === false)
+        $is_youtube = strpos($url_info['host'], '.youtube.com');
+        if (false === $is_youtube)
             return false;
 
-        if ($this->getVideoId($url) === false)
+        $has_video_id = $this->getVideoId($url);
+        if (false === $has_video_id)
             return false;
 
         return true;
@@ -33,12 +36,12 @@ class YouTubeProvider implements ProviderInterface
     {
         $url_info = parse_url($url);
 
-        if (!isset($url_info['query']))
+        $has_query = isset($url_info['query']);
+        if (false === $has_query)
             return false;
 
         $params = explode('&', $url_info['query']);
-        foreach($params as $param)
-        {
+        foreach($params as $param) {
             list($key, $value) = explode('=', $param, 2);
             if ($key == 'v')
                 return $value;
