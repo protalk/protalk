@@ -17,4 +17,14 @@
         </service>
     </services>
     -->
+    <parameters>
+        <parameter key="protalk.media_type.manager.class">Protalk\MediaBundle\MediaType\Manager</parameter>
+    </parameters>
+    <services>
+        <service id="protalk.media_type.manager" class="%protalk.media_type.manager.class%" />
+
+        <service id="protalk.media_type.provider.youtube" class="Protalk\MediaBundle\MediaType\YouTubeProvider">
+            <tag name="protalk.media_type.provider" alias="youtube" />
+        </service>
+    </services>
 </container>
