@@ -32,7 +32,16 @@ class PageControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testGetPage()
+    public function testGetPageWithInvalidRequest()
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/page/madeUpPage');
+
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+    }
+
+    public function testGetPageWithValidRequest()
     {
         $client = static::createClient();
 
