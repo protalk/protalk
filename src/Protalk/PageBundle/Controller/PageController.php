@@ -12,6 +12,7 @@
 namespace Protalk\PageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
@@ -46,13 +47,14 @@ class PageController extends Controller
      * Retrieves page content text from database
      *
      * @param  string  $url
+     * @throws NotFoundHttpException()
      * @return boolean
      */
     protected function getPage($url)
     {
         $this->page = $this->getDoctrine()->getRepository('ProtalkPageBundle:Page')->findOneByUrl($url);
         if (!is_object($this->page)) {
-            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+            throw new NotFoundHttpException();
         }
 
         return true;
