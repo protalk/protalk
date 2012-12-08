@@ -21,6 +21,12 @@ interface ProviderInterface
 
     /**
      * @abstract
+     * @param $url string URL for resource
+     * @return mixed
+     */
+    public function thumb($url);
+    /**
+     * @abstract
      * @return string
      */
     public function getName();

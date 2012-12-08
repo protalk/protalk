@@ -28,7 +28,7 @@ class YouTubeProvider implements ProviderInterface
         $data = array(
             'video_id' => $this->getVideoId($url),
         );
-        return $twig->render('ProtalkMediaBundle:MediaType:YouTube.twig.html', $data);
+        return $twig->render('ProtalkMediaBundle:MediaType:youtube.twig.html', $data);
     }
 
     /**
@@ -56,5 +56,15 @@ class YouTubeProvider implements ProviderInterface
     public function getName()
     {
         return 'youtube';
+    }
+
+    /**
+     * @param $url string URL for resource
+     * @return mixed
+     */
+    public function thumb($url)
+    {
+        $id = $this->getVideoId($url);
+        return 'http://img.youtube.com/vi/'.$id.'/default.jpg';
     }
 }
