@@ -6,7 +6,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Reference;
 
-class MessageFilter implements CompilerPassInterface
+class MediaTypeProviderCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
@@ -16,8 +16,13 @@ class MessageFilter implements CompilerPassInterface
 
         $definition = $container->getDefinition('protalk.media_type.manager');
 
-        foreach ($container->findTaggedServiceIds('protalk.media_type.provider') as $id => $attributes) {
-            $definition->addMethodCall('addProvider', array(new Reference($id), $attributes["alias"]));
+        foreach ($container->findTaggedServiceIds('protalk.media_type.provider') as $taggedServices) {
+            foreach ($taggedServices as $id => $attributes) {
+                    $definition->addMethodCall(
+                        'addProvider',
+                        array(new Reference($id), $attributes["alias"])
+                    );
+            }
         }
     }
 }

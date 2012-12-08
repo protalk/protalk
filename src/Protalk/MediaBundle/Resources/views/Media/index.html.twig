@@ -22,7 +22,6 @@
 {% endblock %}
 
 {% block body %}
-
     <section>
         <div id="mediaPlayerSection">
             <section>
@@ -36,6 +35,8 @@
                     	<embed id="audioPlayer" type="application/x-shockwave-flash" src="/audio-player.swf" quality="best" flashvars="audioUrl={{ media.content }}" width="450" height="27"></embed>
                     {% elseif media.mediatype.type == "video" %}
                         {{ media.content|raw }}
+                    {% elseif media.mediatype.type == 'autodetected' %}
+                        {{ media.content|raw|render_media_type }}
                     {% endif %}
                     <p id="source">sourced from <a href="{{ media.hostUrl }}">{{ media.hostName }}</a></p>
                 </article>

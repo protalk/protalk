@@ -53,8 +53,9 @@ class MediatypeAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $typeChoices = array(
+            'autodetect' => 'autodetect',
             'video'=>'video',
-            'audio'=>'audio'
+            'audio'=>'audio',
         );
 
         $formMapper->add('name', null, array('help' => 'This is the name of the media type'))
