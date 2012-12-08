@@ -32,4 +32,17 @@ class YouTubeProviderTest extends \PHPUnit_Framework_TestCase
             array('http://www.youtube.com/watch?v=123', true),
         );
     }
+
+    public function testRenderer()
+    {
+        $url = 'http://www.example.com';
+        $expected = '<html>test</html>';
+
+        $twig = $this->getMock('Twig_Environment');
+        $twig->expects($this->once())
+            ->method('render')
+            ->will($this->returnValue($expected));
+
+        $this->provider->render($url, $twig);
+    }
 }

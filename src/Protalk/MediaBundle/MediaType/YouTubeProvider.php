@@ -23,13 +23,16 @@ class YouTubeProvider implements ProviderInterface
         return true;
     }
 
-    public function render($url)
+    public function render($url, \Twig_Environment $twig)
     {
-        // TODO: Implement render() method.
+        $data = array(
+            'video_id' => $this->getVideoId($url),
+        );
+        return $twig->render('ProtalkMediaBundle:MediaType:YouTube.twig.html', $data);
     }
 
     /**
-     * @param $url YouTube URL
+     * @param $url string YouTube URL
      * @return string|bool YouTube ID, or false if not found
      */
     private function getVideoId($url)

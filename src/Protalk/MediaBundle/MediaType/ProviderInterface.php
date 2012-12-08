@@ -6,17 +6,18 @@ interface ProviderInterface
 {
     /**
      * @abstract
-     * @param $url URL for resource
+     * @param $url string URL for resource
      * @return bool
      */
     public function supports($url);
 
     /**
      * @abstract
-     * @param $url URL for resource
+     * @param $url string URL for resource
+     * @param \Twig_Environment $twig
      * @return string
      */
-    public function render($url);
+    public function render($url, \Twig_Environment $twig);
 
     /**
      * @abstract
