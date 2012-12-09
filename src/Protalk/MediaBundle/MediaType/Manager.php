@@ -17,7 +17,7 @@ class Manager extends \Twig_Extension
         $this->providers = array();
     }
 
-    public function addProvider($provider, $alias)
+    public function addProvider(ProviderInterface $provider, $alias)
     {
         $this->providers[$alias] = $provider;
     }

@@ -16,12 +16,12 @@ class MediaTypeProviderCompilerPass implements CompilerPassInterface
 
         $definition = $container->getDefinition('protalk.media_type.manager');
 
-        foreach ($container->findTaggedServiceIds('protalk.media_type.provider') as $taggedServices) {
-            foreach ($taggedServices as $id => $attributes) {
-                    $definition->addMethodCall(
-                        'addProvider',
-                        array(new Reference($id), $attributes["alias"])
-                    );
+        foreach ($container->findTaggedServiceIds('protalk.media_type.provider') as $id => $taggedServices) {
+            foreach ($taggedServices as $attributes) {
+                $definition->addMethodCall(
+                    'addProvider',
+                    array(new Reference($id), $attributes["alias"])
+                );
             }
         }
     }
