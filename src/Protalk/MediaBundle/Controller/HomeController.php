@@ -54,7 +54,7 @@ class HomeController extends Controller
         foreach ($items['results'] as $item) {
             $templateItems[] = $item;
         }
-        //var_dump($templateItems[0]->title); die();
+
         return array('items' => $templateItems, 'date' => date('c'));
     }
 }
