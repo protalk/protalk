@@ -27,7 +27,7 @@
             <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.getTruncatedTitle(34) }}</a></h2>
             <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.getTruncatedSpeaker(20) }}</a></span></p>
         </header>
-        <p>{{ media.getTruncatedDescription() }}</p>
+        <p>{{ media.description|truncate(75) }}</p>
         <footer>
             <p>
                 <img src="{{ asset('images/binoculars.png') }}" alt="Binoculars Image" />
