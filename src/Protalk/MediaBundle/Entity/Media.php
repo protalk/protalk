@@ -441,21 +441,6 @@ class Media implements SluggableInterface
         return $this->title;
     }
 
-    /**
-     * Get shorter version of media title
-     *
-     * @param int $length Maximum allowed length of media title
-     * @return string
-     */
-    public function getTruncatedTitle($length = 25)
-    {
-        if (strlen($this->title) > $length ) {
-            return substr($this->title, 0, $length) . '...';
-        }
-
-        return $this->title;
-    }
-
     /*
      * Get slug
      *
