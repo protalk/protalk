@@ -1,6 +1,53 @@
 {
-    "hash": "8d3e4a334708ab323c17a8b91de629a8",
+    "hash": "ec804f464c1d0004053a2ec39b6d3497",
     "packages": [
+        {
+            "name": "dms/twig-extension-bundle",
+            "version": "v1.0.1",
+            "target-dir": "DMS/Bundle/TwigExtensionBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rdohms/DMSTwigExtensionBundle",
+                "reference": "v1.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/rdohms/DMSTwigExtensionBundle/archive/v1.0.1.zip",
+                "reference": "v1.0.1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "twig/extensions": "1.*"
+            },
+            "time": "2012-11-29 23:01:58",
+            "type": "symfony-bundle",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "DMS\\Bundle\\TwigExtensionBundle": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rafael Dohms",
+                    "homepage": "http://doh.ms"
+                }
+            ],
+            "description": "DMS Twig Extension Bundle, leverages Fabien Potencier's extra twig extensions for your website.",
+            "homepage": "https://github.com/rdohms/DMSTwigExtensionsBundle",
+            "keywords": [
+                "symfony",
+                "twig",
+                "bundle",
+                "dms",
+                "twig extension",
+                "fabpot"
+            ]
+        },
         {
             "name": "doctrine/common",
             "version": "2.3.x-dev",
@@ -837,7 +884,6 @@
             "suggest": {
                 "ext-curl": "*"
             },
-            "time": "1345206213",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -860,7 +906,8 @@
             "keywords": [
                 "curl",
                 "http client"
-            ]
+            ],
+            "time": "1345206213"
         },
         {
             "name": "monolog/monolog",
@@ -980,7 +1027,6 @@
                 "php": ">=5.3.2",
                 "kriswallsmith/buzz": ">= 0.6"
             },
-            "time": "1338188924",
             "type": "symfony-bundle",
             "installation-source": "source",
             "autoload": {
@@ -1002,7 +1048,8 @@
             "keywords": [
                 "http client",
                 "buzz"
-            ]
+            ],
+            "time": "1338188924"
         },
         {
             "name": "sensio/distribution-bundle",
