@@ -28,5 +28,8 @@
         <service id="protalk.media_type.provider.youtube" class="Protalk\MediaBundle\MediaType\YouTubeProvider">
             <tag name="protalk.media_type.provider" alias="youtube" />
         </service>
+        <service id="protalk.media_type.provider.vimeo" class="Protalk\MediaBundle\MediaType\VimeoProvider">
+            <tag name="protalk.media_type.provider" alias="vimeo" />
+        </service>
     </services>
 </container>
