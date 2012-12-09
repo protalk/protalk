@@ -282,24 +282,6 @@ class Media implements SluggableInterface
     }
 
     /**
-     * Get truncated description
-     *
-     * @param  integer $length Maximum allowed length of description
-     * @return string
-     */
-    public function getTruncatedDescription($length = 75)
-    {
-
-        $description = $this->getDescription();
-
-        if (strlen($description) > $length ) {
-            return substr($description, 0, $length) . '...';
-        }
-
-        return $description;
-    }
-
-    /**
      * Set length
      *
      * @param string $length
