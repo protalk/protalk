@@ -505,6 +505,23 @@ class Media implements SluggableInterface
     }
 
     /**
+     * Get one speaker's truncated name
+     *
+     * @param integer $length Maximum allowed length of speaker name
+     * @return string
+     */
+    public function getTruncatedSpeaker($length = 16)
+    {
+        $speaker = $this->getOneSpeaker();
+
+        if (strlen($speaker) > $length ) {
+            return substr($speaker, 0, $length) . '...';
+        }
+
+        return $speaker;
+    }
+
+    /**
      * Get one speaker's name
      *
      * @return string
