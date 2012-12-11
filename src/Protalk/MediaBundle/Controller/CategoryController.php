@@ -16,6 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class CategoryController extends Controller
 {
+
     /**
      * @Template()
      */
