@@ -209,6 +209,8 @@ class Media implements SluggableInterface
         $this->tags = new ArrayCollection();
         $this->ratings = new ArrayCollection();
         $this->creationDate = new \DateTime();
+        $this->rating = 0;
+        $this->visits = 0;
     }
 
     /**
