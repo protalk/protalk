@@ -24,10 +24,10 @@
     </div>
     <div class="mediaTextLarge">
         <header>
-            <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.getTruncatedTitle(34) }}</a></h2>
-            <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.getTruncatedSpeaker(20) }}</a></span></p>
+            <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.title|truncate(34) }}</a></h2>
+            <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.getOneSpeaker()|truncate(20) }}</a></span></p>
         </header>
-        <p>{{ media.getTruncatedDescription() }}</p>
+        <p>{{ media.description|truncate(75) }}</p>
         <footer>
             <p>
                 <span class="metadata duration">{{ media.length }}</span> |
@@ -69,8 +69,8 @@
                     </div>
                     <div class="tabMediaText">
                         <header>
-                            <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.getTruncatedTitle(23) }}</a></h2>
-                            <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.date is empty ? media.getTruncatedSpeaker(25) : media.getTruncatedSpeaker() }}</a></span></p>
+                            <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.title|truncate(23) }}</a></h2>
+                            <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.date is empty ? media.getOneSpeaker()|truncate(25) : media.getOneSpeaker()|truncate(16) }}</a></span></p>
                         </header>
 
                         <footer>
@@ -102,8 +102,8 @@
                     </div>
                     <div class="tabMediaText">
                         <header>
-                            <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.getTruncatedTitle(23) }}</a></h2>
-                            <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.date is empty ? media.getTruncatedSpeaker(20) : media.getTruncatedSpeaker() }}</a></span></p>
+                            <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.title|truncate(23) }}</a></h2>
+                            <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.date is empty ? media.getOneSpeaker()|truncate(25) : media.getOneSpeaker()|truncate(16) }}</a></span></p>
                         </header>
 
                         <footer>
