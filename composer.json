@@ -36,7 +36,7 @@
         "excelwebzone/recaptcha-bundle": "dev-master",
         "samj/doctrine-sluggable-bundle": "dev-master",
         "sonata-project/news-bundle": "dev-master",
-        "kriswallsmith/Buzz": "dev-master",
+        "kriswallsmith/Buzz": ">=0.7",
         "sensio/buzz-bundle": "dev-master",
         "dms/twig-extension-bundle": "1.*"
     },
