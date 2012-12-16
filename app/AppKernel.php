@@ -41,6 +41,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
             new SamJ\DoctrineSluggableBundle\SamJDoctrineSluggableBundle(),
+            new DMS\Bundle\TwigExtensionBundle\DMSTwigExtensionBundle(),
 
             new Protalk\PageBundle\ProtalkPageBundle(),
             new Protalk\MediaBundle\ProtalkMediaBundle(),

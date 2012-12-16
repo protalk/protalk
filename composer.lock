@@ -58,6 +58,53 @@
             "homepage": "http://github.com/dflydev/dflydev-markdown",
             "keywords": [
                 "markdown"
+    "hash": "ec804f464c1d0004053a2ec39b6d3497",
+    "packages": [
+        {
+            "name": "dms/twig-extension-bundle",
+            "version": "v1.0.1",
+            "target-dir": "DMS/Bundle/TwigExtensionBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rdohms/DMSTwigExtensionBundle",
+                "reference": "v1.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/rdohms/DMSTwigExtensionBundle/archive/v1.0.1.zip",
+                "reference": "v1.0.1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "twig/extensions": "1.*"
+            },
+            "time": "2012-11-29 23:01:58",
+            "type": "symfony-bundle",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "DMS\\Bundle\\TwigExtensionBundle": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rafael Dohms",
+                    "homepage": "http://doh.ms"
+                }
+            ],
+            "description": "DMS Twig Extension Bundle, leverages Fabien Potencier's extra twig extensions for your website.",
+            "homepage": "https://github.com/rdohms/DMSTwigExtensionsBundle",
+            "keywords": [
+                "symfony",
+                "twig",
+                "bundle",
+                "dms",
+                "twig extension",
+                "fabpot"
             ]
         },
         {
@@ -1118,7 +1165,6 @@
             "suggest": {
                 "ext-curl": "*"
             },
-            "time": "2012-06-25 12:01:38",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -1141,7 +1187,8 @@
             "keywords": [
                 "curl",
                 "http client"
-            ]
+            ],
+            "time": "1345206213"
         },
         {
             "name": "monolog/monolog",

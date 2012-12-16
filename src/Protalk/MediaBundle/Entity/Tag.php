@@ -12,6 +12,7 @@
 namespace Protalk\MediaBundle\Entity;
 
 use SamJ\DoctrineSluggableBundle\Slugger;
+use SamJ\DoctrineSluggableBundle\SluggableInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -24,7 +25,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity("name")
  */
-class Tag
+class Tag implements SluggableInterface
 {
     /**
      * @var integer $id
@@ -49,7 +50,7 @@ class Tag
      */
     private $medias;
 
-     /**
+    /**
      * @var string $slug
      *
      * @ORM\Column(type="string")
@@ -82,7 +83,6 @@ class Tag
     public function setName($name)
     {
         $this->name = $name;
-        $this->setSlug($name);
     }
 
     /**
@@ -125,7 +125,7 @@ class Tag
         return $this->medias;
     }
 
-    /*
+    /**
      * Set slug
      *
      * @param string $slug
@@ -136,25 +136,23 @@ class Tag
         $this->slug = $slug;
     }
 
-    /*
-     * Maps to getSlugFields()
-     *
+    /**
      * Exists because the backend makes a call to getSlug()
      * when creating/updating tags.
      */
     public function getSlug()
     {
-        return $this->getSlugFields();
+        return $this->slug;
     }
 
-    /*
+    /**
      * Get slug fields
      *
      * @return string
      */
     public function getSlugFields()
     {
-        return $this->slug;
+        return $this->getName();
     }
 
     /**

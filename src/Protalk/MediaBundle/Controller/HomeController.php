@@ -19,7 +19,7 @@ class HomeController extends Controller
 {
 
     /**
-     * @Route("/home")
+     * @Route("/", name="_home")
      * @Template()
      */
     public function indexAction()
@@ -31,7 +31,7 @@ class HomeController extends Controller
 
         $latestMedia = $repository->getMediaOrderedBy('date', 1, $numRows);
         $topViewedMedia = $repository->getMediaOrderedBy('visits', 1, $numRows + 2);
-        $topRatedMedia = $repository->getMediaOrderedBy('rating', 1, $numRows + 2);
+        $topRatedMedia = $repository->getMediaOrderedBy(array('rating', 'date'), 1, $numRows + 2);
 
         return array(
             'latestMedia' => $latestMedia['results'],
@@ -41,7 +41,7 @@ class HomeController extends Controller
     }
 
     /**
-    * @Route("/feed")
+    * @Route("/feed", name="rss")
     * @Template()
     */
     public function rssAction()
@@ -54,7 +54,7 @@ class HomeController extends Controller
         foreach ($items['results'] as $item) {
             $templateItems[] = $item;
         }
-        //var_dump($templateItems[0]->title); die();
+
         return array('items' => $templateItems, 'date' => date('c'));
     }
 }

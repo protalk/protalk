@@ -15,7 +15,7 @@
 
         <div class="pinterest"><a href="http://pinterest.com/pin/create/button/?url={{ url('media_show', {'slug': media.slug}) }}&description={{ media.description }}" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a></div>
 
-        <div class="twitter"><a href="https://twitter.com/share" class="twitter-share-button" data-text="I just enjoyed '{{media.getTruncatedTitle(60)}}'" data-via="pro_talk" data-hashtags="ProTalk">Tweet</a></div>
+        <div class="twitter"><a href="https://twitter.com/share" class="twitter-share-button" data-text="I just enjoyed '{{media.title|truncate(60)}}'" data-via="pro_talk" data-hashtags="ProTalk">Tweet</a></div>
 
         <div id="fb-root"></div><div class="fb-like" data-href="{{ url('media_show', {'slug': media.slug}) }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
 
