@@ -38,6 +38,9 @@ class VimeoProvider implements ProviderInterface
     }
 
     /**
+     * Implemented via
+     * http://darcyclarke.me/development/get-image-for-youtube-or-vimeo-videos-from-url/
+     *
      * @param $url string URL for resource
      * @return mixed
      */
