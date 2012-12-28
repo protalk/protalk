@@ -68,6 +68,8 @@ class MediaRepository extends EntityRepository
             $qb->addOrderBy("m." . $sort[$i], $order[$i]);
         }
 
+        $qb->addOrderBy('m.date', 'DESC');
+
         $query = $qb->getQuery();
         $query->setParameter("status", Media::STATUS_PUBLISHED);
 
@@ -103,15 +105,32 @@ class MediaRepository extends EntityRepository
      * Find media by search term
      *
      * @param string $search
-     * @param string $sort
+     * @param string|array $sort
      * @param int    $page
      * @param int    $max
-     * @param string $order
+     * @param string|array $order
      *
      * @return array Array with count and result
+     * @throws \Exception If the sizes of $sort and $order do not match
      */
     public function findMedia($search, $sort, $page, $max, $order)
     {
+        // Sort out the different cases of array parameters this method takes
+        if (is_array($sort) && is_array($order)) {
+            if (count($sort) > count($order)) {
+                /* I don't really care about the size of $order as long as
+                 * it's bigger than $sort. */
+                throw new \Exception(
+                    "Sizes of sort and order parameters given to MediaRepository#getMediaOrderedBy do not match."
+                );
+            }
+        } elseif (is_array($sort) && is_string($order)) {
+            $order = array_fill(0, count($sort), $order);
+        } else {
+            $sort = (array) $sort;
+            $order = (array) $order;
+        }
+
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select("m")->distinct(true)
            ->from("ProtalkMediaBundle:Media", "m")
@@ -137,6 +156,13 @@ class MediaRepository extends EntityRepository
                )
            )
             ->orderBy("m." . $sort, $order);;
+
+        for ($i = 0; $i < count($sort); $i++) {
+            $qb->addOrderBy("m." . $sort[$i], $order[$i]);
+        }
+
+        $qb->addOrderBy('m.date', 'DESC');
+
         $query = $qb->getQuery();
         $query->setParameter('search1', '%'.strtolower($search).'%')
               ->setParameter('search2', '%'.strtolower($search).'%')
