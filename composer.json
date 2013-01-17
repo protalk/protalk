@@ -37,7 +37,8 @@
         "samj/doctrine-sluggable-bundle": "dev-master",
         "kriswallsmith/Buzz": "dev-master",
         "sensio/buzz-bundle": "dev-master",
-        "dms/twig-extension-bundle": "1.*"
+        "dms/twig-extension-bundle": "1.*",
+        "fabpot/goutte": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*"
