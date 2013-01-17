@@ -2,7 +2,7 @@
 
 namespace Protalk\MediaBundle\MediaType;
 
-class YouTubeProvider implements ProviderInterface
+class YouTubeProvider implements ProviderWithImageInterface
 {
     public function supports($url)
     {

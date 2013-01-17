@@ -2,7 +2,7 @@
 
 namespace Protalk\MediaBundle\MediaType;
 
-class VimeoProvider implements ProviderInterface
+class VimeoProvider implements ProviderWithImageInterface
 {
 
     /**
