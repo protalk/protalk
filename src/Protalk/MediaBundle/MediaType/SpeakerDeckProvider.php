@@ -44,25 +44,11 @@ class SpeakerDeckProvider implements ProviderInterface
     }
 
     /**
-     * Implemented via
-     * http://darcyclarke.me/development/get-image-for-youtube-or-vimeo-videos-from-url/
-     *
-     * @param $url string URL for resource
-     * @return mixed
-     */
-    public function thumb($url)
-    {
-        $data = $this->getEmbedData($url);
-        $hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/".$video_id.".php"));
-        return $hash[0]["thumbnail_small"];
-    }
-
-    /**
      * @return string
      */
     public function getName()
     {
-        return 'vimeo';
+        return 'speakerdeck';
     }
 
     private function getEmbedData($url)
