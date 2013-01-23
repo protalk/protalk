@@ -40,7 +40,7 @@ class SpeakerDeckProvider implements ProviderInterface
     public function render($url, \Twig_Environment $twig)
     {
         $data = $this->getEmbedData($url);
-        return $twig->render('ProtalkMediaBundle:MediaType:speakerdeck.twig.html', $data);
+        return $twig->render('ProtalkMediaBundle:MediaType:speakerdeck.html.twig', $data);
     }
 
     /**

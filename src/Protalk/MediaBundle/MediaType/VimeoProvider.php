@@ -34,7 +34,7 @@ class VimeoProvider implements ProviderWithImageInterface
         $data = array(
             'video_id' => $this->getVideoId($url),
         );
-        return $twig->render('ProtalkMediaBundle:MediaType:vimeo.twig.html', $data);
+        return $twig->render('ProtalkMediaBundle:MediaType:vimeo.html.twig', $data);
     }
 
     /**

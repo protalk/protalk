@@ -28,7 +28,7 @@ class YouTubeProvider implements ProviderWithImageInterface
         $data = array(
             'video_id' => $this->getVideoId($url),
         );
-        return $twig->render('ProtalkMediaBundle:MediaType:youtube.twig.html', $data);
+        return $twig->render('ProtalkMediaBundle:MediaType:youtube.html.twig', $data);
     }
 
     /**

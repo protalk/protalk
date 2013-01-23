@@ -43,7 +43,7 @@ class SlideShareProvider implements ProviderWithImageInterface
             'embed_code' => $this->getEmbedCode($url)
         );
 
-        return $twig->render('ProtalkMediaBundle:MediaType:slideshare.twig.html', $data);
+        return $twig->render('ProtalkMediaBundle:MediaType:slideshare.html.twig', $data);
     }
 
     /**
