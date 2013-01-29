@@ -17,4 +17,19 @@
         </service>
     </services>
     -->
+    <parameters>
+        <parameter key="protalk.media_type.manager.class">Protalk\MediaBundle\MediaType\Manager</parameter>
+    </parameters>
+    <services>
+        <service id="protalk.media_type.manager" class="%protalk.media_type.manager.class%">
+            <tag name="twig.extension" />
+        </service>
+
+        <service id="protalk.media_type.provider.youtube" class="Protalk\MediaBundle\MediaType\YouTubeProvider">
+            <tag name="protalk.media_type.provider" alias="youtube" />
+        </service>
+        <service id="protalk.media_type.provider.vimeo" class="Protalk\MediaBundle\MediaType\VimeoProvider">
+            <tag name="protalk.media_type.provider" alias="vimeo" />
+        </service>
+    </services>
 </container>
