@@ -19,3 +19,18 @@ Each media type has 4 parts:
 4. A test (yes, you should submit a test! :D)
 
 
+Ideal Implementation
+--------------------
+
+I didn't want to be the guy who jumps in and starts changing everything, but if I had an ideal recommendation on how to
+implement this system, it would be as follows:
+
+Each media entry gets `video_url` and `slide_url` added to it. Possibly even `video_url_type` and `slide_url_type`
+so that the actual resolution could be cached as well.
+
+Then you use this system to render those urls.
+
+This would free up the 'content' section again for arbitrary content to be added.
+
+You could even use twig to render the 'content' field and replace `{{ video }}` and `{{ slides }}` with the output
+ of the media type processing of `video_url` and `slide_url` so you could do more complex structuring of the content.
