@@ -33,16 +33,6 @@ class Contribution
     private $id;
 
     /**
-     * @var text $category
-     *
-     * @ORM\Column(name="category", type="string", length=30)
-     * @Assert\NotBlank(
-     *      message = "Please select a category from the list:"
-     * )
-     */
-    private $category;
-
-    /**
      * @var text $name
      *
      * @ORM\Column(name="name", type="string", length=100)
@@ -80,16 +70,6 @@ class Contribution
     private $hostUrl;
 
     /**
-     * @var text $hostName
-     *
-     * @ORM\Column(name="hostName", type="string", length=100)
-     * @Assert\NotBlank(
-     *      message = "Please enter the name of the site where the media is hosted:"
-     * )
-     */
-    private $hostName;
-
-    /**
      * @var text $title
      *      *
      * @ORM\Column(name="title", type="string", length=255)
@@ -98,33 +78,6 @@ class Contribution
      * )
      */
     private $title;
-
-    /**
-     * @var float $slidesUrl
-     *
-     * @ORM\Column(name="slidesUrl", type="string", length=200, nullable=true)
-     */
-    private $slidesUrl;
-
-    /**
-     * @var integer $speaker
-     *
-     * @ORM\Column(name="speaker", type="string", length=100)
-     * @Assert\NotBlank(
-     *      message = "Please enter the speaker's name:"
-     * )
-     */
-    private $speaker;
-
-    /**
-     * @var text $description
-     *
-     * @ORM\Column(name="description", type="text")
-     * @Assert\NotBlank(
-     *      message = "Please enter a brief description of the media:"
-     * )
-     */
-    private $description;
 
     /**
      * @var string $tags
@@ -149,26 +102,6 @@ class Contribution
     }
 
     /**
-     * Set category_id
-     *
-     * @param integer $categoryId
-     */
-    public function setCategory($category)
-    {
-        $this->category = $category;
-    }
-
-    /**
-     * Get category_id
-     *
-     * @return integer
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
      * Set hostUrl
      *
      * @param string $hostUrl
@@ -186,86 +119,6 @@ class Contribution
     public function getHostUrl()
     {
         return $this->hostUrl;
-    }
-
-    /**
-     * Set hostName
-     *
-     * @param string $hostName
-     */
-    public function setHostName($hostName)
-    {
-        $this->hostName = $hostName;
-    }
-
-    /**
-     * Get hostName
-     *
-     * @return string
-     */
-    public function getHostName()
-    {
-        return $this->hostName;
-    }
-
-    /**
-     * Set slidesUrl
-     *
-     * @param string $slidesUrl
-     */
-    public function setSlidesUrl($slidesUrl)
-    {
-        $this->slidesUrl = $slidesUrl;
-    }
-
-    /**
-     * Get slidesUrl
-     *
-     * @return string
-     */
-    public function getSlidesUrl()
-    {
-        return $this->slidesUrl;
-    }
-
-    /**
-     * Set speaker
-     *
-     * @param string $speaker
-     */
-    public function setSpeaker($speaker)
-    {
-        $this->speaker = $speaker;
-    }
-
-    /**
-     * Get speaker
-     *
-     * @return string
-     */
-    public function getSpeaker()
-    {
-        return $this->speaker;
-    }
-
-    /**
-     * Set description
-     *
-     * @param text $description
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
-
-    /**
-     * Get description
-     *
-     * @return text
-     */
-    public function getDescription()
-    {
-        return $this->description;
     }
 
     /**
