@@ -5,7 +5,7 @@ php:
 
 before_script:
   - cp app/config/parameters.yml-dist app/config/parameters.yml
-  - composer install --prefer-source
+  - composer install --prefer-source --dev
   - pear install pear/PHP_CodeSniffer
   - phpenv rehash
 
