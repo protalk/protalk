@@ -49,6 +49,10 @@ class FeedAdmin extends Admin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('name')->add('feedtype')->add('url');
+        $listMapper->addIdentifier('name')
+            ->add('feedtype')
+            ->add('url')
+            ->add('lastImportedDate')
+            ->add('mediatype.name');
     }
 }
