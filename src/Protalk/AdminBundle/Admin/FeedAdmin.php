@@ -24,6 +24,7 @@ class FeedAdmin extends Admin
     {
         $formMapper->add('name')
                    ->add('feedtype')
+                   ->add('mediatype')
                    ->add('url')
                    ->add('automaticImport')
                    ->add('contact')
@@ -53,6 +54,6 @@ class FeedAdmin extends Admin
             ->add('feedtype')
             ->add('url')
             ->add('lastImportedDate')
-            ->add('mediatype.name');
+            ->add('mediatype');
     }
 }
