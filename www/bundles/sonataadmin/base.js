@@ -5,6 +5,7 @@ jQuery(document).ready(function() {
     Admin.add_filters(document);
     Admin.set_object_field_value(document);
     Admin.setup_collection_buttons(document);
+    Admin.setup_per_page_switcher(document);
 });
 
 var Admin = {
@@ -81,8 +82,8 @@ var Admin = {
      * @param subject
      */
     add_collapsed_toggle: function(subject) {
-        jQuery('fieldset.sonata-ba-fielset-collapsed').has('.error').addClass('sonata-ba-collapsed-fields-close');
-        jQuery('fieldset.sonata-ba-fielset-collapsed div.sonata-ba-collapsed-fields').not(':has(.error)').hide();
+        jQuery('fieldset.sonata-ba-fieldset-collapsed').has('.error').addClass('sonata-ba-collapsed-fields-close');
+        jQuery('fieldset.sonata-ba-fieldset-collapsed div.sonata-ba-collapsed-fields').not(':has(.error)').hide();
         jQuery('fieldset legend a.sonata-ba-collapsed', subject).live('click', function(event) {
             event.preventDefault();
 
@@ -158,14 +159,14 @@ var Admin = {
             var proto = container.attr('data-prototype');
             // Set field id
             var idRegexp = new RegExp(container.attr('id')+'___name__','g');
-            proto = proto.replace(idRegexp, container.attr('id')+'_'+container.children().length);
-            
+            proto = proto.replace(idRegexp, container.attr('id')+'_'+(container.children().length - 1));
+
             // Set field name
             var parts = container.attr('id').split('_');
             var nameRegexp = new RegExp(parts[parts.length-1]+'\\]\\[__name__','g');
-            proto = proto.replace(nameRegexp, parts[parts.length-1]+']['+container.children().length);
+            proto = proto.replace(nameRegexp, parts[parts.length-1]+']['+(container.children().length - 1));
             jQuery(proto).insertBefore(jQuery(this).parent());
-            
+
             jQuery(this).trigger('sonata-collection-item-added');
         });
 
@@ -173,8 +174,16 @@ var Admin = {
             Admin.stopEvent(event);
 
             jQuery(this).closest('.sonata-collection-row').remove();
-            
+
             jQuery(this).trigger('sonata-collection-item-deleted');
+        });
+    },
+
+    setup_per_page_switcher: function(subject) {
+        jQuery('select.per-page').change(function(event) {
+            jQuery('input[type=submit]').hide();
+
+            window.top.location.href=this.options[this.selectedIndex].value;
         });
     }
 }
