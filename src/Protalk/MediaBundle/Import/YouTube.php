@@ -9,13 +9,9 @@ use Doctrine\ORM\EntityManager;
 use SimplePie_Item;
 
 /**
- * Bliptv import class
- * 
- * This class handles feeds from Bliptv
- * 
- * @author Lineke Kerckhoffs-Willems
+ *
  */
-class Bliptv extends Base
+class YouTube extends Base
 {
     /**
      * Handle import
@@ -27,32 +23,26 @@ class Bliptv extends Base
      */
     public function handleImport(SimplePie_Item $item, Feed $feed, EntityManager $em)
     {
+        $data = $item->get_item_tags('http://search.yahoo.com/mrss/', 'group');
         $enclosures = $item->get_enclosures();
 
-        $videoId = $item->get_item_tags('http://blip.tv/dtd/blip/1.0', 'embedLookup');
-        $videoId = $videoId[0]['data'];
-
-        $contentTemplate = "<iframe src=\"http://blip.tv/play/".$videoId.".html?p=1\" width=\"532\" height=\"334\" frameborder=\"0\" allowfullscreen></iframe><embed type=\"application/x-shockwave-flash\" src=\"http://a.blip.tv/api.swf#".$videoId."\" style=\"display:none\"></embed>";
-
-        $itemUploaded = $item->get_item_tags('http://blip.tv/dtd/blip/1.0', 'datestamp');
-        $itemUploaded = new \DateTime($itemUploaded[0]['data']);
+        $schemaArray = $data[0]['child']['http://gdata.youtube.com/schemas/2007'];
+        $videoId = $schemaArray['videoid'][0]['data'];
+        $itemUploaded = new \DateTime($schemaArray['uploaded'][0]['data']);
 
         $itemIsSuitable = $this->checkSuitableForImport($em, $item, $itemUploaded, $feed->getLastImportedDate());
         if (!$itemIsSuitable) {
             return false;
         }
 
-        $duration = $item->get_item_tags('http://blip.tv/dtd/blip/1.0', 'runtime');
-        $duration = gmdate("H:i:s", $duration[0]['data']);
-
-        $description = $item->get_item_tags('http://blip.tv/dtd/blip/1.0', 'puredescription');
-        $description = $description[0]['data'];
+        $duration = gmdate("H:i:s", $enclosures[0]->get_duration());
+        $contentTemplate = "<iframe width=\"500\" height=\"315\" src=\"http://www.youtube.com/embed/".$videoId."\" frameborder=\"0\" allowfullscreen></iframe>";
 
         $importItem = new ImportItem();
 
         $importItem->title = $item->get_title();
         $importItem->date = new \DateTime($item->get_date());
-        $importItem->description = $description;
+        $importItem->description = $enclosures[0]->get_description();
         $importItem->length = $duration;
         $importItem->mediatype = $feed->getMediatype();
         $importItem->content = $contentTemplate;

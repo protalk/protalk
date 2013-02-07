@@ -6,10 +6,12 @@
 
     <parameters>
         <parameter key="media_content.bliptv">Protalk\MediaBundle\Import\Bliptv</parameter>
+        <parameter key="media_content.youtube">Protalk\MediaBundle\Import\YouTube</parameter>
     </parameters>
     
     <services>
         <service id="protalk_media.bliptv" class="%media_content.bliptv%"></service>
+        <service id="protalk_media.youtube" class="%media_content.youtube%"></service>
     </services>
 
 </container>
