@@ -12,6 +12,7 @@
 namespace Protalk\MediaBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Protalk\MediaBundle\Entity\Media;
 
 /**
  * CategoryRepository
@@ -34,12 +35,13 @@ class CategoryRepository extends EntityRepository
         $qb->select('c.slug', 'c.name', 'COUNT(m.id) as mediaCount');
         $qb->from('\Protalk\MediaBundle\Entity\Category', 'c');
         $qb->join('c.medias', 'm');
-        $qb->where('m.isPublished = 1');
+        $qb->where('m.status = :status');
         $qb->groupBy('c.slug');
         $qb->orderBy('mediaCount', 'DESC');
         $qb->setMaxResults($max);
 
         $query = $qb->getQuery();
+        $query->setParameter("status", Media::STATUS_PUBLISHED);
 
         return $query->execute();
     }
@@ -56,11 +58,12 @@ class CategoryRepository extends EntityRepository
         $qb->select('c.slug', 'c.name', 'COUNT(m.id) as mediaCount');
         $qb->from('\Protalk\MediaBundle\Entity\Category', 'c');
         $qb->join('c.medias', 'm');
-        $qb->where('m.isPublished = 1');
+        $qb->where('m.status = :status');
         $qb->groupBy('c.slug');
         $qb->orderBy('c.name', 'ASC');
 
         $query = $qb->getQuery();
+        $query->setParameter("status", Media::STATUS_PUBLISHED);
 
         return $query->execute();
     }
