@@ -223,6 +223,9 @@ class Media implements SluggableInterface
         $this->creationDate = new \DateTime();
 
         $this->isImported = false;
+        $this->rating = 0;
+        $this->visits = 0;
+
     }
 
     /**
@@ -293,24 +296,6 @@ class Media implements SluggableInterface
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Get truncated description
-     *
-     * @param  integer $length Maximum allowed length of description
-     * @return string
-     */
-    public function getTruncatedDescription($length = 75)
-    {
-
-        $description = $this->getDescription();
-
-        if (strlen($description) > $length ) {
-            return substr($description, 0, $length) . '...';
-        }
-
-        return $description;
     }
 
     /**
@@ -470,21 +455,6 @@ class Media implements SluggableInterface
      */
     public function getTitle()
     {
-        return $this->title;
-    }
-
-    /**
-     * Get shorter version of media title
-     *
-     * @param int $length Maximum allowed length of media title
-     * @return string
-     */
-    public function getTruncatedTitle($length = 25)
-    {
-        if (strlen($this->title) > $length ) {
-            return substr($this->title, 0, $length) . '...';
-        }
-
         return $this->title;
     }
 
@@ -786,10 +756,10 @@ class Media implements SluggableInterface
      */
     public function displayThumbnail()
     {
-        if ($this->getMediatype()->getType() != 'video') {
+        if (strpos($this->getMediatype()->getType(), 'podcast') !== false) {
             return "/images/thumbnails/podcast_icon.png";
         } elseif (!$this->thumbnail) {
-            return "/images/thumbnails/coming_soon.png";
+            return "/images/thumbnails/video_icon.png";
         } else {
             return $this->thumbnail;
         }

@@ -155,4 +155,21 @@ class MediaAdmin extends Admin
 
         return $actions;
     }
+
+    public function supportsPreviewMode()
+    {
+        return true;
+    }
+
+    public function getTemplate($name)
+    {
+        switch ($name) {
+            case 'preview':
+                return 'ProtalkMediaBundle:Media:preview.html.twig';
+                break;
+            default:
+                return parent::getTemplate($name);
+                break;
+        }
+    }
 }

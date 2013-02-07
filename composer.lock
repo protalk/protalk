@@ -1,6 +1,56 @@
 {
-    "hash": "068a6e0110a5d5205dece619134aff93",
+    "hash": "e6fff4f799829398a5dd45a0d329752a",
     "packages": [
+        {
+            "name": "dms/twig-extension-bundle",
+            "version": "v1.1.1",
+            "target-dir": "DMS/Bundle/TwigExtensionBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rdohms/DMSTwigExtensionBundle",
+                "reference": "v1.1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rdohms/DMSTwigExtensionBundle/zipball/v1.1.1",
+                "reference": "v1.1.1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "twig/extensions": "1.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "time": "2013-01-30 17:18:23",
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "DMS\\Bundle\\TwigExtensionBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rafael Dohms",
+                    "homepage": "http://doh.ms"
+                }
+            ],
+            "description": "DMS Twig Extension Bundle, leverages Fabien Potencier's extra twig extensions for your website.",
+            "homepage": "https://github.com/rdohms/DMSTwigExtensionsBundle",
+            "keywords": [
+                "symfony",
+                "twig",
+                "bundle",
+                "dms",
+                "twig extension",
+                "fabpot"
+            ]
+        },
         {
             "name": "doctrine/common",
             "version": "2.3.x-dev",
@@ -366,12 +416,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle",
-                "reference": "1a6ca83046d01e09d2bd524a50fe29a88e5ed49a"
+                "reference": "df0cab6237206a53030b6970a5b5580d4b8fa483"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/FriendsOfSymfony/FOSUserBundle/archive/1a6ca83046d01e09d2bd524a50fe29a88e5ed49a.zip",
-                "reference": "1a6ca83046d01e09d2bd524a50fe29a88e5ed49a",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/df0cab6237206a53030b6970a5b5580d4b8fa483",
+                "reference": "df0cab6237206a53030b6970a5b5580d4b8fa483",
                 "shasum": ""
             },
             "require": {
@@ -392,7 +442,7 @@
                 "doctrine/doctrine-bundle": "*",
                 "doctrine/mongodb-odm-bundle": "*"
             },
-            "time": "2013-01-25 16:25:45",
+            "time": "2013-01-31 20:47:01",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -797,12 +847,12 @@
             "source": {
                 "type": "git",
                 "url": "http://github.com/kriswallsmith/assetic.git",
-                "reference": "5591252faa1c7f3299660daebffd63dee2746b7e"
+                "reference": "faf3b245977d8bc06c9da4710dbcad37756993a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/kriswallsmith/assetic/archive/5591252faa1c7f3299660daebffd63dee2746b7e.zip",
-                "reference": "5591252faa1c7f3299660daebffd63dee2746b7e",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/faf3b245977d8bc06c9da4710dbcad37756993a9",
+                "reference": "faf3b245977d8bc06c9da4710dbcad37756993a9",
                 "shasum": ""
             },
             "require": {
@@ -827,7 +877,7 @@
                 "ptachoire/cssembed": "Assetic provides the integration with phpcssembed to embed data uris",
                 "leafo/scssphp-compass": "Assetic provides the integration with the SCSS compass plugin"
             },
-            "time": "2013-01-12 22:20:24",
+            "time": "2013-01-31 17:45:10",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -867,12 +917,12 @@
             "source": {
                 "type": "git",
                 "url": "http://github.com/kriswallsmith/Buzz.git",
-                "reference": "8ff1d1910b9e04ac571bcf6d639559e065093136"
+                "reference": "v0.8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/kriswallsmith/Buzz/archive/8ff1d1910b9e04ac571bcf6d639559e065093136.zip",
-                "reference": "8ff1d1910b9e04ac571bcf6d639559e065093136",
+                "url": "https://api.github.com/repos/kriswallsmith/Buzz/zipball/v0.8",
+                "reference": "v0.8",
                 "shasum": ""
             },
             "require": {
@@ -1054,18 +1104,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensio/SensioDistributionBundle",
-                "reference": "v2.1.7"
+                "reference": "615f76309dae8c45c72b69578b034713c09767d1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/sensio/SensioDistributionBundle/archive/v2.1.7.zip",
-                "reference": "v2.1.7",
+                "url": "https://api.github.com/repos/sensio/SensioDistributionBundle/zipball/615f76309dae8c45c72b69578b034713c09767d1",
+                "reference": "615f76309dae8c45c72b69578b034713c09767d1",
                 "shasum": ""
             },
             "require": {
                 "symfony/framework-bundle": "2.1.*"
             },
-            "time": "2013-01-04 17:11:22",
+            "time": "2013-02-04 19:54:42",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1249,12 +1299,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "5316b95ec8208a6f2a47e79b8c22f9ad02390f2d"
+                "reference": "dc77e3b3b6fa4603e10e7c391a4641d72d352977"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/sonata-project/SonataAdminBundle/archive/5316b95ec8208a6f2a47e79b8c22f9ad02390f2d.zip",
-                "reference": "5316b95ec8208a6f2a47e79b8c22f9ad02390f2d",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/dc77e3b3b6fa4603e10e7c391a4641d72d352977",
+                "reference": "dc77e3b3b6fa4603e10e7c391a4641d72d352977",
                 "shasum": ""
             },
             "require": {
@@ -1279,7 +1329,7 @@
                 "sonata-project/doctrine-orm-admin-bundle": "dev-master",
                 "sonata-project/intl-bundle": "dev-master"
             },
-            "time": "2013-01-26 00:57:14",
+            "time": "2013-02-06 15:33:51",
             "type": "symfony-bundle",
             "autoload": {
                 "psr-0": {
@@ -1731,12 +1781,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataNotificationBundle",
-                "reference": "2ecec0ffc2568e747f81d8b44950971ad7d22c56"
+                "reference": "334635f7c9e7d1015e83096d93e699a020ee442d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/sonata-project/SonataNotificationBundle/archive/2ecec0ffc2568e747f81d8b44950971ad7d22c56.zip",
-                "reference": "2ecec0ffc2568e747f81d8b44950971ad7d22c56",
+                "url": "https://api.github.com/repos/sonata-project/SonataNotificationBundle/zipball/334635f7c9e7d1015e83096d93e699a020ee442d",
+                "reference": "334635f7c9e7d1015e83096d93e699a020ee442d",
                 "shasum": ""
             },
             "require": {
@@ -1752,7 +1802,7 @@
                 "guzzle/guzzle": "*",
                 "liip/monitor": "*"
             },
-            "time": "2013-01-07 17:23:04",
+            "time": "2013-02-04 14:03:34",
             "type": "symfony-bundle",
             "autoload": {
                 "psr-0": {
@@ -1789,12 +1839,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle",
-                "reference": "7cf895f69ff567402e5bf45aa7c55420152f3504"
+                "reference": "01a13acd8fb6cfb152cbdb20a24a585e5ef49260"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/sonata-project/SonataUserBundle/archive/7cf895f69ff567402e5bf45aa7c55420152f3504.zip",
-                "reference": "7cf895f69ff567402e5bf45aa7c55420152f3504",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/01a13acd8fb6cfb152cbdb20a24a585e5ef49260",
+                "reference": "01a13acd8fb6cfb152cbdb20a24a585e5ef49260",
                 "shasum": ""
             },
             "require": {
@@ -1811,7 +1861,7 @@
             "suggest": {
                 "sonata-project/doctrine-orm-admin-bundle": "dev-master"
             },
-            "time": "2013-01-27 16:25:32",
+            "time": "2013-02-04 14:06:40",
             "type": "symfony-bundle",
             "autoload": {
                 "psr-0": {
@@ -1897,12 +1947,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/AsseticBundle",
-                "reference": "f65ce4736fa79c60fdfc9805abb38aaaef728e95"
+                "reference": "v2.1.1-beta1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/AsseticBundle/archive/f65ce4736fa79c60fdfc9805abb38aaaef728e95.zip",
-                "reference": "f65ce4736fa79c60fdfc9805abb38aaaef728e95",
+                "url": "https://api.github.com/repos/symfony/AsseticBundle/zipball/v2.1.1-beta1",
+                "reference": "v2.1.1-beta1",
                 "shasum": ""
             },
             "require": {
@@ -1922,7 +1972,7 @@
             "suggest": {
                 "symfony/twig-bundle": ">=2.1.0,<2.3-dev"
             },
-            "time": "2013-01-26 01:02:24",
+            "time": "2013-01-31 17:56:17",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -2073,12 +2123,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/symfony/symfony.git",
-                "reference": "6f7194802359559a6b37e1d2fe940ac902cf26cf"
+                "reference": "e50d33308a910db54158ea438282f09621769e74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/symfony/symfony/archive/6f7194802359559a6b37e1d2fe940ac902cf26cf.zip",
-                "reference": "6f7194802359559a6b37e1d2fe940ac902cf26cf",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/e50d33308a910db54158ea438282f09621769e74",
+                "reference": "e50d33308a910db54158ea438282f09621769e74",
                 "shasum": ""
             },
             "require": {
@@ -2127,7 +2177,7 @@
                 "propel/propel1": "dev-master",
                 "monolog/monolog": ">=1.0,<1.3-dev"
             },
-            "time": "2013-01-27 16:12:43",
+            "time": "2013-02-07 11:58:33",
             "type": "library",
             "autoload": {
                 "psr-0": {
@@ -2208,18 +2258,18 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/fabpot/Twig.git",
-                "reference": "eaadcca54b888db779a355e449a16dd8c7760e11"
+                "reference": "c6445fb5cd6823f7bd65108a717064957b6eafd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/fabpot/Twig/archive/eaadcca54b888db779a355e449a16dd8c7760e11.zip",
-                "reference": "eaadcca54b888db779a355e449a16dd8c7760e11",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/c6445fb5cd6823f7bd65108a717064957b6eafd5",
+                "reference": "c6445fb5cd6823f7bd65108a717064957b6eafd5",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
             },
-            "time": "2013-01-27 16:32:04",
+            "time": "2013-02-01 09:44:45",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2257,18 +2307,18 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/videlalvaro/php-amqplib.git",
-                "reference": "v2.0.1"
+                "reference": "66286441c1dfca65e3ce2dff6ff3d5706fe1c228"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/videlalvaro/php-amqplib/archive/v2.0.1.zip",
-                "reference": "v2.0.1",
+                "url": "https://api.github.com/repos/videlalvaro/php-amqplib/zipball/66286441c1dfca65e3ce2dff6ff3d5706fe1c228",
+                "reference": "66286441c1dfca65e3ce2dff6ff3d5706fe1c228",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2013-01-27 13:16:40",
+            "time": "2013-02-01 19:27:41",
             "type": "library",
             "autoload": {
                 "psr-0": {
@@ -2313,6 +2363,8 @@
         "excelwebzone/recaptcha-bundle": 20,
         "samj/doctrine-sluggable-bundle": 20,
         "kriswallsmith/buzz": 20,
-        "sensio/buzz-bundle": 20
+        "sensio/buzz-bundle": 20,
+        "doctrine/doctrine-fixtures-bundle": 20,
+        "liip/functional-test-bundle": 20
     }
 }

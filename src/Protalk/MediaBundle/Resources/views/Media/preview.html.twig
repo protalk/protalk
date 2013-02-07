@@ -1,0 +1,18 @@
+{% set media = object %}
+{% extends "ProtalkMediaBundle:Media:index.html.twig" %}
+
+{% use 'SonataAdminBundle:CRUD:base_edit_form.html.twig' with form as parentForm %}
+
+{% block templateContent %}
+    {{ parent() }}
+
+    {{ block('parentForm') }}
+{% endblock %}
+
+{% block formactions %}
+    <div id="previewButtons">
+    <input class="btn btn-success btn-primary" type="submit" name="btn_preview_approve" value="{{ 'btn_preview_approve'|trans({}, 'SonataAdminBundle') }}"/>
+    <input class="btn btn-danger" type="submit" name="btn_preview_decline" value="{{ 'btn_preview_decline'|trans({}, 'SonataAdminBundle') }}"/>
+    </div>
+{% endblock %}
+

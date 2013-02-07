@@ -37,7 +37,14 @@
         "samj/doctrine-sluggable-bundle": "dev-master",
         "kriswallsmith/Buzz": "dev-master",
         "sensio/buzz-bundle": "dev-master",
-        "fkr/simplepie-bundle": "*"
+
+        "fkr/simplepie-bundle": "*",
+        "dms/twig-extension-bundle": "1.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*",
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "liip/functional-test-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
