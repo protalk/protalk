@@ -79,7 +79,7 @@ class Feed
     /**
      * @var \DateTime $lastImportedDate
      *
-     * @ORM\Column(name="date", type="date", nullable=true)
+     * @ORM\Column(name="lastImportedDate", type="date", nullable=true)
      */
     private $lastImportedDate;
 
