@@ -27,6 +27,7 @@ namespace Protalk\AdminBundle\Controller;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery as ProxyQueryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Protalk\MediaBundle\Entity\Media;
 
 class MediaAdminController extends Controller
 {
@@ -40,10 +41,10 @@ class MediaAdminController extends Controller
      */
     public function batchActionUnpublish(ProxyQueryInterface $query)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         foreach ($query->getQuery()->iterate() as $entity) {
-            $entity[0]->setIsPublished(false);
+            $entity[0]->setStatus(Media::STATUS_PUBLISHED);
             $em->persist($entity[0]);
         }
         $em->flush();
