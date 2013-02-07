@@ -107,13 +107,12 @@ class MediaAdmin extends Admin
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('title');
+        $datagridMapper->add('title')
+            ->add('isImported');
     }
 
     /**
      * Configure list fields
-     *
-     * This function adds isPublished identifier to the Title.
      *
      * @param ListMapper $listMapper
      */

@@ -52,8 +52,8 @@ class FeedAdmin extends Admin
     {
         $listMapper->addIdentifier('name')
             ->add('feedtype')
-            ->add('url')
-            ->add('lastImportedDate')
-            ->add('mediatype');
+            ->add('mediatype')
+            ->add('automaticImport', null, array('editable' => true))
+            ->add('lastImportedDate');
     }
 }
