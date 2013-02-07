@@ -221,6 +221,8 @@ class Media implements SluggableInterface
         $this->tags = new ArrayCollection();
         $this->ratings = new ArrayCollection();
         $this->creationDate = new \DateTime();
+
+        $this->isImported = false;
     }
 
     /**
@@ -586,26 +588,6 @@ class Media implements SluggableInterface
         $slug = $slugger->getSlug($this->getSlugFields());
 
         return $this->setSlug($slug);
-    }
-
-    /**
-     * Set isPublished
-     *
-     * @param boolean $isPublished
-     */
-    public function setIsPublished($isPublished)
-    {
-        $this->isPublished = $isPublished;
-    }
-
-    /**
-     * Get isPublished
-     *
-     * @return boolean
-     */
-    public function getIsPublished()
-    {
-        return $this->isPublished;
     }
 
     /**
