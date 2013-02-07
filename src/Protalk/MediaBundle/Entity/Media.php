@@ -178,13 +178,6 @@ class Media implements SluggableInterface
     private $isImported;
 
     /**
-     * @var string $rssPermalink
-     *
-     * @ORM\Column(name="rssPermalink", type="string", nullable=true)
-     */
-    private $rssPermalink;
-
-    /**
      * @var string $hostName
      *
      * @ORM\Column(name="hostName", type="string")
@@ -897,29 +890,6 @@ class Media implements SluggableInterface
     public function getIsImported()
     {
         return $this->isImported;
-    }
-
-    /**
-     * Set rssPermalink
-     *
-     * @param string $rssPermalink
-     * @return Media
-     */
-    public function setRssPermalink($rssPermalink)
-    {
-        $this->rssPermalink = $rssPermalink;
-    
-        return $this;
-    }
-
-    /**
-     * Get rssPermalink
-     *
-     * @return string 
-     */
-    public function getRssPermalink()
-    {
-        return $this->rssPermalink;
     }
 
     /**
