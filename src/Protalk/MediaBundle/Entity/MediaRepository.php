@@ -256,6 +256,38 @@ class MediaRepository extends EntityRepository
     }
 
     /**
+     * Find media items by title (for import command)
+     *
+     * @param string $title
+     *
+     * @return object or null  (what does it return if no record found?)
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    public function findByTitle($title)
+    {
+        try {
+            $qb = $this->getEntityManager()->createQueryBuilder();
+            $qb->select("m")
+                ->from("ProtalkMediaBundle:Media", "m")
+                ->where("m.isPublished = :title");
+
+            $query = $qb->getQuery();
+            $query->setParameter('title', $title);
+            $media = $query->getResult();
+
+            if (is_object($media)) {
+                return true;
+            } else {
+                throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+            }
+
+        } catch (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e) {
+
+            return false;
+        }
+    }
+
+    /**
      * Increment number of visits to media item
      *
      * @param object $media

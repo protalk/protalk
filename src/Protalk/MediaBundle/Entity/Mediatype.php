@@ -50,6 +50,11 @@ class Mediatype
      */
     private $medias;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Feed", mappedBy="mediatype")
+     */
+    private $feeds;
+
     /*
      * Constructor
      *
@@ -61,6 +66,7 @@ class Mediatype
     public function __construct()
     {
         $this->medias = new ArrayCollection();
+        $this->feeds = new ArrayCollection();
     }
 
     /**

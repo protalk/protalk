@@ -77,6 +77,26 @@ class Feed
     private $remark;
 
     /**
+     * @var \DateTime $lastImportedDate
+     *
+     * @ORM\Column(name="date", type="date", nullable=true)
+     */
+    private $lastImportedDate;
+
+    /**
+     * @var integer $mediatype_id
+     *
+     * @ORM\Column(name="mediatype_id", type="integer")
+     */
+    private $mediatype_id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Mediatype", inversedBy="feeds")
+     * @ORM\JoinColumn(name="mediatype_id", referencedColumnName="id")
+     */
+    protected $mediatype;
+
+    /**
      * Get id
      *
      * @return integer
@@ -244,5 +264,74 @@ class Feed
     public function getFeedtype()
     {
         return $this->feedtype;
+    }
+
+    /**
+     * Set lastImportedDate
+     *
+     * @param \DateTime $lastImportedDate
+     * @return Feed
+     */
+    public function setLastImportedDate($lastImportedDate)
+    {
+        $this->lastImportedDate = $lastImportedDate;
+    
+        return $this;
+    }
+
+    /**
+     * Get lastImportedDate
+     *
+     * @return \DateTime 
+     */
+    public function getLastImportedDate()
+    {
+        return $this->lastImportedDate;
+    }
+
+    /**
+     * Set mediatype_id
+     *
+     * @param integer $mediatypeId
+     * @return Feed
+     */
+    public function setMediatypeId($mediatypeId)
+    {
+        $this->mediatype_id = $mediatypeId;
+    
+        return $this;
+    }
+
+    /**
+     * Get mediatype_id
+     *
+     * @return integer 
+     */
+    public function getMediatypeId()
+    {
+        return $this->mediatype_id;
+    }
+
+    /**
+     * Set mediatype
+     *
+     * @param \Protalk\MediaBundle\Entity\Mediatype $mediatype
+     * @return Feed
+     */
+    public function setMediatype(\Protalk\MediaBundle\Entity\Mediatype $mediatype = null)
+    {
+        $this->mediatype = $mediatype;
+    
+        return $this;
+    }
+
+    /**
+     * Get mediatype
+     *
+     * @return \Protalk\MediaBundle\Entity\Mediatype 
+     */
+    public function getMediatype()
+    {
+        return $this->mediatype;
     }
 }
