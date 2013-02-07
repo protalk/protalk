@@ -23,16 +23,20 @@ class FeedtypeAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('name')
-                   ->add(
-                       'className',
-                       'choice',
-                       array('choices' => array(
-                           'feedburner'=>'feedburner',
-                           'rss'=>'rss',
-                           'dpc'=>'dpc',
-                           'aws' => 'aws')
-                       )
-                   );
+            ->add(
+                'className',
+                'choice',
+                array(
+                    'choices' => array(
+                        'feedburner' => 'feedburner',
+                        'rss' => 'rss',
+                        'dpc' => 'dpc',
+                        'aws' => 'aws',
+                        'bliptv' => 'bliptv',
+                        'youtube' => 'youtube'
+                    )
+                )
+            );
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
