@@ -19,7 +19,7 @@ use Doctrine\ORM\EntityManager;
  * 
  * This imports the rss feeds which locations are stored in the database 
  * 
- * @author Lineke Kerckhoffs-Willems
+ * @author Lineke Kerckhoffs-Willems and Kim Rowan
  */
 class ImportCommand extends ContainerAwareCommand 
 {
@@ -33,12 +33,7 @@ class ImportCommand extends ContainerAwareCommand
     }
     
     /**
-     * Execution of the console command
-     *
-     * This function checks all source code from the src folder, ignores this bundle's
-     * files, and generates documentation HTML with phpDocumentor2.
-     *
-     * After a successful operation, it will install assets with app/console assets:install
+     * Execution of command to import media items from Feeds
      *
      * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
@@ -57,21 +52,32 @@ class ImportCommand extends ContainerAwareCommand
             $rss->set_feed_url($feed->getUrl());
             $rss->init();
             $rss->handle_content_type();
-
-            foreach ($rss->get_items() as $item) {
-                $contentImport = $this->getContainer()->get('protalk_media.'.$feed->getFeedType()->getClassName());
-                $contentImport->handleImport($item, $feed, $em);
-
-            }
-            $this->setFeedImportDate($em, $feed);
+            $this->processFeedItems($rss->get_items(), $feed);
         }
         
-        $output->writeln('Done importing');
-        //send email to confirm import command ran (later, state how many items were imported)
+        $output->writeln('Done importing. Sending confirmation email...');
+
+        $this->sendImportConfirmationEmail();
+        $output->writeln('Confirmation email sent');
+    }
+
+    /**
+     * Process items within a feed
+     *
+     * @param $items
+     * @param $feed
+     */
+    private function processFeedItems($items, $feed)
+    {
+        foreach ($items as $item) {
+            $contentImport = $this->getContainer()->get('protalk_media.'.$feed->getFeedType()->getClassName());
+            $contentImport->handleImport($item, $feed);
+        }
+        $this->setFeedImportDate($feed);
     }
     
     /**
-     * Get the feeds form the database that have automatic import enabled
+     * Get the feeds from the database that have automatic import enabled
      * 
      * @param \Doctrine\ORM\EntityManager $em
      * 
@@ -87,11 +93,39 @@ class ImportCommand extends ContainerAwareCommand
         return $qb->getQuery()->getResult();
     }
 
-    private function setFeedImportDate(EntityManager $em, Feed $feed)
+    /**
+     * Set the date of current import in Feed entity
+     *
+     * @param \Protalk\MediaBundle\Entity\Feed $feed
+     */
+    private function setFeedImportDate(Feed $feed)
     {
+        $em = $this->getContainer()->get('doctrine')->getEntityManager();
         $feed->setLastImportedDate(new \DateTime('now'));
 
         $em->persist($feed);
         $em->flush();
+    }
+
+    /**
+     * Send import confirmation email to info@protalk.me
+     */
+    private function sendImportConfirmationEmail()
+    {
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Feed Import - Confirmation Email')
+            ->setFrom('no-reply@protalk.me')
+            ->setTo('info@protalk.me')
+            ->setCharset('UTF-8')
+            ->setContentType('text/html')
+            ->setBody(
+                $this->getContainer()
+                    ->get('templating')
+                    ->render('ProtalkMediaBundle:Import:confirmationEmail.html.twig')
+            );
+
+        $this->getContainer()->get('mailer')->send($message);
+
+        return;
     }
 }
