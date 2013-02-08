@@ -8,6 +8,7 @@
         <parameter key="auto_import.base">Protalk\MediaBundle\Import\Base</parameter>
         <parameter key="media_content.bliptv">Protalk\MediaBundle\Import\Bliptv</parameter>
         <parameter key="media_content.youtube">Protalk\MediaBundle\Import\YouTube</parameter>
+        <parameter key="media_content.feedburner">Protalk\MediaBundle\Import\Feedburner</parameter>
     </parameters>
     
     <services>
@@ -16,10 +17,10 @@
                 <argument type="service" id="doctrine.orm.entity_manager" />
             </call>
         </service>
-        <service id="protalk_media.bliptv" class="%media_content.bliptv%" parent="auto_import.base">
 
-        </service>
+        <service id="protalk_media.bliptv" class="%media_content.bliptv%" parent="auto_import.base"></service>
         <service id="protalk_media.youtube" class="%media_content.youtube%" parent="auto_import.base"></service>
+        <service id="protalk_media.feedburner" class="%media_content.feedburner%" parent="auto_import.base"></service>
     </services>
 
 </container>
