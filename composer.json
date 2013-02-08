@@ -37,7 +37,6 @@
         "samj/doctrine-sluggable-bundle": "dev-master",
         "kriswallsmith/Buzz": "dev-master",
         "sensio/buzz-bundle": "dev-master",
-
         "fkr/simplepie-bundle": "*",
         "dms/twig-extension-bundle": "1.*"
     },
