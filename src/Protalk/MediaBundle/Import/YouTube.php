@@ -32,6 +32,10 @@ class YouTube extends Base
 
         $schemaArray = $data[0]['child']['http://gdata.youtube.com/schemas/2007'];
         $videoId = $schemaArray['videoid'][0]['data'];
+        if (!$videoId) {
+            return false;
+        }
+
         $itemUploaded = new \DateTime($schemaArray['uploaded'][0]['data']);
 
         $itemIsSuitable = $this->checkSuitableForImport($item, $itemUploaded, $feed->getLastImportedDate());
