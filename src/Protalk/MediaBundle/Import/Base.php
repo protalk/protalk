@@ -4,8 +4,9 @@ namespace Protalk\MediaBundle\Import;
 
 use Protalk\MediaBundle\Entity\Media;
 use Protalk\MediaBundle\Entity\Feed;
-use Doctrine\ORM\EntityManager;
+
 use SimplePie_Item;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Base Import class
@@ -13,28 +14,33 @@ use SimplePie_Item;
  * This class handles the imports, this is the base class because every feedtype
  * should have it's own implementation based on this class
  *
- * @author Lineke Kerckhoffs-Willems
+ * @author Lineke Kerckhoffs-Willems and Kim Rowan
  */
 abstract class Base
 {
+    protected $entityManager;
+
+    public function setEntityManager(EntityManager $em)
+    {
+        $this->entityManager = $em;
+    }
+
     /**
      * Handle import
      *
      * @param \SimplePie_Item                    $item
      * @param \Protalk\MediaBundle\Entity\Feed   $feed
-     * @param \Doctrine\ORM\EntityManager        $em
      */
-    abstract public function handleImport(\SimplePie_Item $item, Feed $feed, EntityManager $em);
+    abstract public function handleImport(\SimplePie_Item $item, Feed $feed);
 
     /**
      * Insert media item
      *
-     * @param \Doctrine\ORM\EntityManager   $em
-     * @param object                        $importItem
+     * @param $importItem
+     * @param \Protalk\MediaBundle\Entity\Media $media
      */
-    protected function insertMedia(EntityManager $em, $importItem)
+    protected function insertMedia($importItem, Media $media)
     {
-        $media = new Media();
         $media->setTitle($importItem->title);
         $media->setDate($importItem->date);
         $media->setDescription($importItem->description);
@@ -53,25 +59,20 @@ abstract class Base
         $media->setStatus(Media::STATUS_PENDING);
         $media->setIsImported(true);
 
-        // TODO: these are supposed to default to zero, but aren't - check why!
-        $media->setRating(0);
-        $media->setVisits(0);
-
-        $em->persist($media);
-        $em->flush();
+        $this->entityManager->persist($media);
+        $this->entityManager->flush();
     }
 
     /**
      *
      * Check if a feed item is suitable for import into database
      *
-     * @param \Doctrine\ORM\EntityManager $em
-     * @param \SimplePie_Item             $item
-     * @param \Datetime                   $itemUploadedToFeed
-     * @param \Datetime                   $lastImportDate
+     * @param \SimplePie_Item  $item
+     * @param \Datetime        $itemUploadedToFeed
+     * @param \Datetime        $lastImportDate
      * @return bool
      */
-    protected function checkSuitableForImport(EntityManager $em, \SimplePie_Item $item, $itemUploadedToFeed, $lastImportDate)
+    protected function checkSuitableForImport(\SimplePie_Item $item, $itemUploadedToFeed, $lastImportDate)
     {
 
         // only check new import items (ie added since last import date)
@@ -83,7 +84,7 @@ abstract class Base
         //   - manually added by a protalk team member
         //   - somehow re-added to the feed, at a later date, but with the same title
         //   - previously imported but a protalk team member edited the title (hence permalink check)
-        $repository = $em->getRepository('ProtalkMediaBundle:Media');
+        $repository = $this->entityManager->getRepository('ProtalkMediaBundle:Media');
         $itemExists = $repository->itemExists($item->get_title(), $item->get_permalink());
 
         if ($itemExists) {

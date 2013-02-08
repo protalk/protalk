@@ -5,6 +5,7 @@ namespace Protalk\MediaBundle\Import;
 use Protalk\MediaBundle\Import\Base;
 use Protalk\MediaBundle\Import\Helper\ImportItem;
 use Protalk\MediaBundle\Entity\Feed;
+use Protalk\MediaBundle\Entity\Media;
 use Doctrine\ORM\EntityManager;
 use SimplePie_Item;
 
@@ -13,7 +14,7 @@ use SimplePie_Item;
  * 
  * This class handles feeds from Bliptv
  * 
- * @author Lineke Kerckhoffs-Willems
+ * @author Lineke Kerckhoffs-Willems and Kim Rowan
  */
 class Bliptv extends Base
 {
@@ -22,10 +23,9 @@ class Bliptv extends Base
      *
      * @param \SimplePie_Item $item
      * @param \Protalk\MediaBundle\Entity\Feed $feed
-     * @param \Doctrine\ORM\EntityManager $em
      * @return bool
      */
-    public function handleImport(SimplePie_Item $item, Feed $feed, EntityManager $em)
+    public function handleImport(SimplePie_Item $item, Feed $feed)
     {
         $enclosures = $item->get_enclosures();
 
@@ -37,7 +37,7 @@ class Bliptv extends Base
         $itemUploaded = $item->get_item_tags('http://blip.tv/dtd/blip/1.0', 'datestamp');
         $itemUploaded = new \DateTime($itemUploaded[0]['data']);
 
-        $itemIsSuitable = $this->checkSuitableForImport($em, $item, $itemUploaded, $feed->getLastImportedDate());
+        $itemIsSuitable = $this->checkSuitableForImport($item, $itemUploaded, $feed->getLastImportedDate());
         if (!$itemIsSuitable) {
             return false;
         }
@@ -60,7 +60,7 @@ class Bliptv extends Base
         $importItem->hostUrl = $item->get_permalink();
         $importItem->thumbnail = $enclosures[0]->get_thumbnail(0);
 
-        $this->insertMedia($em, $importItem);
+        $this->insertMedia($importItem, new Media());
 
         // TODO: add default language to feed entity <-- do this when multi-language support is added?
 
