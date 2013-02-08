@@ -74,7 +74,6 @@ abstract class Base
      */
     protected function checkSuitableForImport(\SimplePie_Item $item, $itemUploadedToFeed, $lastImportDate)
     {
-
         // only check new import items (ie added since last import date)
         if ($itemUploadedToFeed < $lastImportDate) {
             return false;
