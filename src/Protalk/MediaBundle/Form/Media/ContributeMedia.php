@@ -20,21 +20,9 @@ class ContributeMedia extends AbstractType
     {
         $builder->add('name', 'text');
         $builder->add('email', 'email');
-        $builder->add('hostUrl', 'url');
-        $builder->add('hostName', 'text');
+        $builder->add('hostUrl', 'url', array('label'  => 'Where can we find it?'));
         $builder->add('title', 'text');
-        $builder->add('slidesUrl', 'url', array('required' => false));
-        $builder->add('speaker', 'text', array('required' => false));
         $builder->add('tags', 'text', array('required' => false));
-        $builder->add('description', 'textarea', array('required' => false));
-        $builder->add(
-            'category',
-            'entity',
-            array('class' => 'ProtalkMediaBundle:Category',
-                'property' => 'name',
-                'empty_value' => 'Choose a category'
-            )
-        );
         $builder->add(
             'recaptcha',
             'ewz_recaptcha',
