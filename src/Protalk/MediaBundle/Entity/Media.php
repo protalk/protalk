@@ -25,6 +25,11 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Media implements SluggableInterface
 {
+    const STATUS_PENDING = 'pend';
+    const STATUS_PUBLISHED = 'pub';
+    const STATUS_UNPUBLISHED = 'unpub';
+    const STATUS_REJECTED = 'rej';
+
     /**
      * @var integer $id
      *
@@ -159,11 +164,18 @@ class Media implements SluggableInterface
     private $slug;
 
     /**
-     * @var boolean $isPublished
+     * @var string $status
      *
-     * @ORM\Column(name="isPublished", type="boolean")
+     * @ORM\Column(name="status", type="string")
      */
-    private $isPublished;
+    private $status;
+
+    /**
+     * @var boolean $isImported
+     *
+     * @ORM\Column(name="isImported", type="boolean")
+     */
+    private $isImported;
 
     /**
      * @var string $hostName
@@ -209,8 +221,11 @@ class Media implements SluggableInterface
         $this->tags = new ArrayCollection();
         $this->ratings = new ArrayCollection();
         $this->creationDate = new \DateTime();
+
+        $this->isImported = false;
         $this->rating = 0;
         $this->visits = 0;
+
     }
 
     /**
@@ -546,26 +561,6 @@ class Media implements SluggableInterface
     }
 
     /**
-     * Set isPublished
-     *
-     * @param boolean $isPublished
-     */
-    public function setIsPublished($isPublished)
-    {
-        $this->isPublished = $isPublished;
-    }
-
-    /**
-     * Get isPublished
-     *
-     * @return boolean
-     */
-    public function getIsPublished()
-    {
-        return $this->isPublished;
-    }
-
-    /**
      * Set hostName
      *
      * @param string $hostName
@@ -801,5 +796,114 @@ class Media implements SluggableInterface
         $boolean = (substr($this->slides, 0, 4) == "http") ? true : false;
 
         return $boolean;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     * @return Media
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set isImported
+     *
+     * @param boolean $isImported
+     * @return Media
+     */
+    public function setIsImported($isImported)
+    {
+        $this->isImported = $isImported;
+    
+        return $this;
+    }
+
+    /**
+     * Get isImported
+     *
+     * @return boolean 
+     */
+    public function getIsImported()
+    {
+        return $this->isImported;
+    }
+
+    /**
+     * Remove speakers
+     *
+     * @param \Protalk\MediaBundle\Entity\Speaker $speakers
+     */
+    public function removeSpeaker(\Protalk\MediaBundle\Entity\Speaker $speakers)
+    {
+        $this->speakers->removeElement($speakers);
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \Protalk\MediaBundle\Entity\Comment $comments
+     */
+    public function removeComment(\Protalk\MediaBundle\Entity\Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Remove ratings
+     *
+     * @param \Protalk\MediaBundle\Entity\Rating $ratings
+     */
+    public function removeRating(\Protalk\MediaBundle\Entity\Rating $ratings)
+    {
+        $this->ratings->removeElement($ratings);
+    }
+
+    /**
+     * Add categories
+     *
+     * @param \Protalk\MediaBundle\Entity\Category $categories
+     * @return Media
+     */
+    public function addCategorie(\Protalk\MediaBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+    
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param \Protalk\MediaBundle\Entity\Category $categories
+     */
+    public function removeCategorie(\Protalk\MediaBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    /**
+     * Remove tags
+     *
+     * @param \Protalk\MediaBundle\Entity\Tag $tags
+     */
+    public function removeTag(\Protalk\MediaBundle\Entity\Tag $tags)
+    {
+        $this->tags->removeElement($tags);
     }
 }
