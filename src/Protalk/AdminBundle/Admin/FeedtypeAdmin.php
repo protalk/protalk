@@ -33,7 +33,8 @@ class FeedtypeAdmin extends Admin
                         'dpc' => 'dpc',
                         'aws' => 'aws',
                         'bliptv' => 'bliptv',
-                        'youtube' => 'youtube'
+                        'youtube' => 'youtube',
+                        'vimeo' => 'vimeo'
                     )
                 )
             );
