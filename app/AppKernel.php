@@ -41,6 +41,7 @@ class AppKernel extends Kernel
             new Protalk\AdminBundle\ProtalkAdminBundle(),
 
             new Sensio\Bundle\BuzzBundle\SensioBuzzBundle(),
+            new Fkr\SimplePieBundle\FkrSimplePieBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
@@ -48,7 +49,7 @@ class AppKernel extends Kernel
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
             $bundles[] = new Liip\FunctionalTestBundle\LiipFunctionalTestBundle();
-            $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
         }
 
         return $bundles;

@@ -4,17 +4,23 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
     <parameters>
-        <parameter key="protalk_media.example.class">Protalk\MediaBundle\Example</parameter>
+        <parameter key="auto_import.base">Protalk\MediaBundle\Import\Base</parameter>
+        <parameter key="media_content.bliptv">Protalk\MediaBundle\Import\Bliptv</parameter>
+        <parameter key="media_content.youtube">Protalk\MediaBundle\Import\YouTube</parameter>
+        <parameter key="media_content.feedburner">Protalk\MediaBundle\Import\Feedburner</parameter>
     </parameters>
-
+    
     <services>
-        <service id="protalk_media.example" class="%protalk_media.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="auto_import.base" class="%auto_import.base%" abstract="true">
+            <call method="setEntityManager">
+                <argument type="service" id="doctrine.orm.entity_manager" />
+            </call>
         </service>
+
+        <service id="protalk_media.bliptv" class="%media_content.bliptv%" parent="auto_import.base"></service>
+        <service id="protalk_media.youtube" class="%media_content.youtube%" parent="auto_import.base"></service>
+        <service id="protalk_media.feedburner" class="%media_content.feedburner%" parent="auto_import.base"></service>
     </services>
-    -->
+
 </container>

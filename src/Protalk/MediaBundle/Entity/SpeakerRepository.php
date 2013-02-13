@@ -33,11 +33,12 @@ class SpeakerRepository extends EntityRepository
         $qb->select('s.id', 's.name', 'COUNT(m.id) as mediaCount');
         $qb->from('\Protalk\MediaBundle\Entity\Speaker', 's');
         $qb->join('s.medias', 'm');
-        $qb->where('m.isPublished = 1');
+        $qb->where('m.status = :status');
         $qb->groupBy('s.name');
         $qb->orderBy('s.name', 'ASC');
 
         $query = $qb->getQuery();
+        $query->setParameter("status", Media::STATUS_PUBLISHED);
 
         return $query->execute();
     }

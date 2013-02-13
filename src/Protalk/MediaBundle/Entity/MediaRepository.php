@@ -24,13 +24,13 @@ class MediaRepository extends EntityRepository
     /**
      * Query database for a fixed number of media records ordered by
      * one or more specific fields.
-     * 
+     *
      * If $sort and $order are strings, the resultset will be ordered by $sort
      * in the order set in $order. If $sort is an array and $order is a string,
      * the resultset will be ordered by the fields named in $sort in the order
      * set in $order. If $sort and $order are arrays, each array element of
      * $order is treated as the sort order of the field in $sort with the same
-     * index. In the last case, $sort and $order must be the same size. 
+     * index. In the last case, $sort and $order must be the same size.
      *
      * @param string|array $sort
      * @param int          $page
@@ -62,13 +62,16 @@ class MediaRepository extends EntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select("m")
            ->from("ProtalkMediaBundle:Media", "m")
-           ->where("m.isPublished = 1");
+           ->where("m.status = :status");
 
         for ($i = 0; $i < count($sort); $i++) {
             $qb->addOrderBy("m." . $sort[$i], $order[$i]);
         }
 
-        $results = $qb->getQuery()->getResult();
+        $query = $qb->getQuery();
+        $query->setParameter("status", Media::STATUS_PUBLISHED);
+
+        $results = $query->getResult();
 
         return $this->getResultList($results, $page, $max);
     }
@@ -126,7 +129,7 @@ class MediaRepository extends EntityRepository
                        "LOWER(m.description) LIKE :search5",
                        "LOWER(mtype.name) LIKE :search6"
                    ),
-                   "m.isPublished = 1"
+                   "m.status = :status"
                )
            );
         $query = $qb->getQuery();
@@ -135,7 +138,8 @@ class MediaRepository extends EntityRepository
               ->setParameter('search3', '%'.strtolower($search).'%')
               ->setParameter('search4', '%'.strtolower($search).'%')
               ->setParameter('search5', '%'.strtolower($search).'%')
-              ->setParameter('search6', '%'.strtolower($search).'%');
+              ->setParameter('search6', '%'.strtolower($search).'%')
+              ->setParameter("status", Media::STATUS_PUBLISHED);
         $results = $query->getResult();
 
         return $this->getResultList($results, $page, $max);
@@ -156,9 +160,10 @@ class MediaRepository extends EntityRepository
                         'SELECT m, mt
                          FROM ProtalkMediaBundle:Media m
                          JOIN m.mediatype mt
-                         WHERE m.slug = :slug AND m.isPublished = 1'
+                         WHERE m.slug = :slug AND m.status = :status'
                     )
                     ->setParameter('slug', $slug)
+                    ->setParameter("status", Media::STATUS_PUBLISHED)
                     ->getSingleResult();
     }
 
@@ -182,12 +187,13 @@ class MediaRepository extends EntityRepository
            ->where(
                $qb->expr()->andX(
                    "c.slug = :slug",
-                   "m.isPublished = 1"
+                   "m.status = :status"
                )
            )
            ->orderBy("m." . $orderField, $order);
         $query = $qb->getQuery();
-        $query->setParameter("slug", $slug);
+        $query->setParameter("slug", $slug)
+              ->setParameter("status", Media::STATUS_PUBLISHED);
 
         $results = $query->getResult();
 
@@ -214,12 +220,13 @@ class MediaRepository extends EntityRepository
            ->where(
                $qb->expr()->andX(
                    "t.slug = :slug",
-                   "m.isPublished = 1"
+                   "m.status = :status"
                )
            )
            ->orderBy("m." . $orderField, $order);
         $query = $qb->getQuery();
-        $query->setParameter("slug", $slug);
+        $query->setParameter("slug", $slug)
+              ->setParameter("status", Media::STATUS_PUBLISHED);
         $results = $query->getResult();
 
         return $this->getResultList($results, $page, $max);
@@ -244,15 +251,48 @@ class MediaRepository extends EntityRepository
            ->where(
                $qb->expr()->andX(
                    "s.id = :speakerId",
-                   "m.isPublished = 1"
+                   "m.status = :status"
                )
            )
            ->orderBy("m." . $orderField, "DESC");
         $query = $qb->getQuery();
-        $query->setParameter('speakerId', $speakerId);
+        $query->setParameter('speakerId', $speakerId)
+              ->setParameter("status", Media::STATUS_PUBLISHED);
         $results = $query->getResult();
 
         return $this->getResultList($results, $page, $max);
+    }
+
+    /**
+     * Find media items by title or permalink (for import command)
+     *
+     * @param $title
+     * @param $permalink
+     * @return bool
+     */
+    public function itemExists($title, $permalink)
+    {
+
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select("m")
+            ->from("ProtalkMediaBundle:Media", "m")
+            ->where(
+                $qb->expr()->orX(
+                    "m.title = :title",
+                    "m.hostUrl = :permalink"
+                )
+            );
+
+        $query = $qb->getQuery();
+        $query->setParameter('title', $title)
+              ->setParameter('permalink', $permalink);
+        $media = $query->getResult();
+
+        if (count($media) > 0) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
