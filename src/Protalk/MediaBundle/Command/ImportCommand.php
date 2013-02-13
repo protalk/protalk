@@ -49,14 +49,19 @@ EOT
         $output->writeln('Importing content, please wait...');
 
         $em = $this->getContainer()->get('doctrine')->getEntityManager();
-        $feeds = $this->getFeeds($em);
-
         $rss = $this->getContainer()->get('fkr_simple_pie.rss');
+
+        $feeds = $this->getFeeds($em);
 
         foreach ($feeds as $feed) {
             $rss->set_feed_url($feed->getUrl());
             $rss->init();
             $rss->handle_content_type();
+
+            if ($rss->error()) {
+                $output->writeln($feed->getName() . ' had an error: '. $rss->error());
+                continue;
+            }
             $this->processFeedItems($rss->get_items(), $feed);
         }
 
