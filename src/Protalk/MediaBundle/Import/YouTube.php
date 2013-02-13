@@ -43,8 +43,9 @@ class YouTube extends Base
             return false;
         }
 
-        $duration = gmdate("H:i:s", $enclosures[0]->get_duration());
+        // TODO: modify this when media provider PR is merged
         $contentTemplate = "<iframe width=\"500\" height=\"315\" src=\"http://www.youtube.com/embed/".$videoId."\" frameborder=\"0\" allowfullscreen></iframe>";
+        $duration = gmdate("H:i:s", $enclosures[0]->get_duration());
 
         $importItem = new ImportItem();
 
