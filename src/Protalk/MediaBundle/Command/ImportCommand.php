@@ -16,22 +16,27 @@ use Doctrine\ORM\EntityManager;
 
 /**
  * Command for the console
- * 
- * This imports the rss feeds which locations are stored in the database 
- * 
+ *
+ * This imports the rss feeds which locations are stored in the database
+ *
  * @author Lineke Kerckhoffs-Willems and Kim Rowan
  */
-class ImportCommand extends ContainerAwareCommand 
+class ImportCommand extends ContainerAwareCommand
 {
     /**
-     * Set the configuration for the command syntax and description 
+     * Set the configuration for the command syntax and description
      */
-    protected function configure() 
+    protected function configure()
     {
         $this->setName('protalk:content:import')
-             ->setDescription('Imports new content from the RSS feeds stored in the database.');
+             ->setDescription('Imports new content from the RSS feeds stored in the database.')
+             ->setHelp(<<<EOT
+The <info>protalk:content:import</info> command uses RSS feeds stored in the database to
+automatically gather and import new content.
+EOT
+            );
     }
-    
+
     /**
      * Execution of command to import media items from Feeds
      *
@@ -39,13 +44,13 @@ class ImportCommand extends ContainerAwareCommand
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      * @return int|null|void
      */
-    protected function execute(InputInterface $input, OutputInterface $output) 
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('Importing content, please wait...');
-        
+
         $em = $this->getContainer()->get('doctrine')->getEntityManager();
         $feeds = $this->getFeeds($em);
-        
+
         $rss = $this->getContainer()->get('fkr_simple_pie.rss');
 
         foreach ($feeds as $feed) {
@@ -54,7 +59,7 @@ class ImportCommand extends ContainerAwareCommand
             $rss->handle_content_type();
             $this->processFeedItems($rss->get_items(), $feed);
         }
-        
+
         $output->writeln('Done importing. Sending confirmation email...');
 
         $this->sendImportConfirmationEmail();
@@ -75,12 +80,12 @@ class ImportCommand extends ContainerAwareCommand
         }
         $this->setFeedImportDate($feed);
     }
-    
+
     /**
      * Get the feeds from the database that have automatic import enabled
-     * 
+     *
      * @param \Doctrine\ORM\EntityManager $em
-     * 
+     *
      * @return array of objects
      */
     private function getFeeds($em)
