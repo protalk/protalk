@@ -24,6 +24,7 @@ class FeedAdmin extends Admin
     {
         $formMapper->add('name')
                    ->add('feedtype')
+                   ->add('mediatype')
                    ->add('url')
                    ->add('automaticImport')
                    ->add('contact')
@@ -49,6 +50,10 @@ class FeedAdmin extends Admin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('name')->add('feedtype')->add('url');
+        $listMapper->addIdentifier('name')
+            ->add('feedtype')
+            ->add('mediatype')
+            ->add('automaticImport', null, array('editable' => true))
+            ->add('lastImportedDate');
     }
 }

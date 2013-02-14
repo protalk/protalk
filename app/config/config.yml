@@ -153,3 +153,8 @@ ewz_recaptcha:
     private_key:  6LcAINESAAAAAEvnZPMdtyBQ9YwPb3HyS5V90ie2
     secure:       false
     locale_key:   kernel.default_locale
+
+fkr_simple_pie:
+    cache_enabled: false
+    cache_dir: %kernel.cache_dir%/rss
+    cache_duration: 3600

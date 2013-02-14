@@ -29,6 +29,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Form\FormMapper;
+use Protalk\MediaBundle\Entity\Media;
 
 class MediaAdmin extends Admin
 {
@@ -61,7 +62,19 @@ class MediaAdmin extends Admin
                 ->add('slides')
                 ->add('joindin')
                 ->add('language')
-                ->add('isPublished', null, array('required' => false))
+                ->add(
+                    'status',
+                    'choice',
+                    array(
+                        'choices' => array(
+                            ''                         => 'Please select a status',
+                            Media::STATUS_PENDING      => 'pending',
+                            Media::STATUS_PUBLISHED    => 'published',
+                            Media::STATUS_UNPUBLISHED  => 'unpublished',
+                            Media::STATUS_REJECTED     => 'rejected'
+                        )
+                    )
+                )
                 ->add('hostName')
                 ->add('hostUrl')
                 ->add('thumbnail')
@@ -94,19 +107,20 @@ class MediaAdmin extends Admin
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('title');
+        $datagridMapper->add('title')
+            ->add('isImported');
     }
 
     /**
      * Configure list fields
      *
-     * This function adds isPublished identifier to the Title.
-     *
      * @param ListMapper $listMapper
      */
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('title')->add('isPublished');
+        $listMapper->addIdentifier('title')
+            ->add('status')
+            ->add('isImported');
     }
 
     /**
