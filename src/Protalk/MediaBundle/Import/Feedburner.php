@@ -10,9 +10,9 @@ use Doctrine\ORM\EntityManager;
 use SimplePie_Item;
 
 /**
- * Bliptv import class
+ * Feedburner import class
  * 
- * This class handles feeds from Bliptv
+ * This class handles podcast feeds from Feedburner
  * 
  * @author Lineke Kerckhoffs-Willems and Kim Rowan
  */

@@ -35,6 +35,7 @@ class Bliptv extends Base
             return false;
         }
 
+        // TODO: modify this when media provider PR is merged
         $contentTemplate = "<iframe src=\"http://blip.tv/play/".$videoId.".html?p=1\" width=\"532\" height=\"334\" frameborder=\"0\" allowfullscreen></iframe><embed type=\"application/x-shockwave-flash\" src=\"http://a.blip.tv/api.swf#".$videoId."\" style=\"display:none\"></embed>";
 
         $itemUploaded = $item->get_item_tags('http://blip.tv/dtd/blip/1.0', 'datestamp');
