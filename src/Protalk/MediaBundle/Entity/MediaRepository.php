@@ -155,16 +155,13 @@ class MediaRepository extends EntityRepository
      */
     public function findOneBySlug($slug)
     {
-        return $this->getEntityManager()
-                    ->createQuery(
-                        'SELECT m, mt
-                         FROM ProtalkMediaBundle:Media m
-                         JOIN m.mediatype mt
-                         WHERE m.slug = :slug AND m.status = :status'
-                    )
-                    ->setParameter('slug', $slug)
-                    ->setParameter("status", Media::STATUS_PUBLISHED)
-                    ->getSingleResult();
+        $query = $this->createQueryBuilder('m')
+            ->where('m.slug = :slug')
+            ->andWhere('m.status = :status')
+            ->setParameter('slug', $slug)
+            ->setParameter("status", Media::STATUS_PUBLISHED);
+
+        return $query->getQuery()->getSingleResult();
     }
 
     /**
