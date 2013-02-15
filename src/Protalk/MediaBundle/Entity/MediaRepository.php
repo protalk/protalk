@@ -161,7 +161,7 @@ class MediaRepository extends EntityRepository
             ->setParameter('slug', $slug)
             ->setParameter("status", Media::STATUS_PUBLISHED);
 
-        return $query->getQuery()->getSingleResult();
+        return $query->getQuery()->getOneOrNullResult();
     }
 
     /**
