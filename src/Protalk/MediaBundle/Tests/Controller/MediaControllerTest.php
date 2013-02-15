@@ -35,7 +35,6 @@ class MediaControllerTest extends WebTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        var_dump($response->getContent());
         $this->assertContains("My video about PHP", $response->getContent());
         $this->assertContains("PHPNW", $response->getContent());
         $this->assertContains("Joe Bloggs", $response->getContent());
@@ -57,5 +56,15 @@ class MediaControllerTest extends WebTestCase
         $response = $client->getResponse();
 
         $this->assertContains("102 views", $response->getContent());
+    }
+
+    public function testGetMediaThatDoesNotExistThrows404()
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/my-made-up-video');
+        $response = $client->getResponse();
+
+        $this->assertEquals(404, $response->getStatusCode());
     }
 }
