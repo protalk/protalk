@@ -66,6 +66,11 @@ class MediaController extends Controller
     {
         if ($this->getRequest()->isXmlHttpRequest()) {
             $media = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->findOneById($id);
+
+            if (!is_object($media)) {
+                throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+            }
+
             $em = $this->getDoctrine()->getEntityManager();
 
             $newRating = new Rating();
