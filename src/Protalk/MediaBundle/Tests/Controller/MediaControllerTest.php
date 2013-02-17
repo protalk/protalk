@@ -67,4 +67,24 @@ class MediaControllerTest extends WebTestCase
 
         $this->assertEquals(404, $response->getStatusCode());
     }
+
+    public function testGetSpeakersForMediaReturnsValidSpeaker()
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/media/1/speakers');
+        $content = $client->getResponse()->getContent();
+
+        $this->assertContains("Joe Bloggs", $content);
+        $this->assertContains("Joe Bloggs bio", $content);
+    }
+
+    public function testGetInvalidSpeakersForMediaReturns404()
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/media/999/speakers');
+
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+    }
 }
