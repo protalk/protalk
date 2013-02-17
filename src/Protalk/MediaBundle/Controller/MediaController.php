@@ -48,6 +48,10 @@ class MediaController extends Controller
     {
         $media = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->findOneById($id);
 
+        if (!is_object($media)) {
+            throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
+        }
+
         return $this->render('ProtalkMediaBundle:Speaker:show.html.twig', array('speakers' => $media->getSpeakers()));
     }
 
