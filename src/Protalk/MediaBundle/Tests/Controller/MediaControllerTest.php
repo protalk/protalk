@@ -87,4 +87,55 @@ class MediaControllerTest extends WebTestCase
 
         $this->assertEquals(404, $client->getResponse()->getStatusCode());
     }
+
+    public function testSetRatingReturnsValidResponseWithValidRequest()
+    {
+        $client = static::createClient();
+
+        $client->request(
+            'POST',
+            '/rate/1/3',
+            array(),
+            array(),
+            array(
+                'HTTP_X-Requested-With' => 'XMLHttpRequest',
+            )
+        );
+
+        $response = $client->getResponse();
+
+        $stars = substr_count($response->getContent(), 'star_full.png');
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(3, $stars);
+    }
+
+    public function testSetRatingReturnsNotFoundWithInvalidRequest()
+    {
+        $client = static::createClient();
+
+        $client->request(
+            'POST',
+            '/rate/999/3',
+            array(),
+            array(),
+            array(
+                'HTTP_X-Requested-With' => 'XMLHttpRequest',
+            )
+        );
+
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+    }
+
+    public function testSetRatingReturns500IfNotAjax()
+    {
+        $client = static::createClient();
+
+        $client->request(
+            'POST',
+            '/rate/1/3'
+        );
+
+        $this->assertEquals(500, $client->getResponse()->getStatusCode());
+    }
 }
