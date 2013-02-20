@@ -103,7 +103,7 @@ If you would like to know more about how this was set up, [read Joshua's informa
 
 1. Fork the protalk repository
 2. Use git clone to get your fork on your local machine
-3. Run `php bin/composer.phar install` in the root directory of your installation
+3. Run `ant` - this will install all dependencies, clear the cache and run tests
 4. Make sure the app/cache and app/logs directories are writable by the webserver
 5. Create the database and change the parameters.yml in app/config to set the database connection details
 6. Run the command "app/console doctrine:schema:create" to create the database tables
@@ -124,9 +124,13 @@ Having documented codebase is a joy for others to work on and makes the code mor
 
 ###Running the tests
 
-Running the tests is simple. Just go to your project root in a console and type:
+Running the tests is simple. Just go to your project root in a console and run:
 
-    $ phpunit -c app/
+    $ bin/phpunit
+
+Or if you also want to run tests, checkstyle and linting together just run:
+
+    $ ant
 
 ####Further Reading
 
