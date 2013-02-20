@@ -4,10 +4,6 @@
     <target name="build"
             depends="prepare,lint,phpcs,phpunit"/>
 
-
-    <target name="build-parallel"
-            depends="prepare,lint,phpcs,phpunit"/>
-
     <target name="clean" description="Cleanup build artifacts">
         <delete dir="${basedir}/build/coverage"/>
         <delete dir="${basedir}/build/logs"/>
@@ -17,6 +13,14 @@
         <mkdir dir="${basedir}/build/coverage"/>
         <mkdir dir="${basedir}/build/logs"/>
     </target>
+
+    <exec executable="php">
+        <arg line="bin/composer.phar install --dev" />
+    </exec>
+
+    <exec executable="php">
+        <arg line="app/console cache:clear --env=test --no-warmup" />
+    </exec>
 
     <target name="lint">
         <apply executable="php" failonerror="false">
