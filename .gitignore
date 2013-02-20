@@ -3,6 +3,7 @@
 /app/config/parameters.yml
 /app/logs/*
 /bin/phpunit
+/build/*
 composer.phar
 .vagrant
 /vendor/
