@@ -46,6 +46,25 @@ class SpeakerControllerTest extends WebTestCase
         $this->assertContains("This is Joe Bloggs&#039; bio.", $response->getContent(), 'Bio was not set correctly!');
     }
 
+    public function testGetSpeakerReturnsNotFoundWithInvalidRequest()
+    {
+        $client = static::createClient();
+
+        $client->request(
+            'GET',
+            '/speaker/joe-bloggs/999',
+            array(),
+            array(),
+            array(
+                'HTTP_X-Requested-With' => 'XMLHttpRequest',
+            )
+        );
+
+        $response = $client->getResponse();
+
+        $this->assertEquals(404, $response->getStatusCode());
+    }
+
     public function testGetSpeakerReturns500IfNotAjax()
     {
         // Tests that the action throws an exception if the request is not an AJAX request

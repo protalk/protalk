@@ -46,7 +46,7 @@ class SpeakerController extends Controller
                 ->getRepository('ProtalkMediaBundle:Speaker')
                 ->find($id);
 
-            if (!$speaker) {
+            if ($speaker[0] === null) {
                 throw $this->createNotFoundException($name.' not found with id '.$id);
             }
 

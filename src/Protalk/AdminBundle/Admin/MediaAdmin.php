@@ -108,7 +108,16 @@ class MediaAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('title')
-            ->add('isImported');
+            ->add('isImported')
+            ->add('status', null, array(), 'choice',
+                    array(
+                        'choices' => array(
+                            Media::STATUS_PENDING      => 'pending',
+                            Media::STATUS_PUBLISHED    => 'published',
+                            Media::STATUS_UNPUBLISHED  => 'unpublished',
+                            Media::STATUS_REJECTED     => 'rejected'
+                        )
+                    ));
     }
 
     /**
