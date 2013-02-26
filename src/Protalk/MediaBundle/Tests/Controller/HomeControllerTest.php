@@ -38,7 +38,10 @@ class HomeControllerTest extends WebTestCase
         // Assertions on the channel
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertContains('<title>ProTalk RSS feed</title>', $content);
-        $this->assertContains('<atom:link href="http://protalk.me/feed/" rel="self" type="application/rss+xml" />', $content);
+        $this->assertContains(
+            '<atom:link href="http://protalk.me/feed/" rel="self" type="application/rss+xml" />',
+            $content
+        );
         $this->assertContains('<link>http://protalk.me</link>', $content);
 
         // Assertions on the items in the feed

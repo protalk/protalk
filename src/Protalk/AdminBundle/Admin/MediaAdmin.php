@@ -109,15 +109,20 @@ class MediaAdmin extends Admin
     {
         $datagridMapper->add('title')
             ->add('isImported')
-            ->add('status', null, array(), 'choice',
-                    array(
-                        'choices' => array(
-                            Media::STATUS_PENDING      => 'pending',
-                            Media::STATUS_PUBLISHED    => 'published',
-                            Media::STATUS_UNPUBLISHED  => 'unpublished',
-                            Media::STATUS_REJECTED     => 'rejected'
-                        )
-                    ));
+            ->add(
+                'status',
+                null,
+                array(),
+                'choice',
+                array(
+                    'choices' => array(
+                        Media::STATUS_PENDING      => 'pending',
+                        Media::STATUS_PUBLISHED    => 'published',
+                        Media::STATUS_UNPUBLISHED  => 'unpublished',
+                        Media::STATUS_REJECTED     => 'rejected'
+                    )
+                )
+            );
     }
 
     /**
