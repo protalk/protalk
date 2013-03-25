@@ -68,7 +68,4 @@ class ImportItem
      * @var string thumbnail src
      */
     public $thumbnail;
-
-
 }
-

@@ -531,7 +531,7 @@ class Media implements SluggableInterface
     {
         $speaker = $this->getOneSpeaker();
 
-        if (strlen($speaker) > $length ) {
+        if (strlen($speaker) > $length ){
             return substr($speaker, 0, $length) . '...';
         }
 

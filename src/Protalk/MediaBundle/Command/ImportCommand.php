@@ -30,11 +30,12 @@ class ImportCommand extends ContainerAwareCommand
     {
         $this->setName('protalk:content:import')
              ->setDescription('Imports new content from the RSS feeds stored in the database.')
-             ->setHelp(<<<EOT
+             ->setHelp(
+                 <<<EOT
 The <info>protalk:content:import</info> command uses RSS feeds stored in the database to
 automatically gather and import new content.
 EOT
-            );
+             );
     }
 
     /**
