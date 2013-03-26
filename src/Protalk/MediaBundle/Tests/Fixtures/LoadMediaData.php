@@ -11,8 +11,8 @@
 
 namespace Protalk\MediaBundle\Tests\Fixtures;
 
-use Doctrine\ORM\EntityManager;
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Protalk\MediaBundle\Entity\Media;
@@ -21,74 +21,89 @@ use Protalk\MediaBundle\Entity\Speaker;
 use Protalk\MediaBundle\Entity\Category;
 use Protalk\MediaBundle\Entity\Tag;
 
-class LoadMediaData implements FixtureInterface
+class LoadMediaData extends AbstractFixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $videoType = new Mediatype();
-        $videoType->setName('video');
-        $videoType->setType('video');
-
-        $manager->persist($videoType);
-
-        $speaker1 = new Speaker();
-        $speaker1->setName('Joe Bloggs');
-
-        $speaker1->setBiography('Joe Bloggs bio.');
-
-        $manager->persist($speaker1);
-
-        $category1 = new Category();
-        $category1->setName('PHP');
-        $category1->setSlug('php');
-
-        $manager->persist($category1);
-
-        $tag1 = new Tag();
-        $tag1->setName('PHPNW');
-        $tag1->setSlug('phpnw');
-
-        $manager->persist($tag1);
-
-        $video1 = new Media();
-        $video1->setMediatype($videoType);
-        $video1->setSpeakers(
+        $phpbb4 = new Media();
+        $phpbb4->setMediatype($this->getReference('video'));
+        $phpbb4->setSpeakers(
             new ArrayCollection(
                 array(
-                    $speaker1
+                    $this->getReference('nils-adermann')
                 )
             )
         );
 
-        $video1->setCategories(
+        $phpbb4->setCategories(
             new ArrayCollection(
                 array(
-                    $category1
+                    $this->getReference('php')
                 )
             )
         );
 
-        $video1->setTags(
+        $phpbb4->setDate(new \Datetime());
+        $phpbb4->setCreationDate(new \DateTime());
+        $phpbb4->setTitle('phpBB4: Building end-user applications with Symfony2');
+        $phpbb4->setContent('<iframe class="player" frameborder="0" scrolling="no" src="http://playertv-bscdn-admin.pad-playertv.brainsonic.com/web//player-html5-568.html" width="400" height="300"><noframes><img alt="&lt;h2&gt;3 Mars Session 05 Symfony&lt;/h2&gt;" src="http://playertv-bscdn-admin.pad-playertv.brainsonic.com/uploads/32/20110309-193143/photo_1.jpg" /><h2>3 Mars Session 05 Symfony</h2></noframes></iframe>');
+        $phpbb4->setLength('04:00');
+        $phpbb4->setRating(2.5);
+        $phpbb4->setVisits(100);
+        $phpbb4->setLanguage('EN');
+        $phpbb4->setHostName('Symfony');
+        $phpbb4->setHostUrl('http://symfony.com/video/Paris2011/568');
+        $phpbb4->setStatus('pub');
+
+        $toolUpYourLampStack = new Media();
+        $toolUpYourLampStack->setMediatype($this->getReference('video'));
+        $toolUpYourLampStack->setSpeakers(
             new ArrayCollection(
                 array(
-                    $tag1
+                    $this->getReference('lorna-mitchell')
                 )
             )
         );
 
-        $video1->setDate(new \Datetime());
-        $video1->setCreationDate(new \DateTime());
-        $video1->setTitle('My video about PHP');
-        $video1->setDescription('A video about PHP!');
-        $video1->setContent('http://some.video-url.com');
-        $video1->setLength('20:00:00');
-        $video1->setRating(2.5);
-        $video1->setVisits(100);
-        $video1->setLanguage('EN');
-        $video1->setHostName('PHP');
-        $video1->setHostUrl('php');
-        $video1->setStatus('pub');
-        $manager->persist($video1);
+        $toolUpYourLampStack->setTags(
+            new ArrayCollection(
+                array(
+                    $this->getReference('quality-assurance')
+                )
+            )
+        );
+
+        $toolUpYourLampStack->setDate(new \DateTime());
+        $toolUpYourLampStack->setCreationDate(new \DateTime());
+        $toolUpYourLampStack->setTitle('Tool Up Your Lamp Stack');
+        $toolUpYourLampStack->setDescription('A talk about peripheral tools that aid web development');
+        $toolUpYourLampStack->setContent("<iframe src=\"http://player.vimeo.com/video/30012690\" width=\"500\" height=\"409\" frameborder=\"0\" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>");
+        $toolUpYourLampStack->setLength('1hr 20mins');
+        $toolUpYourLampStack->setRating(0);
+        $toolUpYourLampStack->setVisits(100);
+        $toolUpYourLampStack->setLanguage('en');
+        $toolUpYourLampStack->setHostName('Vimeo');
+        $toolUpYourLampStack->setHostUrl('http://vimeo.com/30012690/');
+        $toolUpYourLampStack->setStatus('pub');
+
+        $manager->persist($phpbb4);
+        $manager->persist($toolUpYourLampStack);
         $manager->flush();
+    }
+
+    /**
+     * Load this fixtures dependencies
+     * @see https://github.com/doctrine/data-fixtures
+     *
+     * @return array
+     */
+    public function getDependencies()
+    {
+        return array(
+            'Protalk\MediaBundle\Tests\Fixtures\LoadMediatypeData',
+            'Protalk\MediaBundle\Tests\Fixtures\LoadSpeakerData',
+            'Protalk\MediaBundle\Tests\Fixtures\LoadCategoryData',
+            'Protalk\MediaBundle\Tests\Fixtures\LoadTagData',
+        );
     }
 }

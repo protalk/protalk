@@ -32,7 +32,7 @@ class LoadSpeakerData extends AbstractFixture
         $nilsAdermann = new Speaker();
         $nilsAdermann->setName('Nils Adermann');
         $nilsAdermann->setPhoto(null);
-        $nilsAdermann->setBiography('');
+        $nilsAdermann->setBiography("Nils Adermann's bio.");
 
         $lornaMitchell = new Speaker();
         $lornaMitchell->setName('Lorna Mitchell');
