@@ -61,11 +61,9 @@ class Category implements SluggableInterface
     private $children;
 
     /**
-     * @var ArrayCollection $medias
-     *
-     * @ORM\ManyToMany(targetEntity="Media", mappedBy="categories")
+     * @ORM\OneToMany(targetEntity="LanguageCategory", mappedBy="category")
      */
-    private $medias;
+    private $languageCategories;
 
     /**
      * @var string $slug
@@ -79,7 +77,8 @@ class Category implements SluggableInterface
      */
     public function __construct()
     {
-        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->children = new ArrayCollection();
+        $this->languageCategories = new ArrayCollection();
     }
 
     /**
@@ -149,7 +148,7 @@ class Category implements SluggableInterface
      *
      * @return void
      */
-    public function addCategory(\Protalk\MediaBundle\Entity\Category $children)
+    public function addCategory(Category $children)
     {
         $this->children[] = $children;
     }
@@ -162,26 +161,6 @@ class Category implements SluggableInterface
     public function getChildren()
     {
         return $this->children;
-    }
-
-    /**
-     * Add medias
-     *
-     * @param \Protalk\MediaBundle\Entity\Media $medias
-     */
-    public function addMedia(\Protalk\MediaBundle\Entity\Media $medias)
-    {
-        $this->medias[] = $medias;
-    }
-
-    /**
-     * Get medias
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMedias()
-    {
-        return $this->medias;
     }
 
     /*
@@ -228,5 +207,61 @@ class Category implements SluggableInterface
         $slug = $slugger->getSlug($this->getSlugFields());
 
         return $this->setSlug($slug);
+    }
+
+    /**
+     * Add children
+     *
+     * @param \Protalk\MediaBundle\Entity\Category $children
+     * @return Category
+     */
+    public function addChildren(Category $children)
+    {
+        $this->children[] = $children;
+    
+        return $this;
+    }
+
+    /**
+     * Remove children
+     *
+     * @param \Protalk\MediaBundle\Entity\Category $children
+     */
+    public function removeChildren(Category $children)
+    {
+        $this->children->removeElement($children);
+    }
+
+    /**
+     * Add languageCategories
+     *
+     * @param \Protalk\MediaBundle\Entity\LanguageCategory $languageCategories
+     * @return Category
+     */
+    public function addLanguageCategorie(LanguageCategory $languageCategories)
+    {
+        $this->languageCategories[] = $languageCategories;
+    
+        return $this;
+    }
+
+    /**
+     * Remove languageCategories
+     *
+     * @param \Protalk\MediaBundle\Entity\LanguageCategory $languageCategories
+     */
+    public function removeLanguageCategorie(LanguageCategory $languageCategories)
+    {
+        $this->languageCategories->removeElement($languageCategories);
+    }
+
+    /**
+     * Get languageCategories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLanguageCategories()
+    {
+        return $this->languageCategories;
     }
 }
