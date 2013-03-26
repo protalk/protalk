@@ -20,7 +20,7 @@ class SpeakerControllerTest extends WebTestCase
     {
         $this->loadFixtures(
             array(
-                'Protalk\MediaBundle\Tests\Fixtures\LoadSpeakersData'
+                'Protalk\MediaBundle\Tests\Fixtures\LoadSpeakerData'
             )
         );
     }
