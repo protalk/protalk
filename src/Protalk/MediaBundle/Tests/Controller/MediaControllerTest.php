@@ -76,7 +76,7 @@ class MediaControllerTest extends WebTestCase
         $content = $client->getResponse()->getContent();
 
         $this->assertContains("Joe Bloggs", $content);
-        $this->assertContains("Joe Bloggs bio", $content);
+        $this->assertContains("This is Joe Bloggs&#039; bio.", $content);
     }
 
     public function testGetInvalidSpeakersForMediaReturns404()

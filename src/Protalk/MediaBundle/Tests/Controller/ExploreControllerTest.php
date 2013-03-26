@@ -56,6 +56,16 @@ class ExploreControllerTest extends WebTestCase
         // Assert page contains links to categories and tags
         $this->assertContains('/category/php', $response->getContent());
         $this->assertContains('/tag/phpnw', $response->getContent());
+
+        $client->request(
+            'GET',
+            '/result/video/rating/asc?page=1'
+        );
+
+        $response = $client->getResponse();
+
+        $this->assertContains("You have searched for 'video'", $response->getContent());
+        $this->assertContains('selected="selected">Sort by rating (asc)</option>', $response->getContent());
     }
 
     public function testPerformInvalidSearchReturnsError()
