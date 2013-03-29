@@ -35,8 +35,8 @@ class ExploreControllerTest extends WebTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertContains("href=\"/category/php\"", $response->getContent());
-        $this->assertContains("href=\"/tag/phpnw\"", $response->getContent());
-        $this->assertContains("href=\"http://localhost/search/speaker/1\"", $response->getContent());
+        $this->assertContains("href=\"/tag/quality-assurance\"", $response->getContent());
+        $this->assertContains("href=\"http://localhost/search/speaker/4\"", $response->getContent());
     }
 
     public function testPerformSearchReturnsValidResults()
@@ -52,10 +52,10 @@ class ExploreControllerTest extends WebTestCase
         // Assert the page contains the search form
         $this->assertContains("<form method='post' action='/result' id=\"searchForm\">", $response->getContent());
         // Assert the page contains a link to a video
-        $this->assertContains('/my-video-about-php', $response->getContent());
+        $this->assertContains('/phpbb4-building-end-user-applications-with-symfony2', $response->getContent());
         // Assert page contains links to categories and tags
         $this->assertContains('/category/php', $response->getContent());
-        $this->assertContains('/tag/phpnw', $response->getContent());
+        $this->assertContains('/tag/quality-assurance', $response->getContent());
 
         $client->request(
             'GET',
