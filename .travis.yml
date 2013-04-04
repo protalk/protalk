@@ -5,11 +5,11 @@ php:
 
 before_script:
   - cp app/config/parameters.yml-dist app/config/parameters.yml
-  - composer install --prefer-source --dev
+  - php bin/composer.phar install --prefer-source --dev
   - pear install pear/PHP_CodeSniffer
   - phpenv rehash
 
-script: phpunit -c app/ --coverage-text
+script: phpunit --coverage-text
 
 after_script:
   - phpcs --report=full --report=gitblame --standard=PSR2 src/
