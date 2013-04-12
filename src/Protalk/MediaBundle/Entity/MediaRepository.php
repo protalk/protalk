@@ -115,7 +115,8 @@ class MediaRepository extends EntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select("m")->distinct(true)
            ->from("ProtalkMediaBundle:Media", "m")
-           ->leftJoin("m.categories", "c")
+           ->leftJoin("m.languageCategories", "lc")
+           ->leftJoin("lc.category", "c")
            ->leftJoin("m.tags", "t")
            ->join("m.speakers", "s")
            ->join("m.mediatype", "mtype")
@@ -180,7 +181,8 @@ class MediaRepository extends EntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select("m")
            ->from("ProtalkMediaBundle:Media", "m")
-           ->join("m.categories", "c")
+            ->leftJoin("m.languageCategories", "lc")
+            ->leftJoin("lc.category", "c")
            ->where(
                $qb->expr()->andX(
                    "c.slug = :slug",
