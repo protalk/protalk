@@ -46,7 +46,7 @@ class Tag implements SluggableInterface
     /**
      * @var ArrayCollection $medias
      *
-     * @ORM\ManyToMany(targetEntity="Media", mappedBy="tags")
+     * @ORM\OneToMany(targetEntity="MediaTag", mappedBy="tag")
      */
     private $medias;
 

@@ -41,7 +41,7 @@ class LanguageCategory
     private $language_id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Language")
+     * @ORM\ManyToOne(targetEntity="Language", inversedBy="languageCategories")
      * @ORM\JoinColumn(name="language_id", referencedColumnName="id")
      */
     protected $language;
@@ -52,8 +52,9 @@ class LanguageCategory
      * @ORM\Column(name="category_id", type="integer")
      */
     private $category_id;
+    
     /**
-     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="languageCategories")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     protected $category;
@@ -61,9 +62,10 @@ class LanguageCategory
     /**
      * @var ArrayCollection $medias
      *
-     * @ORM\ManyToMany(targetEntity="Media", mappedBy="languageCategories")
+     * @ORM\OneToMany(targetEntity="Media", mappedBy="languageCategory")
      */
     private $medias;
+    
     /**
      * Constructor function
      *
@@ -73,4 +75,88 @@ class LanguageCategory
         $this->medias = new ArrayCollection();
     }
 
+    /**
+     * Set category
+     *
+     * @param \Protalk\MediaBundle\Entity\Category $category
+     */
+    public function setCategory(\Protalk\MediaBundle\Entity\Category $category)
+    {
+        $this->category = $category;
+    }
+
+    /**
+     * Set language
+     *
+     * @param \Protalk\MediaBundle\Entity\Language $language
+     */
+    public function setLanguage(\Protalk\MediaBundle\Entity\Language $language)
+    {
+        $this->language = $language;
+    }
+
+    /**
+     * Get language
+     *
+     * @return \Protalk\MediaBundle\Entity\Language
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+    
+    /**
+     * Get category
+     *
+     * @return \Protalk\MediaBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+    
+    /**
+     * Set language_id
+     *
+     * @param integer $languageId
+     */
+    public function setLanguageId($languageId)
+    {
+        $this->language_id = $languageId;
+    }
+
+    /**
+     * Get language_id
+     *
+     * @return integer
+     */
+    public function getLanguageId()
+    {
+        return $this->language_id;
+    }
+    
+    /**
+     * Set category_id
+     *
+     * @param integer $categoryId
+     */
+    public function setCategoryId($categoryId)
+    {
+        $this->category_id = $categoryId;
+    }
+
+    /**
+     * Get category_id
+     *
+     * @return integer
+     */
+    public function getCategoryId()
+    {
+        return $this->category_id;
+    }
+    
+    public function __toString() 
+    {
+        return $this->category->getName();
+    }
 }

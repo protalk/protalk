@@ -53,7 +53,7 @@ class Language implements SluggableInterface
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="LanguageCategory", mappedBy="language")
+     * @ORM\OneToMany(targetEntity="LanguageCategory", mappedBy="language", cascade={"persist"}, orphanRemoval=true)
      */
     private $languageCategories;
 
@@ -157,6 +157,17 @@ class Language implements SluggableInterface
     
         return $this;
     }
+    
+    /**
+     * Add languageCategory
+     *
+     * @param \Protalk\MediaBundle\Entity\LanguageCategory $languageCategory
+     * @return Language
+     */
+    public function addLanguageCategorie(LanguageCategory $languageCategory)
+    {
+        return $this->addLanguageCategory($languageCategory);
+    }
 
     /**
      * Remove languageCategory
@@ -167,6 +178,16 @@ class Language implements SluggableInterface
     {
         $this->languageCategories->removeElement($languageCategory);
     }
+    
+    /**
+     * Remove languageCategory
+     *
+     * @param \Protalk\MediaBundle\Entity\LanguageCategory $languageCategory
+     */
+    public function removeLanguageCategorie(LanguageCategory $languageCategory)
+    {
+        $this->removeLanguageCategory($languageCategory);
+    }
 
     /**
      * Get languageCategories
@@ -176,5 +197,29 @@ class Language implements SluggableInterface
     public function getLanguageCategories()
     {
         return $this->languageCategories;
+    }
+    
+    /**
+     * Set language categories
+     * 
+     * @param \Protalk\MediaBundle\Entity\LanguageCategory[] $languageCategories 
+     */
+    public function setLanguageCategories($languageCategories)
+    {
+        $this->languageCategories = new ArrayCollection();
+
+        foreach ($languageCategories as $category) {
+            $this->addLanguageCategory($category);
+        }
+    }
+    
+    /**
+     * Convert object to string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
     }
 }

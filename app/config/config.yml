@@ -83,6 +83,31 @@ sonata_admin:
                 items: ~   
 
 services:
+   protalk.common.admin.language:
+      class: Protalk\AdminBundle\Admin\LanguageAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: protalk_common, label: Language }
+      arguments: [null, Protalk\MediaBundle\Entity\Language, null] 
+   protalk.common.admin.languagecategory:
+      class: Protalk\AdminBundle\Admin\LanguageCategoryAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, show_in_dashboard: false }
+      arguments: [null, Protalk\MediaBundle\Entity\LanguageCategory, null] 
+   protalk.common.admin.medialanguagecategory:
+      class: Protalk\AdminBundle\Admin\MediaLanguageCategoryAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, show_in_dashboard: false }
+      arguments: [null, Protalk\MediaBundle\Entity\MediaLanguageCategory, null] 
+   protalk.common.admin.mediaspeaker:
+      class: Protalk\AdminBundle\Admin\MediaSpeakerAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, show_in_dashboard: false }
+      arguments: [null, Protalk\MediaBundle\Entity\MediaSpeaker, null] 
+   protalk.common.admin.mediatag:
+      class: Protalk\AdminBundle\Admin\MediaTagAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, show_in_dashboard: false }
+      arguments: [null, Protalk\MediaBundle\Entity\MediaTag, null]    
    protalk.common.admin.category:
       class: Protalk\AdminBundle\Admin\CategoryAdmin
       tags:
@@ -137,7 +162,7 @@ services:
       class: Protalk\AdminBundle\Admin\ContributionAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_media, label: Contribution }
-      arguments: [null, Protalk\MediaBundle\Entity\Contribution, null]   
+      arguments: [null, Protalk\MediaBundle\Entity\Contribution, null]    
 
 fos_user:
     db_driver: orm

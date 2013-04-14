@@ -46,12 +46,10 @@ class MediaAdmin extends Admin
                 ->add('mediatype')
                 ->add(
                     'speakers',
-                    'sonata_type_model',
-                    array(
-                        'expanded' => true,
-                        'compound' => true,
-                        'multiple' => true
-                    )
+                    'sonata_type_collection',
+                    array('by_reference' => false),
+                    array('edit' => 'inline',
+                          'inline' => 'table')
                 )
                 ->add('date')
                 ->add('description')
@@ -79,22 +77,19 @@ class MediaAdmin extends Admin
                 ->add('hostUrl')
                 ->add('thumbnail')
                 ->add(
-                    'categories',
-                    'sonata_type_model',
-                    array(
-                        'expanded' => true,
-                        'compound' => true,
-                        'multiple' => true
-                    )
+                    'languageCategories',
+                    'sonata_type_collection',
+                    array('label' => 'Categories', 
+                          'by_reference' => false),
+                    array('edit' => 'inline',
+                          'inline' => 'table')
                 )
                 ->add(
                     'tags',
-                    'sonata_type_model',
-                    array(
-                        'expanded' => true,
-                        'compound' => true,
-                        'multiple' => true
-                    )
+                    'sonata_type_collection',
+                    array('by_reference' => false),
+                    array('edit' => 'inline',
+                          'inline' => 'table')
                 );
     }
 

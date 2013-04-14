@@ -55,8 +55,7 @@ class Media implements SluggableInterface
     /**
      * @var ArrayCollection $speakers
      *
-     * @ORM\ManyToMany(targetEntity="Speaker", inversedBy="medias")
-     * @ORM\JoinTable(name="media_speaker")
+     * @ORM\OneToMany(targetEntity="MediaSpeaker", mappedBy="media", cascade={"persist"}, orphanRemoval=true)
      */
     private $speakers;
 
@@ -73,16 +72,14 @@ class Media implements SluggableInterface
     /**
      * @var ArrayCollection $tags
      *
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="medias")
-     * @ORM\JoinTable(name="media_tag")
+     * @ORM\OneToMany(targetEntity="MediaTag", mappedBy="media", cascade={"persist"}, orphanRemoval=true)
      */
     private $tags;
 
     /**
      * @var ArrayCollection $languageCategories
      *
-     * @ORM\ManyToMany(targetEntity="LanguageCategory", inversedBy="medias")
-     * @ORM\JoinTable(name="media_language_category")
+     * @ORM\OneToMany(targetEntity="MediaLanguageCategory", mappedBy="media", cascade={"persist"}, orphanRemoval=true)
      */
     private $languageCategories;
 
