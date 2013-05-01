@@ -41,6 +41,6 @@ class MediaLanguageCategoryAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('languagecategory');
+        $formMapper->add('languageCategory');
     }
 }

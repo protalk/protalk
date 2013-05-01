@@ -491,9 +491,9 @@ class Media implements SluggableInterface
     /**
      * Add speakers
      *
-     * @param \Protalk\MediaBundle\Entity\Speaker $speakers
+     * @param \Protalk\MediaBundle\Entity\MediaSpeaker $speakers
      */
-    public function addSpeaker(\Protalk\MediaBundle\Entity\Speaker $speakers)
+    public function addSpeaker(\Protalk\MediaBundle\Entity\MediaSpeaker $speakers)
     {
         $this->speakers[] = $speakers;
     }
@@ -642,12 +642,20 @@ class Media implements SluggableInterface
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getLanguageCategories()
+    public function getLanguageCategory()
     {
         return $this->languageCategories;
     }
 
-
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLanguageCategories()
+    {
+        return $this->languageCategories;
+    }
 
     /**
      * Get tags
@@ -668,6 +676,16 @@ class Media implements SluggableInterface
     {
         $this->tags = $tags;
     }
+    
+    /**
+     * Set language category
+     *
+     * @param \Doctrine\Common\Collections\Collection $categories
+     */
+    public function setLanguageCategory($categories)
+    {
+        $this->languageCategories = $categories;
+    }
 
     /**
      * Convert object to string
@@ -681,9 +699,9 @@ class Media implements SluggableInterface
     /**
      * Add language category
      *
-     * @param \Protalk\MediaBundle\Entity\LanguageCategory $languageCategory
+     * @param \Protalk\MediaBundle\Entity\MediaLanguageCategory $languageCategory
      */
-    public function addLanguageCategory(LanguageCategory $languageCategory)
+    public function addLanguageCategory(MediaLanguageCategory $languageCategory)
     {
         $this->languageCategories[] = $languageCategory;
     }
@@ -691,9 +709,9 @@ class Media implements SluggableInterface
     /**
      * Remove language category
      *
-     * @param \Protalk\MediaBundle\Entity\LanguageCategory $languageCategory
+     * @param \Protalk\MediaBundle\Entity\MediaLanguageCategory $languageCategory
      */
-    public function removeLanguageCategory(LanguageCategory $languageCategory)
+    public function removeLanguageCategory(MediaLanguageCategory $languageCategory)
     {
         $this->languageCategories->removeElement($languageCategory);
     }
@@ -701,9 +719,9 @@ class Media implements SluggableInterface
     /**
      * Add tags
      *
-     * @param \Protalk\MediaBundle\Entity\Tag $tags
+     * @param \Protalk\MediaBundle\Entity\MediaTag $tags
      */
-    public function addTag(Tag $tags)
+    public function addTag(MediaTag $tags)
     {
         $this->tags[] = $tags;
     }
@@ -846,13 +864,13 @@ class Media implements SluggableInterface
     /**
      * Remove speakers
      *
-     * @param \Protalk\MediaBundle\Entity\Speaker $speakers
+     * @param \Protalk\MediaBundle\Entity\MediaSpeaker $speakers
      */
-    public function removeSpeaker(Speaker $speakers)
+    public function removeSpeaker(MediaSpeaker $speakers)
     {
         $this->speakers->removeElement($speakers);
     }
-
+    
     /**
      * Remove comments
      *
@@ -876,9 +894,9 @@ class Media implements SluggableInterface
     /**
      * Remove tags
      *
-     * @param \Protalk\MediaBundle\Entity\Tag $tags
+     * @param \Protalk\MediaBundle\Entity\MediaTag $tags
      */
-    public function removeTag(Tag $tags)
+    public function removeTag(MediaTag $tags)
     {
         $this->tags->removeElement($tags);
     }
@@ -886,10 +904,10 @@ class Media implements SluggableInterface
     /**
      * Add languageCategories
      *
-     * @param \Protalk\MediaBundle\Entity\LanguageCategory $languageCategories
+     * @param \Protalk\MediaBundle\Entity\MediaLanguageCategory $languageCategories
      * @return Media
      */
-    public function addLanguageCategorie(\Protalk\MediaBundle\Entity\LanguageCategory $languageCategories)
+    public function addLanguageCategorie(\Protalk\MediaBundle\Entity\MediaLanguageCategory $languageCategories)
     {
         $this->languageCategories[] = $languageCategories;
     
@@ -899,9 +917,9 @@ class Media implements SluggableInterface
     /**
      * Remove languageCategories
      *
-     * @param \Protalk\MediaBundle\Entity\LanguageCategory $languageCategories
+     * @param \Protalk\MediaBundle\Entity\MediaLanguageCategory $languageCategories
      */
-    public function removeLanguageCategorie(\Protalk\MediaBundle\Entity\LanguageCategory $languageCategories)
+    public function removeLanguageCategorie(\Protalk\MediaBundle\Entity\MediaLanguageCategory $languageCategories)
     {
         $this->languageCategories->removeElement($languageCategories);
     }

@@ -62,7 +62,7 @@ class LanguageCategory
     /**
      * @var ArrayCollection $medias
      *
-     * @ORM\OneToMany(targetEntity="Media", mappedBy="languageCategory")
+     * @ORM\OneToMany(targetEntity="MediaLanguageCategory", mappedBy="languageCategory")
      */
     private $medias;
     
@@ -157,6 +157,6 @@ class LanguageCategory
     
     public function __toString() 
     {
-        return $this->category->getName();
+        return $this->category->getName().' ('.$this->language->getName().')';
     }
 }

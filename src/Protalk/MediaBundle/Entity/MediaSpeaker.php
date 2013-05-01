@@ -24,10 +24,18 @@ use Doctrine\Common\Collections\ArrayCollection;
 class MediaSpeaker
 {
     /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    /**
      * @var integer $media_id
      *
      * @ORM\Column(name="media_id", type="integer")
-     * @ORM\Id
      */
     private $media_id;
 
@@ -41,7 +49,6 @@ class MediaSpeaker
      * @var integer $speaker_id
      *
      * @ORM\Column(name="speaker_id", type="integer")
-     * @ORM\Id
      */
     private $speaker_id;
     

@@ -115,10 +115,13 @@ class MediaRepository extends EntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select("m")->distinct(true)
            ->from("ProtalkMediaBundle:Media", "m")
-           ->leftJoin("m.languageCategories", "lc")
+           ->leftJoin('m.languageCategories', 'mlc')     
+           ->leftJoin("mlc.languageCategory", "lc")
            ->leftJoin("lc.category", "c")
-           ->leftJoin("m.tags", "t")
-           ->join("m.speakers", "s")
+           ->leftJoin("m.tags", "mt")
+           ->leftJoin('mt.tag', 't')     
+           ->join("m.speakers", "ms")
+           ->join('ms.speaker', 's')     
            ->join("m.mediatype", "mtype")
            ->where(
                $qb->expr()->andX(
@@ -181,8 +184,9 @@ class MediaRepository extends EntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select("m")
            ->from("ProtalkMediaBundle:Media", "m")
-            ->leftJoin("m.languageCategories", "lc")
-            ->leftJoin("lc.category", "c")
+           ->leftJoin('m.languageCategories', 'mlc')     
+           ->leftJoin("mlc.languageCategory", "lc")
+           ->leftJoin("lc.category", "c")
            ->where(
                $qb->expr()->andX(
                    "c.slug = :slug",
@@ -215,7 +219,8 @@ class MediaRepository extends EntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select("m")
            ->from("ProtalkMediaBundle:Media", "m")
-           ->join("m.tags", "t")
+           ->join('m.tags', 'mt')     
+           ->join("mt.tag", "t")
            ->where(
                $qb->expr()->andX(
                    "t.slug = :slug",
@@ -246,7 +251,8 @@ class MediaRepository extends EntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select("m")
            ->from("ProtalkMediaBundle:Media", "m")
-           ->join("m.speakers", "s")
+           ->join('m.speakers', 'ms')     
+           ->join("ms.speaker", "s")
            ->where(
                $qb->expr()->andX(
                    "s.id = :speakerId",

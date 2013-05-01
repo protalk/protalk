@@ -33,7 +33,8 @@ class TagRepository extends EntityRepository
 
         $qb->select('t.slug', 't.name', 'COUNT(m.id) as mediaCount');
         $qb->from('\Protalk\MediaBundle\Entity\Tag', 't');
-        $qb->join('t.medias', 'm');
+        $qb->join('t.medias', 'mt');
+        $qb->join('mt.media', 'm');
         $qb->where('m.status = :status');
         $qb->groupBy('t.slug');
         $qb->orderBy('mediaCount', 'DESC');

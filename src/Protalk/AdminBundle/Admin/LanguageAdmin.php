@@ -103,11 +103,7 @@ class LanguageAdmin extends Admin
      */
     public function prePersist($language)
     {
-        $languageCategories = $language->getLanguageCategories();
-        foreach ($languageCategories as $index => $category) {
-            $languageCategories[$index]->setLanguage($language);
-        }
-        $language->setLanguageCategories($languageCategories);
+        $this->setLanguageCategories($language);
     }
     
     /**
@@ -118,6 +114,16 @@ class LanguageAdmin extends Admin
      * @return mixed|void
      */
     public function preUpdate($language)
+    {
+        $this->setLanguageCategories($language);
+    }
+    
+    /**
+     * Set language categories
+     * 
+     * @param \Protalk\MediaBundle\Entity\Language $language
+     */
+    private function setLanguageCategories(Language $language)
     {
         $languageCategories = $language->getLanguageCategories();
         foreach ($languageCategories as $index => $category) {

@@ -24,15 +24,23 @@ use Doctrine\Common\Collections\ArrayCollection;
 class MediaLanguageCategory
 {
     /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    /**
      * @var integer $media_id
      *
      * @ORM\Column(name="media_id", type="integer")
-     * @ORM\Id
      */
     private $media_id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Media", inversedBy="speakers")
+     * @ORM\ManyToOne(targetEntity="Media", inversedBy="languageCategories")
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
      */
     protected $media;
@@ -41,7 +49,6 @@ class MediaLanguageCategory
      * @var integer $languagecategory_id
      *
      * @ORM\Column(name="languagecategory_id", type="integer")
-     * @ORM\Id
      */
     private $languagecategory_id;
     
@@ -49,7 +56,7 @@ class MediaLanguageCategory
      * @ORM\ManyToOne(targetEntity="LanguageCategory", inversedBy="medias")
      * @ORM\JoinColumn(name="languagecategory_id", referencedColumnName="id")
      */
-    protected $languagecategory;
+    protected $languageCategory;
 
     /**
      * Set media
@@ -66,9 +73,9 @@ class MediaLanguageCategory
      *
      * @param \Protalk\MediaBundle\Entity\LanguageCategory $languageCategory
      */
-    public function setSpeaker(\Protalk\MediaBundle\Entity\LanguageCategory $languageCategory)
+    public function setLanguageCategory(\Protalk\MediaBundle\Entity\LanguageCategory $languageCategory)
     {
-        $this->languagecategory = $languageCategory;
+        $this->languageCategory = $languageCategory;
     }
 
     /**
@@ -88,7 +95,7 @@ class MediaLanguageCategory
      */
     public function getLanguageCategory()
     {
-        return $this->languagecategory;
+        return $this->languageCategory;
     }
     
     /**
@@ -130,9 +137,9 @@ class MediaLanguageCategory
     {
         return $this->languagecategory_id;
     }
-    
+   
     public function __toString() 
     {
-        return $this->languagecategory->getCategory()->getName().' ('.$this->languagecategory->getLanguage()->getName().')';
+        return $this->languageCategory->getCategory()->getName().' ('.$this->languageCategory->getLanguage()->getName().')';
     }
 }

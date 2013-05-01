@@ -24,15 +24,23 @@ use Doctrine\Common\Collections\ArrayCollection;
 class MediaTag
 {
     /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    /**
      * @var integer $media_id
      *
      * @ORM\Column(name="media_id", type="integer")
-     * @ORM\Id
      */
     private $media_id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Media", inversedBy="speakers")
+     * @ORM\ManyToOne(targetEntity="Media", inversedBy="tags")
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
      */
     protected $media;
@@ -41,7 +49,6 @@ class MediaTag
      * @var integer $tag_id
      *
      * @ORM\Column(name="tag_id", type="integer")
-     * @ORM\Id
      */
     private $tag_id;
     

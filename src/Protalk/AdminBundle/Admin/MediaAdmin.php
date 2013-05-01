@@ -181,4 +181,47 @@ class MediaAdmin extends Admin
                 break;
         }
     }
+    
+    /**
+     * Add the speakers, categories and tags to the media item
+     * 
+     * @param \Protalk\MediaBundle\Entity\Media $media 
+     */
+    public function prePersist($media)
+    {
+        $this->setMedia($media, 'speakers');
+        $this->setMedia($media, 'tags');
+        $this->setMedia($media, 'languageCategory');
+    }
+    
+    /**
+     * Pre update 
+     * 
+     * @param mixed $object
+     * 
+     * @return mixed|void
+     */
+    public function preUpdate($media)
+    {
+        $this->setMedia($media, 'speakers');
+        $this->setMedia($media, 'tags');
+        $this->setMedia($media, 'languageCategory');
+    }
+    
+    /**
+     * Generic method to set media for a certain relation
+     * 
+     * @param \Protalk\MediaBundle\Entity\Media $media
+     * @param string                            $type
+     */
+    private function setMedia($media, $type)
+    {
+        $method = 'get'.$type;
+        $result = $media->$method();
+        foreach ($result as $index => $res) {
+            $result[$index]->setMedia($media);
+        }
+        $method = 'set'.$type;
+        $media->$method($result);
+    }
 }

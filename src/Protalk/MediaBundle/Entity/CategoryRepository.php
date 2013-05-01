@@ -35,7 +35,8 @@ class CategoryRepository extends EntityRepository
         $qb->select('c.slug', 'c.name', 'COUNT(m.id) as mediaCount');
         $qb->from('\Protalk\MediaBundle\Entity\Category', 'c');
         $qb->join('c.languageCategories', 'lc');
-        $qb->join('lc.medias','m' );
+        $qb->join('lc.medias','mlc' );
+        $qb->join('mlc.media', 'm');
         $qb->where('m.status = :status');
         $qb->groupBy('c.slug');
         $qb->orderBy('mediaCount', 'DESC');
@@ -59,7 +60,8 @@ class CategoryRepository extends EntityRepository
         $qb->select('c.slug', 'c.name', 'COUNT(m.id) as mediaCount');
         $qb->from('\Protalk\MediaBundle\Entity\Category', 'c');
         $qb->join('c.languageCategories', 'lc');
-        $qb->join('lc.medias','m' );
+        $qb->join('lc.medias', 'mlc');
+        $qb->join('mlc.media', 'm');
         $qb->where('m.status = :status');
         $qb->groupBy('c.slug');
         $qb->orderBy('c.name', 'ASC');
