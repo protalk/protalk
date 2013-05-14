@@ -45,15 +45,15 @@ class HomeControllerTest extends WebTestCase
         $this->assertContains('<link>http://protalk.me</link>', $content);
 
         // Assertions on the items in the feed
-        $this->assertContains('<title>My video about PHP</title>', $content);
-        $this->assertContains('<link>http://protalk.me/my-video-about-php</link>', $content);
+        $this->assertContains('<title>Tool Up Your Lamp Stack</title>', $content);
+        $this->assertContains('<link>http://protalk.me/tool-up-your-lamp-stack</link>', $content);
 
         $today = new \DateTime();
         $today = $today->format('d-m-Y');
         
         $this->assertContains('<pubDate>'.$today.'</pubDate>', $content);
         $this->assertContains('<dc:creator>ProTalk</dc:creator>', $content);
-        $this->assertContains('<guid isPermaLink="false">http://protalk.me/my-video-about-php</guid>', $content);
-        $this->assertContains('<p>A video about PHP!</p>', $content);
+        $this->assertContains('<guid isPermaLink="false">http://protalk.me/tool-up-your-lamp-stack</guid>', $content);
+        $this->assertContains('<p>A talk about peripheral tools that aid web development</p>', $content);
     }
 }

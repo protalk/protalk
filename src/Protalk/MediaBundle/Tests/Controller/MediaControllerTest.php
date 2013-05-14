@@ -29,30 +29,29 @@ class MediaControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/my-video-about-php');
+        $client->request('GET', '/tool-up-your-lamp-stack');
 
         $response = $client->getResponse();
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $this->assertContains("My video about PHP", $response->getContent());
-        $this->assertContains("PHPNW", $response->getContent());
-        $this->assertContains("Joe Bloggs", $response->getContent());
-        $this->assertContains("A video about PHP!", $response->getContent());
-        $this->assertContains("http://some.video-url.com", $response->getContent());
-        $this->assertContains("20:00:00", $response->getContent());
+        $this->assertContains("Tool Up Your Lamp Stack", $response->getContent());
+        $this->assertContains("Lorna Mitchell", $response->getContent());
+        $this->assertContains("A talk about peripheral tools that aid web development", $response->getContent());
+        $this->assertContains("http://vimeo.com/30012690/", $response->getContent());
+        $this->assertContains("1hr 20mins", $response->getContent());
     }
 
     public function testMediaPageIncrementsMediaViewCount()
     {
         $client = static::createClient();
 
-        $client->request('GET', '/my-video-about-php');
+        $client->request('GET', '/tool-up-your-lamp-stack');
         $response = $client->getResponse();
 
         $this->assertContains("101 views", $response->getContent());
 
-        $client->request('GET', '/my-video-about-php');
+        $client->request('GET', '/tool-up-your-lamp-stack');
         $response = $client->getResponse();
 
         $this->assertContains("102 views", $response->getContent());
@@ -75,8 +74,8 @@ class MediaControllerTest extends WebTestCase
         $client->request('GET', '/media/1/speakers');
         $content = $client->getResponse()->getContent();
 
-        $this->assertContains("Joe Bloggs", $content);
-        $this->assertContains("Joe Bloggs bio", $content);
+        $this->assertContains("Nils Adermann", $content);
+        $this->assertContains("Nils Adermann&#039;s bio.", $content);
     }
 
     public function testGetInvalidSpeakersForMediaReturns404()
