@@ -18,15 +18,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * Protalk\MediaBundle\Entity\Category
+ * Protalk\MediaBundle\Entity\Language
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Protalk\MediaBundle\Entity\CategoryRepository")
+ * @ORM\Entity(repositoryClass="Protalk\MediaBundle\Entity\LanguageRepository")
  * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity("name")
  *
  */
-class Category implements SluggableInterface
+class Language implements SluggableInterface
 {
     /**
      * @var integer $id
@@ -39,31 +39,11 @@ class Category implements SluggableInterface
     private $id;
 
     /**
-     * @var integer $parent_id
-     *
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
-     */
-    private $parent_id;
-
-    /**
      * @var string $name
      *
      * @ORM\Column(name="name", type="string", length=50, unique=true)
      */
     private $name;
-
-    /**
-     * @var array $children
-     *
-     * @ORM\OneToMany(targetEntity="Category", mappedBy="parent_id")
-     */
-    private $children;
-
-    /**
-     * @ORM\OneToMany(targetEntity="LanguageCategory", mappedBy="category")
-     */
-    private $languageCategories;
 
     /**
      * @var string $slug
@@ -73,94 +53,17 @@ class Category implements SluggableInterface
     private $slug;
 
     /**
+     * @ORM\OneToMany(targetEntity="LanguageCategory", mappedBy="language", cascade={"persist"}, orphanRemoval=true)
+     */
+    private $languageCategories;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->children = new ArrayCollection();
+        $this->categories = new ArrayCollection();
         $this->languageCategories = new ArrayCollection();
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set parent_id
-     *
-     * @param integer $parentId
-     */
-    public function setParentId($parentId)
-    {
-        $this->parent_id = $parentId;
-    }
-
-    /**
-     * Get parent_id
-     *
-     * @return integer
-     */
-    public function getParentId()
-    {
-        return $this->parent_id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Get object as string (name)
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Add children
-     *
-     * @param \Protalk\MediaBundle\Entity\Category $children
-     *
-     * @return void
-     */
-    public function addCategory(Category $children)
-    {
-        $this->children[] = $children;
-    }
-
-    /**
-     * Get children
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getChildren()
-    {
-        return $this->children;
     }
 
     /*
@@ -202,7 +105,7 @@ class Category implements SluggableInterface
     public function updateSlug()
     {
 
-        $slugger = new Slugger();
+        $slugger = new Slugger('-', '-');
 
         $slug = $slugger->getSlug($this->getSlugFields());
 
@@ -210,39 +113,60 @@ class Category implements SluggableInterface
     }
 
     /**
-     * Add children
+     * Get id
      *
-     * @param \Protalk\MediaBundle\Entity\Category $children
-     * @return Category
+     * @return integer 
      */
-    public function addChildren(Category $children)
+    public function getId()
     {
-        $this->children[] = $children;
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Language
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     
         return $this;
     }
 
     /**
-     * Remove children
+     * Get name
      *
-     * @param \Protalk\MediaBundle\Entity\Category $children
+     * @return string 
      */
-    public function removeChildren(Category $children)
+    public function getName()
     {
-        $this->children->removeElement($children);
+        return $this->name;
     }
 
     /**
      * Add languageCategory
      *
      * @param \Protalk\MediaBundle\Entity\LanguageCategory $languageCategory
-     * @return Category
+     * @return Language
      */
     public function addLanguageCategory(LanguageCategory $languageCategory)
     {
         $this->languageCategories[] = $languageCategory;
     
         return $this;
+    }
+    
+    /**
+     * Add languageCategory
+     *
+     * @param \Protalk\MediaBundle\Entity\LanguageCategory $languageCategory
+     * @return Language
+     */
+    public function addLanguageCategorie(LanguageCategory $languageCategory)
+    {
+        return $this->addLanguageCategory($languageCategory);
     }
 
     /**
@@ -254,6 +178,16 @@ class Category implements SluggableInterface
     {
         $this->languageCategories->removeElement($languageCategory);
     }
+    
+    /**
+     * Remove languageCategory
+     *
+     * @param \Protalk\MediaBundle\Entity\LanguageCategory $languageCategory
+     */
+    public function removeLanguageCategorie(LanguageCategory $languageCategory)
+    {
+        $this->removeLanguageCategory($languageCategory);
+    }
 
     /**
      * Get languageCategories
@@ -263,5 +197,29 @@ class Category implements SluggableInterface
     public function getLanguageCategories()
     {
         return $this->languageCategories;
+    }
+    
+    /**
+     * Set language categories
+     * 
+     * @param \Protalk\MediaBundle\Entity\LanguageCategory[] $languageCategories 
+     */
+    public function setLanguageCategories($languageCategories)
+    {
+        $this->languageCategories = new ArrayCollection();
+
+        foreach ($languageCategories as $category) {
+            $this->addLanguageCategory($category);
+        }
+    }
+    
+    /**
+     * Convert object to string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
     }
 }

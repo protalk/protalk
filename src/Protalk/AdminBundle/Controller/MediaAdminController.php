@@ -44,7 +44,7 @@ class MediaAdminController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         foreach ($query->getQuery()->iterate() as $entity) {
-            $entity[0]->setStatus(Media::STATUS_PUBLISHED);
+            $entity[0]->setStatus(Media::STATUS_UNPUBLISHED);
             $em->persist($entity[0]);
         }
         $em->flush();
