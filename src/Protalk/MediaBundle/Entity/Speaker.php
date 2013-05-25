@@ -34,7 +34,7 @@ class Speaker
     /**
      * @var ArrayCollection $medias
      *
-     * @ORM\ManyToMany(targetEntity="Media", mappedBy="speakers")
+     * @ORM\OneToMany(targetEntity="MediaSpeaker", mappedBy="speaker")
      */
     private $medias;
 

@@ -55,8 +55,7 @@ class Media implements SluggableInterface
     /**
      * @var ArrayCollection $speakers
      *
-     * @ORM\ManyToMany(targetEntity="Speaker", inversedBy="medias")
-     * @ORM\JoinTable(name="media_speaker")
+     * @ORM\OneToMany(targetEntity="MediaSpeaker", mappedBy="media", cascade={"persist"}, orphanRemoval=true)
      */
     private $speakers;
 
@@ -71,20 +70,18 @@ class Media implements SluggableInterface
     private $ratings;
 
     /**
-     * @var ArrayCollection $categories
-     *
-     * @ORM\ManyToMany(targetEntity="Category", inversedBy="medias")
-     * @ORM\JoinTable(name="media_category")
-     */
-    private $categories;
-
-    /**
      * @var ArrayCollection $tags
      *
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="medias")
-     * @ORM\JoinTable(name="media_tag")
+     * @ORM\OneToMany(targetEntity="MediaTag", mappedBy="media", cascade={"persist"}, orphanRemoval=true)
      */
     private $tags;
+
+    /**
+     * @var ArrayCollection $languageCategories
+     *
+     * @ORM\OneToMany(targetEntity="MediaLanguageCategory", mappedBy="media", cascade={"persist"}, orphanRemoval=true)
+     */
+    private $languageCategories;
 
     /**
      * @var \DateTime $date
@@ -217,9 +214,9 @@ class Media implements SluggableInterface
     {
         $this->speakers = new ArrayCollection();
         $this->comments = new ArrayCollection();
-        $this->categories = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->ratings = new ArrayCollection();
+        $this->languageCategories = new ArrayCollection();
         $this->creationDate = new \DateTime();
 
         $this->isImported = false;
@@ -494,9 +491,9 @@ class Media implements SluggableInterface
     /**
      * Add speakers
      *
-     * @param \Protalk\MediaBundle\Entity\Speaker $speakers
+     * @param \Protalk\MediaBundle\Entity\MediaSpeaker $speakers
      */
-    public function addSpeaker(\Protalk\MediaBundle\Entity\Speaker $speakers)
+    public function addSpeaker(\Protalk\MediaBundle\Entity\MediaSpeaker $speakers)
     {
         $this->speakers[] = $speakers;
     }
@@ -645,19 +642,19 @@ class Media implements SluggableInterface
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getCategories()
+    public function getLanguageCategory()
     {
-        return $this->categories;
+        return $this->languageCategories;
     }
 
     /**
-     * Set categories
+     * Get categories
      *
-     * @param \Doctrine\Common\Collections\Collection $categories
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function setCategories($categories)
+    public function getLanguageCategories()
     {
-        $this->categories = $categories;
+        return $this->languageCategories;
     }
 
     /**
@@ -679,6 +676,16 @@ class Media implements SluggableInterface
     {
         $this->tags = $tags;
     }
+    
+    /**
+     * Set language category
+     *
+     * @param \Doctrine\Common\Collections\Collection $categories
+     */
+    public function setLanguageCategory($categories)
+    {
+        $this->languageCategories = $categories;
+    }
 
     /**
      * Convert object to string
@@ -690,21 +697,31 @@ class Media implements SluggableInterface
     }
 
     /**
-     * Add categories
+     * Add language category
      *
-     * @param \Protalk\MediaBundle\Entity\Category $categories
+     * @param \Protalk\MediaBundle\Entity\MediaLanguageCategory $languageCategory
      */
-    public function addCategory(\Protalk\MediaBundle\Entity\Category $categories)
+    public function addLanguageCategory(MediaLanguageCategory $languageCategory)
     {
-        $this->categories[] = $categories;
+        $this->languageCategories[] = $languageCategory;
+    }
+
+    /**
+     * Remove language category
+     *
+     * @param \Protalk\MediaBundle\Entity\MediaLanguageCategory $languageCategory
+     */
+    public function removeLanguageCategory(MediaLanguageCategory $languageCategory)
+    {
+        $this->languageCategories->removeElement($languageCategory);
     }
 
     /**
      * Add tags
      *
-     * @param \Protalk\MediaBundle\Entity\Tag $tags
+     * @param \Protalk\MediaBundle\Entity\MediaTag $tags
      */
-    public function addTag(\Protalk\MediaBundle\Entity\Tag $tags)
+    public function addTag(MediaTag $tags)
     {
         $this->tags[] = $tags;
     }
@@ -770,7 +787,7 @@ class Media implements SluggableInterface
      *
      * @param \Protalk\MediaBundle\Entity\Rating $ratings
      */
-    public function addRating(\Protalk\MediaBundle\Entity\Rating $ratings)
+    public function addRating(Rating $ratings)
     {
         $this->ratings[] = $ratings;
     }
@@ -847,19 +864,19 @@ class Media implements SluggableInterface
     /**
      * Remove speakers
      *
-     * @param \Protalk\MediaBundle\Entity\Speaker $speakers
+     * @param \Protalk\MediaBundle\Entity\MediaSpeaker $speakers
      */
-    public function removeSpeaker(\Protalk\MediaBundle\Entity\Speaker $speakers)
+    public function removeSpeaker(MediaSpeaker $speakers)
     {
         $this->speakers->removeElement($speakers);
     }
-
+    
     /**
      * Remove comments
      *
      * @param \Protalk\MediaBundle\Entity\Comment $comments
      */
-    public function removeComment(\Protalk\MediaBundle\Entity\Comment $comments)
+    public function removeComment(Comment $comments)
     {
         $this->comments->removeElement($comments);
     }
@@ -869,41 +886,41 @@ class Media implements SluggableInterface
      *
      * @param \Protalk\MediaBundle\Entity\Rating $ratings
      */
-    public function removeRating(\Protalk\MediaBundle\Entity\Rating $ratings)
+    public function removeRating(Rating $ratings)
     {
         $this->ratings->removeElement($ratings);
     }
 
     /**
-     * Add categories
+     * Remove tags
      *
-     * @param \Protalk\MediaBundle\Entity\Category $categories
+     * @param \Protalk\MediaBundle\Entity\MediaTag $tags
+     */
+    public function removeTag(MediaTag $tags)
+    {
+        $this->tags->removeElement($tags);
+    }
+
+    /**
+     * Add languageCategories
+     *
+     * @param \Protalk\MediaBundle\Entity\MediaLanguageCategory $languageCategories
      * @return Media
      */
-    public function addCategorie(\Protalk\MediaBundle\Entity\Category $categories)
+    public function addLanguageCategorie(\Protalk\MediaBundle\Entity\MediaLanguageCategory $languageCategories)
     {
-        $this->categories[] = $categories;
+        $this->languageCategories[] = $languageCategories;
     
         return $this;
     }
 
     /**
-     * Remove categories
+     * Remove languageCategories
      *
-     * @param \Protalk\MediaBundle\Entity\Category $categories
+     * @param \Protalk\MediaBundle\Entity\MediaLanguageCategory $languageCategories
      */
-    public function removeCategorie(\Protalk\MediaBundle\Entity\Category $categories)
+    public function removeLanguageCategorie(\Protalk\MediaBundle\Entity\MediaLanguageCategory $languageCategories)
     {
-        $this->categories->removeElement($categories);
-    }
-
-    /**
-     * Remove tags
-     *
-     * @param \Protalk\MediaBundle\Entity\Tag $tags
-     */
-    public function removeTag(\Protalk\MediaBundle\Entity\Tag $tags)
-    {
-        $this->tags->removeElement($tags);
+        $this->languageCategories->removeElement($languageCategories);
     }
 }
