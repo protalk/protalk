@@ -104,6 +104,7 @@ class MediaAdmin extends Admin
     {
         $datagridMapper->add('title')
             ->add('isImported')
+            ->add('hostName')
             ->add(
                 'status',
                 null,
