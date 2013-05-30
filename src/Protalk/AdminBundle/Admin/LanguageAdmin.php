@@ -12,7 +12,7 @@
 /**
  * Admin for languages
  *
- * This class handles fields for the languages data.
+ * This class handles fields for the language data.
  *
  * @category   AdminBundle
  * @author     Lineke Kerckhoffs-Willems <lineke@protalk.me>
@@ -123,7 +123,7 @@ class LanguageAdmin extends Admin
      * 
      * @param \Protalk\MediaBundle\Entity\Language $language
      */
-    private function setLanguageCategories(Language $language)
+    private function setLanguageCategories($language)
     {
         $languageCategories = $language->getLanguageCategories();
         foreach ($languageCategories as $index => $category) {
