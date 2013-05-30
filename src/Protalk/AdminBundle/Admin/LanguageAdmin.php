@@ -12,7 +12,7 @@
 /**
  * Admin for languages
  *
- * This class handles fields for the languages data.
+ * This class handles fields for the language data.
  *
  * @category   AdminBundle
  * @author     Lineke Kerckhoffs-Willems <lineke@protalk.me>
