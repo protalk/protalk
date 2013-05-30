@@ -123,7 +123,7 @@ class LanguageAdmin extends Admin
      * 
      * @param \Protalk\MediaBundle\Entity\Language $language
      */
-    private function setLanguageCategories(Language $language)
+    private function setLanguageCategories($language)
     {
         $languageCategories = $language->getLanguageCategories();
         foreach ($languageCategories as $index => $category) {
