@@ -13,6 +13,8 @@ namespace Protalk\MediaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use SamJ\DoctrineSluggableBundle\SluggableInterface;
+use SamJ\DoctrineSluggableBundle\Slugger;
 
 /**
  * Protalk\MediaBundle\Entity\Speaker
@@ -20,7 +22,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Protalk\MediaBundle\Entity\SpeakerRepository")
  */
-class Speaker
+class Speaker implements SluggableInterface
 {
     /**
      * @var integer $id
@@ -58,6 +60,13 @@ class Speaker
      * @ORM\Column(name="biography", type="text", nullable=true)
      */
     private $biography;
+
+    /**
+     * @var string $slug
+     *
+     * @ORM\Column(type="string")
+     */
+    private $slug;
 
     /**
      * Constructor function
@@ -166,5 +175,42 @@ class Speaker
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    public function getSlugFields()
+    {
+        return $this->getName();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateSlug()
+    {
+        $slugger = new Slugger('-', '-');
+
+        $slug = $slugger->getSlug($this->getSlugFields());
+
+        return $this->setSlug($slug);
     }
 }
