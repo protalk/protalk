@@ -275,22 +275,16 @@ class MediaRepository extends EntityRepository
      * @param $permalink
      * @return bool
      */
-    public function itemExists($title, $permalink)
+    public function itemExists($permalink)
     {
 
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select("m")
             ->from("ProtalkMediaBundle:Media", "m")
-            ->where(
-                $qb->expr()->orX(
-                    "m.title = :title",
-                    "m.hostUrl = :permalink"
-                )
-            );
+            ->where("m.hostUrl = :permalink");
 
         $query = $qb->getQuery();
-        $query->setParameter('title', $title)
-              ->setParameter('permalink', $permalink);
+        $query->setParameter('permalink', $permalink);
         $media = $query->getResult();
 
         if (count($media) > 0) {
