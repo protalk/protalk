@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use FOS\RestBundle\View\View;
+use Doctrine\ORM\Query;
 
 /**
  * Class MediaController
@@ -20,17 +21,15 @@ class MediaListController extends FOSRestController
      */
     public function getMediaListAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
-        $query = $em->createQuery('SELECT media FROM ProtalkMediaBundle:Media media');
+        $mediaRepository = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media');
+        $mediaItems = $mediaRepository->getMediaOrderedBy('id', 1, 5, 'DESC', Query::HYDRATE_ARRAY);
 
-        $mediaItems = $query->getArrayResult();
-
-        $view = View::create(array('media' => $mediaItems))
+        $view = View::create(array('media' => $mediaItems['results']))
             ->setStatusCode(200)
             ->setEngine('twig')
             ->setTemplate('ProtalkApiBundle:Media:getMediaList.html.twig')
             ->setTemplateVar('media')
-            ->setData($mediaItems);
+            ->setData($mediaItems['results']);
 
         return $this->get('fos_rest.view_handler')->handle($view);
     }

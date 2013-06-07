@@ -94,6 +94,7 @@ class MediaRepository extends EntityRepository
         $total = count($results);
 
         $result = array();
+
         for ($i = $start; $i <= $end && $i < $total; $i++) {
             $result[] = $results[$i];
         }
