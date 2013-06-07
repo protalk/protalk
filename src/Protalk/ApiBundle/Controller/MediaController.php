@@ -5,6 +5,7 @@ namespace Protalk\ApiBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use FOS\RestBundle\View\View;
 
 /**
  * Class MediaController
@@ -19,8 +20,12 @@ class MediaController extends FOSRestController
     public function getMediaAction($id)
     {
         $mediaRepository = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media');
-        $mediaCollection = $mediaRepository->findAll();
+        $mediaItems = $mediaRepository->findAll();
 
-        return $this->render('ProtalkApiBundle:Media:getMedia.html.twig', array('media' => 'test'));
+        $view = $this->view($mediaItems, 200);
+        $view->setTemplate('ProtalkApiBundle:Media:getMedia.html.twig');
+        $view->setTemplateVar('media');
+
+        return $this->get('fos_rest.view_handler')->handle($view);
     }
 }
