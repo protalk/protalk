@@ -27,7 +27,7 @@ class MediaDetailController extends FOSRestController
         $view = View::create(array('media' => $media))
             ->setStatusCode(200)
             ->setEngine('twig')
-            ->setTemplate('ProtalkApiBundle:Media:getMediaDetail.html.twig')
+            ->setTemplate('ProtalkApiBundle:Error:noHtml.html.twig')
             ->setTemplateVar('media')
             ->setData($media);
 

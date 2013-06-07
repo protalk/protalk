@@ -27,7 +27,7 @@ class CategoryListController extends FOSRestController
         $view = View::create(array('media' => $mediaItems['results']))
             ->setStatusCode(200)
             ->setEngine('twig')
-            ->setTemplate('ProtalkApiBundle:Category:getCategoryList.html.twig')
+            ->setTemplate('ProtalkApiBundle:Error:noHtml.html.twig')
             ->setTemplateVar('media')
             ->setData($mediaItems['results']);
 
