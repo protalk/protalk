@@ -27,7 +27,7 @@ class MediaController extends Controller
     public function indexAction($slug)
     {
         $mediaRepository = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media');
-        $media = $mediaRepository->findOneBySlug($slug);
+        $media = $mediaRepository->findOneBySlug($slug, \Doctrine_Core::HYDRATE_ARRAY);
 
         if (is_object($media)) {
             $mediaRepository->incrementVisitCount($media);
