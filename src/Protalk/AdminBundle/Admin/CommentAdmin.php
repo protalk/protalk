@@ -34,8 +34,7 @@ class CommentAdmin extends Admin
 {
     protected function configureRoutes(\Sonata\AdminBundle\Route\RouteCollection $collection) 
     {
-        parent::configureRoutes($collection);
-        $collection->remove('add');
+        $collection->remove('create');
     }
     
     /**
