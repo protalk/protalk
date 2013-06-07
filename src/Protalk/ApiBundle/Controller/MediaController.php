@@ -18,7 +18,6 @@ class MediaController extends FOSRestController
      */
     public function getMediaAction()
     {
-        // using explicit View creation
-        return $this->view(array('media' => 'test'));
+        return $this->render('ProtalkApiBundle:Media:getMedia.html.twig', array('media' => 'test'));
     }
 }
