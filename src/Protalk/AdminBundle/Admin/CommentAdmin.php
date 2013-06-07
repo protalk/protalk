@@ -32,6 +32,12 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class CommentAdmin extends Admin
 {
+    protected function configureRoutes(\Sonata\AdminBundle\Route\RouteCollection $collection) 
+    {
+        parent::configureRoutes($collection);
+        $collection->remove('add');
+    }
+    
     /**
      * Configure form fields
      *
@@ -41,7 +47,11 @@ class CommentAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('name', 'text');
+        $formMapper->add('author')
+                   ->add('email')
+                   ->add('website')
+                   ->add('datetime')
+                   ->add('content');
     }
 
     /**
@@ -53,7 +63,7 @@ class CommentAdmin extends Admin
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('name');
+        $datagridMapper->add('author');
     }
 
     /**
@@ -66,7 +76,9 @@ class CommentAdmin extends Admin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('name');
+        $listMapper->addIdentifier('author')
+                   ->add('email')
+                   ->add('datetime');
     }
 
     /**
