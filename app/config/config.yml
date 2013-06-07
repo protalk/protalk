@@ -202,3 +202,16 @@ fkr_simple_pie:
     cache_enabled: false
     cache_dir: %kernel.cache_dir%/rss
     cache_duration: 3600
+
+fos_rest:
+    view:
+        view_response_listener: false
+        failed_validation: HTTP_BAD_REQUEST
+        default_engine: php
+        formats:
+            json: true
+    format_listener:
+        prefer_extension: true
+    body_listener:
+        decoders:
+            json: fos_rest.decoder.json
