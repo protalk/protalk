@@ -23,7 +23,7 @@ class SpeakerDetailController extends FOSRestController
         $view = View::create(array('speaker' => $speaker))
             ->setStatusCode(200)
             ->setEngine('twig')
-            ->setTemplate('ProtalkApiBundle:Speaker:getSpeakerDetail.html.twig')
+            ->setTemplate('ProtalkApiBundle:Error:noHtml.html.twig')
             ->setTemplateVar('speaker')
             ->setData($speaker);
 
