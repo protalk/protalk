@@ -17,16 +17,18 @@ class SpeakerListController extends FOSRestController
      */
     public function getSpeakerListAction()
     {
-        $mediaRepository = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media');
-        $mediaItems = $mediaRepository->findBySpeaker(9, 'id', 1, 5, Query::HYDRATE_ARRAY);
+        $count = $this->container->get('request')->get('count') ?: 10;
+
+        $mediaRepository = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Speaker');
+        $speakerItems = $mediaRepository->getSpeakers($count);
 
 
-        $view = View::create(array('speaker' => $mediaItems['results']))
+        $view = View::create(array('speaker' => $speakerItems))
             ->setStatusCode(200)
             ->setEngine('twig')
             ->setTemplate('ProtalkApiBundle:Error:noHtml.html.twig')
             ->setTemplateVar('speaker')
-            ->setData($mediaItems['results']);
+            ->setData($speakerItems);
 
         return $this->get('fos_rest.view_handler')->handle($view);
     }

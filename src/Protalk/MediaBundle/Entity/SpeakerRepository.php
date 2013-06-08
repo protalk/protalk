@@ -12,6 +12,7 @@
 namespace Protalk\MediaBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 /**
  * SpeakerRepository
@@ -42,6 +43,28 @@ class SpeakerRepository extends EntityRepository
         $query->setParameter("status", Media::STATUS_PUBLISHED);
 
         return $query->execute();
+    }
+
+    /**
+     * Gets speakers with filters / options [api]
+     */
+    public function getSpeakers($count, $hydrator = Query::HYDRATE_SINGLE_SCALAR)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+
+        $qb->select('s.id', 's.name', 'COUNT(m.id) as mediaCount');
+        $qb->from('\Protalk\MediaBundle\Entity\Speaker', 's');
+        $qb->join('s.medias', 'ms');
+        $qb->join('ms.media', 'm');
+        $qb->where('m.status = :status');
+        $qb->groupBy('s.name');
+        $qb->orderBy('s.name', 'ASC');
+        $qb->setMaxResults($count);
+
+        $query = $qb->getQuery();
+        $query->setParameter("status", Media::STATUS_PUBLISHED);
+
+        return $query->getArrayResult($hydrator);
     }
 
     public function findOneById($id, $hydrator = Query::HYDRATE_SINGLE_SCALAR)
