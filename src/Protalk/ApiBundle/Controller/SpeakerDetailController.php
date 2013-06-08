@@ -9,26 +9,23 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use FOS\RestBundle\View\View;
 use Doctrine\ORM\Query;
 
-class SpeakerListController extends FOSRestController
+class SpeakerDetailController extends FOSRestController
 {
     /**
-     * @Route("/speaker", name="api_speaker_list")
+     * @Route("/speaker/{id}", name="api_speaker_detail")
      * @Template()
      */
-    public function getSpeakerListAction()
+    public function getSpeakerDetailAction($id)
     {
-        $count = $this->container->get('request')->get('count') ?: 10;
+        $speakerRepository = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Speaker');
+        $speaker = $speakerRepository->findOneById($id, Query::HYDRATE_ARRAY);
 
-        $mediaRepository = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Speaker');
-        $speakerItems = $mediaRepository->getSpeakers($count);
-
-
-        $view = View::create(array('speaker' => $speakerItems))
+        $view = View::create(array('speaker' => $speaker))
             ->setStatusCode(200)
             ->setEngine('twig')
             ->setTemplate('ProtalkApiBundle:Error:noHtml.html.twig')
             ->setTemplateVar('speaker')
-            ->setData($speakerItems);
+            ->setData($speaker);
 
         return $this->get('fos_rest.view_handler')->handle($view);
     }
