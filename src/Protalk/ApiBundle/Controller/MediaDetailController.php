@@ -30,6 +30,8 @@ class MediaDetailController extends FOSRestController
 
         $mediaResource        = new Resource(new Link('/media/' . $media['id'], 'self'), 'media');
         $mediaResource->title = $media['title'];
+        $mediaResource->content = '';
+
         $resource->addResource($mediaResource);
 
         $view = View::create(array('media' => $resource->asArray()))
