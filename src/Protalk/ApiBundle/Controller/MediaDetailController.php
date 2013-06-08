@@ -30,7 +30,7 @@ class MediaDetailController extends FOSRestController
 
         $mediaResource        = new Resource(new Link('/media/' . $media['id'], 'self'), 'media');
         $mediaResource->title = $media['title'];
-        $mediaResource->content = '';
+        $mediaResource->content = $media['content'];
 
         $resource->addResource($mediaResource);
 
