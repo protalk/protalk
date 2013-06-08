@@ -40,7 +40,8 @@
         "fkr/simplepie-bundle": "*",
         "dms/twig-extension-bundle": "1.*",
         "friendsofsymfony/rest-bundle": "dev-master",
-        "jms/serializer-bundle": "dev-master"
+        "jms/serializer-bundle": "dev-master",
+        "joshuaestes/hal": "1.0.*@dev"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",
