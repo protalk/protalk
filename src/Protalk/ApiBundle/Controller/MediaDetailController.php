@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use FOS\RestBundle\View\View;
 use Doctrine\ORM\Query;
+use JoshuaEstes\Hal\Link;
+use JoshuaEstes\Hal\Resource;
 
 /**
  * Class MediaController
@@ -21,15 +23,21 @@ class MediaDetailController extends FOSRestController
      */
     public function getMediaDetailAction($id)
     {
+        $resource = new Resource(new Link('/location', 'self'));
+
         $mediaRepository = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media');
         $media = $mediaRepository->findOneBySlug('clean-php', Query::HYDRATE_ARRAY);
 
-        $view = View::create(array('media' => $media))
+        $mediaResource        = new Resource(new Link('/media/' . $media['id'], 'self'), 'media');
+        $mediaResource->title = $media['title'];
+        $resource->addResource($mediaResource);
+
+        $view = View::create(array('media' => $resource->asArray()))
             ->setStatusCode(200)
             ->setEngine('twig')
             ->setTemplate('ProtalkApiBundle:Error:noHtml.html.twig')
             ->setTemplateVar('media')
-            ->setData($media);
+            ->setData($resource->asArray());
 
         return $this->get('fos_rest.view_handler')->handle($view);
     }
