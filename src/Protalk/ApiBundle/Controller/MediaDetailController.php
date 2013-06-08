@@ -18,15 +18,15 @@ use JoshuaEstes\Hal\Resource;
 class MediaDetailController extends FOSRestController
 {
     /**
-     * @Route("/media/{id}", name="api_media_detail")
+     * @Route("/media/{slug}", name="api_media_detail")
      * @Template()
      */
-    public function getMediaDetailAction($id)
+    public function getMediaDetailAction($slug)
     {
         $resource = new Resource(new Link('/location', 'self'));
 
         $mediaRepository = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media');
-        $media = $mediaRepository->findOneBySlug('clean-php', Query::HYDRATE_ARRAY);
+        $media = $mediaRepository->findOneBySlug($slug, Query::HYDRATE_ARRAY);
 
         $mediaResource        = new Resource(new Link('/media/' . $media['id'], 'self'), 'media');
         $mediaResource->title = $media['title'];
