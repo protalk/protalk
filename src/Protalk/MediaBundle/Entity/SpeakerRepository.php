@@ -43,4 +43,13 @@ class SpeakerRepository extends EntityRepository
 
         return $query->execute();
     }
+
+    public function findOneById($id, $hydrator = Query::HYDRATE_SINGLE_SCALAR)
+    {
+        $query = $this->createQueryBuilder('s')
+            ->where('s.id = :id')
+            ->setParameter('id', $id);
+
+        return $query->getQuery()->getOneOrNullResult($hydrator);
+    }
 }
