@@ -4,6 +4,7 @@ namespace Protalk\ApiBundle\Helper;
 
 use Protalk\ApiBundle\Helper\CMMIDataInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 use FOS\Rest\Util\Codes;
 use JoshuaEstes\Hal\Link;
 use JoshuaEstes\Hal\Resource;
@@ -31,6 +32,18 @@ abstract class CMMIDataAbstract implements CMMIDataInterface
     protected $identifier = null;
 
     /**
+     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     */
+    protected $container;
+
+    /**
+     * @param Container $container
+     */
+    public function __construct(Container $container) {
+        $this->container = $container;
+    }
+
+    /**
      * @param \RecursiveArrayIterator $iterator
      * @return mixed
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
@@ -41,7 +54,7 @@ abstract class CMMIDataAbstract implements CMMIDataInterface
             throw new HttpException('Unable to generate CMMI Data, no mapping is known', Codes::HTTP_BAD_REQUEST);
         }
 
-        $this->resource = new Resource(new Link('/location', 'self'));
+        $this->resource = new Resource(new Link($this->container->get('request')->get('request_uri'), 'self'));
 
         if($iterator->hasChildren()) {
             while($iterator->valid()) {
@@ -53,10 +66,6 @@ abstract class CMMIDataAbstract implements CMMIDataInterface
         } else {
             $this->addResource($iterator);
         }
-
-        // You can add more links too
-        $this->resource->addLink(new Link('/location/next', 'next'));
-        $this->resource->addLink(new Link('/location/previous', 'previous'));
 
         return $this->resource;
     }

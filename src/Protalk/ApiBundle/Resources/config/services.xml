@@ -5,10 +5,24 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="protalk_api.helper.media_list" class="Protalk\ApiBundle\Helper\MediaListHelper" />
-        <service id="protalk_api.helper.media_detail" class="Protalk\ApiBundle\Helper\MediaDetailHelper" />
-        <service id="protalk_api.helper.speaker_list" class="Protalk\ApiBundle\Helper\SpeakerListHelper" />
-        <service id="protalk_api.helper.speaker_detail" class="Protalk\ApiBundle\Helper\SpeakerDetailHelper" />
-        <service id="protalk_api.helper.category_list" class="Protalk\ApiBundle\Helper\CategoryListHelper" />
+        <service id="protalk_api.helper.media_list" class="Protalk\ApiBundle\Helper\MediaListHelper">
+            <argument type="service" id="service_container" on-invalid="ignore" />
+        </service>
+
+        <service id="protalk_api.helper.media_detail" class="Protalk\ApiBundle\Helper\MediaDetailHelper">
+            <argument type="service" id="service_container" on-invalid="ignore" />
+        </service>
+
+        <service id="protalk_api.helper.speaker_list" class="Protalk\ApiBundle\Helper\SpeakerListHelper">
+            <argument type="service" id="service_container" on-invalid="ignore" />
+        </service>
+
+        <service id="protalk_api.helper.speaker_detail" class="Protalk\ApiBundle\Helper\SpeakerDetailHelper">
+            <argument type="service" id="service_container" on-invalid="ignore" />
+        </service>
+
+        <service id="protalk_api.helper.category_list" class="Protalk\ApiBundle\Helper\CategoryListHelper">
+            <argument type="service" id="service_container" on-invalid="ignore" />
+        </service>
     </services>
 </container>
