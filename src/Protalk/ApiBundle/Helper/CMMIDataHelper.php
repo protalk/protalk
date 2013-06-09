@@ -9,7 +9,7 @@ use FOS\Rest\Util\Codes;
 use JoshuaEstes\Hal\Link;
 use JoshuaEstes\Hal\Resource;
 
-abstract class CMMIDataAbstract implements CMMIDataInterface
+class CMMIDataHelper implements CMMIDataInterface
 {
     /**
      * Mapping for the entity we are processing
@@ -32,6 +32,13 @@ abstract class CMMIDataAbstract implements CMMIDataInterface
     protected $identifier = null;
 
     /**
+     * Part that we parse before the identifier
+     *
+     * @var string
+     */
+    protected $route = '';
+
+    /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface
      */
     protected $container;
@@ -39,9 +46,22 @@ abstract class CMMIDataAbstract implements CMMIDataInterface
     /**
      * @param Container $container
      */
-    public function __construct(Container $container) {
+    public function __construct(Container $container, $options = array()) {
         $this->container = $container;
+
+        if(isset($options['route'])) {
+            $this->route = $options['route'];
+        }
+
+        if(isset($options['identifier'])) {
+            $this->identifier = $options['identifier'];
+        }
+
+        if(isset($options['mapping'])) {
+            $this->mapping = $options['mapping'];
+        }
     }
+
 
     /**
      * @param \RecursiveArrayIterator $iterator
@@ -54,7 +74,7 @@ abstract class CMMIDataAbstract implements CMMIDataInterface
             throw new HttpException('Unable to generate CMMI Data, no mapping is known', Codes::HTTP_BAD_REQUEST);
         }
 
-        $this->resource = new Resource(new Link($this->container->get('request')->get('request_uri'), 'self'));
+        $this->resource = new Resource(new Link($this->container->get('request')->getUri(), 'self'));
 
         if($iterator->hasChildren()) {
             while($iterator->valid()) {
