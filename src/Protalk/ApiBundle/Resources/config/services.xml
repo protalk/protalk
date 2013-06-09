@@ -7,5 +7,6 @@
     <services>
         <service id="protalk_api.helper.media_list" class="Protalk\ApiBundle\Helper\MediaListHelper" />
         <service id="protalk_api.helper.media_detail" class="Protalk\ApiBundle\Helper\MediaDetailHelper" />
+        <service id="protalk_api.helper.speaker_list" class="Protalk\ApiBundle\Helper\SpeakerListHelper" />
     </services>
 </container>

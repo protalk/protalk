@@ -17,19 +17,31 @@ class SpeakerListController extends FOSRestController
      */
     public function getSpeakerListAction()
     {
-        $count = $this->container->get('request')->get('count') ?: 10;
+        $speakerItems = $this->fetchSpeakerItems();
+        $formattedSpeakerItems = $this->container->get('protalk_api.helper.speaker_list')->buildArray($speakerItems);
 
-        $mediaRepository = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Speaker');
-        $speakerItems = $mediaRepository->getSpeakers($count);
-
-
-        $view = View::create(array('speaker' => $speakerItems))
+        $view = View::create(array('speaker' => $formattedSpeakerItems))
             ->setStatusCode(200)
             ->setEngine('twig')
             ->setTemplate('ProtalkApiBundle:Error:noHtml.html.twig')
             ->setTemplateVar('speaker')
-            ->setData($speakerItems);
+            ->setData($formattedSpeakerItems);
 
         return $this->get('fos_rest.view_handler')->handle($view);
+    }
+
+    /**
+     * Fetch the speaker items from the repository
+     *
+     * @return \RecursiveIteratorIterator
+     */
+    protected function fetchSpeakerItems()
+    {
+        $countSpeakerItems = $this->container->get('request')->get('count') ?: 10;
+
+        $speakerRepository = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Speaker');
+        $speakerItems = $speakerRepository->getSpeakers($countSpeakerItems, Query::HYDRATE_ARRAY);
+
+        return new \RecursiveArrayIterator($speakerItems);
     }
 }

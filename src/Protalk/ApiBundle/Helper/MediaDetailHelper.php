@@ -18,7 +18,7 @@ class MediaDetailHelper extends CMMIDataAbstract
      * @var array
      */
     protected $mapping = array(
-        'title' => 'title',
-        'content'   => 'content'
+        'title'         => 'title',
+        'content'       => 'content'
     );
 }
