@@ -4,10 +4,10 @@ namespace Protalk\ApiBundle\Helper;
 
 use Protalk\ApiBundle\Helper\CMMIDataAbstract;
 
-class MediaListHelper extends CMMIDataAbstract
+class MediaDetailHelper extends CMMIDataAbstract
 {
     /**
-     * Mapping specifically for media list items
+     * Mapping specifically for media detail items
      *
      * @var array
      */

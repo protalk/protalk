@@ -8,7 +8,7 @@ use FOS\Rest\Util\Codes;
 use JoshuaEstes\Hal\Link;
 use JoshuaEstes\Hal\Resource;
 
-abstract class CMMIDataListAbstract implements CMMIDataInterface
+abstract class CMMIDataAbstract implements CMMIDataInterface
 {
     /**
      * Mapping for the entity we are processing
@@ -17,29 +17,53 @@ abstract class CMMIDataListAbstract implements CMMIDataInterface
      */
     protected $mapping = array();
 
-    protected function buildResources(\RecursiveArrayIterator $items)
+    /**
+     * @var JoshuaEstes\Hal\Resource
+     */
+    protected $resource = null;
+
+    /**
+     * @param \RecursiveArrayIterator $iterator
+     * @return mixed
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     */
+    protected function buildResources(\RecursiveArrayIterator $iterator)
     {
         if(count($this->mapping) == 0) {
             throw new HttpException('Unable to generate CMMI Data, no mapping is known', Codes::HTTP_BAD_REQUEST);
         }
 
-        $resource = new Resource(new Link('/location', 'self'));
+        $this->resource = new Resource(new Link('/location', 'self'));
 
-        foreach($items as $item)
-        {
-            $mediaResource        = new Resource(new Link('/media/' . $item['id'], 'self'), 'media');
+        if($iterator->hasChildren()) {
+            while($iterator->valid()) {
+                $childItem = $iterator->current();
+                $this->addResource(new \RecursiveArrayIterator($childItem));
 
-            // Add the mapping to the resource
-            $this->mapResource($mediaResource, new \RecursiveArrayIterator($item));
-
-            $resource->addResource($mediaResource);
+                $iterator->next();
+            }
+        } else {
+            $this->addResource($iterator);
         }
 
         // You can add more links too
-        $resource->addLink(new Link('/location/next', 'next'));
-        $resource->addLink(new Link('/location/previous', 'previous'));
+        $this->resource->addLink(new Link('/location/next', 'next'));
+        $this->resource->addLink(new Link('/location/previous', 'previous'));
 
-        return $resource;
+        return $this->resource;
+    }
+
+    /**
+     * @param \RecursiveArrayIterator $iterator
+     */
+    protected function addResource(\RecursiveArrayIterator $iterator)
+    {
+        $mediaResource = new Resource(new Link('/media/' . $iterator['slug'], 'self'), 'media');
+
+        // Add the mapping to the resource
+        $this->mapResource($mediaResource, $iterator);
+
+        $this->resource->addResource($mediaResource);
     }
 
     /**
@@ -53,8 +77,8 @@ abstract class CMMIDataListAbstract implements CMMIDataInterface
         // Map all the fields in the resource
         foreach($this->mapping as $mappingKey => $mappingValue)
         {
-            if(isset($item->$mappingValue)) {
-                $resource->$mappingKey = $item->$mappingValue;
+            if(isset($item[$mappingValue])) {
+                $resource->$mappingKey = $item[$mappingValue];
             }
         }
     }

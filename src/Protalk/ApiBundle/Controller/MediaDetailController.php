@@ -23,23 +23,17 @@ class MediaDetailController extends FOSRestController
      */
     public function getMediaDetailAction($slug)
     {
-        $resource = new Resource(new Link('/location', 'self'));
-
         $mediaRepository = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media');
-        $media = $mediaRepository->findOneBySlug($slug, Query::HYDRATE_ARRAY);
+        $mediaItem = $mediaRepository->findOneBySlug($slug, Query::HYDRATE_ARRAY);
 
-        $mediaResource        = new Resource(new Link('/media/' . $media['id'], 'self'), 'media');
-        $mediaResource->title = $media['title'];
-        $mediaResource->content = $media['content'];
+        $formattedMediaItem = $this->container->get('protalk_api.helper.media_detail')->buildArray(new \RecursiveArrayIterator($mediaItem));
 
-        $resource->addResource($mediaResource);
-
-        $view = View::create(array('media' => $resource->asArray()))
+        $view = View::create(array('media' => $formattedMediaItem))
             ->setStatusCode(200)
             ->setEngine('twig')
             ->setTemplate('ProtalkApiBundle:Error:noHtml.html.twig')
             ->setTemplateVar('media')
-            ->setData($resource->asArray());
+            ->setData($formattedMediaItem);
 
         return $this->get('fos_rest.view_handler')->handle($view);
     }
