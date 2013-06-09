@@ -8,8 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use FOS\RestBundle\View\View;
 use Doctrine\ORM\Query;
-use JoshuaEstes\Hal\Link;
-use JoshuaEstes\Hal\Resource;
+
 
 /**
  * Class MediaController
@@ -23,29 +22,33 @@ class MediaListController extends FOSRestController
      */
     public function getMediaListAction()
     {
-        $resource = new Resource(new Link('/location', 'self'));
+        $mediaItems = $this->fetchMediaItems();
+        $formattedMediaItems = $this->container->get('protalk_api.helper.media_list')->buildArray($mediaItems);
 
-        $mediaRepository = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media');
-        $mediaItems = $mediaRepository->getMediaOrderedBy('id', 1, 5, 'DESC', Query::HYDRATE_ARRAY);
-
-        foreach($mediaItems['results'] as $item)
-        {
-            $mediaResource        = new Resource(new Link('/media/' . $item['id'], 'self'), 'media');
-            $mediaResource->title = 'bla';
-            $resource->addResource($mediaResource);
-        }
-
-        // You can add more links too
-        $resource->addLink(new Link('/location/next', 'next'));
-        $resource->addLink(new Link('/location/previous', 'previous'));
-
-        $view = View::create(array('media' => $resource->asArray()))
+        $view = View::create(array('media' => $formattedMediaItems))
             ->setStatusCode(200)
             ->setEngine('twig')
             ->setTemplate('ProtalkApiBundle:Error:noHtml.html.twig')
             ->setTemplateVar('media')
-            ->setData($resource->asArray());
+            ->setData($formattedMediaItems);
 
         return $this->get('fos_rest.view_handler')->handle($view);
+    }
+
+    /**
+     * Fetch the media items from the repository
+     *
+     * @return \RecursiveIteratorIterator
+     */
+    protected function fetchMediaItems()
+    {
+        $countMediaItems = $this->container->get('request')->get('count') ?: 10;
+        $pageMediaItems = $this->container->get('request')->get('page') ?: 1;
+        $sortMediaItems = $this->container->get('request')->get('sort') ?: 'DESC';
+
+        $mediaRepository = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media');
+        $mediaItems = $mediaRepository->getMediaOrderedBy('id', $pageMediaItems, $countMediaItems, $sortMediaItems, Query::HYDRATE_ARRAY);
+
+        return new \RecursiveArrayIterator($mediaItems['results']);
     }
 }
