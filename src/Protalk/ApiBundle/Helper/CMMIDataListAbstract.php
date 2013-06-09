@@ -19,7 +19,7 @@ abstract class CMMIDataListAbstract implements CMMIDataInterface
 
     protected function buildResources(\RecursiveArrayIterator $items)
     {
-        if(!is_array($this->mapping) || count($this->mapping == 0)) {
+        if(count($this->mapping) == 0) {
             throw new HttpException('Unable to generate CMMI Data, no mapping is known', Codes::HTTP_BAD_REQUEST);
         }
 
@@ -30,7 +30,7 @@ abstract class CMMIDataListAbstract implements CMMIDataInterface
             $mediaResource        = new Resource(new Link('/media/' . $item['id'], 'self'), 'media');
 
             // Add the mapping to the resource
-            $this->mapResource($mediaResource, $item);
+            $this->mapResource($mediaResource, new \RecursiveArrayIterator($item));
 
             $resource->addResource($mediaResource);
         }
