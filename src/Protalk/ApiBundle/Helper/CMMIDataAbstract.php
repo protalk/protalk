@@ -23,6 +23,14 @@ abstract class CMMIDataAbstract implements CMMIDataInterface
     protected $resource = null;
 
     /**
+     * Is needed to be able to create proper href links that actually work
+     * Example would be 'id' or 'slug'
+     *
+     * @var string identified
+     */
+    protected $identifier = null;
+
+    /**
      * @param \RecursiveArrayIterator $iterator
      * @return mixed
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
@@ -55,10 +63,16 @@ abstract class CMMIDataAbstract implements CMMIDataInterface
 
     /**
      * @param \RecursiveArrayIterator $iterator
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @return void
      */
     protected function addResource(\RecursiveArrayIterator $iterator)
     {
-        $mediaResource = new Resource(new Link('/media/' . $iterator['slug'], 'self'), 'media');
+        if(isset($iterator[$this->identifier]) === false) {
+            throw new HttpException('Cannot add resource, identified not known in the iterator', Codes::HTTP_BAD_REQUEST);
+        }
+
+        $mediaResource = new Resource(new Link('/media/' . $iterator[$this->identifier], 'self'), 'media');
 
         // Add the mapping to the resource
         $this->mapResource($mediaResource, $iterator);
@@ -72,14 +86,16 @@ abstract class CMMIDataAbstract implements CMMIDataInterface
      * @param Resource $resource
      * @param \RecursiveArrayIterator $item
      */
-    protected function mapResource(Resource $resource, \RecursiveArrayIterator $item)
+    protected function mapResource(Resource $resource, \RecursiveArrayIterator $iterator)
     {
         // Map all the fields in the resource
         foreach($this->mapping as $mappingKey => $mappingValue)
         {
-            if(isset($item[$mappingValue])) {
-                $resource->$mappingKey = $item[$mappingValue];
+            if(isset($iterator[$mappingValue]) === false) {
+                throw new HttpException('Cannot map resource, key "' . $mappingValue . '" not known in the iterator', Codes::HTTP_BAD_REQUEST);
             }
+
+            $resource->$mappingKey = $iterator[$mappingValue];
         }
     }
 
