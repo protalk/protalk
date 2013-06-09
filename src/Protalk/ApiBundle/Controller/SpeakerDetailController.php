@@ -18,14 +18,16 @@ class SpeakerDetailController extends FOSRestController
     public function getSpeakerDetailAction($id)
     {
         $speakerRepository = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Speaker');
-        $speaker = $speakerRepository->findOneById($id, Query::HYDRATE_ARRAY);
+        $speakerItem = $speakerRepository->findOneById($id, Query::HYDRATE_ARRAY);
 
-        $view = View::create(array('speaker' => $speaker))
+        $formattedSpeakerItem = $this->container->get('protalk_api.helper.speaker_detail')->buildArray(new \RecursiveArrayIterator($speakerItem));
+
+        $view = View::create(array('speaker' => $formattedSpeakerItem))
             ->setStatusCode(200)
             ->setEngine('twig')
             ->setTemplate('ProtalkApiBundle:Error:noHtml.html.twig')
             ->setTemplateVar('speaker')
-            ->setData($speaker);
+            ->setData($formattedSpeakerItem);
 
         return $this->get('fos_rest.view_handler')->handle($view);
     }

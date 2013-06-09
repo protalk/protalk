@@ -73,6 +73,6 @@ class SpeakerRepository extends EntityRepository
             ->where('s.id = :id')
             ->setParameter('id', $id);
 
-        return $query->getQuery()->getOneOrNullResult($hydrator);
+        return $query->getQuery($hydrator)->getOneOrNullResult($hydrator);
     }
 }
