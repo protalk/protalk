@@ -20,6 +20,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Protalk\MediaBundle\Helpers\Paginator;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\Query;
 
 class ExploreController extends Controller
 {
@@ -31,10 +32,10 @@ class ExploreController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Category');
-        $categories = $repository->getAllCategories();
+        $categories = $repository->getAllCategories(Query::HYDRATE_ARRAY);
 
         return array('categories' => $categories);
-    }
+}
 
     /**
      * @Route("/result/{search}/{sort}/{order}",
