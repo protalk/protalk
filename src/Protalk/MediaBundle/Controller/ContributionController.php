@@ -40,7 +40,7 @@ class ContributionController extends Controller
             if ($form->isValid()) {
 
                 $contribution = $form->getData();
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($contribution);
                 $em->flush();
 

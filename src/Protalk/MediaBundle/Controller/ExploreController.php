@@ -30,7 +30,7 @@ class ExploreController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Category');
         $categories = $repository->getAllCategories(Query::HYDRATE_ARRAY);
 
@@ -56,7 +56,7 @@ class ExploreController extends Controller
             throw new AccessDeniedHttpException("The given sort option '$sort $order' is not supported");
         }
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
 
         if ('all' == $search) {
@@ -84,7 +84,7 @@ class ExploreController extends Controller
             throw new AccessDeniedHttpException("The given sort option '$sort $order' is not supported");
         }
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
         $results = $repository->findByTag($search, $sort, $page, $pageSize, $order);
 
@@ -111,7 +111,7 @@ class ExploreController extends Controller
             throw new AccessDeniedHttpException("The given sort option '$sort $order' is not supported");
         }
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
         $results = $repository->findByCategory($search, $sort, $page, $pageSize, $order);
 
@@ -148,7 +148,7 @@ class ExploreController extends Controller
             throw new AccessDeniedHttpException("The given sort option '$sort' is not supported");
         }
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
         $results = $repository->findBySpeaker($search, $sort, $page, $pageSize);
 

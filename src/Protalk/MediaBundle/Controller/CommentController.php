@@ -49,7 +49,7 @@ class CommentController extends Controller
                 if ($form->isValid()) {
 
                     $comment = $form->getData();
-                    $em = $this->getDoctrine()->getEntityManager();
+                    $em = $this->getDoctrine()->getManager();
                     $em->persist($comment);
                     $em->flush();
 
@@ -86,7 +86,7 @@ class CommentController extends Controller
      */
     public function listAction($media_id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Comment');
         $comments = $repository->getMediaComments($media_id);
 

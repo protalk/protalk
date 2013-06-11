@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
 
         $numRows = $this->container->getParameter('home_lists_max');

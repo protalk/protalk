@@ -72,7 +72,7 @@ class MediaController extends Controller
                 throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
             }
 
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
 
             $newRating = new Rating();
             $newRating->setRating($rating);
