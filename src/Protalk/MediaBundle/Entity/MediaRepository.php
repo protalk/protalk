@@ -37,7 +37,7 @@ class MediaRepository extends EntityRepository
      * @param int          $page
      * @param int          $max
      * @param string|array $order
-     * @param int          $hydrator @see Doctrine_Core
+     * @param int          $hydrator @see Doctrine\ORM\Query
      *
      * @return array Array with total and results
      * @throws \Exception If the sizes of $sort and $order do not match
@@ -110,7 +110,7 @@ class MediaRepository extends EntityRepository
      * @param int    $page
      * @param int    $max
      * @param string $order
-     * @param int    $hydrator @see Doctrine_Core
+     * @param int    $hydrator @see Doctrine\ORM\Query
      *
      * @return array Array with count and result
      */
@@ -159,7 +159,7 @@ class MediaRepository extends EntityRepository
      * and increment no of visits made to media item
      *
      * @param  string   $slug
-     * @param int    $hydrator @see Doctrine_Core
+     * @param int    $hydrator @see Doctrine\ORM\Query
      * @return Doctrine Record
      */
     public function findOneBySlug($slug, $hydrator = Query::HYDRATE_SINGLE_SCALAR)
@@ -181,7 +181,7 @@ class MediaRepository extends EntityRepository
      * @param int    $page
      * @param int    $max
      * @param string $order
-     * @param int    $hydrator @see Doctrine_Core
+     * @param int    $hydrator @see Doctrine\ORM\Query
      *
      * @return array Array with total and results
      */
@@ -217,7 +217,7 @@ class MediaRepository extends EntityRepository
      * @param int    $page
      * @param int    $max
      * @param string $order
-     * @param int    $hydrator @see Doctrine_Core
+     * @param int    $hydrator @see Doctrine\ORM\Query
      *
      * @return array Array with total and results
      */
@@ -250,7 +250,7 @@ class MediaRepository extends EntityRepository
      * @param string $orderField
      * @param int    $page
      * @param int    $max
-     * @param int    $hydrator @see Doctrine_Core
+     * @param int    $hydrator @see Doctrine\ORM\Query
      *
      * @return array Array with total and results
      */
@@ -281,7 +281,7 @@ class MediaRepository extends EntityRepository
      *
      * @param $title
      * @param $permalink
-     * @param int $hydrator @see Doctrine_Core
+     * @param int $hydrator @see Doctrine\ORM\Query
      * @return bool
      */
     public function itemExists($title, $permalink, $hydrator = Query::HYDRATE_OBJECT)
