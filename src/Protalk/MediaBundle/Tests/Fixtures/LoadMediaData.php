@@ -35,13 +35,13 @@ class LoadMediaData extends AbstractFixture implements DependentFixtureInterface
             )
         );
 
-        $phpbb4->setCategories(
-            new ArrayCollection(
-                array(
-                    $this->getReference('php')
-                )
-            )
-        );
+//        $phpbb4->setCategories(
+//            new ArrayCollection(
+//                array(
+//                    $this->getReference('php')
+//                )
+//            )
+//        );
 
         $phpbb4->setDate(new \Datetime());
         $phpbb4->setCreationDate(new \DateTime());
