@@ -24,7 +24,7 @@ security:
             id: fos_user.user_manager
 
     firewalls:
-
+    firewalls:
         # -> custom firewall for the admin area of the URL
         admin:
             pattern:      /admin(.*)
@@ -33,8 +33,9 @@ security:
                 login_path:     /admin/login
                 use_forward:    false
                 check_path:     /admin/login_check
-                default_target_path: /admin/dashboard
                 failure_path:   null
+                default_target_path: /admin/dashboard
+                always_use_default_target_path: true
             logout:
                 path:           /admin/logout
             anonymous:    true

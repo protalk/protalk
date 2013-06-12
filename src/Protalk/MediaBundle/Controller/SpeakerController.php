@@ -22,7 +22,7 @@ class SpeakerController extends Controller
      */
     public function listAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Speaker');
         $speakers = $repository->getAllSpeakers();
 

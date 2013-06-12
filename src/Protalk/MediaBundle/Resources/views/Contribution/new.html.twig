@@ -19,7 +19,7 @@
 
 {% block body %}
 <h1>Contribution</h1>
-{% render "ProtalkPageBundle:Page:content" with { 'url' : 'contribute' } %}
+{% render controller("ProtalkPageBundle:Page:content", { 'url' : 'contribute' }) %}
 
 {% if app.session.hasFlash('contribution-notice') %}
 <div class="contribution-notice">

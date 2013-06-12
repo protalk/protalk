@@ -21,15 +21,15 @@
         </ul>
         <div>
             <div id="categories">
-                {% render "ProtalkMediaBundle:Category:list" %}
+                {% render controller('ProtalkMediaBundle:Category:list', { }) %}
             </div>
 
             <div id="tags">
-                {% render "ProtalkMediaBundle:Tag:list" %}
+                {% render controller('ProtalkMediaBundle:Tag:list', { }) %}
             </div>
 
             <div id="speakers">
-                {% render "ProtalkMediaBundle:Speaker:list" %}
+                {% render controller('ProtalkMediaBundle:Speaker:list', { }) %}
             </div>
         </div>
     </div>

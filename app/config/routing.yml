@@ -13,6 +13,11 @@ ProtalkPageBundle:
     type:     annotation
     prefix:   /page
 
+ProtalkApiBundle:
+    resource: "@ProtalkApiBundle/Controller/"
+    type:     annotation
+    prefix:   /api
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
@@ -49,3 +54,7 @@ sonata_user:
 #_internal:
 #   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
 #   prefix:   /_internal
+
+media_category_list:
+    pattern:  /category/list
+    defaults: { _controller: ProtalkMediaBundle:Category:list }

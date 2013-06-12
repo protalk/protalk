@@ -49,7 +49,7 @@ EOT
     {
         $output->writeln('Importing content, please wait...');
 
-        $em = $this->getContainer()->get('doctrine')->getEntityManager();
+        $em = $this->getContainer()->get('doctrine')->getManager();
         $rss = $this->getContainer()->get('fkr_simple_pie.rss');
 
         $feeds = $this->getFeeds($em);
@@ -111,7 +111,7 @@ EOT
      */
     private function setFeedImportDate(Feed $feed)
     {
-        $em = $this->getContainer()->get('doctrine')->getEntityManager();
+        $em = $this->getContainer()->get('doctrine')->getManager();
         $feed->setLastImportedDate(new \DateTime('now'));
 
         $em->persist($feed);

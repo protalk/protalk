@@ -16,6 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Protalk\MediaBundle\Entity\Rating;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\Query;
 
 class MediaController extends Controller
 {
@@ -27,7 +28,7 @@ class MediaController extends Controller
     public function indexAction($slug)
     {
         $mediaRepository = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media');
-        $media = $mediaRepository->findOneBySlug($slug);
+        $media = $mediaRepository->findOneBySlug($slug, Query::HYDRATE_OBJECT);
 
         if (is_object($media)) {
             $mediaRepository->incrementVisitCount($media);
@@ -71,7 +72,7 @@ class MediaController extends Controller
                 throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
             }
 
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
 
             $newRating = new Rating();
             $newRating->setRating($rating);
