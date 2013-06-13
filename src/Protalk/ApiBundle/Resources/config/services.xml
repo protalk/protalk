@@ -9,7 +9,7 @@
             <argument type="service" id="service_container" on-invalid="ignore" />
             <argument type="collection">
                 <argument key="identifier">slug</argument>
-                <argument key="route">/media</argument>
+                <argument key="route">media</argument>
                 <argument type="collection" key="mapping">
                     <argument key="title">title</argument>
                     <argument key="content">content</argument>
@@ -21,7 +21,7 @@
             <argument type="service" id="service_container" on-invalid="ignore" />
             <argument type="collection">
                 <argument key="identifier">slug</argument>
-                <argument key="route">/media</argument>
+                <argument key="route">media</argument>
                 <argument type="collection" key="mapping">
                     <argument key="title">title</argument>
                     <argument key="content">content</argument>
@@ -33,7 +33,7 @@
             <argument type="service" id="service_container" on-invalid="ignore" />
             <argument type="collection">
                 <argument key="identifier">slug</argument>
-                <argument key="route">/category</argument>
+                <argument key="route">category</argument>
                 <argument type="collection" key="mapping">
                     <argument key="name">name</argument>
                     <argument key="slug">slug</argument>
@@ -45,7 +45,7 @@
             <argument type="service" id="service_container" on-invalid="ignore" />
             <argument type="collection">
                 <argument key="identifier">id</argument>
-                <argument key="route">/speaker</argument>
+                <argument key="route">speaker</argument>
                 <argument type="collection" key="mapping">
                     <argument key="name">name</argument>
                 </argument>
@@ -56,7 +56,7 @@
             <argument type="service" id="service_container" on-invalid="ignore" />
             <argument type="collection">
                 <argument key="identifier">id</argument>
-                <argument key="route">/speaker</argument>
+                <argument key="route">speaker</argument>
                 <argument type="collection" key="mapping">
                     <argument key="name">name</argument>
                 </argument>

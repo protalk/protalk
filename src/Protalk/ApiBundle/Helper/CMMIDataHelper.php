@@ -60,6 +60,10 @@ class CMMIDataHelper implements CMMIDataInterface
         if(isset($options['mapping'])) {
             $this->mapping = $options['mapping'];
         }
+
+        if(isset($options['base'])) {
+            $this->base = $options['base'];
+        }
     }
 
 
@@ -101,7 +105,7 @@ class CMMIDataHelper implements CMMIDataInterface
             throw new HttpException('Cannot add resource, identified not known in the iterator', Codes::HTTP_BAD_REQUEST);
         }
 
-        $mediaResource = new Resource(new Link('/media/' . $iterator[$this->identifier], 'self'), 'media');
+        $mediaResource = new Resource(new Link('/' . $this->route . '/' . $iterator[$this->identifier], 'self'), $this->route);
 
         // Add the mapping to the resource
         $this->mapResource($mediaResource, $iterator);
