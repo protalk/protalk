@@ -14,7 +14,7 @@ use Doctrine\ORM\Query;
  * Class MediaController
  * @package Protalk\ApiBundle\Controller
  */
-class MediaListController extends FOSRestController
+class MediaController extends FOSRestController
 {
     /**
      * @Route("/media", name="api_media_list")

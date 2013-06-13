@@ -10,10 +10,10 @@ use FOS\RestBundle\View\View;
 use Doctrine\ORM\Query;
 
 /**
- * Class MediaController
+ * Class CategoryController
  * @package Protalk\ApiBundle\Controller
  */
-class CategoryListController extends FOSRestController
+class CategoryController extends FOSRestController
 {
     /**
      * @Route("/category", name="api_category_list")
@@ -41,7 +41,7 @@ class CategoryListController extends FOSRestController
      */
     protected function fetchCategoryItems()
     {
-        $countCategoryItems = $this->container->get('request')->get('count') ?: 10;
+        $countCategoryItems = $this->container->get('request')->get('count') ?: $this->container->getParameter('api_items_per_page');
         $pageCategoryItems = $this->container->get('request')->get('page') ?: 1;
         $sortCategoryItems = $this->container->get('request')->get('sort') ?: 'DESC';
 

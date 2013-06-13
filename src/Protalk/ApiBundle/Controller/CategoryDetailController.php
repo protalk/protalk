@@ -12,10 +12,10 @@ use JoshuaEstes\Hal\Link;
 use JoshuaEstes\Hal\Resource;
 
 /**
- * Class CategoryMediaController
+ * Class CategoryDetailController
  * @package Protalk\ApiBundle\Controller
  */
-class CategoryMediaController extends FOSRestController
+class CategoryDetailController extends FOSRestController
 {
     /**
      * @Route("/category/{slug}", name="api_media_category")
@@ -44,7 +44,7 @@ class CategoryMediaController extends FOSRestController
      */
     protected function fetchMediaItems($slug)
     {
-        $countMediaItems = $this->container->get('request')->get('count') ?: 10;
+        $countMediaItems = $this->container->get('request')->get('count') ?: $this->container->getParameter('api_items_per_page');
         $pageMediaItems = $this->container->get('request')->get('page') ?: 1;
         $sortMediaItems = $this->container->get('request')->get('sort') ?: 'DESC';
 

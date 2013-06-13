@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use FOS\RestBundle\View\View;
 use Doctrine\ORM\Query;
 
-class SpeakerListController extends FOSRestController
+class SpeakerController extends FOSRestController
 {
     /**
      * @Route("/speaker", name="api_speaker_list")
@@ -37,7 +37,7 @@ class SpeakerListController extends FOSRestController
      */
     protected function fetchSpeakerItems()
     {
-        $countSpeakerItems = $this->container->get('request')->get('count') ?: 10;
+        $countSpeakerItems = $this->container->get('request')->get('count') ?: $this->container->getParameter('api_items_per_page');
 
         $speakerRepository = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Speaker');
         $speakerItems = $speakerRepository->getSpeakers($countSpeakerItems, Query::HYDRATE_ARRAY);
