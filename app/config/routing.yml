@@ -54,7 +54,3 @@ sonata_user:
 #_internal:
 #   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
 #   prefix:   /_internal
-
-media_category_list:
-    pattern:  /category/list
-    defaults: { _controller: ProtalkMediaBundle:Category:list }
