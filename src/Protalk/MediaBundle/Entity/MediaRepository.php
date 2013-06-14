@@ -135,7 +135,8 @@ class MediaRepository extends EntityRepository
                    ),
                    "m.status = :status"
                )
-           );
+           )
+            ->orderBy("m." . $sort, $order);;
         $query = $qb->getQuery();
         $query->setParameter('search1', '%'.strtolower($search).'%')
               ->setParameter('search2', '%'.strtolower($search).'%')
