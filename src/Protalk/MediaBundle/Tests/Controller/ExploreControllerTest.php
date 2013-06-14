@@ -9,9 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace ProTalk\PageBundle\Tests\Controller;
+namespace Protalk\MediaBundle\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
+use Protalk\MediaBundle\Controller\ExploreController;
 
 class ExploreControllerTest extends WebTestCase
 {
@@ -24,7 +25,6 @@ class ExploreControllerTest extends WebTestCase
         );
     }
 
-
     public function testGetExplorePageReturnsValidResponse()
     {
         $client = static::createClient();
@@ -34,7 +34,7 @@ class ExploreControllerTest extends WebTestCase
         $response = $client->getResponse();
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertContains("href=\"/category/php\"", $response->getContent());
+        $this->assertContains("href=\"/category/tools\"", $response->getContent());
         $this->assertContains("href=\"/tag/quality-assurance\"", $response->getContent());
         $this->assertContains("href=\"http://localhost/search/speaker/4\"", $response->getContent());
     }
@@ -54,7 +54,7 @@ class ExploreControllerTest extends WebTestCase
         // Assert the page contains a link to a video
         $this->assertContains('/phpbb4-building-end-user-applications-with-symfony2', $response->getContent());
         // Assert page contains links to categories and tags
-        $this->assertContains('/category/php', $response->getContent());
+        $this->assertContains('/category/tools', $response->getContent());
         $this->assertContains('/tag/quality-assurance', $response->getContent());
 
         $client->request(
@@ -65,7 +65,7 @@ class ExploreControllerTest extends WebTestCase
         $response = $client->getResponse();
 
         $this->assertContains("You have searched for 'video'", $response->getContent());
-        $this->assertContains('selected="selected">Sort by rating (asc)</option>', $response->getContent());
+        $this->assertContains('selected="selected" data-url="/result/video/rating/asc?page=1"> Sort by rating (asc) </option>', $response->getContent());
     }
 
     public function testPerformInvalidSearchReturnsError()

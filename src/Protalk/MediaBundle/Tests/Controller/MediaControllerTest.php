@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace ProTalk\PageBundle\Tests\Controller;
+namespace Protalk\MediaBundle\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 use Protalk\MediaBundle\Controller\MediaController;
@@ -71,7 +71,7 @@ class MediaControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/media/1/speakers');
+        $client->request('GET', '/media/speakers/phpbb4-building-end-user-applications-with-symfony2');
         $content = $client->getResponse()->getContent();
 
         $this->assertContains("Nils Adermann", $content);
