@@ -29,7 +29,7 @@ class ExploreController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Category');
         $categories = $repository->getAllCategories();
 
@@ -55,7 +55,7 @@ class ExploreController extends Controller
             throw new AccessDeniedHttpException("The given sort option '$sort $order' is not supported");
         }
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
 
         if ('all' == $search) {
