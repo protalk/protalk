@@ -61,8 +61,8 @@ Congratulations, you now have a fully functional ProTalk development environment
 
 You can view the development version ProTalk or PHPMyAdmin in your browser using the following:
 
-	http://33.33.33.10
-	http://33.33.33.10/phpmyadmin         // login credentials are protalk / secret
+* http://33.33.33.10
+* http://33.33.33.10/phpmyadmin         // login credentials are protalk / secret
 
 ####app/console activities
 
