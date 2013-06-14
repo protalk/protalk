@@ -60,7 +60,7 @@
         <div class="mediaTextLarge">
             <header>
                 <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.title|truncate(34) }}</a></h2>
-                <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.getOneSpeaker()|truncate(20) }}</a></span></p>
+                <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'slug': media.slug }) }}">{{ media.getOneSpeaker()|truncate(20) }}</a></span></p>
             </header>
             <p>{{ media.description|truncate(75) }}</p>
             <footer>
