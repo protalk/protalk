@@ -21,14 +21,14 @@ class LoadCategoryData extends AbstractFixture
 {
     public function load(ObjectManager $manager)
     {
-        $php = new Category();
-        $php->setName('PHP');
-        $php->setSlug('php');
+        $tools = new Category();
+        $tools->setName('Tools');
+        $tools->setSlug('tools');
 
-        $manager->persist($php);
+        $manager->persist($tools);
 
         $manager->flush();
 
-        $this->addReference('php', $php);
+        $this->addReference('tools', $tools);
     }
 }
