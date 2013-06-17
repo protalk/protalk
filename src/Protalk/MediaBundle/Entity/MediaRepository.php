@@ -271,8 +271,8 @@ class MediaRepository extends EntityRepository
     /**
      * Find media items by title or permalink (for import command)
      *
-     * @param $title
-     * @param $permalink
+     * @param string $permalink
+     * 
      * @return bool
      */
     public function itemExists($permalink)
