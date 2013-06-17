@@ -13,6 +13,11 @@ ProtalkPageBundle:
     type:     annotation
     prefix:   /page
 
+ProtalkApiBundle:
+    resource: "@ProtalkApiBundle/Controller/"
+    type:     annotation
+    prefix:   /api
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
