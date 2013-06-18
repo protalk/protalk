@@ -2,7 +2,7 @@ class protalk::symfony2 {
 
     # Install / Update the vendors
     exec { "vendorupdate" :
-        command => "/usr/bin/php /vagrant/bin/composer.phar install",
+        command => "/usr/bin/php /vagrant/bin/composer.phar install --dev",
         cwd     => "/vagrant/",
         creates => "/vagrant/vendor/twig",
         require => [ Package["php"], Package["git"] ],
