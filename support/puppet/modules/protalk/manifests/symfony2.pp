@@ -2,7 +2,7 @@ class protalk::symfony2 {
 
     # Install / Update the vendors
     exec { "vendorupdate" :
-        command => "/usr/bin/php /vagrant/bin/composer.phar install",
+        command => "/usr/bin/php /vagrant/bin/composer.phar install --dev",
         cwd     => "/vagrant/",
         creates => "/vagrant/vendor/twig",
         require => [ Package["php"], Package["git"] ],
@@ -20,8 +20,8 @@ class protalk::symfony2 {
 
     # Create our initial db
     exec { "init_db" :
-        command => "/usr/bin/php /vagrant/app/console doctrine:schema:create || true",
-        creates => "/tmp/.sf2seeded",
+        command => "/usr/bin/php /vagrant/app/console doctrine:schema:create && touch /tmp/.init_db",
+        creates => "/tmp/.init_db",
         require => [ Exec["vendorupdate"], Service["mysql"], Package["php-xml"] ],
     }
 
