@@ -14,6 +14,8 @@ Vagrant::Config.run do |config|
 
         protalk_config.vm.network :hostonly, "33.33.33.10"
 
+		protalk_config.vbguest.force = true
+
         # Pass custom arguments to VBoxManage before booting VM
         protalk_config.vm.customize [
             'modifyvm', :id, '--chipset', 'ich9', # solves kernel panic issue on some host machines
