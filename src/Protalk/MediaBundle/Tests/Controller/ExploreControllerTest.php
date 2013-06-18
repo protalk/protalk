@@ -20,7 +20,13 @@ class ExploreControllerTest extends WebTestCase
     {
         $this->loadFixtures(
             array(
-                'Protalk\MediaBundle\Tests\Fixtures\LoadMediaData'
+                'Protalk\MediaBundle\Tests\Fixtures\LoadMediaData',
+                'Protalk\MediaBundle\Tests\Fixtures\LoadMediaTagData',
+                'Protalk\MediaBundle\Tests\Fixtures\LoadTagData',
+                'Protalk\MediaBundle\Tests\Fixtures\LoadMediaLanguageCategoryData',
+                'Protalk\MediaBundle\Tests\Fixtures\LoadCategoryData',
+                'Protalk\MediaBundle\Tests\Fixtures\LoadMediaSpeakerData',
+                'Protalk\MediaBundle\Tests\Fixtures\LoadSpeakerData',
             )
         );
     }
@@ -65,7 +71,7 @@ class ExploreControllerTest extends WebTestCase
         $response = $client->getResponse();
 
         $this->assertContains("You have searched for 'video'", $response->getContent());
-        $this->assertContains('selected="selected" data-url="/result/video/rating/asc?page=1"> Sort by rating (asc) </option>', $response->getContent());
+        $this->assertContains('data-url="/result/video/rating/asc?page=1"        selected="selected">Sort by rating (asc)</option>', $response->getContent());
     }
 
     public function testPerformInvalidSearchReturnsError()
