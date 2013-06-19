@@ -22,13 +22,21 @@ class protalk::symfony2 {
     exec { "init_db" :
         command => "/usr/bin/php /vagrant/app/console doctrine:schema:create && touch /tmp/.init_db",
         creates => "/tmp/.init_db",
-        require => [ Exec["vendorupdate"], Service["mysql"], Package["php-xml"] ],
+        require => [ Exec["vendorupdate"], Service["mysql"], Package["php-xml"], Exec["create-db"] ],
     }
+
+    # Update the db structure
+    exec { "update_db_struct" : 
+        command => "/usr/bin/php /vagrant/app/console doctrine:schema:update",
+        require => [ Exec["vendorupdate"], Service["mysql"], Package["php-xml"], 
+            Exec["init_db"] ],
+    }
+
 
     exec { "seed_db" :
         command => "cat /vagrant/doc/db/seed_data.sql | mysql -u${params::dbuser} -p${params::dbpass} ${params::dbname} && touch /tmp/.sf2seeded",
         creates => "/tmp/.sf2seeded",
-        require => Exec["init_db"],
+        require => [ Exec["init_db"], Exec["update_db_struct"] ],
 
     }
 
