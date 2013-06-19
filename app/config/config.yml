@@ -167,11 +167,6 @@ services:
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_media, label: Comment }
       arguments: [null, Protalk\MediaBundle\Entity\Comment, null]
-   protalk.media.admin.rating:
-      class: Protalk\AdminBundle\Admin\RatingAdmin
-      tags:
-        - { name: sonata.admin, manager_type: orm, group: protalk_media, label: Rating }
-      arguments: [null, Protalk\MediaBundle\Entity\Rating, null]
    protalk.media.admin.contribution:
       class: Protalk\AdminBundle\Admin\ContributionAdmin
       tags:

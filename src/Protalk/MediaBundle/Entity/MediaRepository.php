@@ -12,7 +12,6 @@
 namespace Protalk\MediaBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
 
 /**
  * MediaRepository
@@ -37,12 +36,11 @@ class MediaRepository extends EntityRepository
      * @param int          $page
      * @param int          $max
      * @param string|array $order
-     * @param int          $hydrator @see Doctrine\ORM\Query
      *
      * @return array Array with total and results
      * @throws \Exception If the sizes of $sort and $order do not match
      */
-    public function getMediaOrderedBy($sort, $page, $max, $order = 'DESC', $hydrator = Query::HYDRATE_OBJECT)
+    public function getMediaOrderedBy($sort, $page, $max, $order = 'DESC')
     {
         // Sort out the different cases of array parameters this method takes
         if (is_array($sort) && is_array($order)) {
@@ -73,7 +71,7 @@ class MediaRepository extends EntityRepository
         $query = $qb->getQuery();
         $query->setParameter("status", Media::STATUS_PUBLISHED);
 
-        $results = $query->getResult($hydrator);
+        $results = $query->getResult();
 
         return $this->getResultList($results, $page, $max);
     }
@@ -94,7 +92,6 @@ class MediaRepository extends EntityRepository
         $total = count($results);
 
         $result = array();
-
         for ($i = $start; $i <= $end && $i < $total; $i++) {
             $result[] = $results[$i];
         }
@@ -110,11 +107,10 @@ class MediaRepository extends EntityRepository
      * @param int    $page
      * @param int    $max
      * @param string $order
-     * @param int    $hydrator @see Doctrine\ORM\Query
      *
      * @return array Array with count and result
      */
-    public function findMedia($search, $sort, $page, $max, $order, $hydrator = Query::HYDRATE_OBJECT)
+    public function findMedia($search, $sort, $page, $max, $order)
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select("m")->distinct(true)
@@ -148,7 +144,7 @@ class MediaRepository extends EntityRepository
               ->setParameter('search5', '%'.strtolower($search).'%')
               ->setParameter('search6', '%'.strtolower($search).'%')
               ->setParameter("status", Media::STATUS_PUBLISHED);
-        $results = $query->getResult($hydrator);
+        $results = $query->getResult();
 
         return $this->getResultList($results, $page, $max);
     }
@@ -159,10 +155,9 @@ class MediaRepository extends EntityRepository
      * and increment no of visits made to media item
      *
      * @param  string   $slug
-     * @param int    $hydrator @see Doctrine\ORM\Query
      * @return Doctrine Record
      */
-    public function findOneBySlug($slug, $hydrator = Query::HYDRATE_SINGLE_SCALAR)
+    public function findOneBySlug($slug)
     {
         $query = $this->createQueryBuilder('m')
             ->where('m.slug = :slug')
@@ -170,7 +165,7 @@ class MediaRepository extends EntityRepository
             ->setParameter('slug', $slug)
             ->setParameter("status", Media::STATUS_PUBLISHED);
 
-        return $query->getQuery()->getOneOrNullResult($hydrator);
+        return $query->getQuery()->getOneOrNullResult();
     }
 
     /**
@@ -181,11 +176,10 @@ class MediaRepository extends EntityRepository
      * @param int    $page
      * @param int    $max
      * @param string $order
-     * @param int    $hydrator @see Doctrine\ORM\Query
      *
      * @return array Array with total and results
      */
-    public function findByCategory($slug, $orderField, $page, $max, $order = 'DESC', $hydrator = Query::HYDRATE_OBJECT)
+    public function findByCategory($slug, $orderField, $page, $max, $order = 'DESC')
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select("m")
@@ -204,7 +198,7 @@ class MediaRepository extends EntityRepository
         $query->setParameter("slug", $slug)
               ->setParameter("status", Media::STATUS_PUBLISHED);
 
-        $results = $query->getResult($hydrator);
+        $results = $query->getResult();
 
         return $this->getResultList($results, $page, $max);
     }
@@ -217,11 +211,10 @@ class MediaRepository extends EntityRepository
      * @param int    $page
      * @param int    $max
      * @param string $order
-     * @param int    $hydrator @see Doctrine\ORM\Query
      *
      * @return array Array with total and results
      */
-    public function findByTag($slug, $orderField, $page, $max, $order = 'DESC', $hydrator = Query::HYDRATE_OBJECT)
+    public function findByTag($slug, $orderField, $page, $max, $order = 'DESC')
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select("m")
@@ -238,7 +231,7 @@ class MediaRepository extends EntityRepository
         $query = $qb->getQuery();
         $query->setParameter("slug", $slug)
               ->setParameter("status", Media::STATUS_PUBLISHED);
-        $results = $query->getResult($hydrator);
+        $results = $query->getResult();
 
         return $this->getResultList($results, $page, $max);
     }
@@ -250,11 +243,10 @@ class MediaRepository extends EntityRepository
      * @param string $orderField
      * @param int    $page
      * @param int    $max
-     * @param int    $hydrator @see Doctrine\ORM\Query
      *
      * @return array Array with total and results
      */
-    public function findBySpeaker($speakerId, $orderField, $page, $max, $hydrator = Query::HYDRATE_OBJECT)
+    public function findBySpeaker($speakerId, $orderField, $page, $max)
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select("m")
@@ -271,7 +263,7 @@ class MediaRepository extends EntityRepository
         $query = $qb->getQuery();
         $query->setParameter('speakerId', $speakerId)
               ->setParameter("status", Media::STATUS_PUBLISHED);
-        $results = $query->getResult($hydrator);
+        $results = $query->getResult();
 
         return $this->getResultList($results, $page, $max);
     }
@@ -279,28 +271,21 @@ class MediaRepository extends EntityRepository
     /**
      * Find media items by title or permalink (for import command)
      *
-     * @param $title
-     * @param $permalink
-     * @param int $hydrator @see Doctrine\ORM\Query
+     * @param string $permalink
+     * 
      * @return bool
      */
-    public function itemExists($title, $permalink, $hydrator = Query::HYDRATE_OBJECT)
+    public function itemExists($permalink)
     {
 
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select("m")
             ->from("ProtalkMediaBundle:Media", "m")
-            ->where(
-                $qb->expr()->orX(
-                    "m.title = :title",
-                    "m.hostUrl = :permalink"
-                )
-            );
+            ->where("m.hostUrl = :permalink");
 
         $query = $qb->getQuery();
-        $query->setParameter('title', $title)
-              ->setParameter('permalink', $permalink);
-        $media = $query->getResult($hydrator);
+        $query->setParameter('permalink', $permalink);
+        $media = $query->getResult();
 
         if (count($media) > 0) {
             return true;

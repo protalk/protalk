@@ -11,7 +11,7 @@
         {% if speaker.biography is empty %}
             If you are {{ speaker.name }}, please <a href="mailto:info@protalk.me">email</a> your biography to us!  :)
         {% else %}
-            {{ speaker.biography}}
+            {{ speaker.biography|nl2br }}
         {% endif %}
     </p>
 </div>
