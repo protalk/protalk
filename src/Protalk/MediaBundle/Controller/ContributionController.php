@@ -40,14 +40,14 @@ class ContributionController extends Controller
             if ($form->isValid()) {
 
                 $contribution = $form->getData();
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($contribution);
                 $em->flush();
 
                 $this->sendMail($contribution);
 
                 $this->get('session')
-                    ->setFlash('contribution-notice', 'Thank you! Your contribution has been received.');
+                    ->getFlashBag()->add('contribution-notice', 'Thank you! Your contribution has been received.');
 
                 return $this->redirect($this->generateUrl('contribute_new'));
             }

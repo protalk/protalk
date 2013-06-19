@@ -49,7 +49,7 @@ class MediaAdminController extends Controller
         }
         $em->flush();
 
-        $this->get('session')->setFlash('sonata_flash_success', 'flash_batch_merge_success');
+        $this->get('session')->getFlashBag()->add('sonata_flash_success', 'flash_batch_merge_success');
 
         return new RedirectResponse($this->admin->generateUrl('list', $this->admin->getFilterParameters()));
     }
