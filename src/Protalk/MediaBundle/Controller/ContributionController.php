@@ -47,7 +47,7 @@ class ContributionController extends Controller
                 $this->sendMail($contribution);
 
                 $this->get('session')
-                    ->setFlash('contribution-notice', 'Thank you! Your contribution has been received.');
+                    ->getFlashBag()->add('contribution-notice', 'Thank you! Your contribution has been received.');
 
                 return $this->redirect($this->generateUrl('contribute_new'));
             }
