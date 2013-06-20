@@ -34,6 +34,7 @@ class protalk::web {
     php::module { "mysql" : }
     php::module { "xml" : }
     php::module { "pecl-apc" : }
+    php::module { "bcmath" : }
 
     php::module { "pecl-xdebug" :
         # xdebug is in the epel repo
