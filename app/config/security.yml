@@ -35,6 +35,7 @@ security:
                 check_path:     /admin/login_check
                 default_target_path: /admin/dashboard
                 failure_path:   null
+                always_use_default_target_path: true
             logout:
                 path:           /admin/logout
             anonymous:    true
