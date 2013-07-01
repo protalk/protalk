@@ -13,14 +13,17 @@ namespace Protalk\MediaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use SamJ\DoctrineSluggableBundle\SluggableInterface;
 use SamJ\DoctrineSluggableBundle\Slugger;
+
 
 /**
  * Protalk\MediaBundle\Entity\Speaker
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Protalk\MediaBundle\Entity\SpeakerRepository")
+ * @UniqueEntity("name")
  */
 class Speaker implements SluggableInterface
 {
