@@ -34,7 +34,7 @@ class CategoryRepository extends EntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $qb->select('c.slug', 'c.name', 'COUNT(m.id) as mediaCount');
-        $qb->from('\Protalk\MediaBundle\Entity\Category', 'c');
+        $qb->from('ProtalkMediaBundle:Category', 'c');
         $qb->join('c.languageCategories', 'lc');
         $qb->join('lc.medias','mlc' );
         $qb->join('mlc.media', 'm');
@@ -59,12 +59,11 @@ class CategoryRepository extends EntityRepository
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $qb->select('c.slug', 'c.name', 'COUNT(m.id) as mediaCount');
-        $qb->from('\Protalk\MediaBundle\Entity\Category', 'c');
+        $qb->from("ProtalkMediaBundle:Category", 'c');
         $qb->join('c.languageCategories', 'lc');
         $qb->join('lc.medias', 'mlc');
         $qb->join('mlc.media', 'm');
         $qb->where('m.status = :status');
-        $qb->groupBy('c.slug');
         $qb->orderBy('c.name', 'ASC');
 
         $query = $qb->getQuery($hydrator);

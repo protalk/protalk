@@ -59,6 +59,16 @@ class MediaTag
     protected $tag;
 
     /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * Set media
      *
      * @param \Protalk\MediaBundle\Entity\Media $media

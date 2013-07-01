@@ -17,9 +17,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Collections\ArrayCollection;
 use Protalk\MediaBundle\Entity\Media;
 use Protalk\MediaBundle\Entity\Mediatype;
-use Protalk\MediaBundle\Entity\Speaker;
-use Protalk\MediaBundle\Entity\Category;
-use Protalk\MediaBundle\Entity\Tag;
 
 class LoadMediaData extends AbstractFixture implements DependentFixtureInterface
 {
@@ -49,22 +46,6 @@ class LoadMediaData extends AbstractFixture implements DependentFixtureInterface
 
         $toolUpYourLampStack = new Media();
         $toolUpYourLampStack->setMediatype($this->getReference('video'));
-        $toolUpYourLampStack->setSpeakers(
-            new ArrayCollection(
-                array(
-                    $this->getReference('lorna-mitchell')
-                )
-            )
-        );
-
-        $toolUpYourLampStack->setTags(
-            new ArrayCollection(
-                array(
-                    $this->getReference('quality-assurance')
-                )
-            )
-        );
-
         $toolUpYourLampStack->setDate(new \DateTime());
         $toolUpYourLampStack->setCreationDate(new \DateTime());
         $toolUpYourLampStack->setTitle('Tool Up Your Lamp Stack');
@@ -81,6 +62,9 @@ class LoadMediaData extends AbstractFixture implements DependentFixtureInterface
         $manager->persist($phpbb4);
         $manager->persist($toolUpYourLampStack);
         $manager->flush();
+
+        $this->addReference('phpbb4', $phpbb4);
+        $this->addReference('toolUpYourLampStack', $toolUpYourLampStack);
     }
 
     /**
@@ -93,9 +77,6 @@ class LoadMediaData extends AbstractFixture implements DependentFixtureInterface
     {
         return array(
             'Protalk\MediaBundle\Tests\Fixtures\LoadMediatypeData',
-            'Protalk\MediaBundle\Tests\Fixtures\LoadSpeakerData',
-            'Protalk\MediaBundle\Tests\Fixtures\LoadCategoryData',
-            'Protalk\MediaBundle\Tests\Fixtures\LoadTagData',
         );
     }
 }
