@@ -24,6 +24,14 @@ class LoadMediaData extends AbstractFixture implements DependentFixtureInterface
     {
         $phpbb4 = new Media();
         $phpbb4->setMediatype($this->getReference('video'));
+        $phpbb4->setSpeakers(
+            new ArrayCollection(
+                array(
+                    $this->getReference('nils-adermann')
+                )
+            )
+        );
+
         $phpbb4->setDate(new \Datetime());
         $phpbb4->setCreationDate(new \DateTime());
         $phpbb4->setTitle('phpBB4: Building end-user applications with Symfony2');

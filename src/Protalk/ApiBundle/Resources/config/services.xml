@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="protalk_api.helper.media_list" class="Protalk\ApiBundle\Helper\CMMIDataHelper">
+            <argument type="service" id="service_container" on-invalid="ignore" />
+            <argument type="collection">
+                <argument key="identifier">slug</argument>
+                <argument key="route">media</argument>
+                <argument type="collection" key="mapping">
+                    <argument key="title">title</argument>
+                    <argument key="content">content</argument>
+                </argument>
+            </argument>
+        </service>
+
+        <service id="protalk_api.helper.media_detail" class="Protalk\ApiBundle\Helper\CMMIDataHelper">
+            <argument type="service" id="service_container" on-invalid="ignore" />
+            <argument type="collection">
+                <argument key="identifier">slug</argument>
+                <argument key="route">media</argument>
+                <argument type="collection" key="mapping">
+                    <argument key="title">title</argument>
+                    <argument key="content">content</argument>
+                </argument>
+            </argument>
+        </service>
+
+        <service id="protalk_api.helper.category_list" class="Protalk\ApiBundle\Helper\CMMIDataHelper">
+            <argument type="service" id="service_container" on-invalid="ignore" />
+            <argument type="collection">
+                <argument key="identifier">slug</argument>
+                <argument key="route">category</argument>
+                <argument type="collection" key="mapping">
+                    <argument key="name">name</argument>
+                    <argument key="slug">slug</argument>
+                </argument>
+            </argument>
+        </service>
+
+        <service id="protalk_api.helper.speaker_list" class="Protalk\ApiBundle\Helper\CMMIDataHelper">
+            <argument type="service" id="service_container" on-invalid="ignore" />
+            <argument type="collection">
+                <argument key="identifier">id</argument>
+                <argument key="route">speaker</argument>
+                <argument type="collection" key="mapping">
+                    <argument key="name">name</argument>
+                </argument>
+            </argument>
+        </service>
+
+        <service id="protalk_api.helper.speaker_detail" class="Protalk\ApiBundle\Helper\CMMIDataHelper">
+            <argument type="service" id="service_container" on-invalid="ignore" />
+            <argument type="collection">
+                <argument key="identifier">id</argument>
+                <argument key="route">speaker</argument>
+                <argument type="collection" key="mapping">
+                    <argument key="name">name</argument>
+                </argument>
+            </argument>
+        </service>
+    </services>
+</container>

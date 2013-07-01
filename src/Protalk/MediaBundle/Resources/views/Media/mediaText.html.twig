@@ -22,7 +22,7 @@
 
     </div>
     <div id="rating">
-        {% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}
+        {% render controller("ProtalkMediaBundle:Rating:index", {'rating' : media.rating }) %}
     </div>
 </div>
     </section>
@@ -30,14 +30,14 @@
     <hr />
 
     <section id="description">
-        <p>{{ media.description }}</p>
+        <p>{{ media.description|nl2br }}</p>
     </section>
 
     <hr />
 
     <section id="comments">
          <div id="comments_content">
-            {% render "ProtalkMediaBundle:Comment:list" with {'media_id' : media.id } %}
+            {% render controller("ProtalkMediaBundle:Comment:list", {'media_id' : media.id }) %}
         </div>
         <div><a id="button_add_comment" class="button" href="{{ url('comment_new', {'media_id': media.id }) }}"><span>COMMENT</span></a></div>
     </section>

@@ -84,7 +84,7 @@ abstract class Base
         //   - somehow re-added to the feed, at a later date, but with the same title
         //   - previously imported but a protalk team member edited the title (hence permalink check)
         $repository = $this->entityManager->getRepository('ProtalkMediaBundle:Media');
-        $itemExists = $repository->itemExists($item->get_title(), $item->get_permalink());
+        $itemExists = $repository->itemExists($item->get_permalink());
 
         if ($itemExists) {
             return false;

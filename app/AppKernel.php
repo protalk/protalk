@@ -39,9 +39,13 @@ class AppKernel extends Kernel
             new Protalk\PageBundle\ProtalkPageBundle(),
             new Protalk\MediaBundle\ProtalkMediaBundle(),
             new Protalk\AdminBundle\ProtalkAdminBundle(),
+            new Protalk\ApiBundle\ProtalkApiBundle(),
 
             new Sensio\Bundle\BuzzBundle\SensioBuzzBundle(),
             new Fkr\SimplePieBundle\FkrSimplePieBundle(),
+
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
+            new FOS\RestBundle\FOSRestBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

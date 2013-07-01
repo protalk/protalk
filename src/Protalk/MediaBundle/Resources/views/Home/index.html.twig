@@ -42,7 +42,7 @@
                     {% endif %}
                 </span> |
 
-                <span class="metadata">Rating: {% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span>
+                <span class="metadata">Rating: {% render controller("ProtalkMediaBundle:Rating:index", {'rating' : media.rating }) %}</span>
            </p>
         </footer>
     </div>
@@ -108,7 +108,7 @@
 
                         <footer>
                             <span class="metadata duration">{{ media.length }}</span> |
-                            <span class="metadata">{% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span>
+                            <span class="metadata">{% render controller("ProtalkMediaBundle:Rating:index", {'rating' : media.rating }) %}</span>
                         </footer>
                     </div>
                 </article>
@@ -122,7 +122,7 @@
 </section>
 
 <div class="hidden">
-    {% render "ProtalkMediaBundle:Sponsor:index" %}
+    {% render controller("ProtalkMediaBundle:Sponsor:index", { }) %}
 </div>
 
 {% endblock %}

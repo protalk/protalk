@@ -67,7 +67,7 @@
                 <p>
                     <span class="metadata duration">{{ media.length }}</span> |
                     <img src="{{ asset('images/binoculars.png') }}" alt="Binoculars Image"/><span class="metadata"> {{ media.visits }} {{ (media.visits == 1) ? "view" : "views" }}</span> |
-                    <span id="leftPaddingTen">{% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span>
+                    <span id="leftPaddingTen">{% render controller("ProtalkMediaBundle:Rating:index", {'rating' : media.rating }) %}</span>
                 </p>
             </footer>
         </div>
