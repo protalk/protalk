@@ -76,6 +76,16 @@ class LanguageCategory
     }
 
     /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * Set category
      *
      * @param \Protalk\MediaBundle\Entity\Category $category

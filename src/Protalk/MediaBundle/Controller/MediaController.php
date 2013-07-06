@@ -40,26 +40,32 @@ class MediaController extends Controller
     }
 
     /**
-     * @param $id
+     * @param $slug
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      *
-     * @Route("/media/{id}/speakers", name="get_speakers", requirements={"id" = "\d+"})
+     * @Route("/media/speakers/{slug}", name="get_speakers")
      */
-    public function speakersAction($id)
+    public function speakersAction($slug)
     {
-        $media = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->findOneById($id);
+        $media = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->findOneBy(array('slug' => $slug));
 
         if (!is_object($media)) {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
 
-        return $this->render('ProtalkMediaBundle:Speaker:show.html.twig', array('speakers' => $media->getSpeakers()));
+        $speakers = array();
+        foreach ( $media->getSpeakers() as $mediaSpeaker) {
+            $speakers[] = $mediaSpeaker->getSpeaker();
+        }
+        return $this->render('ProtalkMediaBundle:Speaker:show.html.twig', array('speakers' => $speakers));
     }
 
     /**
      * @param $id
      * @param $rating
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      *
      * @Route("/rate/{id}/{rating}", name="rate_media", requirements={"id" = "\d+", "rating" = "\d+"})
      */

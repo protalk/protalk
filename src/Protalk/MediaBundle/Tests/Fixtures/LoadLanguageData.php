@@ -15,20 +15,26 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Protalk\MediaBundle\Entity\Category;
+use Protalk\MediaBundle\Entity\Language;
 
-class LoadCategoryData extends AbstractFixture
+class LoadLanguageData extends AbstractFixture
 {
     public function load(ObjectManager $manager)
     {
-        $tools = new Category();
-        $tools->setName('Tools');
-        $tools->setSlug('tools');
+        $php = new Language();
+        $php->setName('PHP');
+        $php->setSlug('php');
 
-        $manager->persist($tools);
+        $javascript = new Language();
+        $javascript->setName('JavaScript');
+        $javascript->setSlug('javascript');
+
+        $manager->persist($php);
+        $manager->persist($javascript);
 
         $manager->flush();
 
-        $this->addReference('tools', $tools);
+        $this->addReference('php', $php);
+        $this->addReference('javascript', $javascript);
     }
 }

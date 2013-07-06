@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace ProTalk\PageBundle\Tests\Controller;
+namespace Protalk\PageBundle\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 use Protalk\PageBundle\Controller\PageController;
