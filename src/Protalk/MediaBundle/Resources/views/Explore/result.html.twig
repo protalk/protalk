@@ -60,14 +60,14 @@
         <div class="mediaTextLarge">
             <header>
                 <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.title|truncate(34) }}</a></h2>
-                <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.getOneSpeaker()|truncate(20) }}</a></span></p>
+                <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'slug': media.slug }) }}">{{ media.getOneSpeaker()|truncate(20) }}</a></span></p>
             </header>
             <p>{{ media.description|truncate(75) }}</p>
             <footer>
                 <p>
                     <span class="metadata duration">{{ media.length }}</span> |
                     <img src="{{ asset('images/binoculars.png') }}" alt="Binoculars Image"/><span class="metadata"> {{ media.visits }} {{ (media.visits == 1) ? "view" : "views" }}</span> |
-                    <span id="leftPaddingTen">{% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span>
+                    <span id="leftPaddingTen">{% render controller("ProtalkMediaBundle:Rating:index", {'rating' : media.rating }) %}</span>
                 </p>
             </footer>
         </div>

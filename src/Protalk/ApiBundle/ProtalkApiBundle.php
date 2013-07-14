@@ -1,6 +1,6 @@
 <?php
 
-namespace ProTalk\ApiBundle;
+namespace Protalk\ApiBundle;
 
 use FOS\RestBundle\FOSRestBundle;
 

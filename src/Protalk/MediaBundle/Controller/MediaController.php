@@ -16,6 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Protalk\MediaBundle\Entity\Rating;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\Query;
 
 class MediaController extends Controller
 {
@@ -27,7 +28,7 @@ class MediaController extends Controller
     public function indexAction($slug)
     {
         $mediaRepository = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media');
-        $media = $mediaRepository->findOneBySlug($slug, \Doctrine_Core::HYDRATE_ARRAY);
+        $media = $mediaRepository->findOneBySlug($slug, Query::HYDRATE_OBJECT);
 
         if (is_object($media)) {
             $mediaRepository->incrementVisitCount($media);
@@ -39,26 +40,32 @@ class MediaController extends Controller
     }
 
     /**
-     * @param $id
+     * @param $slug
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      *
-     * @Route("/media/{id}/speakers", name="get_speakers", requirements={"id" = "\d+"})
+     * @Route("/media/speakers/{slug}", name="get_speakers")
      */
-    public function speakersAction($id)
+    public function speakersAction($slug)
     {
-        $media = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->findOneById($id);
+        $media = $this->getDoctrine()->getRepository('ProtalkMediaBundle:Media')->findOneBy(array('slug' => $slug));
 
         if (!is_object($media)) {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
         }
 
-        return $this->render('ProtalkMediaBundle:Speaker:show.html.twig', array('speakers' => $media->getSpeakers()));
+        $speakers = array();
+        foreach ( $media->getSpeakers() as $mediaSpeaker) {
+            $speakers[] = $mediaSpeaker->getSpeaker();
+        }
+        return $this->render('ProtalkMediaBundle:Speaker:show.html.twig', array('speakers' => $speakers));
     }
 
     /**
      * @param $id
      * @param $rating
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      *
      * @Route("/rate/{id}/{rating}", name="rate_media", requirements={"id" = "\d+", "rating" = "\d+"})
      */
@@ -71,7 +78,7 @@ class MediaController extends Controller
                 throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
             }
 
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
 
             $newRating = new Rating();
             $newRating->setRating($rating);

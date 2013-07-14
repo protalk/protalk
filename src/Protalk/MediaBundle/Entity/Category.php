@@ -42,7 +42,7 @@ class Category implements SluggableInterface
      * @var integer $parent_id
      *
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true, onDelete="set null")
      */
     private $parent_id;
 

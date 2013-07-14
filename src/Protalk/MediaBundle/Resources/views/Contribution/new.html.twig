@@ -19,13 +19,14 @@
 
 {% block body %}
 <h1>Contribution</h1>
-{% render "ProtalkPageBundle:Page:content" with { 'url' : 'contribute' } %}
+{% render controller("ProtalkPageBundle:Page:content", { 'url' : 'contribute' }) %}
 
-{% if app.session.hasFlash('contribution-notice') %}
-<div class="contribution-notice">
-    {{ app.session.flash('contribution-notice') }}
-</div>
-{% endif %}
+{% for flashmessage in app.session.flashbag.get('contribution-notice') %}
+    <div class="contribution-notice">
+        {{ flashmessage }}
+    </div>
+{% endfor %}
+
 <form action="{{ path('contribute_new') }}" method="post" {{ form_enctype(form) }} id="contribution">
 
     {{ form_errors(form) }}

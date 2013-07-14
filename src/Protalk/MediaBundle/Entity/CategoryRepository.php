@@ -13,6 +13,7 @@ namespace Protalk\MediaBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Protalk\MediaBundle\Entity\Media;
+use Doctrine\ORM\Query;
 
 /**
  * CategoryRepository
@@ -28,12 +29,12 @@ class CategoryRepository extends EntityRepository
      * @param  int      $max
      * @return Doctrine Collection
      */
-    public function getMostUsedCategories($max = 20)
+    public function getMostUsedCategories($max = 20, $hydrator = Query::HYDRATE_OBJECT)
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $qb->select('c.slug', 'c.name', 'COUNT(m.id) as mediaCount');
-        $qb->from('\Protalk\MediaBundle\Entity\Category', 'c');
+        $qb->from('ProtalkMediaBundle:Category', 'c');
         $qb->join('c.languageCategories', 'lc');
         $qb->join('lc.medias','mlc' );
         $qb->join('mlc.media', 'm');
@@ -53,20 +54,19 @@ class CategoryRepository extends EntityRepository
      *
      * @return Doctrine Collection
      */
-    public function getAllCategories()
+    public function getAllCategories($hydrator = Query::HYDRATE_OBJECT)
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
 
         $qb->select('c.slug', 'c.name', 'COUNT(m.id) as mediaCount');
-        $qb->from('\Protalk\MediaBundle\Entity\Category', 'c');
+        $qb->from("ProtalkMediaBundle:Category", 'c');
         $qb->join('c.languageCategories', 'lc');
         $qb->join('lc.medias', 'mlc');
         $qb->join('mlc.media', 'm');
         $qb->where('m.status = :status');
-        $qb->groupBy('c.slug');
         $qb->orderBy('c.name', 'ASC');
 
-        $query = $qb->getQuery();
+        $query = $qb->getQuery($hydrator);
         $query->setParameter("status", Media::STATUS_PUBLISHED);
 
         return $query->execute();

@@ -22,7 +22,7 @@ class SpeakerController extends Controller
      */
     public function listAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('ProtalkMediaBundle:Speaker');
         $speakers = $repository->getAllSpeakers();
 
@@ -44,7 +44,7 @@ class SpeakerController extends Controller
         if ($request->isXmlHttpRequest()) {
             $speaker[] = $this->getDoctrine()
                 ->getRepository('ProtalkMediaBundle:Speaker')
-                ->find($id);
+                ->findOneBy(array('id' => $id));
 
             if ($speaker[0] === null) {
                 throw $this->createNotFoundException($name.' not found with id '.$id);
