@@ -20,7 +20,6 @@ class MediaControllerTest extends WebTestCase
     {
         $this->loadFixtures(
             array(
-                'Protalk\MediaBundle\Tests\Fixtures\LoadMediaData',
                 'Protalk\MediaBundle\Tests\Fixtures\LoadMediaSpeakerData'
             )
         );
