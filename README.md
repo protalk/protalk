@@ -57,6 +57,10 @@ That's it! I know, it's too easy. The first time you run this command, it may ta
 
 Congratulations, you now have a fully functional ProTalk development environment!
 
+####Newer VirtualBox versions
+
+If you are running a newer version of VirtualBox (like >= 4.2), the provided Vagrant box might not work out-of-the-box for you at the moment. You can read [this small guide](https://github.com/protalk/protalk/wiki/Manually-fixing-Vagrant-for-newer-VirtualBox-versions) to fix the box manually and get it running again.
+
 ####URLs
 
 You can view the development version ProTalk or PHPMyAdmin in your browser using the following:
