@@ -24,16 +24,8 @@ class LoadMediaData extends AbstractFixture implements DependentFixtureInterface
     {
         $phpbb4 = new Media();
         $phpbb4->setMediatype($this->getReference('video'));
-        $phpbb4->setSpeakers(
-            new ArrayCollection(
-                array(
-                    $this->getReference('nils-adermann')
-                )
-            )
-        );
-
-        $phpbb4->setDate(new \Datetime());
-        $phpbb4->setCreationDate(new \DateTime());
+        $phpbb4->setDate(new \Datetime('16-07-2013'));
+        $phpbb4->setCreationDate(new \DateTime('16-07-2013'));
         $phpbb4->setTitle('phpBB4: Building end-user applications with Symfony2');
         $phpbb4->setContent('<iframe class="player" frameborder="0" scrolling="no" src="http://playertv-bscdn-admin.pad-playertv.brainsonic.com/web//player-html5-568.html" width="400" height="300"><noframes><img alt="&lt;h2&gt;3 Mars Session 05 Symfony&lt;/h2&gt;" src="http://playertv-bscdn-admin.pad-playertv.brainsonic.com/uploads/32/20110309-193143/photo_1.jpg" /><h2>3 Mars Session 05 Symfony</h2></noframes></iframe>');
         $phpbb4->setLength('04:00');
@@ -46,8 +38,8 @@ class LoadMediaData extends AbstractFixture implements DependentFixtureInterface
 
         $toolUpYourLampStack = new Media();
         $toolUpYourLampStack->setMediatype($this->getReference('video'));
-        $toolUpYourLampStack->setDate(new \DateTime());
-        $toolUpYourLampStack->setCreationDate(new \DateTime());
+        $toolUpYourLampStack->setDate(new \DateTime('15-07-2013'));
+        $toolUpYourLampStack->setCreationDate(new \DateTime('15-07-2013'));
         $toolUpYourLampStack->setTitle('Tool Up Your Lamp Stack');
         $toolUpYourLampStack->setDescription('A talk about peripheral tools that aid web development');
         $toolUpYourLampStack->setContent("<iframe src=\"http://player.vimeo.com/video/30012690\" width=\"500\" height=\"409\" frameborder=\"0\" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>");
