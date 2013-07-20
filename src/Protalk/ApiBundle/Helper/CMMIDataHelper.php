@@ -75,7 +75,7 @@ class CMMIDataHelper implements CMMIDataInterface
     protected function buildResources(\RecursiveArrayIterator $iterator)
     {
         if(count($this->mapping) == 0) {
-            throw new HttpException('Unable to generate CMMI Data, no mapping is known', Codes::HTTP_BAD_REQUEST);
+            throw new HttpException(Codes::HTTP_BAD_REQUEST, 'Unable to generate CMMI Data, no mapping is known');
         }
 
         $this->resource = new Resource(new Link($this->container->get('request')->getUri(), 'self'));
@@ -102,7 +102,7 @@ class CMMIDataHelper implements CMMIDataInterface
     protected function addResource(\RecursiveArrayIterator $iterator)
     {
         if(isset($iterator[$this->identifier]) === false) {
-            throw new HttpException('Cannot add resource, identified not known in the iterator', Codes::HTTP_BAD_REQUEST);
+            throw new HttpException(Codes::HTTP_BAD_REQUEST, 'Cannot add resource, identifier not known in the iterator');
         }
 
         $mediaResource = new Resource(new Link('/' . $this->route . '/' . $iterator[$this->identifier], 'self'), $this->route);
