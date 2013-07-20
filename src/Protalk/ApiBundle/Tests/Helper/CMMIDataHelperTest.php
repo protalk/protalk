@@ -13,7 +13,6 @@ class CMMIDataHelperTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException Symfony\Component\HttpKernel\Exception\HttpException
      * @expectedExceptionMessage Unable to generate CMMI Data, no mapping is known
-     * @expectedExceptionCode 400
      */
     public function testBuildArrayWithoutMapping()
     {
@@ -27,8 +26,7 @@ class CMMIDataHelperTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException Symfony\Component\HttpKernel\Exception\HttpException
-     * @expectedExceptionMessage Cannot add resource, identified not known in the iterator
-     * @expectedExceptionCode 400
+     * @expectedExceptionMessage Cannot add resource, identifier not known in the iterator
      */
     public function testBuildArrayWithoutKnowIdentifier()
     {
