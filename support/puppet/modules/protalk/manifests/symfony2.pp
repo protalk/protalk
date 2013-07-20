@@ -27,7 +27,7 @@ class protalk::symfony2 {
 
     # Update the db structure
     exec { "update_db_struct" : 
-        command => "/usr/bin/php /vagrant/app/console doctrine:schema:update",
+        command => "/usr/bin/php /vagrant/app/console doctrine:schema:update --force",
         require => [ Exec["vendorupdate"], Service["mysql"], Package["php-xml"], 
             Exec["init_db"] ],
     }
