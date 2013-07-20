@@ -18,8 +18,8 @@ class CMMIDataHelperTest extends \PHPUnit_Framework_TestCase
     {
         $items = new \RecursiveArrayIterator();;
 
-        $container = new Container(null);
-        $cmmiDataHelper = new CMMIDataHelper($container);
+        $request = new Request();
+        $cmmiDataHelper = new CMMIDataHelper($request);
 
         $cmmiDataHelper->buildArray($items);
     }
@@ -34,11 +34,8 @@ class CMMIDataHelperTest extends \PHPUnit_Framework_TestCase
 
         $request = new Request(array(), array(), array(), array(), array(), array('HTTPS'=>0), null);
 
-        $container = new Container(null);
-        $container->set('request', $request);
-
         $cmmiDataHelper = new CMMIDataHelper(
-            $container,
+            $request,
             array(
                 'identifier' => 'slug',
                 'mapping' => array(
@@ -61,11 +58,8 @@ class CMMIDataHelperTest extends \PHPUnit_Framework_TestCase
         );
         $request = new Request(array(), array(), array(), array(), array(), $serverParams, null);
 
-        $container = new Container(null);
-        $container->set('request', $request);
-
         $cmmiDataHelper = new CMMIDataHelper(
-            $container,
+            $request,
             array(
                 'identifier' => 'id',
                 'route' => 'speaker',
