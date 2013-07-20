@@ -20,8 +20,8 @@ class protalk::symfony2 {
 
     # Create our initial db
     exec { "init_db" :
-        command => "/usr/bin/php /vagrant/app/console doctrine:schema:create && touch /tmp/.init_db",
-        creates => "/tmp/.init_db",
+        command => "/usr/bin/php /vagrant/app/console doctrine:schema:create",
+        creates => "/tmp/.sf2seeded",
         require => [ Exec["vendorupdate"], Service["mysql"], Package["php-xml"], Exec["create-db"] ],
     }
 
