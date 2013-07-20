@@ -2,7 +2,7 @@ class protalk::symfony2 {
 
     # Install / Update the vendors
     exec { "vendorupdate" :
-        command => "/usr/bin/php /vagrant/bin/composer.phar install",
+        command => "/usr/bin/php /vagrant/bin/composer.phar install --dev",
         cwd     => "/vagrant/",
         creates => "/vagrant/vendor/twig",
         require => [ Package["php"], Package["git"] ],
@@ -20,15 +20,23 @@ class protalk::symfony2 {
 
     # Create our initial db
     exec { "init_db" :
-        command => "/usr/bin/php /vagrant/app/console doctrine:schema:create || true",
+        command => "/usr/bin/php /vagrant/app/console doctrine:schema:create",
         creates => "/tmp/.sf2seeded",
-        require => [ Exec["vendorupdate"], Service["mysql"], Package["php-xml"] ],
+        require => [ Exec["vendorupdate"], Service["mysql"], Package["php-xml"], Exec["create-db"] ],
     }
+
+    # Update the db structure
+    exec { "update_db_struct" : 
+        command => "/usr/bin/php /vagrant/app/console doctrine:schema:update --force",
+        require => [ Exec["vendorupdate"], Service["mysql"], Package["php-xml"], 
+            Exec["init_db"] ],
+    }
+
 
     exec { "seed_db" :
         command => "cat /vagrant/doc/db/seed_data.sql | mysql -u${params::dbuser} -p${params::dbpass} ${params::dbname} && touch /tmp/.sf2seeded",
         creates => "/tmp/.sf2seeded",
-        require => Exec["init_db"],
+        require => [ Exec["init_db"], Exec["update_db_struct"] ],
 
     }
 
