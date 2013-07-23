@@ -31,6 +31,57 @@ class ExploreControllerTest extends WebTestCase
         );
     }
 
+    public function testPaginationSummaryShowsCorrectResults()
+    {
+        $client = static::createClient();
+
+        $crawler  = $client->request('GET', '/tag/quality-assurance');
+
+        $response = $client->getResponse();
+
+        // Gets the number of results from the pagination results summary
+        $numResults  = (int) $crawler->filter('#resultHeading > h1 > span.hilite')->text();
+        // Gets the number of Media elements
+        $numElements = $crawler->filter('article.mediaLarge')->count();
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertContains("You have searched for 'quality-assurance'", $response->getContent());
+        $this->assertEquals($numElements, $numResults);
+    }
+
+    public function testGetCategoryPageReturnsValidResponse()
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/category/tools');
+
+        $response = $client->getResponse();
+
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    public function testGetSpeakerPageReturnsValidResponse()
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/search/speaker/frank');
+
+        $response = $client->getResponse();
+
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
+    public function testGetSpeakerPageWithPageParameterReturnsValidResponse()
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/search/speaker/frank?page=1');
+
+        $response = $client->getResponse();
+
+        $this->assertEquals(200, $response->getStatusCode());
+    }
+
     public function testGetExplorePageReturnsValidResponse()
     {
         $client = static::createClient();
@@ -74,11 +125,29 @@ class ExploreControllerTest extends WebTestCase
         $this->assertContains('data-url="/result/video/rating/asc?page=1"        selected="selected">Sort by rating (asc)</option>', $response->getContent());
     }
 
-    public function testPerformInvalidSearchReturnsError()
+    public function invalidParamUrls()
+    {
+        return array(
+            array('/tag/quality-assurance/invalid/desc'),
+            array('/tag/quality-assurance/date/invalid'),
+            array('/result/date/abc123'),
+            array('/result/php/invalid/desc'),
+            array('/result/php/date/invalid'),
+            array('/category/tools/invalid/desc'),
+            array('/category/tools/date/invalid'),
+            array('/search/speaker/frank?sort=invalid'),
+            array('/search/speaker/frank?order=invalid'),
+        );
+    }
+
+    /**
+     * @dataProvider invalidParamUrls
+     */
+    public function testPerformRequestWithInvalidParams($url)
     {
         $client = static::createClient();
 
-        $client->request('GET', '/result/date/abc123');
+        $client->request('GET', $url);
 
         $response = $client->getResponse();
 
