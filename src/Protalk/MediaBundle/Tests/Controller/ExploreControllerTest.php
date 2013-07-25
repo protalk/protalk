@@ -36,7 +36,6 @@ class ExploreControllerTest extends WebTestCase
         $client = static::createClient();
 
         $crawler  = $client->request('GET', '/tag/quality-assurance');
-
         $response = $client->getResponse();
 
         // Gets the number of results from the pagination results summary
@@ -55,9 +54,7 @@ class ExploreControllerTest extends WebTestCase
 
         $client->request('GET', '/category/tools');
 
-        $response = $client->getResponse();
-
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
     public function testGetSpeakerPageReturnsValidResponse()
@@ -66,9 +63,7 @@ class ExploreControllerTest extends WebTestCase
 
         $client->request('GET', '/search/speaker/frank');
 
-        $response = $client->getResponse();
-
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
     public function testGetSpeakerPageWithPageParameterReturnsValidResponse()
@@ -77,9 +72,7 @@ class ExploreControllerTest extends WebTestCase
 
         $client->request('GET', '/search/speaker/frank?page=1');
 
-        $response = $client->getResponse();
-
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
     public function testGetExplorePageReturnsValidResponse()
@@ -149,8 +142,6 @@ class ExploreControllerTest extends WebTestCase
 
         $client->request('GET', $url);
 
-        $response = $client->getResponse();
-
-        $this->assertEquals(403, $response->getStatusCode());
+        $this->assertEquals(403, $client->getResponse()->getStatusCode());
     }
 }
