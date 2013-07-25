@@ -78,6 +78,15 @@ class MediaControllerTest extends WebTestCase
         $this->assertContains("Nils Adermann&#039;s bio.", $content);
     }
 
+    public function testGetSpeakersForMediaWithInvalidSlugReturnsError()
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/media/speakers/symfony-for-dummies');
+
+        $this->assertEquals(404, $client->getResponse()->getStatusCode());
+    }
+
     public function testGetInvalidSpeakersForMediaReturns404()
     {
         $client = static::createClient();
