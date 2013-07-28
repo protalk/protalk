@@ -126,8 +126,7 @@ class MediaRepository extends EntityRepository
                    ),
                    "m.status = :status"
                )
-           )
-            ->orderBy("m." . $sort, $order);;
+           );
 
         $this->addOrderByToQueryBuilder($qb, 'm', $sort, $order);
 
