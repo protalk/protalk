@@ -12,6 +12,7 @@
 namespace Protalk\MediaBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * MediaRepository
@@ -42,31 +43,17 @@ class MediaRepository extends EntityRepository
      */
     public function getMediaOrderedBy($sort, $page, $max, $order = 'DESC')
     {
-        // Sort out the different cases of array parameters this method takes
-        if (is_array($sort) && is_array($order)) {
-            if (count($sort) > count($order)) {
-                /* I don't really care about the size of $order as long as
-                 * it's bigger than $sort. */
-                throw new \Exception(
-                    "Sizes of sort and order parameters given to "
-                    . "MediaRepository#getMediaOrderedBy do not match."
-                );
-            }
-        } elseif (is_array($sort) && is_string($order)) {
-            $order = array_fill(0, count($sort), $order);
-        } else {
-            $sort = (array) $sort;
-            $order = (array) $order;
-        }
+        $sort = $this->cleanSort($sort);
+        $order = $this->cleanOrder($sort, $order);
 
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select("m")
            ->from("ProtalkMediaBundle:Media", "m")
            ->where("m.status = :status");
 
-        for ($i = 0; $i < count($sort); $i++) {
-            $qb->addOrderBy("m." . $sort[$i], $order[$i]);
-        }
+        $this->addOrderByToQueryBuilder($qb, 'm', $sort, $order);
+
+        $qb->addOrderBy('m.date', 'DESC');
 
         $query = $qb->getQuery();
         $query->setParameter("status", Media::STATUS_PUBLISHED);
@@ -103,15 +90,19 @@ class MediaRepository extends EntityRepository
      * Find media by search term
      *
      * @param string $search
-     * @param string $sort
+     * @param string|array $sort
      * @param int    $page
      * @param int    $max
-     * @param string $order
+     * @param string|array $order
      *
      * @return array Array with count and result
+     * @throws \Exception If the sizes of $sort and $order do not match
      */
     public function findMedia($search, $sort, $page, $max, $order)
     {
+        $sort = $this->cleanSort($sort);
+        $order = $this->cleanOrder($sort, $order);
+
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select("m")->distinct(true)
            ->from("ProtalkMediaBundle:Media", "m")
@@ -135,8 +126,12 @@ class MediaRepository extends EntityRepository
                    ),
                    "m.status = :status"
                )
-           )
-            ->orderBy("m." . $sort, $order);;
+           );
+
+        $this->addOrderByToQueryBuilder($qb, 'm', $sort, $order);
+
+        $qb->addOrderBy('m.date', 'DESC');
+
         $query = $qb->getQuery();
         $query->setParameter('search1', '%'.strtolower($search).'%')
               ->setParameter('search2', '%'.strtolower($search).'%')
@@ -327,5 +322,48 @@ class MediaRepository extends EntityRepository
         $average = $result[0][1];
 
         return $average;
+    }
+
+    /**
+     * @param string|array $sort
+     * @return array
+     */
+    protected function cleanSort($sort)
+    {
+        if (!is_array($sort)) {
+            $sort = array($sort);
+        }
+
+        return $sort;
+    }
+
+    /**
+     * @param array $sort
+     * @param string|array $order
+     * @return array
+     * @throws \Exception
+     */
+    protected function cleanOrder($sort, $order)
+    {
+        // Sort out the different cases of array parameters this method takes
+        if (!is_array($order)) {
+            $order = array_fill(0, count($sort), $order);
+        }
+        if (count($sort) > count($order)) {
+            /* I don't really care about the size of $order as long as
+             * it's bigger than $sort. */
+            throw new \Exception(
+                "Sizes of sort and order parameters given to ".__CLASS__."::".__FUNCTION__." do not match."
+            );
+        }
+
+        return $order;
+    }
+
+    protected function addOrderByToQueryBuilder(QueryBuilder $qb, $alias, $sort, $order)
+    {
+        for ($i = 0; $i < count($sort); $i++) {
+            $qb->addOrderBy($alias . "." . $sort[$i], $order[$i]);
+        }
     }
 }
