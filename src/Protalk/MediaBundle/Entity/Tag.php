@@ -16,6 +16,7 @@ use SamJ\DoctrineSluggableBundle\SluggableInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Protalk\MediaBundle\Entity\Tag
@@ -40,6 +41,12 @@ class Tag implements SluggableInterface
      * @var string $name
      *
      * @ORM\Column(name="name", type="string", length=50, unique=true)
+     * @Assert\Length(
+     *    min = "2",
+     *    max = "50",
+     *    minMessage = "A tag must be at least {{ limit }} character in length",
+     *    maxMessage = "A tag cannot be longer than {{ limit }} characters length"
+     * )
      */
     private $name;
 
@@ -102,17 +109,24 @@ class Tag implements SluggableInterface
      */
     public function __toString()
     {
+        if(!$this->name) {
+            return 'pending';
+        }
+
         return $this->name;
     }
 
     /**
-     * Add medias
+     * Add media
      *
-     * @param Protalk\MediaBundle\Entity\Media $medias
+     * @param Protalk\MediaBundle\Entity\MediaTag $medias
      */
-    public function addMedia(\Protalk\MediaBundle\Entity\Media $medias)
+    public function addMedia(\Protalk\MediaBundle\Entity\MediaTag $media)
     {
-        $this->medias[] = $medias;
+        $this->medias[] = $media;
+        $media->setTag($this);
+
+        return $this;
     }
 
     /**

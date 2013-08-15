@@ -27,7 +27,6 @@ namespace Protalk\AdminBundle\Admin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Form\FormMapper;
 
 class LanguageCategoryAdmin extends Admin
@@ -41,6 +40,16 @@ class LanguageCategoryAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('category');
+
+        if($this->isChild()) {
+            $formMapper
+                ->add('category')
+                ->add('language');
+        } else {
+
+        $formMapper
+            ->add('category', 'sonata_type_model')
+            ->add('language', 'sonata_type_model');
+        }
     }
 }
