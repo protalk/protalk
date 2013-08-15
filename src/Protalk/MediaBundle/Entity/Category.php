@@ -16,6 +16,7 @@ use SamJ\DoctrineSluggableBundle\Slugger;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Protalk\MediaBundle\Entity\Category
@@ -50,6 +51,12 @@ class Category implements SluggableInterface
      * @var string $name
      *
      * @ORM\Column(name="name", type="string", length=50, unique=true)
+     * @Assert\Length(
+     *    min = "2",
+     *    max = "50",
+     *    minMessage = "A category must be at least {{ limit }} character in length",
+     *    maxMessage = "A category cannot be longer than {{ limit }} characters length"
+     * )
      */
     private $name;
 
@@ -241,6 +248,7 @@ class Category implements SluggableInterface
     public function addLanguageCategory(LanguageCategory $languageCategory)
     {
         $this->languageCategories[] = $languageCategory;
+        $languageCategory->setCategory($this);
     
         return $this;
     }

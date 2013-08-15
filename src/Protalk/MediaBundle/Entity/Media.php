@@ -15,6 +15,7 @@ use SamJ\DoctrineSluggableBundle\SluggableInterface;
 use SamJ\DoctrineSluggableBundle\Slugger;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Protalk\MediaBundle\Entity\Media
@@ -108,6 +109,12 @@ class Media implements SluggableInterface
      * @var string $title
      *
      * @ORM\Column(name="title", type="string", length=200)
+     * @Assert\Length(
+     *    min = "2",
+     *    max = "200",
+     *    minMessage = "A media title must be at least {{ limit }} character in length",
+     *    maxMessage = "A media title cannot be longer than {{ limit }} characters length"
+     * )
      */
     private $title;
 
