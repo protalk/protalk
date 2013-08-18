@@ -21,20 +21,20 @@ class LoadTagData extends AbstractFixture
 {
     public function load(ObjectManager $manager)
     {
-        $phpnw = new Tag();
-        $phpnw->setName('PHPNW');
-        $phpnw->setSlug('phpnw');
+        $symfony = new Tag();
+        $symfony->setName('symfony');
+        $symfony->setSlug('symfony');
 
         $qualityAssurance = new Tag();
         $qualityAssurance->setName('Quality Assurance');
         $qualityAssurance->setSlug('quality-assurance');
 
-        $manager->persist($phpnw);
+        $manager->persist($symfony);
         $manager->persist($qualityAssurance);
 
         $manager->flush();
 
-        $this->addReference('phpnw', $phpnw);
+        $this->addReference('symfony', $symfony);
         $this->addReference('quality-assurance', $qualityAssurance);
     }
 }

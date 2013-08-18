@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace ProTalk\PageBundle\Tests\Controller;
+namespace Protalk\MediaBundle\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 use Protalk\MediaBundle\Controller\SpeakerController;

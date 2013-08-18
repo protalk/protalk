@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace ProTalk\PageBundle\Tests\Controller;
+namespace Protalk\MediaBundle\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 use Protalk\MediaBundle\Controller\MediaController;
@@ -20,7 +20,7 @@ class HomeControllerTest extends WebTestCase
     {
         $this->loadFixtures(
             array(
-                'Protalk\MediaBundle\Tests\Fixtures\LoadMediaData'
+                'Protalk\MediaBundle\Tests\Fixtures\LoadMediaSpeakerData'
             )
         );
     }
@@ -48,7 +48,7 @@ class HomeControllerTest extends WebTestCase
         $this->assertContains('<title>Tool Up Your Lamp Stack</title>', $content);
         $this->assertContains('<link>http://protalk.me/tool-up-your-lamp-stack</link>', $content);
 
-        $today = new \DateTime();
+        $today = new \DateTime('15-07-2013');
         $today = $today->format('d-m-Y');
         
         $this->assertContains('<pubDate>'.$today.'</pubDate>', $content);

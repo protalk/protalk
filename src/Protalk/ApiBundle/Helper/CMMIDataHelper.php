@@ -3,8 +3,8 @@
 namespace Protalk\ApiBundle\Helper;
 
 use Protalk\ApiBundle\Helper\CMMIDataInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 use FOS\Rest\Util\Codes;
 use JoshuaEstes\Hal\Link;
 use JoshuaEstes\Hal\Resource;
@@ -39,15 +39,16 @@ class CMMIDataHelper implements CMMIDataInterface
     protected $route = '';
 
     /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
+     * @var Request
      */
-    protected $container;
+    protected $request;
 
     /**
-     * @param Container $container
+     * @param Request $request
+     * @param array $options
      */
-    public function __construct(Container $container, $options = array()) {
-        $this->container = $container;
+    public function __construct(Request $request, $options = array()) {
+        $this->request = $request;
 
         if(isset($options['route'])) {
             $this->route = $options['route'];
@@ -66,7 +67,6 @@ class CMMIDataHelper implements CMMIDataInterface
         }
     }
 
-
     /**
      * @param \RecursiveArrayIterator $iterator
      * @return mixed
@@ -75,10 +75,10 @@ class CMMIDataHelper implements CMMIDataInterface
     protected function buildResources(\RecursiveArrayIterator $iterator)
     {
         if(count($this->mapping) == 0) {
-            throw new HttpException('Unable to generate CMMI Data, no mapping is known', Codes::HTTP_BAD_REQUEST);
+            throw new HttpException(Codes::HTTP_BAD_REQUEST, 'Unable to generate CMMI Data, no mapping is known');
         }
 
-        $this->resource = new Resource(new Link($this->container->get('request')->getUri(), 'self'));
+        $this->resource = new Resource(new Link($this->request->getUri(), 'self'));
 
         if($iterator->hasChildren()) {
             while($iterator->valid()) {
@@ -102,7 +102,7 @@ class CMMIDataHelper implements CMMIDataInterface
     protected function addResource(\RecursiveArrayIterator $iterator)
     {
         if(isset($iterator[$this->identifier]) === false) {
-            throw new HttpException('Cannot add resource, identified not known in the iterator', Codes::HTTP_BAD_REQUEST);
+            throw new HttpException(Codes::HTTP_BAD_REQUEST, 'Cannot add resource, identifier not known in the iterator');
         }
 
         $mediaResource = new Resource(new Link('/' . $this->route . '/' . $iterator[$this->identifier], 'self'), $this->route);
