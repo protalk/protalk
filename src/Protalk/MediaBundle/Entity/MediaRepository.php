@@ -267,19 +267,11 @@ class MediaRepository extends EntityRepository
     /**
      * Find media items by title or permalink (for import command)
      *
-<<<<<<< HEAD
      * @param $permalink
      * @param int $hydrator @see Doctrine\ORM\Query
      * @return bool
      */
     public function itemExists($permalink, $hydrator = Query::HYDRATE_OBJECT)
-=======
-     * @param string $permalink
-     * 
-     * @return bool
-     */
-    public function itemExists($permalink)
->>>>>>> upstream/master
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select("m")
@@ -288,11 +280,7 @@ class MediaRepository extends EntityRepository
 
         $query = $qb->getQuery();
         $query->setParameter('permalink', $permalink);
-<<<<<<< HEAD
         $media = $query->getResult($hydrator);
-=======
-        $media = $query->getResult();
->>>>>>> upstream/master
 
         if (count($media) > 0) {
             return true;
