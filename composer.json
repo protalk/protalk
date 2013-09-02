@@ -41,7 +41,9 @@
         "dms/twig-extension-bundle": "1.*",
         "friendsofsymfony/rest-bundle": "dev-master",
         "jms/serializer-bundle": "dev-master",
-        "joshuaestes/hal": "1.0.*@dev"
+        "joshuaestes/hal": "1.0.*@dev",
+        "doctrine/migrations": "dev-master",
+        "doctrine/doctrine-migrations-bundle": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",
