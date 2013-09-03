@@ -123,7 +123,11 @@ To check for differences and make new migration file if needed:
 
     $ app/console doctrine:migrations:diff
 
-If there are changes made to any of the entity classes, new migration file will be created under app/DoctrineMigrations. To make changes to the database, run:
+New migration file will be created under app/DoctrineMigrations, regardless of whether there are any changes in the entities or not.
+
+If you see there are no SQL statements in the newly generated file, you can remove it.
+
+To make changes to the database according to the SQL statements in the migration files, run:
 
     $ app/console doctrine:migrations:migrate
 
@@ -133,7 +137,7 @@ It is necessary to always check for new migrations when you pull new code from G
 
 You will see highlighted number in the "New Migrations" section if there are any migrations to be executed.
 
-Please note, that you should never manually modify a table structure that belongs to an entity.
+Please note, that you should never manually modify a table structure that belongs to an entity. Always do a diff and then migrate to update your database. When your diff creates new migration files, it is crucial that you commit these files along with your pull request.
 
 ###Writing tests
 
