@@ -25,10 +25,11 @@
 namespace Protalk\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Form\FormMapper;
+use Knp\Menu\ItemInterface as MenuItemInterface;
 use Protalk\MediaBundle\Entity\Media;
 
 class MediaAdmin extends Admin
@@ -44,13 +45,6 @@ class MediaAdmin extends Admin
     {
         $formMapper->add('title')
                 ->add('mediatype')
-                ->add(
-                    'speakers',
-                    'sonata_type_collection',
-                    array('by_reference' => false),
-                    array('edit' => 'inline',
-                          'inline' => 'table')
-                )
                 ->add('date')
                 ->add('description')
                 ->add('length')
@@ -75,22 +69,7 @@ class MediaAdmin extends Admin
                 )
                 ->add('hostName')
                 ->add('hostUrl')
-                ->add('thumbnail')
-                ->add(
-                    'languageCategories',
-                    'sonata_type_collection',
-                    array('label' => 'Categories', 
-                          'by_reference' => false),
-                    array('edit' => 'inline',
-                          'inline' => 'table')
-                )
-                ->add(
-                    'tags',
-                    'sonata_type_collection',
-                    array('by_reference' => false),
-                    array('edit' => 'inline',
-                          'inline' => 'table')
-                );
+                ->add('thumbnail');
     }
 
     /**
@@ -131,20 +110,6 @@ class MediaAdmin extends Admin
         $listMapper->addIdentifier('title')
             ->add('status')
             ->add('isImported');
-    }
-
-    /**
-     * Validator function
-     *
-     * This function validates that title of the media is no longer
-     * than 255 characters long.
-     *
-     * @param ErrorElement $errorElement
-     * @param type $object
-     */
-    public function validate(ErrorElement $errorElement, $object)
-    {
-        $errorElement->with('title')->assertMaxLength(array('limit' => 255))->end();
     }
 
     /**
@@ -224,5 +189,38 @@ class MediaAdmin extends Admin
         }
         $method = 'set'.$type;
         $media->$method($result);
+    }
+
+    /**
+     * Add links to child entity lists in menu side bar
+     *
+     * @param MenuItemInterface $menu
+     * @param $action
+     * @param AdminInterface $childAdmin
+     */
+    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
+    {
+        if (!$childAdmin && !in_array($action, array('edit'))) {
+            return;
+        }
+
+        $admin = $this->isChild() ? $this->getParent() : $this;
+
+        $id = $admin->getRequest()->get('id');
+
+        $menu->addChild(
+            'Speakers',
+            array('uri' => $admin->generateUrl('protalk.common.admin.mediaspeaker.list', array('id' => $id)))
+        );
+
+        $menu->addChild(
+            'Categories',
+            array('uri' => $admin->generateUrl('protalk.common.admin.medialanguagecategory.list', array('id' => $id)))
+        );
+
+       $menu->addChild(
+            'Tags',
+            array('uri' => $admin->generateUrl('protalk.common.admin.mediatag.list', array('id' => $id)))
+        );
     }
 }

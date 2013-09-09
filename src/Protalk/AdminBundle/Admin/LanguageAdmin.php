@@ -27,7 +27,6 @@ namespace Protalk\AdminBundle\Admin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Form\FormMapper;
 
 class LanguageAdmin extends Admin
@@ -80,22 +79,6 @@ class LanguageAdmin extends Admin
         $listMapper->addIdentifier('name')->add('slug');
     }
 
-    /**
-     * Validator class
-     *
-     * This function validates that Name is no longer that 50 characters long.
-     *
-     * @param ErrorElement $errorElement
-     * @param type         $object
-     */
-    public function validate(ErrorElement $errorElement, $object)
-    {
-        $errorElement
-        ->with('name')
-        ->assertMaxLength(array('limit' => 50))
-        ->end();
-    }
-    
     /**
      * Add the categories to the language
      * 

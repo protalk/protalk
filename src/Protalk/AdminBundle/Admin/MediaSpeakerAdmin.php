@@ -27,11 +27,12 @@ namespace Protalk\AdminBundle\Admin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Form\FormMapper;
 
 class MediaSpeakerAdmin extends Admin
 {
+    protected $parentAssociationMapping = 'media';
+
     /**
      * Form fields configuration
      *
@@ -42,5 +43,27 @@ class MediaSpeakerAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('speaker');
+    }
+
+    /**
+     * Configure list fields
+     *
+     * @param ListMapper $listMapper
+     */
+    protected function configureListFields(ListMapper $listMapper)
+    {
+        $listMapper
+            ->add('speaker')
+            ->add(
+                '_action',
+                'actions',
+                array(
+                    'actions' => array(
+                        'view' => array(),
+                        'edit' => array(),
+                        'delete' => array(),
+                    )
+                )
+            );
     }
 }
