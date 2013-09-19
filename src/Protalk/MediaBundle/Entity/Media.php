@@ -700,6 +700,10 @@ class Media implements SluggableInterface
      */
     public function __toString()
     {
+        if (!$this->title) {
+            return '';
+        }
+        
         return $this->title;
     }
 
