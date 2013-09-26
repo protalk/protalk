@@ -38,7 +38,6 @@ class protalk::web {
 
     php::module { "pecl-xdebug" :
         # xdebug is in the epel repo
-        require => File["EpelRepo"],
     }
 
     # Set development values to our php.ini and xdebug.ini

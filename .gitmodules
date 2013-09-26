@@ -1,0 +1,15 @@
+[submodule "support/puppet/modules/apache"]
+	path = support/puppet/modules/apache
+	url = https://github.com/example42/puppet-apache
+[submodule "support/puppet/modules/mysql"]
+	path = support/puppet/modules/mysql
+	url = https://github.com/example42/puppet-mysql
+[submodule "support/puppet/modules/php"]
+	path = support/puppet/modules/php
+	url = https://github.com/example42/puppet-php
+[submodule "support/puppet/modules/puppi"]
+	path = support/puppet/modules/puppi
+	url = https://github.com/example42/puppi
+[submodule "support/puppet/modules/epel"]
+	path = support/puppet/modules/epel
+	url = https://github.com/stahnma/puppet-module-epel
