@@ -2,12 +2,9 @@
 # vi: set ft=ruby :
 
 Vagrant::Config.run do |config|
-    # This vagrant will be running on centos 6.2, 64bit with puppet provisioning
-    config.vm.box = 'centos-63-32-puppet'
-    config.vm.box_url = 'https://dl.dropbox.com/sh/9rldlpj3cmdtntc/chqwU6EYaZ/centos-63-32bit-puppet.box'
-
-    # Use :gui for showing a display for easy debugging of vagrant
-    config.vm.boot_mode = :gui
+    # This vagrant will be running on centos 6.4, 64bit with puppet provisioning
+    config.vm.box = 'centos-64-64bit-puppetlabs'
+    config.vm.box_url = 'http://puppet-vagrant-boxes.puppetlabs.com/centos-64-x64-vbox4210.box'
 
     config.vm.define :protalk do |protalk_config|
         protalk_config.vm.host_name = "www.protalk.dev"
