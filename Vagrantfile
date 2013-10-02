@@ -6,9 +6,6 @@ Vagrant::Config.run do |config|
     config.vm.box = 'centos-64-64bit-puppetlabs'
     config.vm.box_url = 'http://puppet-vagrant-boxes.puppetlabs.com/centos-64-x64-vbox4210.box'
 
-    # Use :gui for showing a display for easy debugging of vagrant
-    config.vm.boot_mode = :gui
-
     config.vm.define :protalk do |protalk_config|
         protalk_config.vm.host_name = "www.protalk.dev"
 
