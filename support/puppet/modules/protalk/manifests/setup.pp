@@ -6,13 +6,10 @@ class protalk::setup {
         ensure => present,
     }
 
-    # Setup a EPEL repo, the default one is disabled.
-    file { "EpelRepo" :
-        path   => "/etc/yum.repos.d/epel.repo",
-        source => "${params::filepath}/protalk/files/epel.repo",
-        owner  => "root",
-        group  => "root",
-        mode  => 0644,
+    include epel
+
+    service { "iptables":
+        ensure => "stopped"
     }
 
 }
