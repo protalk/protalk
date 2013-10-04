@@ -30,6 +30,7 @@ Fork the ProTalk repository, then clone it to your local machine:
 	$ cd /path/to/where/you/want/the/cloned/repo/to/be
 	$ git clone https://github.com/{YourGitHubUsername}/protalk.git
 	$ cd protalk
+	$ git submodule update --init
 
 To keep your cloned fork up-to-date with the main ProTalk project repository, add it as a remote:
 
