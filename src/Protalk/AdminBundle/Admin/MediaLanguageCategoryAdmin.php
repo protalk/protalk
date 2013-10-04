@@ -41,7 +41,22 @@ class MediaLanguageCategoryAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('languageCategory', 'sonata_type_model');
+        $categoryQuery = $this->modelManager
+                              ->getEntityManager('Protalk\MediaBundle\Entity\LanguageCategory')
+                              ->createQuery(
+                                  'SELECT lc
+                                   FROM ProtalkMediaBundle:languagecategory lc
+                                   JOIN lc.category c
+                                   JOIN lc.language l
+                                   ORDER BY c.name ASC, l.name ASC'
+                              );
+        
+        $formMapper->add('languageCategory',
+                         'sonata_type_model',
+                         array(
+                             'class' => 'Protalk\MediaBundle\Entity\LanguageCategory',
+                             'query' => $categoryQuery
+                         ));
     }
 
     /**
