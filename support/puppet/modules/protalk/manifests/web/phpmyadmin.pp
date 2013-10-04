@@ -2,8 +2,7 @@ class protalk::web::phpmyadmin {
 
     # Install PHPMyAdmin on /phpmyadmin
     package { "phpMyAdmin" :
-        ensure  => present,
-        require => File["EpelRepo"],
+        ensure  => present
     }
 
     # Setup our own phpmyadmin configuration file
