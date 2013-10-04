@@ -115,6 +115,31 @@ If you would like to know more about how this was set up, [read Joshua's informa
 7. Import the doc/db/seed_data.sql in your database for initial data
 8. Creating a admin user for the backend can be done by running this command: "app/console fos:user:create admin admin@example.com password --super-admin
 
+###Doctrine Migrations
+
+ProTalk uses Doctrine Migrations to enable synchronizing database changes between multiple developers. It works by comparing your changes in the entity classes to your database schema and generate
+migration files according to the entity changes. Usage:
+
+To check for differences and make new migration file if needed:
+
+    $ app/console doctrine:migrations:diff
+
+New migration file will be created under app/DoctrineMigrations, regardless of whether there are any changes in the entities or not.
+
+If you see there are no SQL statements in the newly generated file, you can remove it.
+
+To make changes to the database according to the SQL statements in the migration files, run:
+
+    $ app/console doctrine:migrations:migrate
+
+It is necessary to always check for new migrations when you pull new code from Github. To see if you have any new migrations to be executed, run:
+
+    $ app/console doctrine:migrations:status
+
+You will see highlighted number in the "New Migrations" section if there are any migrations to be executed.
+
+Please note, that you should never manually modify a table structure that belongs to an entity. Always do a diff and then migrate to update your database. When your diff creates new migration files, it is crucial that you commit these files along with your pull request.
+
 ###Writing tests
 
 If you want to contribute by writing unit or functional tests, this is actually quite easy. One example unit test is in the MediaBundle, in src/ProTalk/MediaBundle/Tests/Helpers/Paginator.php.
