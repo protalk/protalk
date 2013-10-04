@@ -44,7 +44,7 @@ class CommentController extends Controller
             $form = $this->createForm(new CommentMedia(), $comment);
 
             if ($request->getMethod() == 'POST') {
-                $form->bindRequest($request);
+                $form->bind($request);
 
                 if ($form->isValid()) {
 
