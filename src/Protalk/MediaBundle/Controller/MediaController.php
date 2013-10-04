@@ -31,8 +31,10 @@ class MediaController extends Controller
         $media = $mediaRepository->findOneBySlug($slug, Query::HYDRATE_OBJECT);
 
         if (is_object($media)) {
-            $mediaRepository->incrementVisitCount($media);
-
+            if (!$this->get("session")->get("hasViewedInThisSession")) {
+                $this->get("session")->set("hasViewedInThisSession", true);
+                $mediaRepository->incrementVisitCount($media);
+            }
             return array('media' => $media);
         } else {
             throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException();
