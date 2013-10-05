@@ -31,8 +31,8 @@ class MediaController extends Controller
         $media = $mediaRepository->findOneBySlug($slug, Query::HYDRATE_OBJECT);
 
         if (is_object($media)) {
-            if (!$this->get("session")->get("hasViewedInThisSession")) {
-                $this->get("session")->set("hasViewedInThisSession", true);
+            if (!$this->get("session")->get("hasViewedInThisSession_".$media->getId())) {
+                $this->get("session")->set("hasViewedInThisSession".$media->getId(), true);
                 $mediaRepository->incrementVisitCount($media);
             }
             return array('media' => $media);
