@@ -32,7 +32,7 @@ class MediaController extends Controller
 
         if (is_object($media)) {
             if (!$this->get("session")->get("hasViewedInThisSession_".$media->getId())) {
-                $this->get("session")->set("hasViewedInThisSession".$media->getId(), true);
+                $this->get("session")->set("hasViewedInThisSession_".$media->getId(), true);
                 $mediaRepository->incrementVisitCount($media);
             }
             return array('media' => $media);
