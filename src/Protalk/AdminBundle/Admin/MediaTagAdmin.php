@@ -42,7 +42,23 @@ class MediaTagAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('tag', 'sonata_type_model');
+        $tagQuery = $this->modelManager
+                         ->getEntityManager('Protalk\MediaBundle\Entity\Tag')
+                         ->createQuery(
+                             'SELECT t
+                             FROM ProtalkMediaBundle:tag t
+                             ORDER BY t.name ASC'
+                         );
+        
+        $formMapper->add(
+            'tag',
+            'sonata_type_model',
+            array(
+                'class' => 'Protalk\MediaBundle\Entity\Tag',
+                'property' => 'name',
+                'query' => $tagQuery
+            )
+        );
     }
 
     /**

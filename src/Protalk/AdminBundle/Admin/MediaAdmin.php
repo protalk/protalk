@@ -34,6 +34,10 @@ use Protalk\MediaBundle\Entity\Media;
 
 class MediaAdmin extends Admin
 {
+    protected $datagridValues = array(
+        '_sort_by' => 'title' // name of the ordered field (default = the model id field, if any)
+    );
+    
     /**
      * Configure form fields
      *

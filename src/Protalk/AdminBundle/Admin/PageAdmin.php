@@ -19,6 +19,10 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class PageAdmin extends Admin
 {
+    protected $datagridValues = array(
+        '_sort_by' => 'pageTitle' // name of the ordered field (default = the model id field, if any)
+    );
+    
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('url')->add('pageTitle')->add('title')->add('content');
