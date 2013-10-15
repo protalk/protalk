@@ -32,6 +32,10 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class SpeakerAdmin extends Admin
 {
+    protected $datagridValues = array(
+        '_sort_by' => 'name' // name of the ordered field (default = the model id field, if any)
+    );
+    
     /**
      * Form field configuration
      *

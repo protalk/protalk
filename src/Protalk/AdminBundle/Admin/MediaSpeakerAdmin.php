@@ -42,7 +42,21 @@ class MediaSpeakerAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('speaker');
+        $speakerQuery = $this->modelManager
+                             ->getEntityManager('Protalk\MediaBundle\Entity\Speaker')
+                             ->createQuery(
+                                 'SELECT s
+                                  FROM ProtalkMediaBundle:speaker s
+                                  ORDER BY s.name ASC'
+                             );
+        
+        $formMapper->add('speaker',
+                         'sonata_type_model',
+                         array(
+                             'class' => 'Protalk\MediaBundle\Entity\Speaker',
+                             'property' => 'name',
+                             'query' => $speakerQuery
+                         ));
     }
 
     /**
