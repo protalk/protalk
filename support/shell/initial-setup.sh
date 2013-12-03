@@ -1,10 +1,10 @@
 #!/bin/bash
 
-OS=$(/bin/bash /vagrant/shell/os-detect.sh ID)
-CODENAME=$(/bin/bash /vagrant/shell/os-detect.sh CODENAME)
+OS=$(/bin/bash /vagrant/support/shell/os-detect.sh ID)
+CODENAME=$(/bin/bash /vagrant/support/shell/os-detect.sh CODENAME)
 
 if [[ ! -d /.puphpet-stuff ]]; then
-    cat /vagrant/shell/self-promotion.txt
+    cat /vagrant/support/shell/self-promotion.txt
     mkdir /.puphpet-stuff
     echo "Created directory /.puphpet-stuff"
 fi
