@@ -2,7 +2,7 @@
     <tr>
     {% for speaker in speakers %}
         <td>
-			<a class="speaker" href="{{ url('speaker_search', { 'search' : speaker.id }) }}">{{ speaker.name }} ({{ speaker.mediaCount }})</a>
+			<a class="speaker" href="{{ url('speaker_search', { 'search' : speaker.slug }) }}">{{ speaker.name }} ({{ speaker.mediaCount }})</a>
 		</td>
         {% if loop.index is even %}
             </tr>

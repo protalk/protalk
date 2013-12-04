@@ -31,7 +31,7 @@ class SpeakerRepository extends EntityRepository
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
 
-        $qb->select('s.id', 's.name', 'COUNT(m.id) as mediaCount');
+        $qb->select('s.slug', 's.name', 'COUNT(m.id) as mediaCount');
         $qb->from('\Protalk\MediaBundle\Entity\Speaker', 's');
         $qb->join('s.medias', 'ms');
         $qb->join('ms.media', 'm');

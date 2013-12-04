@@ -122,27 +122,17 @@ class ExploreController extends Controller
     }
 
     /**
-     * @Route("/search/speaker/{search}", name="speaker_search")
+     * @Route("/speaker/{search}/{sort}/{order}",
+     *        name="speaker_search", defaults={"sort" = "date", "order" = "desc" })
      * @Template("ProtalkMediaBundle:Explore:result.html.twig")
      */
-    public function speakerAction($search)
+    public function speakerAction($search, $sort, $order)
     {
-        $sort = 'date';
-        if ($this->getRequest()->get('sort') != '') {
-            $sort = $this->getRequest()->get('sort');
-        }
-
-        $order = 'asc';
-        if ($this->getRequest()->get('order') != '') {
-            $order = $this->getRequest()->get('order');
-        }
-
-        $page = 1;
-        if ($this->getRequest()->get('page') != '') {
-            $page = $this->getRequest()->get('page');
-        }
-
         $pageSize = $this->container->getParameter('search_results_page');
+        $request = Request::createFromGlobals();
+
+        $order = $request->request->get('order', $order);
+        $page = $this->getRequest()->get('page', 1);
 
         if (!ExploreSortOptions::verifySortOption($sort, $order)) {
             throw new AccessDeniedHttpException("The given sort option '$sort' is not supported");
@@ -152,7 +142,7 @@ class ExploreController extends Controller
         $repository = $em->getRepository('ProtalkMediaBundle:Media');
         $results = $repository->findBySpeaker($search, $sort, $page, $pageSize);
 
-        return $this->getViewParameters($results, 'id', $search, $sort, $page, $pageSize, 'speaker_search', 'id');
+        return $this->getViewParameters($results, 'search', $search, $sort, $page, $pageSize, 'speaker_search', $order);
     }
 
     /**
