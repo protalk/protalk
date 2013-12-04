@@ -96,7 +96,7 @@ class MediatypeAdmin extends Admin
      */
     public function validate(ErrorElement $errorElement, $object)
     {
-        $errorElement->with('name')->assertMaxLength(array('limit' => 50))->end();
-        $errorElement->with('type')->assertMaxLength(array('limit' => 10))->end();
+        $errorElement->with('name')->assertLength(array('max' => 50))->end();
+        $errorElement->with('type')->assertLength(array('max' => 10))->end();
     }
 }
