@@ -19,22 +19,22 @@ class protalk::symfony2 {
     }
 
 # Create our initial db
-    exec { "init_db" :
-        command => "/usr/bin/php /var/www/app/console doctrine:schema:create",
-        creates => "/tmp/.sf2seeded",
-        require => [ Exec["vendorupdate"], Class['mysql::server'], Exec["create-db"] ],
-    }
+#    exec { "init_db" :
+#        command => "/usr/bin/php /var/www/app/console doctrine:schema:create",
+#        creates => "/tmp/.sf2seeded",
+#        require => [ Exec["vendorupdate"], Class['mysql::server'], Exec["create-db"] ],
+#    }
 
 # Update the db structure
     exec { "update_db_struct" :
         command => "/usr/bin/php /var/www/app/console doctrine:schema:update --force",
-        require => [ Exec["vendorupdate"], Class['mysql::server'], Exec["init_db"] ],
+        require => [ Exec["vendorupdate"], Class['mysql::server'] ],
     }
 
     exec { "seed_db" :
         command => "cat /var/www/doc/db/seed_data.sql | mysql -u${params::dbuser} -p${params::dbpass} ${params::dbname} && touch /tmp/.sf2seeded",
         creates => "/tmp/.sf2seeded",
-        require => [ Exec["init_db"], Exec["update_db_struct"] ],
+        require => [ Exec["update_db_struct"] ],
 
     }
 
@@ -44,7 +44,7 @@ class protalk::symfony2 {
         owner => "vagrant",
         group => "vagrant",
         mode => 0777,
-        before => Exec["init_db"],
+        before => Exec["vendorupdate"],
     }
 
 }
