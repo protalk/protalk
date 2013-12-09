@@ -38,7 +38,7 @@ class protalk::symfony2 {
 
     }
 
-    $cachedirs = [ "/tmp/sf2cache", "/tmp/sf2cache/app", "/tmp/sf2cache/app/cache", "/tmp/sf2cache/app/logs", "/tmp/sf2cache/app/cache/dev", ]
+    $cachedirs = [ "/var/www/app", "/var/www/app/cache", "/var/www/app/logs", "/var/www/app/cache/dev", ]
     file { $cachedirs :
         ensure => "directory",
         owner => "vagrant",
@@ -46,5 +46,17 @@ class protalk::symfony2 {
         mode => 0777,
         before => Exec["vendorupdate"],
     }
+
+###  FIND A WAY TO SET PERMISSIONS CORRECTLY FOR WWW-DATA AND VAGRANT ON CACHE AND LOGS FILES
+
+#    exec { "www-permissions" :
+ #           command => "sudo chmod +a \"www-data allow delete,write,append,file_inherit,directory_inherit\" app/cache app/logs",
+  #          require =>  Exec["vendorupdate"]
+   #     }
+
+#    exec { "vagrant-permissions" :
+ #           command => "sudo chmod +a \"`whoami` allow delete,write,append,file_inherit,directory_inherit\" app/cache app/logs",
+  #          require =>  Exec["www-permissions"]
+   #     }
 
 }
