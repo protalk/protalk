@@ -1,7 +1,7 @@
 #!/bin/bash
 
-OS=$(/bin/bash /vagrant/shell/os-detect.sh ID)
-CODENAME=$(/bin/bash /vagrant/shell/os-detect.sh CODENAME)
+OS=$(/bin/bash /vagrant/support/shell/os-detect.sh ID)
+CODENAME=$(/bin/bash /vagrant/support/shell/os-detect.sh CODENAME)
 
 # Directory in which librarian-puppet should manage its modules directory
 PUPPET_DIR=/etc/puppet/
@@ -32,7 +32,7 @@ if [[ ! -d "$PUPPET_DIR" ]]; then
     echo "Created directory $PUPPET_DIR"
 fi
 
-cp "/vagrant/puppet/Puppetfile" "$PUPPET_DIR"
+cp "/vagrant/support/puppet/Puppetfile" "$PUPPET_DIR"
 echo "Copied Puppetfile"
 
 if [ "$OS" == 'debian' ] || [ "$OS" == 'ubuntu' ]; then

@@ -44,8 +44,8 @@ file { "/home/${::ssh_username}":
 # copy dot files to ssh user's home directory
 exec { 'dotfiles':
   cwd     => "/home/${::ssh_username}",
-  command => "cp -r /vagrant/support/files/dot/.[a-zA-Z0-9]* /home/${::ssh_username}/ && chown -R ${::ssh_username} /home/${::ssh_username}/.[a-zA-Z0-9]*",
-  onlyif  => "test -d /vagrant/support/files/dot",
+  command => "cp -r /vagrant/files/dot/.[a-zA-Z0-9]* /home/${::ssh_username}/ && chown -R ${::ssh_username} /home/${::ssh_username}/.[a-zA-Z0-9]*",
+  onlyif  => "test -d /vagrant/files/dot",
   require => User[$::ssh_username]
 }
 
