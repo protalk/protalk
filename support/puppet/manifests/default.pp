@@ -7,6 +7,15 @@ if $server_values == undef {
 # Ensure the time is accurate, reducing the possibilities of apt repositories
 # failing for invalid certificates
 include '::ntp'
+import 'params.pp'
+import 'init.pp'
+import 'sql.pp'
+import 'symfony2.pp'
+
+node default {
+    include params
+    include protalk
+}
 
 Exec { path => [ '/bin/', '/sbin/', '/usr/bin/', '/usr/sbin/' ] }
 File { owner => 0, group => 0, mode => 0644 }
@@ -474,6 +483,8 @@ define mysql_db (
     sql      => $sql_file,
   }
 }
+
+
 
 if $mysql_values['phpmyadmin'] == 1 and is_hash($php_values) {
   if $::osfamily == 'debian' {
