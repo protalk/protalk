@@ -22,13 +22,13 @@ class protalk::symfony2 {
 #    exec { "init_db" :
 #        command => "/usr/bin/php /var/www/app/console doctrine:schema:create",
 #        creates => "/tmp/.sf2seeded",
-#        require => [ Exec["vendorupdate"], Class['mysql::server'], Exec["create-db"] ],
+#        require => [ Exec["vendorupdate"], Class['mysql::server'], Package['php5-dev'], Exec["create-db"] ],
 #    }
 
 # Update the db structure
     exec { "update_db_struct" :
         command => "/usr/bin/php /var/www/app/console doctrine:schema:update --force",
-        require => [ Exec["vendorupdate"], Class['mysql::server'] ],
+        require => [ Exec["vendorupdate"], Class['mysql::server'], Package['php5-dev'] ],
     }
 
     exec { "seed_db" :
@@ -38,6 +38,11 @@ class protalk::symfony2 {
 
     }
 
+    exec { "update_db_struct_again" :
+            command => "/usr/bin/php /var/www/app/console doctrine:schema:update --force",
+            require => [ Exec["seed_db"] ],
+        }
+
     $cachedirs = [ "/var/www/app", "/var/www/app/cache", "/var/www/app/logs", "/var/www/app/cache/dev", ]
     file { $cachedirs :
         ensure => "directory",
@@ -46,17 +51,4 @@ class protalk::symfony2 {
         mode => 0777,
         before => Exec["vendorupdate"],
     }
-
-###  FIND A WAY TO SET PERMISSIONS CORRECTLY FOR WWW-DATA AND VAGRANT ON CACHE AND LOGS FILES
-
-#    exec { "www-permissions" :
- #           command => "sudo chmod +a \"www-data allow delete,write,append,file_inherit,directory_inherit\" app/cache app/logs",
-  #          require =>  Exec["vendorupdate"]
-   #     }
-
-#    exec { "vagrant-permissions" :
- #           command => "sudo chmod +a \"`whoami` allow delete,write,append,file_inherit,directory_inherit\" app/cache app/logs",
-  #          require =>  Exec["www-permissions"]
-   #     }
-
 }

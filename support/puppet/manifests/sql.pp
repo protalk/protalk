@@ -8,10 +8,9 @@ class protalk::sql {
    #         require => Class['mysql::server'],
     #    }
 
-   # exec { 'create-db':
-   #     unless => "/usr/bin/mysql -u${params::dbuser} -p${params::dbpass} ${params::dbname}",
-   #    command => "/usr/bin/mysql -e \"create database ${params::dbname}; grant all on ${params::dbname}.* to ${params::dbuser}@localhost identified by '${params::dbpass}';\"",
-   #     require => Class['mysql::server'],
-   # }
-
+    exec { 'create-db':
+        unless => "/usr/bin/mysql -uroot -p123 ${params::dbname}",
+       command => "/usr/bin/mysql -uroot -p123 -e \"create database ${params::dbname}; grant all on ${params::dbname}.* to ${params::dbuser}@localhost identified by '${params::dbpass}';\"",
+        require => Class['mysql::server'],
+    }
 }
