@@ -65,11 +65,11 @@ apache:
                 - 'APP_ENV dev'
             override:
                 - All
-            directories:
-              - path: /var/www/www
-                options: FollowSymLinks
-                order: allow,deny
-                allow: from all
+#            directories:
+#              - path: /var/www/www
+#                options: FollowSymLinks
+#                order: allow,deny
+#                allow: from all
     user: www-data
     group: www-data
     #default_vhost: true
