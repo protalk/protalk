@@ -42,10 +42,10 @@ class PageAdmin extends Admin
     {
         $errorElement
             ->with('pageTitle')
-            ->assertMaxLength(array('limit' => 100))
+            ->assertLength(array('max' => 100))
             ->end()
             ->with('url')
-            ->assertMaxLength(array('limit' => 100))
+            ->assertLength(array('max' => 100))
             ->end();
     }
 }
