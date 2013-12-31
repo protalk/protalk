@@ -142,4 +142,37 @@ class MediaLanguageCategory
     {
         return $this->languageCategory->getCategory()->getName().' ('.$this->languageCategory->getLanguage()->getName().')';
     }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set languagecategory_id
+     *
+     * @param integer $languagecategoryId
+     * @return MediaLanguageCategory
+     */
+    public function setLanguagecategoryId($languagecategoryId)
+    {
+        $this->languagecategory_id = $languagecategoryId;
+    
+        return $this;
+    }
+
+    /**
+     * Get languagecategory_id
+     *
+     * @return integer 
+     */
+    public function getLanguagecategoryId()
+    {
+        return $this->languagecategory_id;
+    }
 }
