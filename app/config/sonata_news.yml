@@ -1,0 +1,12 @@
+sonata_news:
+  title:        "Mon titre"
+  link:         http://sonata-project.org
+  description:  Cool bundles on top of Symfony2
+  salt:         'secureToken'
+  permalink_generator: sonata.news.permalink.date # sonata.news.permalink.category
+
+  comment:
+        notification:
+            emails:   [info@protalk.me, email2@example.org]
+            from:     no-reply@protalk.me
+            template: 'SonataNewsBundle:Mail:comment_notification.txt.twig'
