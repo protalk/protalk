@@ -242,7 +242,7 @@ class MediaRepository extends EntityRepository
      *
      * @return array Array with total and results
      */
-    public function findBySpeaker($speakerId, $orderField, $page, $max)
+    public function findBySpeaker($slug, $orderField, $page, $max)
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select("m")
@@ -251,13 +251,13 @@ class MediaRepository extends EntityRepository
            ->join("ms.speaker", "s")
            ->where(
                $qb->expr()->andX(
-                   "s.id = :speakerId",
+                   "s.slug = :slug",
                    "m.status = :status"
                )
            )
            ->orderBy("m." . $orderField, "DESC");
         $query = $qb->getQuery();
-        $query->setParameter('speakerId', $speakerId)
+        $query->setParameter('slug', $slug)
               ->setParameter("status", Media::STATUS_PUBLISHED);
         $results = $query->getResult();
 
