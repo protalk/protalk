@@ -216,4 +216,14 @@ class Speaker implements SluggableInterface
 
         return $this->setSlug($slug);
     }
+
+    /**
+     * Remove medias
+     *
+     * @param \Protalk\MediaBundle\Entity\MediaSpeaker $medias
+     */
+    public function removeMedia(\Protalk\MediaBundle\Entity\MediaSpeaker $medias)
+    {
+        $this->medias->removeElement($medias);
+    }
 }

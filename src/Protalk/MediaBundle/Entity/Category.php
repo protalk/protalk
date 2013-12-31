@@ -272,4 +272,27 @@ class Category implements SluggableInterface
     {
         return $this->languageCategories;
     }
+
+    /**
+     * Add languageCategories
+     *
+     * @param \Protalk\MediaBundle\Entity\LanguageCategory $languageCategories
+     * @return Category
+     */
+    public function addLanguageCategorie(\Protalk\MediaBundle\Entity\LanguageCategory $languageCategories)
+    {
+        $this->languageCategories[] = $languageCategories;
+    
+        return $this;
+    }
+
+    /**
+     * Remove languageCategories
+     *
+     * @param \Protalk\MediaBundle\Entity\LanguageCategory $languageCategories
+     */
+    public function removeLanguageCategorie(\Protalk\MediaBundle\Entity\LanguageCategory $languageCategories)
+    {
+        $this->languageCategories->removeElement($languageCategories);
+    }
 }
