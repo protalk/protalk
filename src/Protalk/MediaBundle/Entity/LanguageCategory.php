@@ -169,4 +169,37 @@ class LanguageCategory
     {
         return $this->category->getName().' ('.$this->language->getName().')';
     }
+
+    /**
+     * Add medias
+     *
+     * @param \Protalk\MediaBundle\Entity\MediaLanguageCategory $medias
+     * @return LanguageCategory
+     */
+    public function addMedia(\Protalk\MediaBundle\Entity\MediaLanguageCategory $medias)
+    {
+        $this->medias[] = $medias;
+    
+        return $this;
+    }
+
+    /**
+     * Remove medias
+     *
+     * @param \Protalk\MediaBundle\Entity\MediaLanguageCategory $medias
+     */
+    public function removeMedia(\Protalk\MediaBundle\Entity\MediaLanguageCategory $medias)
+    {
+        $this->medias->removeElement($medias);
+    }
+
+    /**
+     * Get medias
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMedias()
+    {
+        return $this->medias;
+    }
 }
