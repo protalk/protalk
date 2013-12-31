@@ -180,4 +180,14 @@ class Tag implements SluggableInterface
 
         return $this->setSlug($slug);
     }
+
+    /**
+     * Remove medias
+     *
+     * @param \Protalk\MediaBundle\Entity\MediaTag $medias
+     */
+    public function removeMedia(\Protalk\MediaBundle\Entity\MediaTag $medias)
+    {
+        $this->medias->removeElement($medias);
+    }
 }

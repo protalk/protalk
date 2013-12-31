@@ -42,7 +42,7 @@ class MediaControllerTest extends WebTestCase
         $this->assertContains("1hr 20mins", $response->getContent());
     }
 
-    public function testMediaPageIncrementsMediaViewCount()
+    public function testMediaPageDoesNotIncrementsMediaViewCountAfterFirstVisit()
     {
         $client = static::createClient();
 
@@ -54,7 +54,7 @@ class MediaControllerTest extends WebTestCase
         $client->request('GET', '/tool-up-your-lamp-stack');
         $response = $client->getResponse();
 
-        $this->assertContains("102 views", $response->getContent());
+        $this->assertContains("101 views", $response->getContent());
     }
 
     public function testGetMediaThatDoesNotExistThrows404()
