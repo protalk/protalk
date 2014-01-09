@@ -63,6 +63,11 @@ sonata_block:
     blocks:
         sonata.admin.block.admin_list:
             contexts:   [admin]
+        sonata.block.service.text:
+        sonata.user.block.menu:    # used to display the menu in profile pages
+        sonata.user.block.account: # used to display menu option (login option)
+        protalk.block.service.watchlist:
+        protalk.block.service.welcome:
 
 sonata_admin:
     title:      ProTalk
@@ -176,16 +181,69 @@ services:
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_media, label: Contribution }
       arguments: [null, Protalk\MediaBundle\Entity\Contribution, null]   
-   sonata.user.admin:
-      class: Sonata\UserBundle\Admin\Entity\UserAdmin
+   sonata.admin.user:
+      class: Protalk\AdminBundle\Admin\UserAdmin
       tags:
         - { name: sonata.admin, manager_type: orm, group: protalk_user, label: User }
-      arguments: [null, Sonata\UserBundle\Entity\User, null]  
+      arguments: [null, Protalk\UserBundle\Entity\User, null]
 
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: Application\Sonata\UserBundle\Entity\User
+    user_class: Protalk\UserBundle\Entity\User
+    from_email:
+      address:        info@protalk.me
+      sender_name:    ProTalk Team
+    profile:
+      form:
+        type:               fos_user_profile
+        handler:            fos_user.profile.form.handler.default
+        name:               fos_user_profile_form
+        validation_groups:  [Authentication]
+    change_password:
+        form:
+          type:               fos_user_change_password
+          name:               fos_user_change_password_form
+          validation_groups:  [ChangePassword, Default]
+    registration:
+      confirmation:
+        enabled: true
+        template: FOSUserBundle:Registration:email.txt.twig
+    service:
+        mailer:              fos_user.mailer.default
+    resetting:
+        token_ttl: 86400
+        email:
+          template:   FOSUserBundle:Resetting:email.txt.twig
+        form:
+          type:               fos_user_resetting
+          handler:            fos_user.resetting.form.handler.default
+          name:               fos_user_resetting_form
+          validation_groups:  [ResetPassword, Default]
+
+sonata_user:
+    security_acl:     false
+    class:
+        user:         Protalk\UserBundle\Entity\User
+    admin:                  # Admin Classes
+        user:
+            class:          Protalk\AdminBundle\Admin\UserAdmin
+            controller:     SonataAdminBundle:CRUD
+            translation:    SonataUserBundle
+
+    profile:  # Profile Form (firstname, lastname, etc ...)
+        form:
+            type:               sonata_user_profile
+            handler:            sonata.user.profile.form.handler.default
+            name:               sonata_user_profile_form
+            validation_groups:  [Profile]
+        menu:
+          ~
+
+        dashboard:
+            blocks:
+              - { position: center, type: protalk.block.service.welcome }
+              - { position: right, type: protalk.block.service.watchlist }
 
 parameters:
     home_lists_max:  6
