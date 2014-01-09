@@ -1,0 +1,31 @@
+{# This file overrides the corresponding file in the SonataUserBundle package. #}
+
+{% extends "::base.html.twig" %}
+
+{% block moreContent %}
+
+    <div class="sonata-user-show">
+
+        <div class="span2 well" style="padding: 8px 0;">
+            {% block sonata_profile_menu %}
+                {{ sonata_block_render({'type': 'sonata.user.block.menu'}, {'current_uri': app.request.requestUri}) }}
+            {% endblock %}
+        </div>
+
+        <div class="span10">
+            {% for message in app.session.flashbag.get('fos_user_success') %}
+                <div class="contribution-notice">
+                    {{ message|trans({}, "FOSUserBundle") }}
+                </div>
+            {% endfor %}
+            {% for message in app.session.flashbag.get('sonata_user_success') %}
+                <div class="contribution-notice">
+                    {{ message|trans({}, "SonataUserBundle") }}
+                </div>
+            {% endfor %}
+            {% block sonata_profile_content %}
+            {% endblock %}
+        </div>
+    </div>
+
+{% endblock %}

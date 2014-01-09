@@ -1,0 +1,12 @@
+{# This file overrides the corresponding file in the FOSUserBundle package. #}
+
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+
+    <h1>CHECK YOUR EMAIL</h1>
+
+        <p>
+        {{ 'resetting.check_email'|trans({'%email%': email}, 'FOSUserBundle') }}
+        </p>
+{% endblock %}

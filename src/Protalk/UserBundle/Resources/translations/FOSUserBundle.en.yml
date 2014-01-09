@@ -1,0 +1,98 @@
+# Group
+group:
+    edit:
+        submit: Update group
+    show:
+        name: Group name
+    new:
+        submit: Create group
+    flash:
+        updated: The group has been updated
+        created: The group has been created
+        deleted: The group has been deleted
+
+# Security
+"Bad credentials": Oops! Invalid username or password
+
+security:
+    login:
+        username: "username:"
+        password: "password:"
+        remember_me: remember me
+        submit: Login
+
+# Profile
+profile:
+    show:
+        username: Username
+        email: Email
+    edit:
+        submit: Update
+    flash:
+        updated: Your ProTalk profile has been updated!
+
+# Password change
+change_password:
+    submit: Change password
+    flash:
+        success: Your ProTalk password has been changed!
+
+# Registration
+registration:
+    check_email: An email has been sent to %email%. It contains an activation link you must click to activate your account.
+    confirmed: Congrats %username%, your ProTalk account is now activated.
+    back: Back to the originating page.
+    submit: Register
+    flash:
+        user_created: Your ProTalk account has been created successfully!
+    email:
+        subject: Welcome %username%!
+        message: |
+            Hello %username%!
+
+            Thank you for registering with ProTalk!  We hope you enjoy using the site.  Please feel free to send us some feedback to info@protalk.me.
+
+            To finish activating your ProTalk account - please visit %confirmationUrl%
+
+            Regards,
+            the ProTalk Team.
+
+# Password resetting
+resetting:
+    password_already_requested: The password for this user has already been requested within the last 24 hours.
+    check_email: An email has been sent to %email%. It contains a link you must click to reset your password.
+    request:
+        invalid_username: The username or email address "%username%" does not exist.
+        username: "username or email:"
+        submit: Reset Password
+    reset:
+        submit: Change password
+    flash:
+        success: Your ProTalk password has been reset successfully!
+    email:
+        subject: Reset Password
+        message: |
+            Hello %username%!
+
+            To reset your ProTalk password - please visit %confirmationUrl%
+
+            Regards,
+            the ProTalk Team.
+
+# Global strings
+layout:
+    logout: Logout
+    login: Login
+    register: Register
+    logged_in_as: Logged in as %username%
+
+# Form field labels
+form:
+    group_name: "group name:"
+    username: "username:"
+    email: "email:"
+    current_password: "current password:"
+    password: "password:"
+    password_confirmation: "re-enter password:"
+    new_password: "new password:"
+    new_password_confirmation: "re-enter password:"

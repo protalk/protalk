@@ -1,0 +1,5 @@
+{% for flashMessage in app.session.flashbag.get('watchlist_notice') %}
+    <span class="info-notice">
+        {{ flashMessage }}
+    </span>
+{% endfor %}

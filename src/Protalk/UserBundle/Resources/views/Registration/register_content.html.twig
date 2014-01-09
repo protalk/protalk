@@ -1,0 +1,41 @@
+{# This file overrides the corresponding file in the FOSUserBundle package. #}
+
+<div id="userFormContainer">
+
+    <h1>REGISTER!</h1>
+
+    <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+
+        {{ form_errors(form) }}
+
+        <div>
+            {{ form_errors(form.username, { 'attr': {'class': 'form_error'} }) }}
+            {{ form_label(form.username, 'form.username'|trans({}, 'FOSUserBundle'), { 'label_attr': {'class': 'form_label'} }) }}
+            {{ form_widget(form.username, { 'attr': {'class': 'form_field'} }) }}
+        </div>
+
+        <div>
+            {{ form_errors(form.email, { 'attr': {'class': 'form_error'} }) }}
+            {{ form_label(form.email, 'form.email'|trans({}, 'FOSUserBundle'), { 'label_attr': {'class': 'form_label'} }) }}
+            {{ form_widget(form.email, { 'attr': {'class': 'form_field'} }) }}
+        </div>
+
+        <div>
+            {{ form_errors(form.plainPassword.first, { 'attr': {'class': 'form_error'} }) }}
+            {{ form_label(form.plainPassword.first, 'form.password'|trans({}, 'FOSUserBundle'), { 'label_attr': {'class': 'form_label'} }) }}
+            {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form_field'} }) }}
+        </div>
+
+        <div>
+            {{ form_errors(form.plainPassword.second, { 'attr': {'class': 'form_error'} }) }}
+            {{ form_label(form.plainPassword.second,  'form.password_confirmation'|trans({}, 'FOSUserBundle'), { 'label_attr': {'class': 'form_label'} }) }}
+            {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form_field'} }) }}
+        </div>
+
+        {{ form_rest(form) }}
+
+        <div>
+            <input type="submit" class="btn btn-primary userButton" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+        </div>
+    </form>
+</div>

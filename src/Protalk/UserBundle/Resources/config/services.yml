@@ -1,0 +1,16 @@
+services:
+    protalk.block.service.watchlist:
+        class: Protalk\UserBundle\Block\Service\WatchlistBlockService
+        arguments: [protalk.block.service.watchlist, @templating, @security.context]
+        tags:
+            - { name: sonata.block }
+    protalk.block.service.welcome:
+        class: Protalk\UserBundle\Block\Service\WelcomeBlockService
+        arguments: [protalk.block.service.welcome, @templating]
+        tags:
+            - { name: sonata.block }
+    sonata.user.profile.form.type:
+        class: Protalk\UserBundle\Form\Type\ProfileType
+        arguments: [ %fos_user.model.user.class% ]
+        tags:
+            - { name: form.type, alias: sonata_user_profile }

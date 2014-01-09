@@ -1,0 +1,30 @@
+{# This file overrides the corresponding file in the FOSUserBundle package. #}
+
+<div id="userFormContainer">
+
+    <h1>RESET YOUR PASSWORD<
+
+    {% if error %}
+        <div class="userFormError">{{ error|trans({}, 'FOSUserBundle') }}</div>
+    {% endif %}/h1>
+
+    <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+        <div>
+            {{ form_errors(form.new.first, { 'attr': {'class': 'form_error'} }) }}
+            {{ form_label(form.new.first, 'form.new_password'|trans({}, 'FOSUserBundle'), { 'label_attr': {'class': 'form_label'} }) }}
+            {{ form_widget(form.new.first, { 'attr': {'class': 'form_field'} }) }}
+        </div>
+
+        <div>
+            {{ form_errors(form.new.second, { 'attr': {'class': 'form_error'} }) }}
+            {{ form_label(form.new.second,  'form.new_password_confirmation'|trans({}, 'FOSUserBundle'), { 'label_attr': {'class': 'form_label'} }) }}
+            {{ form_widget(form.new.second, { 'attr': {'class': 'form_field'} }) }}
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary userButton" value="{{ 'resetting.reset.submit'|trans({}, 'FOSUserBundle') }}" />
+        </div>
+
+        {{ form_rest(form) }}
+
+    </form>
+</div>
