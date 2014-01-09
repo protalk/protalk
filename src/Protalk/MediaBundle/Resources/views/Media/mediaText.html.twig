@@ -1,7 +1,12 @@
 {% if media.slidesIsLink() %}
     <div id="slidesLink">slides available <a href="{{ media.slides }}">here</a></div>
 {% endif %}
-<div id="rate_button_container"><a id="button_rate_media" class="tagButton" href="#"><span> RATE THIS </span></a></div>
+
+<div id="rate_button_container">
+    {%  include 'ProtalkUserBundle:Watchlist:button.html.twig' %}
+    <a id="button_rate_media" class="tagButton" href="#"><span> RATE THIS </span></a>
+</div>
+
 <div id="mediaTextContent">
 
     <hr />
