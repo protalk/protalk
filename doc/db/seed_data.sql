@@ -394,64 +394,13 @@ INSERT INTO `Tag` VALUES (1,'PHP','php'),(2,'Quality Assurance','quality-assuran
 UNLOCK TABLES;
 
 --
--- Table structure for table `fos_user_group`
+-- Table structure for table `fos_user`
 --
 
-DROP TABLE IF EXISTS `fos_user_group`;
+DROP TABLE IF EXISTS `fos_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fos_user_group` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `roles` longtext NOT NULL COMMENT '(DC2Type:array)',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UNIQ_583D1F3E5E237E06` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `fos_user_group`
---
-
-LOCK TABLES `fos_user_group` WRITE;
-/*!40000 ALTER TABLE `fos_user_group` DISABLE KEYS */;
-/*!40000 ALTER TABLE `fos_user_group` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `fos_user_group_audit`
---
-
-DROP TABLE IF EXISTS `fos_user_group_audit`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fos_user_group_audit` (
-  `id` int(11) NOT NULL,
-  `rev` int(11) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `roles` longtext COMMENT '(DC2Type:array)',
-  `revtype` varchar(4) NOT NULL,
-  PRIMARY KEY (`id`,`rev`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `fos_user_group_audit`
---
-
-LOCK TABLES `fos_user_group_audit` WRITE;
-/*!40000 ALTER TABLE `fos_user_group_audit` DISABLE KEYS */;
-/*!40000 ALTER TABLE `fos_user_group_audit` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `fos_user_user`
---
-
-DROP TABLE IF EXISTS `fos_user_user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fos_user_user` (
+CREATE TABLE `fos_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `username_canonical` varchar(255) NOT NULL,
@@ -498,84 +447,13 @@ CREATE TABLE `fos_user_user` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `fos_user_user`
+-- Dumping data for table `fos_user`
 --
 
-LOCK TABLES `fos_user_user` WRITE;
-/*!40000 ALTER TABLE `fos_user_user` DISABLE KEYS */;
-INSERT INTO `fos_user_user` VALUES (1,'admin','admin','admin@protalk.me','admin@protalk.me',1,'fgor99rgxnkgkoowcocg0csw08csw0o','FhcUbPXGaBKMATyHzJbKfZgXTKuaUbI/ooiHHDbZQKBj9LY87e+6BJ67fGX6DsW2iGwTCmRn0GTg7ZvLsVyrdA==','2013-05-24 13:01:09',0,0,NULL,'32khubjmoxusck0k0ss8w004wkcsccgcoso4sgccoccwoss448',NULL,'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}',0,NULL,'2012-04-15 14:07:45','2013-05-24 13:01:09',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,'lineke','lineke','lineke@protalk.me','lineke@protalk.me',1,'jrekyk96k6oogw48koso4kc0g08c8wg','OEzOAeOdj+Iw7xv0RikOMJrZXzSGsuNT8R7GzEopJ1+wONdibY+bub/bCikO9P4NeEKtK5YLVjY/4KuXi7Ophg==','2012-04-15 14:19:54',0,0,NULL,'557ymav0tgw8oo0gwckck08gc84gkw4sgwww44k8ks0ckwg0ok',NULL,'a:0:{}',0,NULL,'2012-04-15 14:08:13','2012-04-15 14:19:54',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-/*!40000 ALTER TABLE `fos_user_user` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `fos_user_user_audit`
---
-
-DROP TABLE IF EXISTS `fos_user_user_audit`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fos_user_user_audit` (
-  `id` int(11) NOT NULL,
-  `rev` int(11) NOT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  `username_canonical` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `email_canonical` varchar(255) DEFAULT NULL,
-  `enabled` tinyint(1) DEFAULT NULL,
-  `salt` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `last_login` datetime DEFAULT NULL,
-  `locked` tinyint(1) DEFAULT NULL,
-  `expired` tinyint(1) DEFAULT NULL,
-  `expires_at` datetime DEFAULT NULL,
-  `confirmation_token` varchar(255) DEFAULT NULL,
-  `password_requested_at` datetime DEFAULT NULL,
-  `roles` longtext COMMENT '(DC2Type:array)',
-  `credentials_expired` tinyint(1) DEFAULT NULL,
-  `credentials_expire_at` datetime DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `two_step_code` varchar(255) DEFAULT NULL,
-  `revtype` varchar(4) NOT NULL,
-  PRIMARY KEY (`id`,`rev`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `fos_user_user_audit`
---
-
-LOCK TABLES `fos_user_user_audit` WRITE;
-/*!40000 ALTER TABLE `fos_user_user_audit` DISABLE KEYS */;
-INSERT INTO `fos_user_user_audit` VALUES (1,1,'admin','admin','admin@protalk.me','admin@protalk.me',1,'fgor99rgxnkgkoowcocg0csw08csw0o','Y9HTtpzhvt4ig22ilnrsu2u6vUHFuDSvkDRKmspCH/ZfyiAv3tzhh8nZf8CdboMPAGPKSDy1vqePvbP5p1yoVA==',NULL,0,0,NULL,'32khubjmoxusck0k0ss8w004wkcsccgcoso4sgccoccwoss448',NULL,'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}',0,NULL,'2012-04-15 14:07:45','2012-04-15 14:07:45',NULL,'INS'),(1,3,'admin','admin','admin@protalk.me','admin@protalk.me',1,'fgor99rgxnkgkoowcocg0csw08csw0o','Y9HTtpzhvt4ig22ilnrsu2u6vUHFuDSvkDRKmspCH/ZfyiAv3tzhh8nZf8CdboMPAGPKSDy1vqePvbP5p1yoVA==','2012-04-15 14:11:20',0,0,NULL,'32khubjmoxusck0k0ss8w004wkcsccgcoso4sgccoccwoss448',NULL,'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}',0,NULL,'2012-04-15 14:07:45','2012-04-15 14:11:20',NULL,'UPD'),(1,5,'admin','admin','admin@protalk.me','admin@protalk.me',1,'fgor99rgxnkgkoowcocg0csw08csw0o','Y9HTtpzhvt4ig22ilnrsu2u6vUHFuDSvkDRKmspCH/ZfyiAv3tzhh8nZf8CdboMPAGPKSDy1vqePvbP5p1yoVA==','2012-04-15 14:32:41',0,0,NULL,'32khubjmoxusck0k0ss8w004wkcsccgcoso4sgccoccwoss448',NULL,'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}',0,NULL,'2012-04-15 14:07:45','2012-04-15 14:32:41',NULL,'UPD'),(1,6,'admin','admin','admin@protalk.me','admin@protalk.me',1,'fgor99rgxnkgkoowcocg0csw08csw0o','Y9HTtpzhvt4ig22ilnrsu2u6vUHFuDSvkDRKmspCH/ZfyiAv3tzhh8nZf8CdboMPAGPKSDy1vqePvbP5p1yoVA==','2012-04-15 20:36:18',0,0,NULL,'32khubjmoxusck0k0ss8w004wkcsccgcoso4sgccoccwoss448',NULL,'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}',0,NULL,'2012-04-15 14:07:45','2012-04-15 20:36:18',NULL,'UPD'),(1,7,'admin','admin','admin@protalk.me','admin@protalk.me',1,'fgor99rgxnkgkoowcocg0csw08csw0o','Y9HTtpzhvt4ig22ilnrsu2u6vUHFuDSvkDRKmspCH/ZfyiAv3tzhh8nZf8CdboMPAGPKSDy1vqePvbP5p1yoVA==','2012-04-15 20:36:56',0,0,NULL,'32khubjmoxusck0k0ss8w004wkcsccgcoso4sgccoccwoss448',NULL,'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}',0,NULL,'2012-04-15 14:07:45','2012-04-15 20:36:56',NULL,'UPD'),(1,8,'admin','admin','admin@protalk.me','admin@protalk.me',1,'fgor99rgxnkgkoowcocg0csw08csw0o','Y9HTtpzhvt4ig22ilnrsu2u6vUHFuDSvkDRKmspCH/ZfyiAv3tzhh8nZf8CdboMPAGPKSDy1vqePvbP5p1yoVA==','2012-04-16 21:15:16',0,0,NULL,'32khubjmoxusck0k0ss8w004wkcsccgcoso4sgccoccwoss448',NULL,'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}',0,NULL,'2012-04-15 14:07:45','2012-04-16 21:15:16',NULL,'UPD'),(1,9,'admin','admin','admin@protalk.me','admin@protalk.me',1,'fgor99rgxnkgkoowcocg0csw08csw0o','Y9HTtpzhvt4ig22ilnrsu2u6vUHFuDSvkDRKmspCH/ZfyiAv3tzhh8nZf8CdboMPAGPKSDy1vqePvbP5p1yoVA==','2012-04-16 21:17:44',0,0,NULL,'32khubjmoxusck0k0ss8w004wkcsccgcoso4sgccoccwoss448',NULL,'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}',0,NULL,'2012-04-15 14:07:45','2012-04-16 21:17:44',NULL,'UPD'),(1,11,'admin','admin','admin@protalk.me','admin@protalk.me',1,'fgor99rgxnkgkoowcocg0csw08csw0o','Y9HTtpzhvt4ig22ilnrsu2u6vUHFuDSvkDRKmspCH/ZfyiAv3tzhh8nZf8CdboMPAGPKSDy1vqePvbP5p1yoVA==','2012-04-17 21:18:30',0,0,NULL,'32khubjmoxusck0k0ss8w004wkcsccgcoso4sgccoccwoss448',NULL,'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}',0,NULL,'2012-04-15 14:07:45','2012-04-17 21:18:30',NULL,'UPD'),(1,12,'admin','admin','admin@protalk.me','admin@protalk.me',1,'fgor99rgxnkgkoowcocg0csw08csw0o','Y9HTtpzhvt4ig22ilnrsu2u6vUHFuDSvkDRKmspCH/ZfyiAv3tzhh8nZf8CdboMPAGPKSDy1vqePvbP5p1yoVA==','2012-04-22 20:28:35',0,0,NULL,'32khubjmoxusck0k0ss8w004wkcsccgcoso4sgccoccwoss448',NULL,'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}',0,NULL,'2012-04-15 14:07:45','2012-04-22 20:28:35',NULL,'UPD'),(1,13,'admin','admin','admin@protalk.me','admin@protalk.me',1,'fgor99rgxnkgkoowcocg0csw08csw0o','Y9HTtpzhvt4ig22ilnrsu2u6vUHFuDSvkDRKmspCH/ZfyiAv3tzhh8nZf8CdboMPAGPKSDy1vqePvbP5p1yoVA==','2012-04-24 20:03:40',0,0,NULL,'32khubjmoxusck0k0ss8w004wkcsccgcoso4sgccoccwoss448',NULL,'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}',0,NULL,'2012-04-15 14:07:45','2012-04-24 20:03:40',NULL,'UPD'),(2,2,'lineke','lineke','lineke@protalk.me','lineke@protalk.me',1,'jrekyk96k6oogw48koso4kc0g08c8wg','OEzOAeOdj+Iw7xv0RikOMJrZXzSGsuNT8R7GzEopJ1+wONdibY+bub/bCikO9P4NeEKtK5YLVjY/4KuXi7Ophg==',NULL,0,0,NULL,'557ymav0tgw8oo0gwckck08gc84gkw4sgwww44k8ks0ckwg0ok',NULL,'a:0:{}',0,NULL,'2012-04-15 14:08:13','2012-04-15 14:08:13',NULL,'INS'),(2,4,'lineke','lineke','lineke@protalk.me','lineke@protalk.me',1,'jrekyk96k6oogw48koso4kc0g08c8wg','OEzOAeOdj+Iw7xv0RikOMJrZXzSGsuNT8R7GzEopJ1+wONdibY+bub/bCikO9P4NeEKtK5YLVjY/4KuXi7Ophg==','2012-04-15 14:19:54',0,0,NULL,'557ymav0tgw8oo0gwckck08gc84gkw4sgwww44k8ks0ckwg0ok',NULL,'a:0:{}',0,NULL,'2012-04-15 14:08:13','2012-04-15 14:19:54',NULL,'UPD');
-/*!40000 ALTER TABLE `fos_user_user_audit` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `fos_user_user_group`
---
-
-DROP TABLE IF EXISTS `fos_user_user_group`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fos_user_user_group` (
-  `user_id` int(11) NOT NULL,
-  `group_id` int(11) NOT NULL,
-  PRIMARY KEY (`user_id`,`group_id`),
-  KEY `IDX_B3C77447A76ED395` (`user_id`),
-  KEY `IDX_B3C77447FE54D947` (`group_id`),
-  CONSTRAINT `FK_B3C77447A76ED395` FOREIGN KEY (`user_id`) REFERENCES `fos_user_user` (`id`),
-  CONSTRAINT `FK_B3C77447FE54D947` FOREIGN KEY (`group_id`) REFERENCES `fos_user_group` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `fos_user_user_group`
---
-
-LOCK TABLES `fos_user_user_group` WRITE;
-/*!40000 ALTER TABLE `fos_user_user_group` DISABLE KEYS */;
-/*!40000 ALTER TABLE `fos_user_user_group` ENABLE KEYS */;
+LOCK TABLES `fos_user` WRITE;
+/*!40000 ALTER TABLE `fos_user` DISABLE KEYS */;
+INSERT INTO `fos_user` VALUES (1,'admin','admin','admin@protalk.me','admin@protalk.me',1,'fgor99rgxnkgkoowcocg0csw08csw0o','FhcUbPXGaBKMATyHzJbKfZgXTKuaUbI/ooiHHDbZQKBj9LY87e+6BJ67fGX6DsW2iGwTCmRn0GTg7ZvLsVyrdA==','2013-05-24 13:01:09',0,0,NULL,'32khubjmoxusck0k0ss8w004wkcsccgcoso4sgccoccwoss448',NULL,'a:1:{i:0;s:16:\"ROLE_SUPER_ADMIN\";}',0,NULL,'2012-04-15 14:07:45','2013-05-24 13:01:09',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,'lineke','lineke','lineke@protalk.me','lineke@protalk.me',1,'jrekyk96k6oogw48koso4kc0g08c8wg','OEzOAeOdj+Iw7xv0RikOMJrZXzSGsuNT8R7GzEopJ1+wONdibY+bub/bCikO9P4NeEKtK5YLVjY/4KuXi7Ophg==','2012-04-15 14:19:54',0,0,NULL,'557ymav0tgw8oo0gwckck08gc84gkw4sgwww44k8ks0ckwg0ok',NULL,'a:0:{}',0,NULL,'2012-04-15 14:08:13','2012-04-15 14:19:54',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `fos_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
