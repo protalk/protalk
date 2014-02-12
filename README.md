@@ -54,7 +54,7 @@ Once you have the required software installed, and you have cloned your fork to 
 
 	$ vagrant up
 	
-That's it! I know, it's too easy. The first time you run this command, it may take a few minutes to complete. Subsequent invocations should run much faster.  A VBox window will open and multiple lines of output will appear inside it and at the command line. When it is finished, you will be returned to the command prompt and you can minimise the VBox window out of view (a future release will hide the VBox window for you automatically).
+That's it! I know, it's too easy. The first time you run this command, it may take a few minutes to complete. Subsequent invocations should run much faster.  
 
 Now, add the following to your hosts file to access the virtual host:
 
