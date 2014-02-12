@@ -19,7 +19,7 @@ Before getting to work on a new feature, please talk your idea over with a membe
 
 ###Installation
 
-[Joshua Thijssen](http://www.adayinthelifeof.nl) has made it super-easy to get a development environment up and running 'on the fly' using [Vagrant](http://vagrantup.com/) and [Puppet](http://puppetlabs.com/).  With a single command, this powerful tool can set-up or tear-down a fully functional development environment inside an [Oracle VirtualBox](https://www.virtualbox.org/).  It works on all platforms and is the recommended way to get started with ProTalk.  
+We have an automated development environment available which can have you up and running 'on the fly' using [Vagrant](http://vagrantup.com/) and [Puppet](http://puppetlabs.com/).  With a single command, this powerful tool can set-up or tear-down a fully functional development environment inside an [Oracle VirtualBox](https://www.virtualbox.org/).  It works on all platforms and is the recommended way to get started with ProTalk.  
 
 If you prefer to do things old-school, go ahead and jump down to the [Manual Installation](#manual-installation) instructions at the end of the page.
 
@@ -56,6 +56,10 @@ Once you have the required software installed, and you have cloned your fork to 
 	
 That's it! I know, it's too easy. The first time you run this command, it may take a few minutes to complete. Subsequent invocations should run much faster.  A VBox window will open and multiple lines of output will appear inside it and at the command line. When it is finished, you will be returned to the command prompt and you can minimise the VBox window out of view (a future release will hide the VBox window for you automatically).
 
+Now, add the following to your hosts file to access the virtual host:
+
+192.168.56.199 protalk.dev
+
 Congratulations, you now have a fully functional ProTalk development environment!
 
 ####Newer VirtualBox versions
@@ -66,8 +70,7 @@ If you are running a newer version of VirtualBox (like >= 4.2), the provided Vag
 
 You can view the development version ProTalk or PHPMyAdmin in your browser using the following:
 
-* http://33.33.33.10
-* http://33.33.33.10/phpmyadmin         // login credentials are protalk / secret
+* http://protalk.dev
 
 ####app/console activities
 
