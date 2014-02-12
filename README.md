@@ -62,13 +62,9 @@ Now, add the following to your hosts file to access the virtual host:
 
 Congratulations, you now have a fully functional ProTalk development environment!
 
-####Newer VirtualBox versions
-
-If you are running a newer version of VirtualBox (like >= 4.2), the provided Vagrant box might not work out-of-the-box for you at the moment. You can read [this small guide](https://github.com/protalk/protalk/wiki/Manually-fixing-Vagrant-for-newer-VirtualBox-versions) to fix the box manually and get it running again.
-
 ####URLs
 
-You can view the development version ProTalk or PHPMyAdmin in your browser using the following:
+You can view the development version of ProTalk in your browser using the following:
 
 * http://protalk.dev
 
@@ -77,7 +73,7 @@ You can view the development version ProTalk or PHPMyAdmin in your browser using
 This is important, if you need to perform `php app/console` commands as part of your development work, do it _inside_ the Vbox:
 
 	$ vagrant ssh
-	$ cd /vagrant         //this is the protalk root directory inside the vbox
+	$ cd /var/www         //this is the protalk root directory inside the vbox
 	
 Other than that, you can work with the code directly in the location you cloned it to.
 
@@ -103,9 +99,6 @@ The following command is a housekeeping action which you shouldn't need to worry
 
 	$ vagrant provision
 
-####Further Reading
-
-If you would like to know more about how this was set up, [read Joshua's informative blog post](http://www.adayinthelifeof.nl/2012/06/29/using-vagrant-and-puppet-to-setup-your-symfony2-environment/).
 
 ###Manual Installation
 
