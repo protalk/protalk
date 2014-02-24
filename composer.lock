@@ -11,12 +11,12 @@
             "target-dir": "DMS/Bundle/TwigExtensionBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/rdohms/DMSTwigExtensionBundle.git",
+                "url": "https://github.com/rdohms/dms-twig-extension-bundle.git",
                 "reference": "4d0185be6412bd8befe79fb16017b6d6bedaf60d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rdohms/DMSTwigExtensionBundle/zipball/4d0185be6412bd8befe79fb16017b6d6bedaf60d",
+                "url": "https://api.github.com/repos/rdohms/dms-twig-extension-bundle/zipball/4d0185be6412bd8befe79fb16017b6d6bedaf60d",
                 "reference": "4d0185be6412bd8befe79fb16017b6d6bedaf60d",
                 "shasum": ""
             },
@@ -44,7 +44,7 @@
                 }
             ],
             "description": "DMS Twig Extension Bundle, leverages Fabien Potencier's extra twig extensions for your website.",
-            "homepage": "https://github.com/rdohms/DMSTwigExtensionBundle",
+            "homepage": "https://github.com/rdohms/dms-twig-extension-bundle",
             "keywords": [
                 "bundle",
                 "dms",

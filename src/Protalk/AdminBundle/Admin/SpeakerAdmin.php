@@ -28,6 +28,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Validator\ErrorElement;
 
 class SpeakerAdmin extends Admin
 {
@@ -70,5 +71,18 @@ class SpeakerAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper->addIdentifier('name')->add('biography');
+    }
+
+    /**
+     * Validator function
+     *
+     * This function validates that name is no more tan 100 characters long.
+     *
+     * @param ErrorElement $errorElement
+     * @param mixed $object
+     */
+    public function validate(ErrorElement $errorElement, $object)
+    {
+        $errorElement->with('name')->assertLength(array('max' => 50))->end();
     }
 }

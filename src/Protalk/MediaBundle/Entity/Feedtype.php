@@ -133,4 +133,27 @@ class Feedtype
     {
         return $this->feeds;
     }
+
+    /**
+     * Add feeds
+     *
+     * @param \Protalk\MediaBundle\Entity\Feed $feeds
+     * @return Feedtype
+     */
+    public function addFeed(\Protalk\MediaBundle\Entity\Feed $feeds)
+    {
+        $this->feeds[] = $feeds;
+    
+        return $this;
+    }
+
+    /**
+     * Remove feeds
+     *
+     * @param \Protalk\MediaBundle\Entity\Feed $feeds
+     */
+    public function removeFeed(\Protalk\MediaBundle\Entity\Feed $feeds)
+    {
+        $this->feeds->removeElement($feeds);
+    }
 }
