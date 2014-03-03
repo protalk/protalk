@@ -8,6 +8,7 @@ composer.phar
 .vagrant
 /vendor/
 /web/bundles/
+/xhprof
 
 .idea
 .buildpath

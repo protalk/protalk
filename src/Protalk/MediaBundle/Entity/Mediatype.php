@@ -148,4 +148,47 @@ class Mediatype
     {
         return $this->medias;
     }
+
+    /**
+     * Remove medias
+     *
+     * @param \Protalk\MediaBundle\Entity\Media $medias
+     */
+    public function removeMedia(\Protalk\MediaBundle\Entity\Media $medias)
+    {
+        $this->medias->removeElement($medias);
+    }
+
+    /**
+     * Add feeds
+     *
+     * @param \Protalk\MediaBundle\Entity\Feed $feeds
+     * @return Mediatype
+     */
+    public function addFeed(\Protalk\MediaBundle\Entity\Feed $feeds)
+    {
+        $this->feeds[] = $feeds;
+    
+        return $this;
+    }
+
+    /**
+     * Remove feeds
+     *
+     * @param \Protalk\MediaBundle\Entity\Feed $feeds
+     */
+    public function removeFeed(\Protalk\MediaBundle\Entity\Feed $feeds)
+    {
+        $this->feeds->removeElement($feeds);
+    }
+
+    /**
+     * Get feeds
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFeeds()
+    {
+        return $this->feeds;
+    }
 }

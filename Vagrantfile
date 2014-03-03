@@ -1,31 +1,42 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+  config.vm.box = "debian-wheezy72-x64-vbox43"
+  config.vm.box_url = "https://puphpet.s3.amazonaws.com/debian-wheezy72-x64-vbox43.box"
 
-Vagrant::Config.run do |config|
-    # This vagrant will be running on centos 6.4, 64bit with puppet provisioning
-    config.vm.box = 'centos-64-64bit-puppetlabs'
-    config.vm.box_url = 'http://puppet-vagrant-boxes.puppetlabs.com/centos-64-x64-vbox4210.box'
+  config.vm.network "private_network", ip: "192.168.56.199"
 
-    config.vm.define :protalk do |protalk_config|
-        protalk_config.vm.host_name = "www.protalk.dev"
 
-        protalk_config.vm.network :hostonly, "33.33.33.10"
+  config.vm.synced_folder "./", "/var/www", id: "vagrant-root", :nfs => false, :mount_options => ['dmode=777,fmode=777']
 
-        # Pass custom arguments to VBoxManage before booting VM
-        protalk_config.vm.customize [
-            'modifyvm', :id, '--chipset', 'ich9', # solves kernel panic issue on some host machines
-            '--uartmode1', 'file', 'C:\\base6-console.log' # uncomment to change log location on Windows
-        ]
+  config.vm.usable_port_range = (2200..2250)
+  config.vm.provider :virtualbox do |virtualbox|
+    virtualbox.customize ["modifyvm", :id, "--name", "protalk-vm"]
+    virtualbox.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    virtualbox.customize ["modifyvm", :id, "--memory", "512"]
+    virtualbox.customize ["setextradata", :id, "--VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
+  end
 
-        # Pass installation procedure over to Puppet (see `support/puppet/manifests/protalk.pp`)
-        protalk_config.vm.provision :puppet do |puppet|
-            puppet.manifests_path = "support/puppet/manifests"
-            puppet.module_path = "support/puppet/modules"
-            puppet.manifest_file = "protalk.pp"
-            puppet.options = [
-                '--verbose',
-#                '--debug',
-            ]
-        end
-    end
+  config.vm.provision :shell, :path => "support/shell/initial-setup.sh"
+  config.vm.provision :shell, :path => "support/shell/update-puppet.sh"
+  config.vm.provision :shell, :path => "support/shell/librarian-puppet-vagrant.sh"
+  config.vm.provision :puppet do |puppet|
+    puppet.facter = {
+      "ssh_username" => "vagrant"
+    }
+
+    puppet.manifests_path = "support/puppet/manifests"
+    puppet.options = ["--verbose", "--hiera_config /vagrant/hiera.yaml", "--parser future"]
+  end
+
+
+
+
+  config.ssh.username = "vagrant"
+
+  config.ssh.shell = "bash -l"
+
+  config.ssh.keep_alive = true
+  config.ssh.forward_agent = false
+  config.ssh.forward_x11 = false
+  config.vagrant.host = :detect
 end
+

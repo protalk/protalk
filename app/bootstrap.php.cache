@@ -392,6 +392,8 @@ const HEADER_CLIENT_HOST ='client_host';
 const HEADER_CLIENT_PROTO ='client_proto';
 const HEADER_CLIENT_PORT ='client_port';
 protected static $trustedProxies = array();
+protected static $trustedHostPatterns = array();
+protected static $trustedHosts = array();
 protected static $trustedHeaders = array(
 self::HEADER_CLIENT_IP =>'X_FORWARDED_FOR',
 self::HEADER_CLIENT_HOST =>'X_FORWARDED_HOST',
@@ -544,6 +546,9 @@ $dup->baseUrl = null;
 $dup->basePath = null;
 $dup->method = null;
 $dup->format = null;
+if (!$dup->get('_format')) {
+$dup->setRequestFormat($this->getRequestFormat());
+}
 return $dup;
 }
 public function __clone()
@@ -592,6 +597,17 @@ self::$trustedProxies = $proxies;
 public static function getTrustedProxies()
 {
 return self::$trustedProxies;
+}
+public static function setTrustedHosts(array $hostPatterns)
+{
+self::$trustedHostPatterns = array_map(function ($hostPattern) {
+return sprintf('{%s}i', str_replace('}','\\}', $hostPattern));
+}, $hostPatterns);
+self::$trustedHosts = array();
+}
+public static function getTrustedHosts()
+{
+return self::$trustedHostPatterns;
 }
 public static function setTrustedHeaderName($key, $value)
 {
@@ -794,7 +810,19 @@ $host = $this->server->get('SERVER_ADDR','');
 }
 $host = strtolower(preg_replace('/:\d+$/','', trim($host)));
 if ($host && !preg_match('/^\[?(?:[a-zA-Z0-9-:\]_]+\.?)+$/', $host)) {
-throw new \UnexpectedValueException('Invalid Host');
+throw new \UnexpectedValueException('Invalid Host "'.$host.'"');
+}
+if (count(self::$trustedHostPatterns) > 0) {
+if (in_array($host, self::$trustedHosts)) {
+return $host;
+}
+foreach (self::$trustedHostPatterns as $pattern) {
+if (preg_match($pattern, $host)) {
+self::$trustedHosts[] = $host;
+return $host;
+}
+}
+throw new \UnexpectedValueException('Untrusted Host "'.$host.'"');
 }
 return $host;
 }
@@ -1261,8 +1289,16 @@ $previous = null;
 $obStatus = ob_get_status(1);
 while (($level = ob_get_level()) > 0 && $level !== $previous) {
 $previous = $level;
-if ($obStatus[$level - 1] && isset($obStatus[$level - 1]['del']) && $obStatus[$level - 1]['del']) {
+if ($obStatus[$level - 1]) {
+if (version_compare(PHP_VERSION,'5.4','>=')) {
+if (isset($obStatus[$level - 1]['flags']) && ($obStatus[$level - 1]['flags'] & PHP_OUTPUT_HANDLER_REMOVABLE)) {
 ob_end_flush();
+}
+} else {
+if (isset($obStatus[$level - 1]['del']) && $obStatus[$level - 1]['del']) {
+ob_end_flush();
+}
+}
 }
 }
 flush();
@@ -1811,6 +1847,7 @@ public function __construct(ParameterBagInterface $parameterBag = null)
 {
 $this->parameterBag = null === $parameterBag ? new ParameterBag() : $parameterBag;
 $this->services = array();
+$this->aliases = array();
 $this->scopes = array();
 $this->scopeChildren = array();
 $this->scopedServices = array();
@@ -1858,20 +1895,34 @@ $this->services[$id] = $service;
 if (method_exists($this, $method ='synchronize'.strtr($id, array('_'=>'','.'=>'_')).'Service')) {
 $this->$method();
 }
+if (self::SCOPE_CONTAINER !== $scope && null === $service) {
+unset($this->scopedServices[$scope][$id]);
+}
+if (null === $service) {
+unset($this->services[$id]);
+}
 }
 public function has($id)
 {
 $id = strtolower($id);
-return array_key_exists($id, $this->services) || method_exists($this,'get'.strtr($id, array('_'=>'','.'=>'_')).'Service');
+return isset($this->services[$id])
+|| array_key_exists($id, $this->services)
+|| isset($this->aliases[$id])
+|| method_exists($this,'get'.strtr($id, array('_'=>'','.'=>'_')).'Service')
+;
 }
 public function get($id, $invalidBehavior = self::EXCEPTION_ON_INVALID_REFERENCE)
 {
+foreach (array(false, true) as $strtolower) {
+if ($strtolower) {
 $id = strtolower($id);
+}
 if (isset($this->aliases[$id])) {
 $id = $this->aliases[$id];
 }
-if (array_key_exists($id, $this->services)) {
+if (isset($this->services[$id]) || array_key_exists($id, $this->services)) {
 return $this->services[$id];
+}
 }
 if (isset($this->loading[$id])) {
 throw new ServiceCircularReferenceException($id, array_keys($this->loading));
@@ -1913,7 +1964,8 @@ return $service;
 }
 public function initialized($id)
 {
-return array_key_exists(strtolower($id), $this->services);
+$id = strtolower($id);
+return isset($this->services[$id]) || array_key_exists($id, $this->services);
 }
 public function getServiceIds()
 {
@@ -2007,7 +2059,7 @@ return isset($this->scopedServices[$name]);
 }
 public static function camelize($id)
 {
-return preg_replace_callback('/(^|_|\.)+(.)/', function ($match) { return ('.'=== $match[1] ?'_':'').strtoupper($match[2]); }, $id);
+return strtr(ucwords(strtr($id, array('_'=>' ','.'=>'_ '))), array(' '=>''));
 }
 public static function underscore($id)
 {
@@ -2097,13 +2149,13 @@ protected $debug;
 protected $booted;
 protected $name;
 protected $startTime;
-protected $classes;
 protected $loadClassCache;
-const VERSION ='2.3.2-DEV';
-const VERSION_ID ='20302';
+protected $errorReportingLevel;
+const VERSION ='2.3.5-DEV';
+const VERSION_ID ='20305';
 const MAJOR_VERSION ='2';
 const MINOR_VERSION ='3';
-const RELEASE_VERSION ='2';
+const RELEASE_VERSION ='5';
 const EXTRA_VERSION ='DEV';
 public function __construct($environment, $debug)
 {
@@ -2112,7 +2164,6 @@ $this->debug = (Boolean) $debug;
 $this->booted = false;
 $this->rootDir = $this->getRootDir();
 $this->name = $this->getName();
-$this->classes = array();
 $this->bundles = array();
 if ($this->debug) {
 $this->startTime = microtime(true);
@@ -2847,7 +2898,6 @@ return (string) $var;
 namespace Symfony\Component\HttpKernel\DependencyInjection
 {
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
