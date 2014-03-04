@@ -30,13 +30,13 @@ class YouTube extends Base
         $data = $item->get_item_tags('http://search.yahoo.com/mrss/', 'group');
         $enclosures = $item->get_enclosures();
 
-        $schemaArray = $data[0]['child']['http://gdata.youtube.com/schemas/2007'];
-        $videoId = $schemaArray['videoid'][0]['data'];
-        if (!$videoId) {
+        $schemaArray = $data[0]['child']['http://search.yahoo.com/mrss/'];
+        $videoURL = $schemaArray['content'][0]['attribs']['']['url'];
+        if (!$videoURL) {
             return false;
         }
 
-        $itemUploaded = new \DateTime($schemaArray['uploaded'][0]['data']);
+        $itemUploaded = new \DateTime($item->get_date());
 
         $itemIsSuitable = $this->checkSuitableForImport($item, $itemUploaded, $feed->getLastImportedDate());
         if (!$itemIsSuitable) {
@@ -44,7 +44,7 @@ class YouTube extends Base
         }
 
         // TODO: modify this when media provider PR is merged
-        $contentTemplate = "<iframe width=\"500\" height=\"315\" src=\"http://www.youtube.com/embed/".$videoId."\" frameborder=\"0\" allowfullscreen></iframe>";
+        $contentTemplate = "<iframe width=\"500\" height=\"315\" src=\"".$videoURL."\" frameborder=\"0\" allowfullscreen></iframe>";
         $duration = gmdate("H:i:s", $enclosures[0]->get_duration());
 
         $importItem = new ImportItem();
