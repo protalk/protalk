@@ -30,34 +30,11 @@ class WatchlistController extends Controller
      */
     public function addAction(Media $media)
     {
-        $user = $this->get('security.context')->getToken()->getUser();
+        $watchlistManager = $this->get('protalk.watchlist_manager');
+        $watchlistManager->addItem($media);
 
-        $securityContext = $this->get('security.context');
         $request = $this->getRequest();
         $referer = $request->request->get('referer', $request->headers->get('referer'));
-
-        if( !$securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            return new RedirectResponse($referer);
-        }
-
-        if($user->getWatchlist()->contains($media)){
-            $this->get('session')->getFlashBag()->add(
-                'watchlist_notice',
-                'you already have it!'
-            );
-            return new RedirectResponse($referer);
-        }
-
-        $user->addWatchlist($media);
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($user);
-        $entityManager->flush();
-
-        $this->get('session')->getFlashBag()->add(
-            'watchlist_notice',
-            'successfully added!'
-        );
 
         return new RedirectResponse($referer);
     }
@@ -72,34 +49,11 @@ class WatchlistController extends Controller
      */
     public function removeAction(Media $media)
     {
-        $user = $this->get('security.context')->getToken()->getUser();
+        $watchlistManager = $this->get('protalk.watchlist_manager');
+        $watchlistManager->removeItem($media);
 
-        $securityContext = $this->get('security.context');
         $request = $this->getRequest();
         $referer = $request->request->get('referer', $request->headers->get('referer'));
-
-        if( !$securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            return new RedirectResponse($referer);
-        }
-
-        if(!$user->getWatchlist()->contains($media)){
-            $this->get('session')->getFlashBag()->add(
-                'watchlist_notice',
-                "you didn't have it!"
-            );
-            return new RedirectResponse($referer);
-        }
-
-        $user->removeWatchlist($media);
-
-        $this->get('session')->getFlashBag()->add(
-            'watchlist_notice',
-            'successfully removed!'
-        );
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($user);
-        $entityManager->flush();
 
         return new RedirectResponse($referer);
     }
