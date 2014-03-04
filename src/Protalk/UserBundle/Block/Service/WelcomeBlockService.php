@@ -35,7 +35,6 @@ class WelcomeBlockService extends BaseBlockService
      *
      * @param string $name
      * @param EngineInterface $templating
-     * @param SecurityContext $security
      */
     public function __construct($name, EngineInterface $templating)
     {
@@ -82,7 +81,6 @@ class WelcomeBlockService extends BaseBlockService
     public function setDefaultSettings(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            //'content'  => 'Insert your custom content here',
             'template' => 'ProtalkUserBundle:Block:block_welcome.html.twig'
         ));
     }
