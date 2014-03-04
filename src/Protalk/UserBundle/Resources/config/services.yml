@@ -1,16 +1,28 @@
+parameters:
+  block.service.watchlist.class: 'Protalk\UserBundle\Block\Service\WatchlistBlockService'
+  block.service.welcome.class: 'Protalk\UserBundle\Block\Service\WelcomeBlockService'
+  user.profile.form.type.class: 'Protalk\UserBundle\Form\Type\ProfileType'
+  watchlist_manager.class: 'Protalk\UserBundle\Service\WatchlistManager'
+
 services:
     protalk.block.service.watchlist:
-        class: Protalk\UserBundle\Block\Service\WatchlistBlockService
+        class: '%block.service.watchlist.class%'
         arguments: [protalk.block.service.watchlist, @templating, @security.context]
         tags:
             - { name: sonata.block }
+
     protalk.block.service.welcome:
-        class: Protalk\UserBundle\Block\Service\WelcomeBlockService
+        class: '%block.service.welcome.class%'
         arguments: [protalk.block.service.welcome, @templating]
         tags:
             - { name: sonata.block }
+
     sonata.user.profile.form.type:
-        class: Protalk\UserBundle\Form\Type\ProfileType
+        class: '%user.profile.form.type.class%'
         arguments: [ %fos_user.model.user.class% ]
         tags:
             - { name: form.type, alias: sonata_user_profile }
+
+    protalk.watchlist_manager:
+            class: '%watchlist_manager.class%'
+            arguments: [@doctrine.orm.entity_manager, @security.context, @session]
