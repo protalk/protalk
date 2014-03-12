@@ -18,32 +18,19 @@ class protalk::symfony2 {
         before => Exec["vendorupdate"],
     }
 
-# Create our initial db
-#    exec { "init_db" :
-#        command => "/usr/bin/php /var/www/app/console doctrine:schema:create",
-#        creates => "/tmp/.sf2seeded",
-#        require => [ Exec["vendorupdate"], Class['mysql::server'], Package['php5-dev'], Exec["create-db"] ],
-#    }
-
-# Update the db structure
-    exec { "update_db_struct" :
-        command => "/usr/bin/php /var/www/app/console doctrine:schema:update --force",
+# Run migrations classes
+    exec { "run_migrations" :
+        command => "/usr/bin/php /var/www/app/console doctrine:migrations:migrate --no-interaction",
         require => [ Exec["vendorupdate"], Class['mysql::server'], Package['php5-dev'] ],
+        before => [ Exec["load_fixtures"]]
     }
 
-    exec { "seed_db" :
-        command => "cat /var/www/doc/db/seed_data.sql | mysql -u${params::dbuser} -p${params::dbpass} ${params::dbname} && touch /tmp/.sf2seeded",
-        creates => "/tmp/.sf2seeded",
-        require => [ Exec["update_db_struct"] ],
-
+# Load data fixtures
+    exec { "load_fixtures" :
+        command => "/usr/bin/php /var/www/app/console doctrine:fixtures:load --fixtures=/var/www/src/Protalk/MediaBundle/Tests/Fixtures --fixtures=/var/www/src/Protalk/UserBundle/Tests/Fixtures --no-interaction"
     }
 
-    exec { "update_db_struct_again" :
-            command => "/usr/bin/php /var/www/app/console doctrine:schema:update --force",
-            require => [ Exec["seed_db"] ],
-        }
-
-    $cachedirs = [ "/var/www/app", "/var/www/app/cache", "/var/www/app/logs", "/var/www/app/cache/dev", ]
+    $cachedirs = [ "/var/www/app", "/var/www/app/cache", "/var/www/app/logs", "/var/www/app/cache/dev" ]
     file { $cachedirs :
         ensure => "directory",
         owner => "vagrant",

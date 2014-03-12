@@ -1,0 +1,10 @@
+{# This file overrides the corresponding file in the FOSUserBundle/SonataUserBundle package. #}
+
+{% extends "::base.html.twig" %}
+
+{% block moreContent %}
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+{%  endblock %}

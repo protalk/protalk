@@ -1,0 +1,50 @@
+{# This file overrides the corresponding file in the SonataUserBundle package. #}
+
+{% extends "SonataUserBundle:Profile:action.html.twig" %}
+
+{% block sonata_profile_title %}
+    {{ "title_user_account" | trans({}, 'SonataUserBundle')}} - {{ "title_user_edit_authentication" | trans({}, 'SonataUserBundle')}}
+{% endblock %}
+
+
+{% block sonata_profile_content %}
+    <div id="userFormContainer">
+
+        <h1>CHANGE YOUR CREDENTIALS</h1>
+
+        <div class="row">
+            <div class="span6">
+                <form action="{{ path('sonata_user_profile_edit_authentication') }}" method="POST">
+
+                    {{ form_errors(form) }}
+
+                    <div>
+                        {{ form_errors(form.username, { 'attr': {'class': 'form_error'} }) }}
+                        {{ form_label(form.username, 'form.username'|trans({}, 'FOSUserBundle'), { 'label_attr': {'class': 'form_label'} }) }}
+                        {{ form_widget(form.username, { 'attr': {'class': 'form_field'} }) }}
+                    </div>
+
+                    <div>
+                        {{ form_errors(form.email, { 'attr': {'class': 'form_error'} }) }}
+                        {{ form_label(form.email, 'form.email'|trans({}, 'FOSUserBundle'), { 'label_attr': {'class': 'form_label'} }) }}
+                        {{ form_widget(form.email, { 'attr': {'class': 'form_field'} }) }}
+                    </div>
+
+                    <div>
+                        {{ form_errors(form.current_password, { 'attr': {'class': 'form_error'} }) }}
+                        {{ form_label(form.current_password,  'form.current_password'|trans({}, 'FOSUserBundle'), { 'label_attr': {'class': 'form_label'} }) }}
+                        {{ form_widget(form.current_password, { 'attr': {'class': 'form_field'} }) }}
+                    </div>
+
+                    {{ form_rest(form) }}
+
+                    <input type="submit" name="submit" class="btn btn-primary userButton" value="{{ 'sonata_user_submit'|trans({}, 'SonataUserBundle') }}" />
+                    <span id="resetPassword"> ...or click here to <a class="profileLink" href="{{ path('fos_user_change_password') }}"> change your password</a></span>
+                </form>
+            </div>
+
+
+
+        </div>
+    </div>
+{% endblock %}

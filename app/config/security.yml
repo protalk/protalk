@@ -24,6 +24,10 @@ security:
             id: fos_user.user_manager
 
     firewalls:
+        # Disabling the security for the web debug toolbar, the profiler and Assetic.
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
 
         # -> custom firewall for the admin area of the URL
         admin:
@@ -44,13 +48,19 @@ security:
         # defaut login area for standard users
         main:
             pattern:      .*
+            context:             user
             form_login:
                 provider:       fos_userbundle
-                login_path:     /login
+                csrf_provider:  form.csrf_provider
+                login_path:     /user/login
                 use_forward:    false
-                check_path:     /login_check
+                check_path:     /user/login_check
                 failure_path:   null
-            logout:       true
+                always_use_default_target_path: true
+                default_target_path: /user/profile
+            logout:
+                path:   /user/logout
+                target: /
             anonymous:    true
 
     access_control:
@@ -65,11 +75,13 @@ security:
         - { path: ^/admin/login-check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         # -> end
 
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/user/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/user/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
         # Secured part of the site
         # This config requires being logged for the whole site and having the admin role for the admin part.
         # Change these rules to adapt them to your needs
         - { path: ^/admin, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
-        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+
+        - { path: ^/watchlist, role: IS_AUTHENTICATED_REMEMBERED }

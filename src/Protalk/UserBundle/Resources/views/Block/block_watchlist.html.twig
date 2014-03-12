@@ -1,0 +1,38 @@
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <h1>MY WATCH LIST</h1>
+    <div id="watchlistContainer">
+        {% for media in watchlist %}
+            <article class="tabMedia">
+                <div class="tabMediaThumbNail">
+                    <a href="{{ path('media_show', { 'slug': media.slug }) }}"><img src="{{ media.displayThumbnail() }}" alt="Media ThumbNail Image"/></a>
+                </div>
+                <div class="tabMediaText">
+                    <header>
+                        <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.title|truncate(23) }}</a></h2>
+                        <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'slug': media.slug }) }}">{{ media.date is empty ? media.getOneSpeaker()|truncate(25) : media.getOneSpeaker()|truncate(16) }}</a></span></p>
+                    </header>
+
+                    <footer>
+                        <p>
+                            <span class="metadata duration">{{ media.length }}</span> |
+                            <img src="{{ asset('images/binoculars.png') }}" alt="Binoculars Image"/>
+                               <span class="metadata">
+                                   {% if media.visits == 1 %}
+                                       {{ media.visits }} view
+                                   {% else %}
+                                       {{ media.visits }} views
+                                   {% endif %}
+
+                               </span>
+                            <a class="watchlistButtonProfile" href="{{ url('watchlist_remove', { 'media_slug': media.slug }) }}"><span> REMOVE </span></a>
+                        </p>
+                    </footer>
+                </div>
+            </article>
+        {% else %}
+            <p>Oh no! There are no items in your watchlist yet. Go add some!</p>
+        {% endfor %}
+    </div>
+{% endblock %}

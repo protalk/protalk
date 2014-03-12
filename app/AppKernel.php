@@ -28,7 +28,7 @@ class AppKernel extends Kernel
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             new Sonata\NotificationBundle\SonataNotificationBundle(),
-            new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
+            new Sonata\CoreBundle\SonataCoreBundle(),
 
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new FOS\UserBundle\FOSUserBundle(),
@@ -40,6 +40,7 @@ class AppKernel extends Kernel
             new Protalk\MediaBundle\ProtalkMediaBundle(),
             new Protalk\AdminBundle\ProtalkAdminBundle(),
             new Protalk\ApiBundle\ProtalkApiBundle(),
+            new Protalk\UserBundle\ProtalkUserBundle(),
 
             new Sensio\Bundle\BuzzBundle\SensioBuzzBundle(),
             new Fkr\SimplePieBundle\FkrSimplePieBundle(),

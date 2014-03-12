@@ -1,0 +1,9 @@
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    <h1>WELCOME TO PROTALK!</h1>
+
+    <p>Thank you for signing up to ProTalk!  We hope you enjoy the site and visit often to discover new skills and techniques.</p>
+
+    <p>If you feel like it, click here to <a class="profileLink" href="{{ url('sonata_user_profile_edit') }}"> edit your profile </a> or <a class="profileLink" href="{{ url('sonata_user_profile_edit_authentication') }}">change your credentials</a>.</p>
+{% endblock %}

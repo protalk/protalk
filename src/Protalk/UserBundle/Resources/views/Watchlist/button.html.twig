@@ -1,0 +1,15 @@
+{% for flashMessage in app.session.flashbag.get('watchlist_notice') %}
+    <div class="info-notice">
+        {{ flashMessage }}
+    </div>
+{% endfor %}
+
+<div id="watchlistButtonContainer">
+    {% if app.user %}
+        {% if media not in app.user.watchlist %}
+          <a class="watchlistButton" href="{{ path('watchlist_add', { 'media_slug': media.slug }) }}"><span> ADD TO MY LIST </span></a>
+        {% else %}
+          <a class="watchlistButton" href="{{ path('watchlist_remove', { 'media_slug': media.slug }) }}"><span> REMOVE FROM MY LIST </span></a>
+        {% endif %}
+    {% endif %}
+</div>

@@ -80,7 +80,7 @@ a {
 
 #blueStripThin {
     height:103px;
-    text-align:left;
+    text-align:center;
 }
 
 #headerContainer {
@@ -91,24 +91,32 @@ a {
 #bluestripContent p{
     font-size:30px;
     color:white;
-    margin:0px;
-    padding-top:20px;
+    margin:0;
+    padding-top:10px;
+}
+
+#accountLinkContainer {
+    text-align: left;
+    font-family: "Helvetica Neue", "Helvetica", sans-serif;
+}
+
+#accountLinkContainer p {
+    font-size:13px;
+    padding-top:5px;
+    margin-bottom:0;
+    color:white;
 }
 
 p#textLight {
     font-family: "Helvetica Neue", "Helvetica", sans-serif;
     font-size:18px;
-    padding-top:0px;
+    padding-top:0;
     font-weight:100;
 }
 
 .search {
     vertical-align: middle;
     margin-top:20px;
-}
-
-#searchForm {
-    padding-top:10px;
 }
 
 #searchForm p {
@@ -157,12 +165,16 @@ h2, h2 a, #speakerName {
     padding-bottom: 7px;
 }
 
-.speaker, .name, #source a, .speakerBio a, #pageContent a, .metadata span, .hilite, #slidesLink, #contributors a, .pageLink {
+.speaker, .profileLink, .name, #source a, .speakerBio a, #pageContent a, .metadata span, .hilite, #slidesLink, #contributors a, .pageLink, .accountLink:hover {
     color:#89B029;
 }
 
-#source a:hover, .speaker:hover, #pageContent a:hover, #contributors a:hover, .pageLink:hover {
+#source a:hover, .speaker:hover, .profileLink:hover, #pageContent a:hover, #contributors a:hover, .pageLink:hover {
     color: #454546;
+}
+
+.accountLink {
+    color: white;
 }
 
 time, .metadata, #source {
@@ -373,7 +385,7 @@ time, .metadata, #source {
 
 
 .yui3-tab-loading {
-background: url(../images/ajax-loader.gif) no-repeat center center;
+background: url("../images/ajax-loader.gif") no-repeat center center;
 height:70px;
 }
 
@@ -535,9 +547,9 @@ nav {
 }
 
 .speaker {
-    margin-right: 10px;
-    margin-bottom:10px;
-}
+     margin-right: 10px;
+     margin-bottom:10px;
+ }
 
 .categoryList {
     width:  100%;
@@ -571,7 +583,7 @@ nav {
 .speakerList {
     width:  100%;
     margin: 0;
-    padding 0;
+    padding: 0;
     border: 0;
 }
 
@@ -635,7 +647,7 @@ a.button:active span {
 }
 
 #pagerContainer {
-    font-size: 18.57px;
+    font-size: 18px;
     color:#5f5f5f;
 }
 
@@ -680,7 +692,18 @@ a.pagerButton:active span {
     padding: 6px 2px 4px 10px; /* push text down 1px */
 }
 
-a.tagButton {
+a.tagButton, a.watchlistButton {
+     background: transparent url('../images/button_small.png') no-repeat scroll top right;
+     color: #444;
+     display: block;
+     float: left;
+     height:  23px; /* 43px;  */
+     padding-right: 3px; /* sliding doors padding */
+     margin-right: 8px;
+     margin-bottom: 10px;
+ }
+
+a.tagButton, a.watchlistButtonProfile {
     background: transparent url('../images/button_small.png') no-repeat scroll top right;
     color: #444;
     display: block;
@@ -691,7 +714,11 @@ a.tagButton {
     margin-bottom: 10px;
 }
 
-a.tagButton span {
+#watchlistButtonContainer {
+    float:left;
+}
+
+a.tagButton span, a.watchlistButton span, a.watchlistButtonProfile span {
     background: transparent url('../images/button_small.png') no-repeat;
     display: block;
     line-height: 13px;  /* 33px;  */
@@ -701,13 +728,13 @@ a.tagButton span {
     font-size:14px;
 }
 
-a.tagButton:active {
+a.tagButton:active, a.watchlistButton:active,  a.watchlistButtonProfile:active {
     background-position: bottom right;
     color: #000;
     outline: none; /* hide dotted outline in Firefox */
 }
 
-a.tagButton:active span {
+a.tagButton:active span, a.watchlistButton:active span, a.watchlistButtonProfile:active span {
     background-position: bottom left;
     padding: 6px 2px 4px 6px; /* push text down 1px */
 }
@@ -883,7 +910,7 @@ form {
     height:150px;
 }
 
-form li, .contribution-notice {
+form li, .contribution-notice, .userFormError {
     background-color: #C43C35;
     background-image: -moz-linear-gradient(center top , #EE5F5B, #C43C35);
     background-repeat: repeat-x;
@@ -904,6 +931,15 @@ form li, .contribution-notice {
     color:white;
 }
 
+.userFormError {
+    width:inherit;
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-weight: normal;
+    font-size: 15px;
+    text-align: center;
+    margin-bottom:15px;
+}
+
 .contribution-notice {
     background-color: #C2E078;
     background-image: -moz-linear-gradient(center top , #C2E078, #C2E078);
@@ -911,6 +947,16 @@ form li, .contribution-notice {
     font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     font-weight: normal;
     font-size: 15px;
+}
+
+.info-notice {
+    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-weight: normal;
+    font-size: 15px;
+    color:#999999;
+    padding-top:4px;
+    float:left;
+    margin-right:7px;
 }
 
 form ul {
@@ -1097,4 +1143,56 @@ fieldset {
 
 #previewButtons {
     margin:0px 0px 40px 150px;
+}
+
+#watchlistContainer {
+    width:900px;
+    padding:5px 5px 5px 20px;
+    margin-bottom:40px;
+    margin-left:65px;
+}
+
+#watchlistContainer .tabMedia {
+    width:350px;
+    margin-right:50px;
+}
+
+#watchlistContainer .tabMedia .tabMediaText {
+    width:220px;
+}
+
+.profileLink {
+    margin:0;
+}
+
+#sonata_user_profile_form_biography {
+    height:150px;
+}
+
+#editProfileButton {
+    margin-left:135px;
+    margin-bottom:40px;
+}
+
+#userFormContainer {
+    width:500px;
+    margin-top:40px;
+    margin-left:150px;
+}
+
+.userButton {
+    margin-top: 25px;
+    margin-left:135px;
+    margin-bottom: 40px;
+}
+
+#remember_me {
+    margin-top:7px;
+    margin-bottom:0;
+}
+
+#resetPassword {
+    vertical-align:middle;
+    margin-left:10px;
+
 }

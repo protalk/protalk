@@ -1,0 +1,15 @@
+{# This file overrides the corresponding file in the SonataUserBundle package. #}
+
+{% extends "ProtalkUserBundle:Profile:action.html.twig" %}
+
+{% block sonata_profile_content %}
+
+        <div>
+            {% for block in blocks %}
+
+                    {{ sonata_block_render({ 'type': block.type, 'settings': block.settings}) }}
+
+            {% endfor %}
+        </div>
+
+{% endblock %}
