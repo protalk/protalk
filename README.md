@@ -1,6 +1,9 @@
 Welcome to ProTalk
 ==================
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/c76aa3ec-3aa9-4ffc-ace5-ee0212112dd2/mini.png)](https://insight.sensiolabs.com/projects/c76aa3ec-3aa9-4ffc-ace5-ee0212112dd2) [![Build Status](https://travis-ci.org/protalk/protalk.png?branch=master)](https://travis-ci.org/protalk/protalk)
+
+
 Welcome to the repository for [ProTalk](http://protalk.me), an online community resource providing a central point of access to audio/ video content with a PHP focus.
 
 Contribute
