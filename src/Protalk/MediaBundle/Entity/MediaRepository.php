@@ -42,7 +42,7 @@ class MediaRepository extends EntityRepository
      * @return array Array with total and results
      * @throws \Exception If the sizes of $sort and $order do not match
      */
-    public function getMediaOrderedBy($sort, $page, $max, $order = 'DESC')
+    public function getMediaOrderedBy($sort, $page, $max, $order = 'DESC', $hydrator = Query::HYDRATE_OBJECT)
     {
         $sort = $this->cleanSort($sort);
         $order = $this->cleanOrder($sort, $order);
@@ -59,7 +59,7 @@ class MediaRepository extends EntityRepository
         $query = $qb->getQuery();
         $query->setParameter("status", Media::STATUS_PUBLISHED);
 
-        $results = $query->getResult();
+        $results = $query->getResult($hydrator);
 
         return $this->getResultList($results, $page, $max);
     }
