@@ -12,7 +12,6 @@
 namespace Protalk\MediaBundle\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
-use Protalk\MediaBundle\Controller\MediaController;
 
 class MediaControllerTest extends WebTestCase
 {
@@ -20,7 +19,7 @@ class MediaControllerTest extends WebTestCase
     {
         $this->loadFixtures(
             array(
-                'Protalk\MediaBundle\Tests\Fixtures\LoadMediaSpeakerData'
+                'Protalk\MediaBundle\DataFixtures\ORM\MediaData'
             )
         );
     }
@@ -29,32 +28,32 @@ class MediaControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/tool-up-your-lamp-stack');
+        $client->request('GET', '/interview-with-lineke-kerckhoffs-willems');
 
         $response = $client->getResponse();
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $this->assertContains("Tool Up Your Lamp Stack", $response->getContent());
-        $this->assertContains("Lorna Mitchell", $response->getContent());
-        $this->assertContains("A talk about peripheral tools that aid web development", $response->getContent());
-        $this->assertContains("http://vimeo.com/30012690/", $response->getContent());
-        $this->assertContains("1hr 20mins", $response->getContent());
+        $this->assertContains("Interview with Lineke Kerckhoffs-Willems", $response->getContent());
+        $this->assertContains("Cal Evans", $response->getContent());
+        $this->assertContains("A Voices of the Elephpant Interview with Lineke Kerckhoffs-Willems by Cal Evans", $response->getContent());
+        $this->assertContains("http://voices.of.the.elephpant.s3.amazonaws.com/vote_061.mp3", $response->getContent());
+        $this->assertContains("14:21", $response->getContent());
     }
 
     public function testMediaPageDoesNotIncrementsMediaViewCountAfterFirstVisit()
     {
         $client = static::createClient();
 
-        $client->request('GET', '/tool-up-your-lamp-stack');
+        $client->request('GET', '/your-code-sucks-lets-fix-it');
         $response = $client->getResponse();
 
-        $this->assertContains("101 views", $response->getContent());
+        $this->assertContains("8895 views", $response->getContent());
 
-        $client->request('GET', '/tool-up-your-lamp-stack');
+        $client->request('GET', '/your-code-sucks-lets-fix-it');
         $response = $client->getResponse();
 
-        $this->assertContains("101 views", $response->getContent());
+        $this->assertContains("8895 views", $response->getContent());
     }
 
     public function testGetMediaThatDoesNotExistThrows404()
@@ -71,11 +70,11 @@ class MediaControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/media/speakers/phpbb4-building-end-user-applications-with-symfony2');
+        $client->request('GET', '/media/speakers/your-code-sucks-lets-fix-it');
         $content = $client->getResponse()->getContent();
 
-        $this->assertContains("Nils Adermann", $content);
-        $this->assertContains("Nils Adermann&#039;s bio.", $content);
+        $this->assertContains("Rafael Dohms", $content);
+        $this->assertContains("Computer Engineer, PHP Evangelist and Gamer. Enabler of the AmsterdamPHP Community. Loves code and growing communities.", $content);
     }
 
     public function testGetSpeakersForMediaWithInvalidSlugReturnsError()
