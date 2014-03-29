@@ -4,7 +4,6 @@ namespace Protalk\MediaBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Protalk\MediaBundle\Entity\Speaker;
 
@@ -16,7 +15,7 @@ class SpeakerData extends AbstractFixture implements FixtureInterface
      *
      * @param ObjectManager $manager
      */
-    function load(ObjectManager $manager)
+    public function load(ObjectManager $manager)
     {
         $speaker = new Speaker();
         $speaker->setName('Cal Evans');
@@ -26,7 +25,10 @@ class SpeakerData extends AbstractFixture implements FixtureInterface
 
         $speaker = new Speaker();
         $speaker->setName('Rafael Dohms');
-        $speaker->setBiography("Computer Engineer, PHP Evangelist and Gamer. Enabler of the AmsterdamPHP Community. Loves code and growing communities.");
+        $speaker->setBiography(
+            "Computer Engineer, PHP Evangelist and Gamer. Enabler of the AmsterdamPHP Community.
+            Loves code and growing communities."
+        );
         $manager->persist($speaker);
         $this->addReference('speaker#rdohms', $speaker);
 

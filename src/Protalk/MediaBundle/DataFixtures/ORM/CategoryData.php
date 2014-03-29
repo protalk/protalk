@@ -5,14 +5,12 @@ namespace Protalk\MediaBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Protalk\MediaBundle\Entity\Category;
 use Protalk\MediaBundle\Entity\Language;
 use Protalk\MediaBundle\Entity\LanguageCategory;
 
-class CategoryData extends AbstractFixture
-    implements FixtureInterface, DependentFixtureInterface
+class CategoryData extends AbstractFixture implements FixtureInterface, DependentFixtureInterface
 {
 
     /**
@@ -20,7 +18,7 @@ class CategoryData extends AbstractFixture
      *
      * @param ObjectManager $manager
      */
-    function load(ObjectManager $manager)
+    public function load(ObjectManager $manager)
     {
 
         $php = new Category();
@@ -99,7 +97,7 @@ class CategoryData extends AbstractFixture
      *
      * @return array
      */
-    function getDependencies()
+    public function getDependencies()
     {
         return array(
             'Protalk\MediaBundle\DataFixtures\ORM\LanguageData'

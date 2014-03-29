@@ -15,7 +15,7 @@ class MediatypeData extends AbstractFixture implements FixtureInterface
      *
      * @param ObjectManager $manager
      */
-    function load(ObjectManager $manager)
+    public function load(ObjectManager $manager)
     {
         $type = new Mediatype();
         $type->setName('video');

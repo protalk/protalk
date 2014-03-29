@@ -5,12 +5,10 @@ namespace Protalk\MediaBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Protalk\MediaBundle\Entity\Comment;
 
-class CommentData extends AbstractFixture
-    implements FixtureInterface, DependentFixtureInterface
+class CommentData extends AbstractFixture implements FixtureInterface, DependentFixtureInterface
 {
 
     /**
@@ -18,7 +16,7 @@ class CommentData extends AbstractFixture
      *
      * @param ObjectManager $manager
      */
-    function load(ObjectManager $manager)
+    public function load(ObjectManager $manager)
     {
         $comment = new Comment();
         $comment->setMedia($this->getReference('media#your-code-sucks'));
@@ -56,7 +54,7 @@ class CommentData extends AbstractFixture
      *
      * @return array
      */
-    function getDependencies()
+    public function getDependencies()
     {
         return array(
             'Protalk\MediaBundle\DataFixtures\ORM\MediaData'

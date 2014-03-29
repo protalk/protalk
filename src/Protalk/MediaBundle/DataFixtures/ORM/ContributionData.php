@@ -4,7 +4,6 @@ namespace Protalk\MediaBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Protalk\MediaBundle\Entity\Contribution;
 
@@ -16,7 +15,7 @@ class ContributionData extends AbstractFixture implements FixtureInterface
      *
      * @param ObjectManager $manager
      */
-    function load(ObjectManager $manager)
+    public function load(ObjectManager $manager)
     {
         $contribution = new Contribution();
         $contribution->setName('Anthony Ferrara');
@@ -30,7 +29,9 @@ class ContributionData extends AbstractFixture implements FixtureInterface
         $contribution = new Contribution();
         $contribution->setName('Thijs Feryn');
         $contribution->setEmail('bogus@email.com');
-        $contribution->setHostUrl('http://blog.ibuildings.com/2013/01/14/dpcradioscalability-issues-cure-first-prevent-later/');
+        $contribution->setHostUrl(
+            'http://blog.ibuildings.com/2013/01/14/dpcradioscalability-issues-cure-first-prevent-later/'
+        );
         $contribution->setTitle('Scalability Issues: Cure First, Prevent Later');
         $contribution->setTags('scalability, php');
         $manager->persist($contribution);

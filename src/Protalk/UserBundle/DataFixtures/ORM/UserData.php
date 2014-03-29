@@ -4,13 +4,12 @@ namespace Protalk\UserBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Protalk\UserBundle\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class UserData extends AbstractFixture implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
+class UserData extends AbstractFixture implements FixtureInterface, ContainerAwareInterface
 {
     const DEFAULT_PLAIN_PASSWORD = 'password';
 
@@ -28,22 +27,13 @@ class UserData extends AbstractFixture implements FixtureInterface, ContainerAwa
     {
         $this->container = $container;
     }
-    /**
-     * Get the order of this fixture
-     *
-     * @return integer
-     */
-    function getOrder()
-    {
-        return 10;
-    }
 
     /**
      * Load data fixtures with the passed EntityManager
      *
      * @param ObjectManager $manager
      */
-    function load(ObjectManager $manager)
+    public function load(ObjectManager $manager)
     {
         $factory = $this->container->get('security.encoder_factory');
 

@@ -5,7 +5,6 @@ namespace Protalk\MediaBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Protalk\MediaBundle\Entity\Rating;
 
@@ -17,7 +16,7 @@ class RatingData extends AbstractFixture implements FixtureInterface, DependentF
      *
      * @param ObjectManager $manager
      */
-    function load(ObjectManager $manager)
+    public function load(ObjectManager $manager)
     {
         $rating = new Rating();
         $rating->setIpaddress('33.33.10.10');
@@ -58,7 +57,7 @@ class RatingData extends AbstractFixture implements FixtureInterface, DependentF
      *
      * @return array
      */
-    function getDependencies()
+    public function getDependencies()
     {
         return array(
             'Protalk\MediaBundle\DataFixtures\ORM\MediaData'

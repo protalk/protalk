@@ -12,7 +12,6 @@
 namespace Protalk\MediaBundle\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
-use Protalk\MediaBundle\Controller\SpeakerController;
 
 class SpeakerControllerTest extends WebTestCase
 {

@@ -5,7 +5,6 @@ namespace Protalk\MediaBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Protalk\MediaBundle\Entity\Feed;
 
@@ -17,7 +16,7 @@ class FeedData extends AbstractFixture implements FixtureInterface, DependentFix
      *
      * @param ObjectManager $manager
      */
-    function load(ObjectManager $manager)
+    public function load(ObjectManager $manager)
     {
         $feed = new Feed();
         $feed->setFeedtype($this->getReference('feedtype#feedburner'));
@@ -61,7 +60,7 @@ class FeedData extends AbstractFixture implements FixtureInterface, DependentFix
      *
      * @return array
      */
-    function getDependencies()
+    public function getDependencies()
     {
         return array(
             'Protalk\MediaBundle\DataFixtures\ORM\MediatypeData',

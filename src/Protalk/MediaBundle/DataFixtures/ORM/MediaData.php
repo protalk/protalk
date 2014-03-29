@@ -5,7 +5,6 @@ namespace Protalk\MediaBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Protalk\MediaBundle\Entity\Media;
 use Protalk\MediaBundle\Entity\MediaLanguageCategory;
@@ -20,17 +19,28 @@ class MediaData extends AbstractFixture implements FixtureInterface, DependentFi
      *
      * @param ObjectManager $manager
      */
-    function load(ObjectManager $manager)
+    public function load(ObjectManager $manager)
     {
         $media = new Media();
         $media->setMediatype($this->getReference('mediatype#video'));
         $media->setDate(new \DateTime('2012/12/03'));
-        $media->setDescription('Identify trouble areas in your code, learn how to refactor them and train you to write better code in future projects avoiding common pitfalls.');
+        $media->setDescription(
+            'Identify trouble areas in your code, learn how to refactor them and train you to write better code in
+            future projects avoiding common pitfalls.'
+        );
         $media->setLength('47:25');
         $media->setRating(5);
         $media->setVisits(8894);
-        $media->setContent('<iframe width="500" height="315" src="http://www.youtube.com/embed/H2AvoAzbGOE" frameborder="0" allowfullscreen></iframe>');
-        $media->setSlides('<iframe src="http://www.slideshare.net/slideshow/embed_code/15471808" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe>');
+        $media->setContent(
+            '<iframe width="500" height="315" src="http://www.youtube.com/embed/H2AvoAzbGOE" frameborder="0"
+            allowfullscreen></iframe>'
+        );
+        $media->setSlides(
+            '<iframe src="http://www.slideshare.net/slideshow/embed_code/15471808" width="427" height="356"
+            frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;
+            border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen>
+            </iframe>'
+        );
         $media->setJoindin('');
         $media->setLanguage('en');
         $media->setTitle('Your code sucks, let\'s fix it');
@@ -45,7 +55,9 @@ class MediaData extends AbstractFixture implements FixtureInterface, DependentFi
         $this->addReference('media#your-code-sucks', $media);
         $this->assignLanguageCategory($manager, $media, 'cat_lang#design-patterns#php');
         $this->assignSpeaker($manager, $media, 'speaker#rdohms');
-        $this->assignTags($manager, $media, array('tag#php', 'tag#refactoring', 'tag#kings-of-code', 'tag#design-patterns'));
+        $this->assignTags($manager, $media, array(
+                'tag#php', 'tag#refactoring', 'tag#kings-of-code', 'tag#design-patterns'
+            ));
 
 
         $media = new Media();
@@ -80,7 +92,10 @@ class MediaData extends AbstractFixture implements FixtureInterface, DependentFi
         $media->setLength('00:47:04');
         $media->setRating(0);
         $media->setVisits(0);
-        $media->setContent('<iframe width="500" height="315" src="http://www.youtube.com/embed/BdO4xz64VjQ" frameborder="0" allowfullscreen></iframe>');
+        $media->setContent(
+            '<iframe width="500" height="315" src="http://www.youtube.com/embed/BdO4xz64VjQ" frameborder="0"
+            allowfullscreen></iframe>'
+        );
         $media->setSlides(null);
         $media->setJoindin(null);
         $media->setLanguage('en');
@@ -96,7 +111,9 @@ class MediaData extends AbstractFixture implements FixtureInterface, DependentFi
         $this->addReference('media#orm', $media);
         $this->assignLanguageCategory($manager, $media, 'cat_lang#oop#php');
         $this->assignSpeaker($manager, $media, 'speaker#blanco');
-        $this->assignTags($manager, $media, array('tag#php', 'tag#performance', 'tag#symfony_live11', 'tag#oop', 'tag#tools', 'tag#optimisation'));
+        $this->assignTags($manager, $media, array(
+                'tag#php', 'tag#performance', 'tag#symfony_live11', 'tag#oop', 'tag#tools', 'tag#optimisation'
+            ));
 
         $manager->flush();
     }
@@ -136,10 +153,10 @@ class MediaData extends AbstractFixture implements FixtureInterface, DependentFi
      */
     public function assignTags($manager, $media, $tagReferences)
     {
-        foreach ($tagReferences as $tagReferences) {
+        foreach ($tagReferences as $reference) {
             $mediaTag = new MediaTag();
             $mediaTag->setMedia($media);
-            $mediaTag->setTag($this->getReference($tagReferences));
+            $mediaTag->setTag($this->getReference($reference));
 
             $manager->persist($mediaTag);
         }
@@ -151,7 +168,7 @@ class MediaData extends AbstractFixture implements FixtureInterface, DependentFi
      *
      * @return array
      */
-    function getDependencies()
+    public function getDependencies()
     {
         return array(
             'Protalk\MediaBundle\DataFixtures\ORM\TagData',
