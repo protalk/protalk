@@ -8,18 +8,8 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Protalk\MediaBundle\Entity\Feedtype;
 
-class FeedtypeData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
+class FeedtypeData extends AbstractFixture implements FixtureInterface
 {
-
-    /**
-     * Get the order of this fixture
-     *
-     * @return integer
-     */
-    function getOrder()
-    {
-        return 10;
-    }
 
     /**
      * Load data fixtures with the passed EntityManager

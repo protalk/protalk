@@ -8,18 +8,8 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Protalk\MediaBundle\Entity\Tag;
 
-class TagData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
+class TagData extends AbstractFixture implements FixtureInterface
 {
-
-    /**
-     * Get the order of this fixture
-     *
-     * @return integer
-     */
-    function getOrder()
-    {
-        return 10;
-    }
 
     /**
      * Load data fixtures with the passed EntityManager
@@ -56,6 +46,6 @@ class TagData extends AbstractFixture implements FixtureInterface, OrderedFixtur
         $tag->setName($name);
 
         $manager->persist($tag);
-        $this->addReference('tag#'.strtolower($name), $tag);
+        $this->addReference('tag#'.str_replace(' ', '-', strtolower($name)), $tag);
     }
 }

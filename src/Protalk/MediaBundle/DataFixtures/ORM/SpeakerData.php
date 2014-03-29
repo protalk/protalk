@@ -8,18 +8,8 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Protalk\MediaBundle\Entity\Speaker;
 
-class CategoryData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
+class SpeakerData extends AbstractFixture implements FixtureInterface
 {
-
-    /**
-     * Get the order of this fixture
-     *
-     * @return integer
-     */
-    function getOrder()
-    {
-        return 10;
-    }
 
     /**
      * Load data fixtures with the passed EntityManager
@@ -44,6 +34,11 @@ class CategoryData extends AbstractFixture implements FixtureInterface, OrderedF
         $speaker->setName('Chris Hartjes');
         $manager->persist($speaker);
         $this->addReference('speaker#grumpy', $speaker);
+
+        $speaker = new Speaker();
+        $speaker->setName('Guilherme Blanco');
+        $manager->persist($speaker);
+        $this->addReference('speaker#blanco', $speaker);
 
         $manager->flush();
     }

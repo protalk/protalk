@@ -3,23 +3,14 @@
 namespace Protalk\MediaBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Protalk\MediaBundle\Entity\Feed;
 
-class FeedData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
+class FeedData extends AbstractFixture implements FixtureInterface, DependentFixtureInterface
 {
-
-    /**
-     * Get the order of this fixture
-     *
-     * @return integer
-     */
-    function getOrder()
-    {
-        return 20;
-    }
 
     /**
      * Load data fixtures with the passed EntityManager
@@ -62,5 +53,19 @@ class FeedData extends AbstractFixture implements FixtureInterface, OrderedFixtu
         $this->addReference('feed#atlanta', $feed);
 
         $manager->flush();
+    }
+
+    /**
+     * This method must return an array of fixtures classes
+     * on which the implementing class depends on
+     *
+     * @return array
+     */
+    function getDependencies()
+    {
+        return array(
+            'Protalk\MediaBundle\DataFixtures\ORM\MediatypeData',
+            'Protalk\MediaBundle\DataFixtures\ORM\FeedtypeData'
+        );
     }
 }
