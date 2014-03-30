@@ -25,8 +25,7 @@ class MediaData extends AbstractFixture implements FixtureInterface, DependentFi
         $media->setMediatype($this->getReference('mediatype#video'));
         $media->setDate(new \DateTime('2012/12/03'));
         $media->setDescription(
-            'Identify trouble areas in your code, learn how to refactor them and train you to write better code in
-            future projects avoiding common pitfalls.'
+            'Identify trouble areas in your code, learn how to refactor them and train you to write better code in future projects avoiding common pitfalls.'
         );
         $media->setLength('47:25');
         $media->setRating(5);
@@ -56,8 +55,8 @@ class MediaData extends AbstractFixture implements FixtureInterface, DependentFi
         $this->assignLanguageCategory($manager, $media, 'cat_lang#design-patterns#php');
         $this->assignSpeaker($manager, $media, 'speaker#rdohms');
         $this->assignTags($manager, $media, array(
-                'tag#php', 'tag#refactoring', 'tag#kings-of-code', 'tag#design-patterns'
-            ));
+            'tag#php', 'tag#refactoring', 'tag#kings-of-code', 'tag#design-patterns'
+        ));
 
 
         $media = new Media();

@@ -26,8 +26,7 @@ class SpeakerData extends AbstractFixture implements FixtureInterface
         $speaker = new Speaker();
         $speaker->setName('Rafael Dohms');
         $speaker->setBiography(
-            "Computer Engineer, PHP Evangelist and Gamer. Enabler of the AmsterdamPHP Community.
-            Loves code and growing communities."
+            "Computer Engineer, PHP Evangelist and Gamer. Enabler of the AmsterdamPHP Community. Loves code and growing communities."
         );
         $manager->persist($speaker);
         $this->addReference('speaker#rdohms', $speaker);
