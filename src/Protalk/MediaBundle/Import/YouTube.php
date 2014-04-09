@@ -40,7 +40,7 @@ class YouTube extends Base
 
         $itemIsSuitable = $this->checkSuitableForImport($item, $itemUploaded, $feed->getLastImportedDate());
         if (!$itemIsSuitable) {
-            return false;
+            return $this->getMessage($item->get_title(), false);
         }
 
         // TODO: modify this when media provider PR is merged
@@ -63,6 +63,6 @@ class YouTube extends Base
 
         // TODO: add default language to feed entity <-- do this when multi-language support is added?
 
-        return true;
+        return $this->getMessage($item->get_title(), true);
     }
 }

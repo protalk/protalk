@@ -43,7 +43,7 @@ class Bliptv extends Base
 
         $itemIsSuitable = $this->checkSuitableForImport($item, $itemUploaded, $feed->getLastImportedDate());
         if (!$itemIsSuitable) {
-            return false;
+            return $this->getMessage($item->get_title(), false);
         }
 
         $duration = $item->get_item_tags('http://blip.tv/dtd/blip/1.0', 'runtime');
@@ -68,6 +68,6 @@ class Bliptv extends Base
 
         // TODO: add default language to feed entity <-- do this when multi-language support is added?
 
-        return true;
+        return $this->getMessage($item->get_title(), true);
     }
 }
