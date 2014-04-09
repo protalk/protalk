@@ -63,7 +63,11 @@ EOT
                 $output->writeln($feed->getName() . ' had an error: '. $rss->error());
                 continue;
             }
-            $this->processFeedItems($rss->get_items(), $feed);
+            $output->writeln('Processing: '.$feed->getName());
+            $this->processFeedItems($rss->get_items(), $feed, $output);
+            $output->writeln('...');
+            $output->writeln('...moving on...');
+            $output->writeln('...');
         }
 
         $output->writeln('Done importing. Sending confirmation email...');
@@ -77,12 +81,14 @@ EOT
      *
      * @param $items
      * @param $feed
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
-    private function processFeedItems($items, $feed)
+    private function processFeedItems($items, $feed, OutputInterface $output)
     {
         foreach ($items as $item) {
             $contentImport = $this->getContainer()->get('protalk_media.'.$feed->getFeedType()->getClassName());
-            $contentImport->handleImport($item, $feed);
+            $response = $contentImport->handleImport($item, $feed);
+            $output->writeln($response);
         }
         $this->setFeedImportDate($feed);
     }
