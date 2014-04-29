@@ -32,7 +32,7 @@ class YouTube extends Base
 
         $schemaArray = $data[0]['child']['http://search.yahoo.com/mrss/'];
         $videoURL = $schemaArray['content'][0]['attribs']['']['url'];
-        if (!$videoURL) { var_dump('NO VIDEO URL');die;
+        if (!$videoURL) {
             return false;
         }
 
