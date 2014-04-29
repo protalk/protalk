@@ -92,13 +92,4 @@ abstract class Base
 
         return true;
     }
-
-    protected function getMessage($title, $isImported)
-    {
-        if ( ! $isImported) {
-            return 'Skipping: '.$title;
-        }
-
-        return "Importing: ".$title;
-    }
 }

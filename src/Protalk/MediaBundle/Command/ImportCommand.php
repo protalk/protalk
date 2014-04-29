@@ -86,10 +86,19 @@ EOT
     private function processFeedItems($items, $feed, OutputInterface $output)
     {
         foreach ($items as $item) {
+
             $contentImport = $this->getContainer()->get('protalk_media.'.$feed->getFeedType()->getClassName());
-            $response = $contentImport->handleImport($item, $feed);
-            $output->writeln($response);
+            $itemTitle = $item->get_title();
+
+            $output->writeln("Checking $itemTitle...");
+            if( ! $contentImport->handleImport($item, $feed)) {
+                $output->writeln("Skipping $itemTitle...");
+                continue;
+            }
+
+            $output->writeln("Imported $itemTitle...");
         }
+
         $this->setFeedImportDate($feed);
     }
 

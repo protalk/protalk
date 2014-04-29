@@ -37,7 +37,7 @@ class Feedburner extends Base
 
         $itemIsSuitable = $this->checkSuitableForImport($item, $itemUploaded, $feed->getLastImportedDate());
         if (!$itemIsSuitable) {
-            return $this->getMessage($item->get_title(), false);
+            return false;
         }
 
         $importItem = new ImportItem();
@@ -55,6 +55,6 @@ class Feedburner extends Base
 
         // TODO: add default language to feed entity <-- do this when multi-language support is added?
 
-        return $this->getMessage($item->get_title(), true);
+        return true;
     }
 }

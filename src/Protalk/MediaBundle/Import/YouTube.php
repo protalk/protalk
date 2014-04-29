@@ -32,7 +32,7 @@ class YouTube extends Base
 
         $schemaArray = $data[0]['child']['http://search.yahoo.com/mrss/'];
         $videoURL = $schemaArray['content'][0]['attribs']['']['url'];
-        if (!$videoURL) {
+        if (!$videoURL) { var_dump('NO VIDEO URL');die;
             return false;
         }
 
@@ -40,7 +40,7 @@ class YouTube extends Base
 
         $itemIsSuitable = $this->checkSuitableForImport($item, $itemUploaded, $feed->getLastImportedDate());
         if (!$itemIsSuitable) {
-            return $this->getMessage($item->get_title(), false);
+            return false;
         }
 
         // TODO: modify this when media provider PR is merged
@@ -63,6 +63,6 @@ class YouTube extends Base
 
         // TODO: add default language to feed entity <-- do this when multi-language support is added?
 
-        return $this->getMessage($item->get_title(), true);
+        return true;
     }
 }
