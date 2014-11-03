@@ -14,5 +14,11 @@
             {{ speaker.biography|nl2br }}
         {% endif %}
     </p>
+
+    <p>
+        Find all talks by
+        <a href="{{ path('search_results', {'search': speaker.name}) }}" title="Find all talks by {{ speaker.name }}">
+            {{ speaker.name }}</a>.
+    </p>
 </div>
 {% endfor %}
