@@ -12,7 +12,6 @@
 namespace Protalk\MediaBundle\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
-use Protalk\MediaBundle\Controller\MediaController;
 
 class HomeControllerTest extends WebTestCase
 {
@@ -20,7 +19,7 @@ class HomeControllerTest extends WebTestCase
     {
         $this->loadFixtures(
             array(
-                'Protalk\MediaBundle\Tests\Fixtures\LoadMediaSpeakerData'
+                'Protalk\MediaBundle\DataFixtures\ORM\MediaData'
             )
         );
     }
@@ -45,15 +44,11 @@ class HomeControllerTest extends WebTestCase
         $this->assertContains('<link>http://protalk.me</link>', $content);
 
         // Assertions on the items in the feed
-        $this->assertContains('<title>Tool Up Your Lamp Stack</title>', $content);
-        $this->assertContains('<link>http://protalk.me/tool-up-your-lamp-stack</link>', $content);
+        $this->assertContains('<title>Your code sucks, let&#039;s fix it</title>', $content);
+        $this->assertContains('<link>http://protalk.me/your-code-sucks-lets-fix-it</link>', $content);
 
-        $today = new \DateTime('15-07-2013');
-        $today = $today->format('d-m-Y');
-        
-        $this->assertContains('<pubDate>'.$today.'</pubDate>', $content);
         $this->assertContains('<dc:creator>ProTalk</dc:creator>', $content);
-        $this->assertContains('<guid isPermaLink="false">http://protalk.me/tool-up-your-lamp-stack</guid>', $content);
-        $this->assertContains('<p>A talk about peripheral tools that aid web development</p>', $content);
+        $this->assertContains('<guid isPermaLink="false">http://protalk.me/your-code-sucks-lets-fix-it</guid>', $content);
+        $this->assertContains('<p>Identify trouble areas in your code, learn how to refactor them and train you to write better code in future projects avoiding common pitfalls.</p>', $content);
     }
 }

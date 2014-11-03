@@ -12,7 +12,6 @@
 namespace Protalk\MediaBundle\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
-use Protalk\MediaBundle\Controller\ExploreController;
 
 class ExploreControllerTest extends WebTestCase
 {
@@ -20,13 +19,12 @@ class ExploreControllerTest extends WebTestCase
     {
         $this->loadFixtures(
             array(
-                'Protalk\MediaBundle\Tests\Fixtures\LoadMediaData',
-                'Protalk\MediaBundle\Tests\Fixtures\LoadMediaTagData',
-                'Protalk\MediaBundle\Tests\Fixtures\LoadTagData',
-                'Protalk\MediaBundle\Tests\Fixtures\LoadMediaLanguageCategoryData',
-                'Protalk\MediaBundle\Tests\Fixtures\LoadCategoryData',
-                'Protalk\MediaBundle\Tests\Fixtures\LoadMediaSpeakerData',
-                'Protalk\MediaBundle\Tests\Fixtures\LoadSpeakerData',
+                'Protalk\MediaBundle\DataFixtures\ORM\MediaData',
+                'Protalk\MediaBundle\DataFixtures\ORM\MediatypeData',
+                'Protalk\MediaBundle\DataFixtures\ORM\TagData',
+                'Protalk\MediaBundle\DataFixtures\ORM\CategoryData',
+                'Protalk\MediaBundle\DataFixtures\ORM\LanguageData',
+                'Protalk\MediaBundle\DataFixtures\ORM\SpeakerData',
             )
         );
     }
@@ -35,7 +33,7 @@ class ExploreControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $crawler  = $client->request('GET', '/tag/quality-assurance');
+        $crawler  = $client->request('GET', '/tag/refactoring');
         $response = $client->getResponse();
 
         // Gets the number of results from the pagination results summary
@@ -44,7 +42,7 @@ class ExploreControllerTest extends WebTestCase
         $numElements = $crawler->filter('article.mediaLarge')->count();
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertContains("You have searched for 'quality-assurance'", $response->getContent());
+        $this->assertContains("You have searched for 'refactoring'", $response->getContent());
         $this->assertEquals($numElements, $numResults);
     }
 
@@ -52,7 +50,7 @@ class ExploreControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/category/tools');
+        $client->request('GET', '/category/design-patterns');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
@@ -61,7 +59,7 @@ class ExploreControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/search/speaker/frank');
+        $client->request('GET', '/search/speaker/cal');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
@@ -70,7 +68,7 @@ class ExploreControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/search/speaker/frank?page=1');
+        $client->request('GET', '/search/speaker/cal?page=1');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
@@ -84,9 +82,9 @@ class ExploreControllerTest extends WebTestCase
         $response = $client->getResponse();
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertContains("href=\"/category/tools\"", $response->getContent());
-        $this->assertContains("href=\"/tag/quality-assurance\"", $response->getContent());
-        $this->assertContains("href=\"http://localhost/search/speaker/4\"", $response->getContent());
+        $this->assertContains("href=\"/category/design-patterns\"", $response->getContent());
+        $this->assertContains("href=\"/tag/refactoring\"", $response->getContent());
+        $this->assertContains("href=\"http://localhost/search/speaker/1\"", $response->getContent());
     }
 
     public function testPerformSearchReturnsValidResults()
@@ -102,34 +100,34 @@ class ExploreControllerTest extends WebTestCase
         // Assert the page contains the search form
         $this->assertContains("<form method='post' action='/result' id=\"searchForm\">", $response->getContent());
         // Assert the page contains a link to a video
-        $this->assertContains('/phpbb4-building-end-user-applications-with-symfony2', $response->getContent());
+        $this->assertContains('/your-code-sucks-lets-fix-it', $response->getContent());
         // Assert page contains links to categories and tags
-        $this->assertContains('/category/tools', $response->getContent());
-        $this->assertContains('/tag/quality-assurance', $response->getContent());
+        $this->assertContains('/category/design-patterns', $response->getContent());
+        $this->assertContains('/tag/refactoring', $response->getContent());
 
         $client->request(
             'GET',
-            '/result/video/rating/asc?page=1'
+            '/result/php/rating/asc?page=1'
         );
 
         $response = $client->getResponse();
 
-        $this->assertContains("You have searched for 'video'", $response->getContent());
-        $this->assertContains('data-url="/result/video/rating/asc?page=1"        selected="selected">Sort by rating (asc)</option>', $response->getContent());
+        $this->assertContains("You have searched for 'php'", $response->getContent());
+        $this->assertContains('data-url="/result/php/rating/asc?page=1"        selected="selected">Sort by rating (asc)</option>', $response->getContent());
     }
 
     public function invalidParamUrls()
     {
         return array(
-            array('/tag/quality-assurance/invalid/desc'),
-            array('/tag/quality-assurance/date/invalid'),
+            array('/tag/refactoring/invalid/desc'),
+            array('/tag/refactoring/date/invalid'),
             array('/result/date/abc123'),
             array('/result/php/invalid/desc'),
             array('/result/php/date/invalid'),
-            array('/category/tools/invalid/desc'),
-            array('/category/tools/date/invalid'),
-            array('/search/speaker/frank?sort=invalid'),
-            array('/search/speaker/frank?order=invalid'),
+            array('/category/design-patterns/invalid/desc'),
+            array('/category/design-patterns/date/invalid'),
+            array('/search/speaker/cal?sort=invalid'),
+            array('/search/speaker/cal?order=invalid'),
         );
     }
 

@@ -12,7 +12,6 @@
 namespace Protalk\MediaBundle\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
-use Protalk\MediaBundle\Controller\SpeakerController;
 
 class SpeakerControllerTest extends WebTestCase
 {
@@ -20,7 +19,7 @@ class SpeakerControllerTest extends WebTestCase
     {
         $this->loadFixtures(
             array(
-                'Protalk\MediaBundle\Tests\Fixtures\LoadSpeakerData'
+                'Protalk\MediaBundle\DataFixtures\ORM\SpeakerData'
             )
         );
     }
@@ -31,7 +30,7 @@ class SpeakerControllerTest extends WebTestCase
 
         $client->request(
             'GET',
-            '/speaker/joe-bloggs/1',
+            '/speaker/cal-evans/1',
             array(),
             array(),
             array(
@@ -42,8 +41,8 @@ class SpeakerControllerTest extends WebTestCase
         $response = $client->getResponse();
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertContains('Joe Bloggs', $response->getContent(), 'Name was not set correctly!');
-        $this->assertContains("This is Joe Bloggs&#039; bio.", $response->getContent(), 'Bio was not set correctly!');
+        $this->assertContains('Cal Evans', $response->getContent(), 'Name was not set correctly!');
+        $this->assertContains("Bio of Mr. Cal Evans", $response->getContent(), 'Bio was not set correctly!');
     }
 
     public function testGetSpeakerReturnsNotFoundWithInvalidRequest()
@@ -52,7 +51,7 @@ class SpeakerControllerTest extends WebTestCase
 
         $client->request(
             'GET',
-            '/speaker/joe-bloggs/999',
+            '/speaker/rafael-dohms/999',
             array(),
             array(),
             array(
@@ -70,7 +69,7 @@ class SpeakerControllerTest extends WebTestCase
         // Tests that the action throws an exception if the request is not an AJAX request
         $client = static::createClient();
 
-        $client->request('GET', '/speaker/joe-bloggs/1');
+        $client->request('GET', '/speaker/rafael-dohms/1');
 
         $this->assertEquals(500, $client->getResponse()->getStatusCode());
     }
