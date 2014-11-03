@@ -24,30 +24,36 @@ class LoadSpeakerData extends AbstractFixture
         $joeBloggs = new Speaker();
         $joeBloggs->setName('Joe Bloggs');
         $joeBloggs->setBiography("This is Joe Bloggs' bio.");
+        $joeBloggs->setSlug('joe-bloggs');
 
         $janeBloggs = new Speaker();
         $janeBloggs->setName('Jane Bloggs');
         $janeBloggs->setBiography("This is Jane Bloggs' bio.");
+        $janeBloggs->setSlug('jane-bloggs');
 
         $nilsAdermann = new Speaker();
         $nilsAdermann->setName('Nils Adermann');
         $nilsAdermann->setPhoto(null);
         $nilsAdermann->setBiography("Nils Adermann's bio.");
+        $nilsAdermann->setSlug('nils-adermann');
 
         $lornaMitchell = new Speaker();
         $lornaMitchell->setName('Lorna Mitchell');
         $lornaMitchell->setPhoto(null);
         $lornaMitchell->setBiography('');
+        $lornaMitchell->setSlug('lorna-mitchell');
 
         $calEvans = new Speaker();
         $calEvans->setName('Cal Evans');
         $calEvans->setPhoto(null);
         $calEvans->setBiography('');
+        $calEvans->setSlug('cal-evans');
 
         $derickRethans = new Speaker();
         $derickRethans->setName('Derick Rethans');
         $derickRethans->setPhoto(null);
         $derickRethans->setBiography('');
+        $derickRethans->setSlug('derick-rethans');
 
         $manager->persist($joeBloggs);
         $manager->persist($janeBloggs);
